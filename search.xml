@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title><![CDATA[与vim的一段往事]]></title>
+      <url>/2018/01/21/%E4%B8%8Evim%E7%9A%84%E4%B8%80%E6%AE%B5%E5%BE%80%E4%BA%8B/</url>
+      <content type="html"><![CDATA[<p>这就要从大学里面学c语言说起了，那个时候我们还在用古老的 visual c++ 6.0（满满的回忆有木有……），不过我唯一的印象只剩下了，嗯，这个东西真的很丑很难用，不过还好，不久就有了 visual studio 2010，好看是好看了，但是好像卡得不行，也不知道是 windows 的锅呢，还是 vs 的锅呢，还是我电脑配置太低，anyway，这些都不太重要，反正那个时候对 IDE 没有什么好感，再加上英语也不太好，那些软件又都是英文，就更不想用了……</p>
+<p>后来呢，进了一个实验室，发现大家都在一个黑白的终端下面写代码，所有的操作都通过键盘完成，完全不用鼠标，当时我都惊呆了，这和电视里面演的黑客不是一模一样么，瞬间觉得那些 IDE 简直 low 爆了，真正厉害的黑客是不用 IDE 的（当时天真的想法……）。Vim —— Text editor of the Gods，正是我想要的。</p>
+<p>于是开始读vim的书，查相关的资料，记各种快捷键，装各种插件，折腾我的 vimrc。为了用上更纯粹的 vim，我装了双系统；为我的 chrome 装了 vim 插件；在 win 系统下用 vim 整了一套开发环境。远离鼠标！拒绝 IDE！很快我就在 vim 的使用上面小有成就。</p>
+<p>然而一直有一个问题我没有解决，但是我相信和其他问题一样，很快就能找到答案。这个问题就是，我想做到像 IDE 那样的智能代码提示，以及函数的调用以及声明的跳转。我查了好多资料，尝试了很多方案，最后好不容易是有提示了，但是提示的内容只是这个文件中出现的其他标识符，也有点用，但是和我想要的还差很远；然后又继续尝试，功夫不负有心人，终于找到了标准库的代码提示，然而只能提示标准库，我自己写的类并没有用；然后我又继续尝试，然后时间一天天过去，并没有什么进展，渐渐地也就没有太大的兴趣了，现在这么用也挺好，真正的黑客是不依赖 IDE 的提示的。而函数跳转的那个问题也类似，一直也没有找到一个完美的解决方案。</p>
+<p>后来开始学 java 了，作为 vim 的脑残粉，肯定是要用 vim 来写 java 的，没有代码提示，没有函数跳转，没有编译调试环境，无形之中给自己增加了好多难度，但是老师可不会等我把这些都整明白了再教，没办法，最终还是很不情愿地随了大流，用了 eclipse。</p>
+<p>后来终于毕业了，看到公司里大家都在用 vim，我就放心了，这里这么多大牛，困扰我好几年的问题应该能很快就解决了吧。然而……，我发现，我竟然是这里面用 vim 用得最熟练……，也不知道是该高兴呢，还是该忧伤……</p>
+<p>省吃俭用的工资终于够买 Mac，第一件事情，就是配置好 vim。然后果断放弃 windows，开始折腾新的 Mac。发现 Mac 上自带的 xcode 做得还挺好看的，关键是还能写 c++，然后就试了试，感觉还挺爽，关键是有错误直接就能看出来，不像之前用 vim 那样写了一大堆，尝试编译一下，跳出几十个错误；智能提示也很友好，好多之前没用过的函数被提示出来才知道，原来还有这么方便的函数，之前我都用别的方式自己实现了一下……；按住 <code>cmd</code> 键就能很方便地跳转到函数实现的地方，再也不用从一堆文件里面去猜，这个函数可能是在哪里实现的了。尝到甜头之后，开始尝试把公司的项目往 xcode 上面迁，结果开发效率有了极大的提升，而更关键的是写代码变成了一件愉快的事情。</p>
+<p>现在，基本我所有的代码都用不同的 IDE（xcode, goland, ideal, pycharm, sublime text 3, webstorm）开发完成。而曾经那么迷恋的 vim，有时候在服务器上写一些临时的脚本，也还是会用一用的。</p>
+<p>讲真的，鼠标和 IDE 都是非常伟大的发明，把人从繁复重复无聊的工作中解放出来，让人的精力集中在更具创造力的地方，极大提高了生产效率，推动了整个行业的快速发展。而 vim 作为上一个时代的效率的代表，也曾经那么光彩照人，也是时候功成身退了。</p>
+<p>科技在进步，时代在向前，虽然我也是一个怀旧的人，但也不想被潮流甩开太远。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> vim </tag>
+            
+            <tag> ide </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[谈谈注释]]></title>
+      <url>/2018/01/19/%E8%B0%88%E8%B0%88%E6%B3%A8%E9%87%8A/</url>
+      <content type="html"><![CDATA[<p>大家肯定都有写过注释，注释这个东西不同于代码，与程序逻辑的正确性没有直接的关系，所以每个人可能都有自己的风格，每个人对哪里应该写注释，注释应该写成什么样子可能都有自己的理解。</p>
+<p>我个人对注释的理解经历了四个阶段。</p>
+<p>第一个阶段，完全不写注释，这个阶段还处在代码逻辑的实现上面，花大量的时间去调试，修改代码，根本就无暇顾及到注释这个事情。过了一段时间后，发现之前写的又臭又长的代码完全看不明白了，才意识到注释的重要性，于是开始慢慢进入了第二个阶段。</p>
+<p>第二个阶段，哪哪都是注释，每个文件，每个类，每个函数，设置每个分支，每个变量，都有一个注释来说明，就怕漏掉某个小细节然后就看不懂了。后来又发现了一个叫做文档注释的东西（doxygen），这个东西不要太酷，可以根据你的写的注释直接生成文档，于是到处都是文档注释，每个文件里面都有一段简介，而简介里面最重要的内容可能就是 <code>@author: hatlonely</code>，生怕别人不知道这些这么low的代码是你写出来的🤦‍♀️，每个函数参数，函数参数的返回值等等，也都有详尽的注释，注释的长度已经远远超过了代码的长度。看起来好像妈妈再也不用担心我看不懂之前写的代码了，然而，一段时间当我重新读到add这个函数的注释的时候，我发现这些信息对我来说好像并没有用，这段代码已经足够的清晰简单，甚至比注释更容易读懂，那这个注释在这里存在的意义又是什么呢，仅仅是为了生成文档注释吗？而更大的问题可能是，如果我要新增一个函数，<code>add3(int a, int b, int c)</code> 我不得不按照之前的文档注释格式写一大堆的注释……注释的维护也是一个大问题，每次逻辑的变更，都需要去改对应的注释，如果忘记修改，注释和代码逻辑的不一致会让人更加困惑。于是注释的维护变成了一件非常无聊的事情，大大地降低了编程体验，而另一方面冗长繁复的注释也降低了代码的阅读体验。</p>
+<pre><code class="c++">// @file: 谈谈注释.md
+// @date: 2018-01-19 14:00
+// @author: hatlonely
+// @brief: 一些对注释的理解
+
+// @brief: 求两个数的和 
+// @param a 加数
+// @param b 被加数
+// @return 和
+int add(int a, int b) {
+    return a + b;
+}
+</code></pre>
+<p>第三个阶段，代码即注释。突然有一天，看到一个观点，代码是一种艺术，本身就是美，就像是诗歌，你见过一首诗歌里面插入了很多注释吗？注释不是对代码的翻译，而绝大多数时候，你在考虑用一个注释解释一个变量的时候，往往可以通过一个好的变量名来避免这个注释，同样，当你要注释某段逻辑的时候，也往往可以通过优化这段逻辑结构，使用一些可读性更强的变量来描述某些过程。于是我去掉了所有的注释，开始编写可读性更强的代码，开始纠结每一个普通的小变量的命名，开始站在普通人的角度去思考代码的逻辑，让代码更贴近自然语言，把让没有任何计算机基础的人都能读懂我的代码作为目标。于是现在代码看起来清爽了不少，代码本该如此简单。但是我满意了吗？并没有。</p>
+<p>第四个阶段，必要的注释。毕竟代码不是诗歌，如果没有当时的文化背景以及别人的解读，大部分是诗歌普通人应该也是读不懂的吧。代码逻辑是由特定的场景决定，同一份代码在不同的场景下面也可能是完全不同的含义，所以为什么会是这样一个逻辑，是这个场景下特定的背景所决定的，而代码本身并不能包含这些背景信息。比如下面这段代码，关于ios过滤的这段逻辑，是因为目前的业务上暂时还没有这个需求决定的，这里的注释给了我们一些额外的信息，对我们理解这段逻辑有很大的帮助，如果没有这段注释，一个月后，你可能也忘记了为什么要有ios这样一个特殊的逻辑，不敢动也不知道，久而久之这些代码就成了谜一样的存在。嗯，看起来很优雅，现在我满意了！</p>
+<pre><code class="golang">func checkDeviceType(info DeviceInfo, deviceTypeSet map[int32]struct{}) bool {
+    // ios的设备类型不想android那么多，暂时还没有定向需求
+    if info.platform != &quot;ios&quot; {
+        return true
+    }
+
+    if _, ok := deviceTypeSet[info.deviceType]; ok {
+        return true
+    }
+    return false
+}
+</code></pre>
+<p>下一个阶段是什么呢？是时候提高一下自己的表述能力了🤣🤣。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 注释 </tag>
+            
+            <tag> 编码风格 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang slice性能分析]]></title>
+      <url>/2018/01/18/golang%20slice%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</url>
+      <content type="html"><![CDATA[<p>golang在gc这块的做得比较弱，频繁地申请和释放内存会消耗很多的资源。另外slice使用数组实现，有一个容量和长度的问题，当slice的容量用完再继续添加元素时需要扩容，而这个扩容会把申请新的空间，把老的内容复制到新的空间，这是一个非常耗时的操作。有两种方式可以减少这个问题带来的性能开销：</p>
+<ol>
+<li>在slice初始化的时候设置capacity（但更多的时候我们可能并不知道capacity的大小）</li>
+<li>复用slice</li>
+</ol>
+<p>下面就针对这两个优化设计了如下的benchmark，代码在: <a href="https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/slice_test.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/slice_test.go</a></p>
+<pre><code>BenchmarkAppendWithoutCapacity-8                     100      21442390 ns/op
+BenchmarkAppendWithCapLessLen10th-8                  100      18579700 ns/op
+BenchmarkAppendWithCapLessLen3th-8                   100      13867060 ns/op
+BenchmarkAppendWithCapEqualLen-8                     200       6287940 ns/op
+BenchmarkAppendWithCapGreaterLen10th-8               100      18692880 ns/op
+BenchmarkAppendWithoutCapacityReuse-8                300       5014320 ns/op
+BenchmarkAppendWithCapEqualLenReuse-8                300       4821420 ns/op
+BenchmarkAppendWithCapGreaterLen10thReuse-8          300       4903230 ns/op
+</code></pre><p>主要结论：</p>
+<ol>
+<li>在已知 capacity 的情况下，直接设置 capacity 减少内存的重新分配，有效提高性能</li>
+<li>capacity &lt; length，capacity越接近length，性能越好</li>
+<li>capacity &gt; lenght，如果太大，反而会造成性能下降，这里当capacity &gt; 10 * length时，与不设置capacity的性能差不太多</li>
+<li>多次使用复用同一块内存能有效提高性能</li>
+</ol>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang开发目录结构]]></title>
+      <url>/2018/01/16/golang%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
+      <content type="html"><![CDATA[<p>在实际的项目中发现大家的目录结构都比较凌乱，基本每个人都有每个人的风格，一个项目在不断地变大，一些新的文件或目录又不断地被添加进来，从这里面去找到自己需要的信息的成本越来越高，一个统一的通用的目录结构非常有必要。</p>
+<p>以下内容来自于github上的这个项目（<a href="https://github.com/golang-standards/project-layout" target="_blank" rel="noopener">https://github.com/golang-standards/project-layout</a>）</p>
+<h3 id="cmd"><a href="#cmd" class="headerlink" title="/cmd"></a><code>/cmd</code></h3><p>main函数文件（比如 <code>/cmd/myapp.go</code>）目录，这个目录下面，每个文件在编译之后都会生成一个可执行的文件。</p>
+<p>不要把很多的代码放到这个目录下面，这里面的代码尽可能简单。</p>
+<h3 id="internal"><a href="#internal" class="headerlink" title="/internal"></a><code>/internal</code></h3><p>应用程序的封装的代码，某个应用私有的代码放到 <code>/internal/myapp/</code> 目录下，多个应用通用的公共的代码，放到 <code>/internal/common</code> 之类的目录。</p>
+<h3 id="pkg"><a href="#pkg" class="headerlink" title="/pkg"></a><code>/pkg</code></h3><p>一些通用的可以被其他项目所使用的代码，放到这个目录下面</p>
+<h3 id="vendor"><a href="#vendor" class="headerlink" title="/vendor"></a><code>/vendor</code></h3><p>项目依赖的其他第三方库，使用 <a href="https://github.com/Masterminds/glide" target="_blank" rel="noopener"><code>glide</code></a> 工具来管理依赖</p>
+<h3 id="api"><a href="#api" class="headerlink" title="/api"></a><code>/api</code></h3><p>协议文件，<code>Swagger/thrift/protobuf</code> 等</p>
+<h3 id="web"><a href="#web" class="headerlink" title="/web"></a><code>/web</code></h3><p>web服务所需要的静态文件</p>
+<h3 id="configs"><a href="#configs" class="headerlink" title="/configs"></a><code>/configs</code></h3><p>配置文件</p>
+<h3 id="init"><a href="#init" class="headerlink" title="/init"></a><code>/init</code></h3><p>服务启停脚本</p>
+<h3 id="scripts"><a href="#scripts" class="headerlink" title="/scripts"></a><code>/scripts</code></h3><p>其他一些脚本，编译、安装、测试、分析等等</p>
+<h3 id="build"><a href="#build" class="headerlink" title="/build"></a><code>/build</code></h3><p>持续集成目录</p>
+<p>云 (AMI), 容器 (Docker), 操作系统 (deb, rpm, pkg)等的包配置和脚本放到 <code>/build/package/</code> 目录</p>
+<h3 id="deployments"><a href="#deployments" class="headerlink" title="/deployments"></a><code>/deployments</code></h3><p>部署相关的配置文件和模板</p>
+<h3 id="test"><a href="#test" class="headerlink" title="/test"></a><code>/test</code></h3><p>其他测试目录，功能测试，性能测试等</p>
+<h3 id="docs"><a href="#docs" class="headerlink" title="/docs"></a><code>/docs</code></h3><p>设计文档</p>
+<h3 id="tools"><a href="#tools" class="headerlink" title="/tools"></a><code>/tools</code></h3><p>常用的工具和脚本，可以引用 <code>/internal</code> 或者 <code>/pkg</code> 里面的库</p>
+<h3 id="examples"><a href="#examples" class="headerlink" title="/examples"></a><code>/examples</code></h3><p>应用程序或者公共库使用的一些例子</p>
+<h3 id="assets"><a href="#assets" class="headerlink" title="/assets"></a><code>/assets</code></h3><p>其他一些依赖的静态资源</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[《microservice & serverless》by蔡超的一点感想]]></title>
+      <url>/2018/01/12/%E3%80%8Amicroservice%20&amp;%20serverless%E3%80%8Bby%E8%94%A1%E8%B6%85%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/</url>
+      <content type="html"><![CDATA[<p>超哥是来自Amazon的顶级的架构师，经历了Amazon整个向微服务架构迁移的过程，以及向serverless的演化过程，有着极其丰富的经验，年过40，一直站在技术的最前沿，始终保持对技术的执着追求和热情，是名副其实的技术大牛，能与之一起工作，荣幸之至！今天超哥给我们分享的主题《microservice &amp; serverless》，是超哥实际工作经验的一些分享，也为公司架构的演化提供了新的思路和指导。</p>
+<p>microservice（微服务）这个可能是这些年最火的一种架构设计了，频繁地出现在各种技术大会上，各大互联网巨头纷纷向这种架构演化，很多小的互联网公司也往这些概念上去靠，大有一种不做微服务就要落伍的趋势。事实上，很多对于微服务的理解比较粗浅，盲目的微服务化甚至会带来更多的负面影响。</p>
+<p>目前Amazon内部运行着超过2w过微服务，但是这些微服务并不是凭空产生的，在这之前，运行的服务都是超大的单体服务，但是随着业务的发展，这种服务在整个研发的pipeline（设计→研发→编译→测试→发布→部署→运维）中都出现了一些问题。设计阶段，老的单体服务会给我们带来一些技术限制，比如有些技术只有python语言的实现，但是我们的服务使用java开发，这样我们不得不拿出一个更复杂的设计去解决类似的问题；研发阶段，随着开发人数越来越多，代码冲突的问题越来越多，我们不得不花更多的时间去做这种无趣又没有什么意义的事情；编译阶段，越来越多的依赖很容易造成版本冲突，不同的版本也会引发兼容性的问题，而这种问题如果在运行时才暴露出来可能会造成严重业务影响；部署阶段，很多的特性打包在一起发布，特性越多，出问题的概率也就越大；而最致命的是运维阶段没有回滚方案，一次上线中可能包含很多的特性，而其中任何一条特性的bug就需要回滚，然后可能有些特性需要变更数据格式，新特性能向前兼容老的数据格式，但是回滚后却无法处理新的数据格式，因此无法回滚……就是在这样的背景下，Amazon开始朝微服务的架构演化。</p>
+<p>微服务摆脱了单体服务技术的束缚，可以自由地根据业务的特点，选择最适合的技术去实现自己的服务；将一个大的开发流程拆成了很多个小的独立的开发流程，彼此之间不在相互依赖，大大缩短了项目周期；代码冲突的问题也得到了很好的改善；每次发布的特性很少，每天都能发布，而且能做到快速回滚。真正做到，持续集成，持续交付，敏捷开发。</p>
+<p>微服务架构同时也带来了一些新的问题。相比与单体服务，微服务的架构数据的传输依赖于rpc的调用，这个调用会带来一些额外的网络耗时，这种耗时往往需要业务上面去考虑是否能容忍，这种rpc的调用收到网络环境的影响，失败是很正常事情，因此需要失败重试机制，于是代码里面到处都充斥着失败重试的冗余代码，影响代码的可读性，更糟糕的是会有雪崩效应，当某个底层服务出现问题时，比如响应时间过长，或者无法访问，这种影响会层层传递到上层，最终导致整个业务系统挂掉；在测试上面也会变得更加困难，之前都在一个实例里面，现在一个服务依赖很多其他的微服务，测试的时候都需要去mock，日志也会分布在不同的服务下面，问题排查比较困难；此外，数据分布在不同的微服务上，在数据一致性上也会有些问题。所以在进行微服务设计的时候也要特别注意这些额外的负面影响，封装重试逻辑，引入熔断和限流机制，统一的日志收集方式。</p>
+<p>serverless（无服务器）架构可能是为了让devOps从繁复的运维工作中解放出来的全新架构，最大的特点是整个系统基于AWS提供的各种服务，能够做到自动的拓展以及按流量计费，不再需要人力去维护，大大提高了效率，同时按真实流量的计费对成本也有可能会有优化。而Fass架构，把业务需求封装在一个函数内部，开发人员只需要关注自己的业务逻辑，然后通过网页提交就能完成上线。我在想，当这些技术真正成熟和普及的时候，可能每个普通人，随便花点时间学点python，也能做出一个的服务，而那个时候，我的价值又是什么！？</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 微服务 </tag>
+            
+            <tag> 无服务架构 </tag>
+            
+            <tag> serverless </tag>
+            
+            <tag> microservice </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我的c++开发最佳实践]]></title>
+      <url>/2017/12/31/%E6%88%91%E7%9A%84c++%E5%BC%80%E5%8F%91%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+      <content type="html"><![CDATA[<p>其实我的工作经历并不长，14年到现在也就三年多吧，刚毕业去了百度，干了两年，跟着前老大去了一家广告公司。用了两年多的c++，现在在用golang。</p>
+<p>其实c++是一门很好的语言，无论是语言特性还是性能上面都是一门很好的语言。面向对象的思想，使得抽象更加容易更加符合人的思维习惯，模板泛化极大得提升效率的前提下还不损失性能，甚至从c语言继承过来的宏定义在恰当的时候使用，不仅能使代码更加清晰，而且用来区分release和debug版本，最近在使用golang的时候就碰到一个问题，有些日志我只希望出现在debug的版本中，在c++把日志输出定义成一个宏就实现了，在golang里面可能就需要增加很多额外的代码，在每次需要debug输出的时候读取判断一下目前的版本。在性能上面就更不用说了，java的虚拟机本身就是很占资源，另外java虽然不用管理内存，但是同时也失去了对内存的精细控制，对于性能要求极高的场合，java性能优化要比c++困难得多。</p>
+<p>c++那么优秀，那又为什么没有流行起来呢？首先c++非常流行，在Google，百度这样的公司都是以c++为主，其他Facebook，Amazon，阿里，腾讯也都用c++，只是和java相比稍少一些吧。所以我们的问题可能是c++为什么没有java那么火呢？我觉得有历史原因，也有语言本身的原因吧。</p>
+<p>在面向对象语言出现之前，是c语言的天下，而为了平滑的过渡，c++完全兼容了c语言，听起来是美好的，兼容总是能有更多的用户基础嘛，然后不幸的是，因为这种兼容，很多的c语言开发者一直停留在c语言的思想（面向过程）里面，再也没有跳出来……直到今天，依然有很多人还是把c语言和c++看成一种语言。而java采用了完全不同的思路，因为思考问题的方式发生了根本的变化，java被定位成一种与c语言完全不同的语言（面向对象），并由此产生了很多的新的设计模式，而这些优雅的特性也吸引了越来越多的大牛加入到java的行列，同时java还解决了困惑c语言程序员的指针问题，把人从debug的泥潭中解脱出来（没有解决所有问题，但是解决了大部分的问题），因此大受欢迎。</p>
+<p>受到全新编程思想以及全新设计模式的影响，java程序员往往有更强的设计和封装能力，更加注重代码的复用性，于是越来越多的java类库在网上开源，而另一方面maven，gradle这样优秀的构建工具同时也支持依赖以及版本的管理，我们可以非常方便地利用这些优秀的源码，于是依靠这些优秀工具，java的开发成本变得越来越低，于是就像滚雪球一样，越来越多的优秀项目基于java开发，也产生了越来越多优秀的产品和平台。而很多c++程序员还在自己造轮子，能自己写的，一定不用别人的库，自己写不了的，就绕开这个问题……所以c++的库发展非常缓慢，到目前为止也没有一个比较统一的依赖管理的方法，可能还停留在用 <code>yum install</code> 管理依赖的初级阶段，然而这种方式，不仅没有版本管理，而且对所有开发人员都需要在自己电脑上面安装，使用起来非常不友好，已经远远不能满足现在敏捷开发的需求，也正是依赖管理的问题，使得c++依赖第三方库的成本很高，因此开发效率低下。然后像Google，百度这样的公司有能力解决这样的问题，所以能用得很好。</p>
+<p>而c++一直被诟病的可能内存泄露问题吧，但其实这个问题应该说是c语言的问题，自从boost引入智能指针之后，其实可以解决大部分问题了，而c++11把boost里面的智能指针引入到标准库之后，使用起来就更加方便了。其实大多数内存泄露的问题，说道底还是设计模式的问题，一个好的设计模式里面真的很难有内存泄露，当然对coder也提出了更高的要求。</p>
+<p>废话说了这么多，下面让我们进入正题吧，事先申明，本人工作经验有限，下面是只是本人目前的最佳实践，我并没有解决所有的问题，有很多的不足，只是提出一些我关注到的问题，以及我的一些解决方案，希望能给你一些启发，同时也欢迎大家给我更多的建议，一起进步成长。</p>
+<h2 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h2><p>首先你需要一台Mac，如果你在用windows，那我们价值观可能不一致，可能需要你自己解决更多的问题</p>
+<p>IDE我使用Mac自带的Xcode，因为自带，获取比较方便，代码提示，自动补全，函数跳转等功能也都很完善，嗯，另外颜值也还可以</p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><ul>
+<li><code>include/</code>: 头文件</li>
+<li><code>src/</code>: 源文件</li>
+<li><code>test/</code> 测试文件</li>
+<li><code>conf/</code>: 配置文件</li>
+<li><code>docs/</code>: 各种文档说明</li>
+<li><code>proto/</code>: 协议源文件</li>
+<li><code>tools/</code>: 工具脚本</li>
+<li><code>build/</code>: cmake工作目录，本地目录，不提交到git</li>
+<li><code>CMakeLists.txt</code>: 构建文件</li>
+<li><code>README</code>: 项目说明</li>
+<li><code>everything.sh</code>: 统一的依赖管理，协议生成等</li>
+</ul>
+<h2 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h2><p>Makefile可能是unix最有名的构建工具吧，但是其复杂的配置语法，以及需要人工分析代码依赖，使得其使用以及维护成本都极高，在这个背景下，cmake应运而生，自动的依赖分析，以及更加简洁清晰的配置语法，成为目前主流的c++构建工具，但是遗憾的是，这个单机的工具并没有解决依赖的问题。</p>
+<p>可能传统的c++程序员并不认为依赖这是个问题吧，毕竟我们有 <code>yum install</code> ，但是当我们有不同的项目依赖不同的库版本的时候，这种方式就会显得很麻烦，而另外，不同开发人员的环境也很难做到一致，于是我们希望项目本身就能解决依赖的问题，而不依赖操作系统本身。大公司基本都会有自己管理的依赖的方式，比如百度自己搞了一套comake，这个东西通过简单的配置就能从服务器上把最新的依赖拉到本地。开源的工具也有一些，但是基本都需要自己搭建一个依赖服务器。这里我并不想去搭建这么一个服务，就写了一些脚本来完成同样的事情，其实这个事情也可以深入做下去，做成一个统一的工具，提供更加人性化的用户界面。</p>
+<p>静态编译 OR 动态编译？静态编译就是把依赖的库都静态地编译到同一个二进制文件中，这样这个二进制文件就能发布到任何其他机器上面，而不需要依赖系统的环境，缺点就是由于需要打包库文件，所以文件大小会大一些，但是在磁盘这么便宜的今天，这点劣势甚至都撑不上劣势了</p>
+<p>最后我还想说一下关于源码依赖的事情，所谓源码依赖，就是我依赖的是第三方库的代码，与之对应的就是库依赖啦。这样的好处是什么呢，首先第一个就是跨平台，你可以再Mac编写，然后到linux上面去编译，另外利用IDE的函数跳转功能，也能很方便地阅读源码；至于缺点嘛，可能就是第一次编译的时候会慢一点，因为需要额外编译生成二进制的库，但是之后就都一样了。目前Google就是采用这种方式，所有的代码都依赖源码，当然他们的本意可能是为了跑单元测试啦。所以这里我都是采用源码依赖。</p>
+<h2 id="日志与配置"><a href="#日志与配置" class="headerlink" title="日志与配置"></a>日志与配置</h2><h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2>]]></content>
+      
+        
+        <tags>
+            
+            <tag> c++ </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[topic]]></title>
+      <url>/2017/12/30/topic/</url>
+      <content type="html"><![CDATA[<h2 id="人文"><a href="#人文" class="headerlink" title="人文"></a>人文</h2><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>状态</th>
+<th>日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>程序猿（媛），你为什么需要一台Mac</td>
+<td>undo</td>
+<td>2017-12-29</td>
+</tr>
+<tr>
+<td>我理想中的技术团队</td>
+<td>undo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="技术"><a href="#技术" class="headerlink" title="技术"></a>技术</h2><table>
+<thead>
+<tr>
+<th>主题</th>
+<th>状态</th>
+<th>日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>你为什么要用c++11</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>你不得不知道的boost</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>我的c++开发最佳实践</td>
+<td>undergoing</td>
+<td>2017-12-30</td>
+</tr>
+<tr>
+<td>代码可测试性的艺术</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>你不得不知道的网络框架之thrift</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>你不得不知道的网络框架之grpc</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>HTTP与RESTful服务</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>绕不开的配置与日志libconfig&amp;log4cpp</td>
+<td>undo</td>
+<td></td>
+</tr>
+<tr>
+<td>技术，业务与管理</td>
+<td>undo</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+      
+        
+    </entry>
+    
+  
+  
+</search>
