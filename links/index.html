@@ -45,12 +45,12 @@
         
             links | 
         
-        hatlonely的博客
+        hatlonely的小站
     </title>
 
     <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/img/hatlonely.png">
-    <link rel="icon" href="/img/hatlonely.png">
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar/hatlonely4.png">
+    <link rel="icon" href="/img/avatar/hatlonely4.png">
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
@@ -217,13 +217,13 @@
 
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="hatlonely的博客">
+    <meta name="application-name" content="hatlonely的小站">
     <meta name="msapplication-starturl" content="http://hatlonely.github.io/links/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="hatlonely的博客">
+    <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/img/hatlonely.png">
+    <link rel="apple-touch-icon" href="/img/avatar/hatlonely4.png">
 
     <!-- Site Verification -->
     
@@ -235,8 +235,8 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://hatlonely.github.io/links/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="links | hatlonely的博客">
-    <meta property="og:image" content="/img/hatlonely.png">
+    <meta property="og:title" content="links | hatlonely的小站">
+    <meta property="og:image" content="/img/avatar/hatlonely4.png">
     <meta property="og:description" content="">
     
 
@@ -344,7 +344,7 @@
     }
 
     .md-links-item {
-        background: #fff;
+        background: #FAFAFA;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
         height: 72px;
         line-height: 15px;
@@ -359,12 +359,16 @@
     }
 
     .md-links li {
+        border-radius: 2px;
         width: 300px;
         float: left;
         list-style: none;
     }
 
     .md-links-item img {
+        border-radius: 50%;
+        height: 50px;
+        margin: 11px;
         float: left;
         box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 11px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
     }
@@ -393,12 +397,28 @@
 <ul class="md-links">
     
         
-            <li class="md-links-item">
-                <a href="http://hatlonely.github.io/" title="hatlonely" target="_blank">
-                    <img src="http://hatlonely.github.io/img/hatlonely4.png" alt="hatlonely" height="72px"/>
-                    <span class="md-links-title">hatlonely</span><br />
-                    <span>hatlonely的博客</span>
-                </a>
+            <li class="md-links-item" onclick="location='http://hatlonely.github.io/'">
+                <img src="http://hatlonely.github.io/img/hatlonely4.png" alt="hatlonely" />
+                <span class="md-links-title">hatlonely</span><br />
+                <span>Try new, go far, see more</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='https://blog.viosey.com/'">
+                <img src="/img/links/viosey.png" alt="viosey" />
+                <span class="md-links-title">viosey</span><br />
+                <span>深自缄默，如云漂泊</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='https://material.io/'">
+                <img src="/img/links/material.png" alt="material" />
+                <span class="md-links-title">material</span><br />
+                <span>material design</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='https://formtypemaker.appspot.com/'">
+                <img src="/img/links/formtypemaker.png" alt="formtypemaker" />
+                <span class="md-links-title">formtypemaker</span><br />
+                <span>material letters generator</span>
             </li>
         
     
@@ -428,7 +448,7 @@
 <aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
     <div id="sidebar-main">
         <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+        <div class="sidebar-header header-cover" style="background-image: url(/img/blog/house.png);">
     <!-- Top bar -->
     <div class="top-bar"></div>
 
@@ -443,7 +463,7 @@
 
     <!-- Sidebar Avatar -->
     <div class="sidebar-image">
-        <img src="/img/hatlonely4.png" alt="hatlonely's avatar">
+        <img src="/img/avatar/hatlonely4.png" alt="hatlonely's avatar">
     </div>
 
     <!-- Sidebar Email -->
@@ -461,7 +481,7 @@
         <ul id="settings-dropdown" class="dropdown-menu">
             
                 <li>
-                    <a href="#" target="_blank" title="Email Me">
+                    <a href="mailto:hatlonely@foxmail.com" target="_blank" title="Email Me">
                         
                             <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
                         
@@ -613,7 +633,7 @@ It will not impact the appearance and can give developers a lot of support :)
         <div class="mdl-mini-footer--left-section sns-list">
     <!-- Twitter -->
     
-        <a href="https://twitter.com/twitter" target="_blank">
+        <a href="https://twitter.com/hatlonely" target="_blank">
             <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
                 <span class="visuallyhidden">Twitter</span>
             </button><!--
@@ -622,7 +642,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
     <!-- Facebook -->
     
-        <a href="https://www.facebook.com/facebook" target="_blank">
+        <a href="https://www.facebook.com/profile.php?id=100002314767374" target="_blank">
             <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
                 <span class="visuallyhidden">Facebook</span>
             </button><!--
@@ -639,6 +659,12 @@ It will not impact the appearance and can give developers a lot of support :)
     
 
     <!-- Weibo -->
+    
+        <a href="http://weibo.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
     
 
     <!-- Instagram -->
@@ -675,7 +701,7 @@ It will not impact the appearance and can give developers a lot of support :)
 
         <!--Copyright-->
         <div id="copyright">
-            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>hatlonely的博客
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>hatlonely的小站
             
         </div>
 
