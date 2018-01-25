@@ -39,13 +39,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 a {
-    font-weight: 300;
+    font-weight: 400;
 }
 .mdl-button {
     font-family: Roboto, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
-}
-.mdl-menu__item {
-    font-weight: 300;
 }
 /****************/
 /* Local_Search */
@@ -123,6 +120,13 @@ a {
     top: 0;
     left: 0;
     bottom: 0;
+}
+#post-content a {
+    text-decoration: none;
+    font-weight: normal;
+}
+#post-content a:hover {
+    text-decoration: underline;
 }
 #post-content h1,
 #post-content h2,
@@ -508,6 +512,10 @@ a {
     padding-top: 165px;
     margin: 0 auto;
     width: 100%;
+}
+.material-layout__content a {
+    text-decoration: none;
+    font-weight: normal;
 }
 @media screen and (max-width: 480px) {
     #scheme-Paradox .material-layout .material-layout__content {
