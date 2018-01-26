@@ -43,7 +43,7 @@
     
     <title>
         
-            谈谈注释 | 
+            蓄水池算法 | 
         
         hatlonely的小站
     </title>
@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content=",注释,编码风格">
+    <meta name="keywords" content=",算法">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -221,7 +221,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="hatlonely的小站">
-    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/01/19/谈谈注释/">
+    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/01/26/蓄水池算法/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
@@ -236,16 +236,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://hatlonely.github.io/2018/01/19/谈谈注释/">
+    <meta property="og:url" content="http://hatlonely.github.io/2018/01/26/蓄水池算法/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="谈谈注释 | hatlonely的小站">
+    <meta property="og:title" content="蓄水池算法 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely4.png">
     <meta property="og:description" content="">
-    <meta property="og:article:tag" content="注释"> <meta property="og:article:tag" content="编码风格"> 
+    <meta property="og:article:tag" content="算法"> 
 
     
-        <meta property="article:published_time" content="Fri Jan 19 2018 21:54:23 GMT+0800">
-        <meta property="article:modified_time" content="Thu Jan 25 2018 11:50:19 GMT+0800">
+        <meta property="article:published_time" content="Fri Jan 26 2018 14:07:47 GMT+0800">
+        <meta property="article:modified_time" content="Fri Jan 26 2018 18:51:47 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -253,7 +253,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://hatlonely.github.io/2018/01/19/谈谈注释/index.html" />
+        <link rel="canonical" href="http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -265,10 +265,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://hatlonely.github.io/2018/01/19/谈谈注释/index.html",
-    "headline": "谈谈注释",
-    "datePublished": "Fri Jan 19 2018 21:54:23 GMT+0800",
-    "dateModified": "Thu Jan 25 2018 11:50:19 GMT+0800",
+    "mainEntityOfPage": "http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html",
+    "headline": "蓄水池算法",
+    "datePublished": "Fri Jan 26 2018 14:07:47 GMT+0800",
+    "dateModified": "Fri Jan 26 2018 18:51:47 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -286,7 +286,7 @@
             "url": "/img/avatar/hatlonely4.png"
         }
     },
-    "keywords": ",注释,编码风格",
+    "keywords": ",算法",
     "description": "",
 }
 </script>
@@ -355,6 +355,15 @@
     <!-- Left aligned menu below button -->
     
     
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#蓄水池算法"><span class="post-toc-number">1.</span> <span class="post-toc-text">蓄水池算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加权蓄水池算法"><span class="post-toc-number">2.</span> <span class="post-toc-text">加权蓄水池算法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+    </ul>
+    
 
 
 
@@ -372,10 +381,10 @@
     <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/blog/clean_code.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/blog/lake.jpg)">
     
             <p class="article-headline-p">
-                谈谈注释
+                蓄水池算法
             </p>
         </div>
 
@@ -394,7 +403,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>hatlonely</strong>
-        <span>1月 19, 2018</span>
+        <span>1月 26, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -416,7 +425,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACYklEQVR42u3aW27DMAwEwNz/0u0BirhLUpaVYPxVFH5oHECSl3z9fPXxwsPDw8PDw8PDO4z3io+/V13f5935785M7hmNDQ8PD28L75+p9s051wO9Hvo1fjI2PDw8vJ28ZMrOh5L8Jz+/sJzg4eHhHczLp+zkDslz8fDw8D6Xl4QC1WsPWhjw8PDwloYRvWA3CTKqEQYeHh7es7x8yt7/99b6Hh4eHl7AK7c0tYZ1fbde2BE1XeHh4eHdwJsEDckGutdcNRkPHh4e3h5eL1TNkdfPqjYfLPtiwMPDwxvw8kGvmr7vaD7Aw8PD28+rbprLm90gvEiejoeHh3cCLxn6ZGPdizOasQgeHh7ezbx8+u6dWS2M9Vpm8fDw8HbyerFCryGg+qzeIoGHh4e3kzcp5E9IyYtbFuPi4eHhjXmTUCAZ6GQByNsR8PDw8HbyejfqlbLyJWS0tODh4eFt5CXlqyoyL5I98MWAh4eHN/5aX1Xs7zV15c9q1vfw8PDwlvKq0UOVVz0n2UDj4eHhPcWrXpwsKlVevslOFh48PDy8PbzJgPKXlS9Ik00/Hh4e3n5eNQ6oTvHVRoFyMwEeHh7eRt6kESpvQs0bC5aFEXh4eHhLefNCVDWSqLaf5j8DHh4e3h5edTrOw9+keSsvp416yvDw8PBu4OXFrbzwnzQlJIsNHh4e3sm8fEKfFMaqJbTqJh4PDw/vE3l5eJEUz8qRMR4eHt7xvMmkX10MosYsPDw8vI28JIyI4oA4vEjuc/268fDw8J7i9abmwiNjxhyJh4eHdzfv+w48PDw8PDw8PLwDjl8nGDUAc6uJ4QAAAABJRU5ErkJggg==">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACz0lEQVR42u3aQY7jMAwEwPz/0zsPCJJ0U5pBViqfjMzaVmkPBNl6/LvyemBjY2NjY2NjY2N/JfsRX89PJb88/x4t8enZ5/t6zdjY2NhHs5NFzJb46j2vnkq2b7ZmbGxs7BvYrwpAft8WraRMtsUMGxsbG3vGTkhtazFrS7CxsbGx888kLcSuDcXGxsbG3jVUes9OxkmzmGF9EIaNjY19NjsPTb/n/k/zbWxsbOwvZu86TPO+RLUBwK6jP9jY2Ng3sPPCMNuI5NldwcOHp7CxsbGPZueDmzY2yP+arGdl5ISNjY19A7vdgm0RbNmizIouNjY29qnsnDFbUN5I5F9sD2hiY2Nj38NeD32TZbVxwqzhwcbGxr6HPRsn5aFv+/58qNRGv9jY2NinsvOl5BuxEuu2hbNogbCxsbGPZq80DHVLsPD7UrnFxsbGPprdjoGGUWs56H+/9RtmadjY2NhHsFteXjaSRRcjoVFogY2NjX0Du40BdrUfeQlsy1udb2NjY2P/5+z8k+1mJWUvHxglcfKHb2FjY2Nfw26D3qT9yMdDs0IYvR8bGxv7UPZ6yUkW0TYwSaBbD7ywsbGxD2XnjLz9aEtg+98wa5mwsbGxT2W3xWBXPNCGwe3wqziphI2NjX0Quz0Q0zYk64FBsonY2NjYt7FXStSsXM22rN2CqAPDxsbGPo7dLncvYOVYT6TAxsbGvoadL64d/bdj/YRajMOwsbGxr2EnpSg/UjMb6OdrKA79YGNjYx/Kbq925LQS97ZRwYd/iY2NjX0ouy0M7WipbXtm91Fjg42NjX00e1fRasPXZBT1R/k2NjY29hHsfOyej5byb/3GhY2NjY2dH+tZD4Nn0XIRM2NjY2NjB+xZDNy2QLONxsbGxr6B3Q56VkLcdcy2k0rY2NjYR7CXDjUuHM1cec+GoRI2Njb2Eex7LmxsbGxsbGxsbOyvuX4Ak85c/zLM6hMAAAAASUVORK5CYII=">
     
 </ul>
 
@@ -430,7 +439,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/注释/">注释</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/编码风格/">编码风格</a>
+        <a class="post_tag-link" href="/tags/算法/">算法</a>
     </ul>
     
 
@@ -447,7 +456,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=谈谈注释&url=http://hatlonely.github.io/2018/01/19/谈谈注释/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely4.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=蓄水池算法&url=http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely4.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -456,7 +465,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=谈谈注释&url=http://hatlonely.github.io/2018/01/19/谈谈注释/index.html&via=hatlonely" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=蓄水池算法&url=http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html&via=hatlonely" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -465,7 +474,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/01/19/谈谈注释/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -474,7 +483,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/01/19/谈谈注释/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -486,7 +495,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=谈谈注释&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely4.png&url=http://hatlonely.github.io/2018/01/19/谈谈注释/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=蓄水池算法&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely4.png&url=http://hatlonely.github.io/2018/01/26/蓄水池算法/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -505,38 +514,56 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>大家肯定都有写过注释，注释这个东西不同于代码，与程序逻辑的正确性没有直接的关系，所以每个人可能都有自己的风格，每个人对哪里应该写注释，注释应该写成什么样子可能都有自己的理解。</p>
-<p>我个人对注释的理解经历了四个阶段。</p>
-<p>第一个阶段，完全不写注释，这个阶段还处在代码逻辑的实现上面，花大量的时间去调试，修改代码，根本就无暇顾及到注释这个事情。过了一段时间后，发现之前写的又臭又长的代码完全看不明白了，才意识到注释的重要性，于是开始慢慢进入了第二个阶段。</p>
-<p>第二个阶段，哪哪都是注释，每个文件，每个类，每个函数，设置每个分支，每个变量，都有一个注释来说明，就怕漏掉某个小细节然后就看不懂了。后来又发现了一个叫做文档注释的东西（doxygen），这个东西不要太酷，可以根据你的写的注释直接生成文档，于是到处都是文档注释，每个文件里面都有一段简介，而简介里面最重要的内容可能就是 <code>@author: hatlonely</code>，生怕别人不知道这些这么low的代码是你写出来的🤦‍♀️，每个函数参数，函数参数的返回值等等，也都有详尽的注释，注释的长度已经远远超过了代码的长度。看起来好像妈妈再也不用担心我看不懂之前写的代码了，然而，一段时间当我重新读到add这个函数的注释的时候，我发现这些信息对我来说好像并没有用，这段代码已经足够的清晰简单，甚至比注释更容易读懂，那这个注释在这里存在的意义又是什么呢，仅仅是为了生成文档注释吗？而更大的问题可能是，如果我要新增一个函数，<code>add3(int a, int b, int c)</code> 我不得不按照之前的文档注释格式写一大堆的注释……注释的维护也是一个大问题，每次逻辑的变更，都需要去改对应的注释，如果忘记修改，注释和代码逻辑的不一致会让人更加困惑。于是注释的维护变成了一件非常无聊的事情，大大地降低了编程体验，而另一方面冗长繁复的注释也降低了代码的阅读体验。</p>
-<pre><code class="c++">// @file: 谈谈注释.md
-// @date: 2018-01-19 14:00
-// @author: hatlonely
-// @brief: 一些对注释的理解
+        <p>最近有个需求，需要从不固定大小的数据集中取固定数量的数据作为样本，有个同学提到了蓄水池算法，于是了解了一下。</p>
+<p>蓄水池算法，本身是为了解决海量数据的随机抽样问题，在算法领域应用还是挺广泛的，由于数据本身是有权重，又出现了加权蓄水池算法。</p>
+<h3 id="蓄水池算法"><a href="#蓄水池算法" class="headerlink" title="蓄水池算法"></a>蓄水池算法</h3><p><strong>问题描述</strong>: 给定一个不固定长度的数据集合 <code>sequence</code>，从中等概率地抽取 <code>k</code> 个元素作为样本返回</p>
+<p><strong>问题思路</strong>: 先把样本填满，然后不断往样本里面等概率替换元素</p>
+<p><strong>算法实现</strong></p>
+<pre><code class="python">def reservior_sampling(sequence, k):
+    n = len(sequence)
+    if k &gt; n:
+        return sequence
 
-// @brief: 求两个数的和 
-// @param a 加数
-// @param b 被加数
-// @return 和
-int add(int a, int b) {
-    return a + b;
-}
-</code></pre>
-<p>第三个阶段，代码即注释。突然有一天，看到一个观点，代码是一种艺术，本身就是美，就像是诗歌，你见过一首诗歌里面插入了很多注释吗？注释不是对代码的翻译，而绝大多数时候，你在考虑用一个注释解释一个变量的时候，往往可以通过一个好的变量名来避免这个注释，同样，当你要注释某段逻辑的时候，也往往可以通过优化这段逻辑结构，使用一些可读性更强的变量来描述某些过程。于是我去掉了所有的注释，开始编写可读性更强的代码，开始纠结每一个普通的小变量的命名，开始站在普通人的角度去思考代码的逻辑，让代码更贴近自然语言，把让没有任何计算机基础的人都能读懂我的代码作为目标。于是现在代码看起来清爽了不少，代码本该如此简单。但是我满意了吗？并没有。</p>
-<p>第四个阶段，必要的注释。毕竟代码不是诗歌，如果没有当时的文化背景以及别人的解读，大部分是诗歌普通人应该也是读不懂的吧。代码逻辑是由特定的场景决定，同一份代码在不同的场景下面也可能是完全不同的含义，所以为什么会是这样一个逻辑，是这个场景下特定的背景所决定的，而代码本身并不能包含这些背景信息。比如下面这段代码，关于ios过滤的这段逻辑，是因为目前的业务上暂时还没有这个需求决定的，这里的注释给了我们一些额外的信息，对我们理解这段逻辑有很大的帮助，如果没有这段注释，一个月后，你可能也忘记了为什么要有ios这样一个特殊的逻辑，不敢动也不知道，久而久之这些代码就成了谜一样的存在。嗯，看起来很优雅，现在我满意了！</p>
-<pre><code class="golang">func checkDeviceType(info DeviceInfo, deviceTypeSet map[int32]struct{}) bool {
-    // ios的设备类型不想android那么多，暂时还没有定向需求
-    if info.platform != &quot;ios&quot; {
-        return true
-    }
+    sample = list()
+    for i in range(k):
+        sample.append(sequence[i])
 
-    if _, ok := deviceTypeSet[info.deviceType]; ok {
-        return true
-    }
-    return false
-}
+    for i in range(k, n):
+        j = random.randint(0, i)
+        if j &gt;= k:
+            continue
+        sample[j] = sequence[i]
+
+    return sample
 </code></pre>
-<p>下一个阶段是什么呢？是时候提高一下自己的表述能力了🤣🤣。</p>
+<p>这里需要注意的是往样本里面替换元素的时候，第 <code>i</code> 个元素能被选中用来替换的概率是 <code>k / i + 1</code>，这样就能保证每个元素被选中的机会都是均等的</p>
+<h3 id="加权蓄水池算法"><a href="#加权蓄水池算法" class="headerlink" title="加权蓄水池算法"></a>加权蓄水池算法</h3><p><strong>问题描述</strong>: 给定一个不固定长度的非常大的数据集合 <code>sequence</code>，集合中每个元素包含一个权重 <code>weight</code>，按照权重从集合中抽取 <code>k</code> 个元素返回</p>
+<p><strong>问题思路</strong>: 和蓄水池算法的思路一样，先把样本填满，然后不断地按照权重替换元素</p>
+<p><strong>算法实现</strong></p>
+<pre><code class="python">def weighted_reservior_sampling_achao(sequence, k):
+    n = len(sequence)
+    if k &gt; n:
+        return sequence
+
+    wsum = 0
+    sample = list()
+    for i in range(k):
+        sample.append(sequence[i])
+        wsum += sequence[i][&#39;weight&#39;] / k
+
+    for i in range(k, n):
+        wsum += sequence[i][&#39;weight&#39;] / k
+        p = sequence[i][&#39;weight&#39;] / wsum
+        j = random.random()
+        if j &lt;= p:
+            sample[random.randint(0, k-1)] = sequence[i]
+
+    return sample
+</code></pre>
+<p>这里第 <code>i</code> 个元素被选中用来替换的概率是 <code>sequence[i].weight * k / sum(sequence[0:i+1].weight)</code>，当所有权重都一致的时候，就和蓄水池算法是一致的了。</p>
+<p>这里面有个小问题，就是一开始用来填充样本的数据，其实是等概率的，这样会导致，填充样本的数据权重失效，但是这个问题只在数据集合较小（准确地说 <code>k</code> 和 <code>len(sequence)</code> 比较接近）的情况下才会有比较明显的缺陷，在海量数据集的情况下，这种影响是微乎其微的。</p>
+<p>完整代码: <a href="https://github.com/hatlonely/algorithm/blob/master/reservoir_sampling.py" target="_blank" rel="noopener">https://github.com/hatlonely/algorithm/blob/master/reservoir_sampling.py</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>Reservoir sampling: <a href="https://en.wikipedia.org/wiki/Reservoir_sampling" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Reservoir_sampling</a></p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
@@ -545,7 +572,7 @@ int add(int a, int b) {
                             转载请注明出处
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/01/19/谈谈注释/">http://hatlonely.github.io/2018/01/19/谈谈注释/</a>
+                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/01/26/蓄水池算法/">http://hatlonely.github.io/2018/01/26/蓄水池算法/</a>
                     </p>
                 </blockquote>
         
@@ -568,21 +595,13 @@ int add(int a, int b) {
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2018/01/21/与vim的一段往事/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2018/01/18/golang slice性能分析/" id="post_nav-older" class="next-content">
+        <a href="/2018/01/24/golang字符串的几种连接方式/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -960,6 +979,26 @@ It will not impact the appearance and can give developers a lot of support :)
 </script>
 
 <!-- MathJax Load-->
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({"HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"], linebreaks: { automatic:true }, EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50) },
+        tex2jax: { inlineMath: [ ["$", "$"], ["\\(","\\)"] ], processEscapes: true, ignoreClass: "tex2jax_ignore|dno",skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']},
+        TeX: {  noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } }, Macros: { href: "{}" } },
+        messageStyle: "none"
+    });
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+    <script type="text/javascript" src="/js/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
 
 
 <!-- Bing Background -->

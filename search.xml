@@ -3,6 +3,70 @@
   
     
     <entry>
+      <title><![CDATA[蓄水池算法]]></title>
+      <url>/2018/01/26/%E8%93%84%E6%B0%B4%E6%B1%A0%E7%AE%97%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>最近有个需求，需要从不固定大小的数据集中取固定数量的数据作为样本，有个同学提到了蓄水池算法，于是了解了一下。</p>
+<p>蓄水池算法，本身是为了解决海量数据的随机抽样问题，在算法领域应用还是挺广泛的，由于数据本身是有权重，又出现了加权蓄水池算法。</p>
+<h3 id="蓄水池算法"><a href="#蓄水池算法" class="headerlink" title="蓄水池算法"></a>蓄水池算法</h3><p><strong>问题描述</strong>: 给定一个不固定长度的数据集合 <code>sequence</code>，从中等概率地抽取 <code>k</code> 个元素作为样本返回</p>
+<p><strong>问题思路</strong>: 先把样本填满，然后不断往样本里面等概率替换元素</p>
+<p><strong>算法实现</strong></p>
+<pre><code class="python">def reservior_sampling(sequence, k):
+    n = len(sequence)
+    if k &gt; n:
+        return sequence
+
+    sample = list()
+    for i in range(k):
+        sample.append(sequence[i])
+
+    for i in range(k, n):
+        j = random.randint(0, i)
+        if j &gt;= k:
+            continue
+        sample[j] = sequence[i]
+
+    return sample
+</code></pre>
+<p>这里需要注意的是往样本里面替换元素的时候，第 <code>i</code> 个元素能被选中用来替换的概率是 <code>k / i + 1</code>，这样就能保证每个元素被选中的机会都是均等的</p>
+<h3 id="加权蓄水池算法"><a href="#加权蓄水池算法" class="headerlink" title="加权蓄水池算法"></a>加权蓄水池算法</h3><p><strong>问题描述</strong>: 给定一个不固定长度的非常大的数据集合 <code>sequence</code>，集合中每个元素包含一个权重 <code>weight</code>，按照权重从集合中抽取 <code>k</code> 个元素返回</p>
+<p><strong>问题思路</strong>: 和蓄水池算法的思路一样，先把样本填满，然后不断地按照权重替换元素</p>
+<p><strong>算法实现</strong></p>
+<pre><code class="python">def weighted_reservior_sampling_achao(sequence, k):
+    n = len(sequence)
+    if k &gt; n:
+        return sequence
+
+    wsum = 0
+    sample = list()
+    for i in range(k):
+        sample.append(sequence[i])
+        wsum += sequence[i][&#39;weight&#39;] / k
+
+    for i in range(k, n):
+        wsum += sequence[i][&#39;weight&#39;] / k
+        p = sequence[i][&#39;weight&#39;] / wsum
+        j = random.random()
+        if j &lt;= p:
+            sample[random.randint(0, k-1)] = sequence[i]
+
+    return sample
+</code></pre>
+<p>这里第 <code>i</code> 个元素被选中用来替换的概率是 <code>sequence[i].weight * k / sum(sequence[0:i+1].weight)</code>，当所有权重都一致的时候，就和蓄水池算法是一致的了。</p>
+<p>这里面有个小问题，就是一开始用来填充样本的数据，其实是等概率的，这样会导致，填充样本的数据权重失效，但是这个问题只在数据集合较小（准确地说 <code>k</code> 和 <code>len(sequence)</code> 比较接近）的情况下才会有比较明显的缺陷，在海量数据集的情况下，这种影响是微乎其微的。</p>
+<p>完整代码: <a href="https://github.com/hatlonely/algorithm/blob/master/reservoir_sampling.py" target="_blank" rel="noopener">https://github.com/hatlonely/algorithm/blob/master/reservoir_sampling.py</a></p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>Reservoir sampling: <a href="https://en.wikipedia.org/wiki/Reservoir_sampling" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Reservoir_sampling</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 几种字符串的连接方式]]></title>
       <url>/2018/01/24/golang%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%87%A0%E7%A7%8D%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/</url>
       <content type="html"><![CDATA[<p>最近在做性能优化，有个函数里面的耗时特别长，看里面的操作大多是一些字符串拼接的操作，而字符串拼接在 golang 里面其实有很多种实现。</p>
