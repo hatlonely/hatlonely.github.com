@@ -351,6 +351,7 @@
         margin: 20px 10px;
         padding: 0px 0px;
         transition: box-shadow 0.25s;
+        -webkit-tap-highlight-color:transparent;
     }
 
     .md-links a {
@@ -383,7 +384,12 @@
 
     .md-links-title {
         font-size: 20px;
-        line-height: 50px;
+        line-height: 40px;
+        display: block;
+    }
+
+    .md-links-descr {
+        font-size: 10px;
     }
 
     #scheme-Paradox .mdl-mini-footer{
@@ -399,26 +405,50 @@
         
             <li class="md-links-item" onclick="location='http://hatlonely.github.io/'">
                 <img src="http://hatlonely.github.io/img/hatlonely4.png" alt="hatlonely" />
-                <span class="md-links-title">hatlonely</span><br />
-                <span>Try new, go far, see more</span>
+                <span class="md-links-title">hatlonely</span>
+                <span class="md-links-descr">Try new, go far, see more</span>
             </li>
         
             <li class="md-links-item" onclick="location='https://blog.viosey.com/'">
                 <img src="/img/links/viosey.png" alt="viosey" />
-                <span class="md-links-title">viosey</span><br />
-                <span>深自缄默，如云漂泊</span>
+                <span class="md-links-title">viosey</span>
+                <span class="md-links-descr">深自缄默，如云漂泊</span>
             </li>
         
             <li class="md-links-item" onclick="location='https://material.io/'">
                 <img src="/img/links/material.png" alt="material" />
-                <span class="md-links-title">material</span><br />
-                <span>material design</span>
+                <span class="md-links-title">material</span>
+                <span class="md-links-descr">A unified system that combines theory, resources, and tools for crafting digital experiences.</span>
             </li>
         
             <li class="md-links-item" onclick="location='https://formtypemaker.appspot.com/'">
                 <img src="/img/links/formtypemaker.png" alt="formtypemaker" />
-                <span class="md-links-title">formtypemaker</span><br />
-                <span>material letters generator</span>
+                <span class="md-links-title">formtypemaker</span>
+                <span class="md-links-descr">Material letters generator</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='https://reactjs.org/'">
+                <img src="/img/links/react.ico" alt="react" />
+                <span class="md-links-title">react</span>
+                <span class="md-links-descr">A JavaScript library for building user interfaces</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='http://www.material-ui.com/'">
+                <img src="/img/links/material-ui.ico" alt="material-ui" />
+                <span class="md-links-title">material-ui</span>
+                <span class="md-links-descr">React components that implement Google&#39;s Material Design</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='http://www.rsc.org/periodic-table'">
+                <img src="/img/links/periodic-table.ico" alt="periodic-table" />
+                <span class="md-links-title">periodic-table</span>
+                <span class="md-links-descr">Royal Society of Chemistry</span>
+            </li>
+        
+            <li class="md-links-item" onclick="location='https://goreportcard.com/'">
+                <img src="/img/links/goreportcard.ico" alt="goreportcard" />
+                <span class="md-links-title">goreportcard</span>
+                <span class="md-links-descr">Go Report Card</span>
             </li>
         
     
@@ -587,17 +617,8 @@ It will not impact the appearance and can give developers a lot of support :)
 
 <!-- Sidebar Divider -->
 
-    <div class="sidebar-divider"></div>
-
 
 <!-- Theme Material -->
-
-    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
-        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
-            主题 - Material
-            <span class="sidebar-badge badge-circle">i</span>
-        </div>
-    </a>
 
 
 <!-- Help & Support -->
