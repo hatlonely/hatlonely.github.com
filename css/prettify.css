@@ -1,15 +1,16 @@
 @charset "UTF-8";
 
 /* for color-themes-for-google-code-prettify */
-pre{
+pre {
     white-space: pre-wrap;
     word-break: break-all;
     word-wrap: break-word;
+    font-family: 'SF Mono', Menlo, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
 #post-content .prettyprint{
     padding: 1.2em;
-    border-radius: 0;
+    border-radius: 5px;
 }
 
 #post-content pre ol,#post-content pre ul {
@@ -28,7 +29,7 @@ pre{
 
 @media screen and (max-width:1024px) {
     #post-content pre ol,#post-content pre ul {
-        padding-left: 35px;
-        font-size: 0.5rem;
+        padding-left: 30px;
+        font-size: 0.8rem;
     }
 }
