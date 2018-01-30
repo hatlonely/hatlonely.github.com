@@ -245,7 +245,7 @@
 
     
         <meta property="article:published_time" content="Sun Jan 28 2018 13:42:19 GMT+0800">
-        <meta property="article:modified_time" content="Sun Jan 28 2018 22:09:23 GMT+0800">
+        <meta property="article:modified_time" content="Tue Jan 30 2018 11:06:23 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -268,7 +268,7 @@
     "mainEntityOfPage": "http://hatlonely.github.io/2018/01/28/golang-json-性能分析/index.html",
     "headline": "golang json 性能分析",
     "datePublished": "Sun Jan 28 2018 13:42:19 GMT+0800",
-    "dateModified": "Sun Jan 28 2018 22:09:23 GMT+0800",
+    "dateModified": "Tue Jan 30 2018 11:06:23 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -539,6 +539,9 @@ type A struct {
 </code></pre>
 <h3 id="jsoniter"><a href="#jsoniter" class="headerlink" title="jsoniter"></a>jsoniter</h3><pre><code>go get -u github.com/json-iterator/go
 </code></pre><p>这是一个很神奇的库，滴滴开发的，不像 easyjson 和 ffjson 都使用了预编译，而且 100% 兼容原生库，但是性能超级好，也不知道怎么实现的，如果有人知道的话，可以告诉我一下吗？</p>
+<blockquote>
+<p>2018-1-28日更新，来自官方（@taowen）的回复：<br>没啥神奇的。就是预先缓存了对应struct的decoder实例而已。然后unsafe.Pointer省掉了一些interface{}的开销。还有一些文本解析上的优化</p>
+</blockquote>
 <p>使用上面，你只要把所有的 </p>
 <pre><code>import &quot;encoding/json&quot;
 </code></pre><p>替换成</p>
@@ -612,6 +615,14 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             <!-- Post Prev & Next Nav -->
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
+    
+        <a href="/2018/01/29/golang-pprof-性能分析工具/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
     
 
     <!-- Section Spacer -->
@@ -715,7 +726,7 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">10</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">11</span></a>
             </ul>
         </li>
         
