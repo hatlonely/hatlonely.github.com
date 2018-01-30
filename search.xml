@@ -65,9 +65,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> pprof </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> pprof </tag>
             
         </tags>
         
@@ -154,9 +154,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> json </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -164,7 +164,7 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
     
     <entry>
       <title><![CDATA[golang 依赖管理]]></title>
-      <url>/2018/01/27/golang%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</url>
+      <url>/2018/01/27/golang-%E4%BE%9D%E8%B5%96%E7%AE%A1%E7%90%86/</url>
       <content type="html"><![CDATA[<p>依赖管理是一个语言非常重要的特性，很大程度上决定着一个语言的流行程度，流行的语言大多都有非常成熟的依赖管理工具，java 的 maven 和 gradle，javascript 的 npm，python 的 pip，这些工具极大地降低了我们使用第三方库的成本，提高了生产效率，而 c++ 比较奇葩，并没有这样统一的依赖管理工具，大公司好一点，有专门的团队去做这样的工具解决依赖的问题，小公司就只能自己把源码拉下来，放到固定的目录，然后编译成二进制，运气不好的话，还要自己解决各种兼容性的问题，如果有版本更新，这个过程还得重复一遍，第三方库的使用和维护成本之高，让人简直就想放弃……</p>
 <p>Golang 是自带依赖管理工具的，直接 <code>go get &lt;packages&gt;</code> 就可以把依赖拉下来，但是这种方式有个缺陷，没有版本控制，你每次拉下来的 <code>package</code> 都是 <code>master</code> 分支上的版本，这样是很危险的，源代码更新可能会有一些对外接口上面的调整，这些调整很有可能就导致你的程序编译通不过，而更致命的是，新的代码引入了一些新的 bug 或者接口语义上的变化会导致你的程序崩溃，所以早期的 gopher 开发了另一个依赖管理工具 <a href="https://github.com/tools/godep" target="_blank" rel="noopener"><code>godep</code></a>解决了版本管理的问题，最近，golang 官方也在开发一个新的依赖管理工具 <a href="https://github.com/golang/dep" target="_blank" rel="noopener"><code>dep</code></a>，但今天我给大家推荐的是 <a href="https://github.com/Masterminds/glide" target="_blank" rel="noopener"><code>glide</code></a> 这款工具，和其他工具相比呢，这款工具支持更多的特性，包括支持依赖的自动分析，指定版本范围，依赖清理等等，而且使用起来也比较简单。这里有一些工具的对比：<a href="https://github.com/Masterminds/glide/wiki/Go-Package-Manager-Comparison" target="_blank" rel="noopener">https://github.com/Masterminds/glide/wiki/Go-Package-Manager-Comparison</a></p>
 <p>下面我给大家简单介绍一下 <code>glide</code> 在实际项目中的使用</p>
@@ -274,7 +274,7 @@ git clone https://github.com/golang/net.git
     
     <entry>
       <title><![CDATA[golang 几种字符串的连接方式]]></title>
-      <url>/2018/01/24/golang%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%87%A0%E7%A7%8D%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/</url>
+      <url>/2018/01/24/golang-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%87%A0%E7%A7%8D%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F/</url>
       <content type="html"><![CDATA[<p>最近在做性能优化，有个函数里面的耗时特别长，看里面的操作大多是一些字符串拼接的操作，而字符串拼接在 golang 里面其实有很多种实现。</p>
 <h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><h4 id="1-直接使用运算符"><a href="#1-直接使用运算符" class="headerlink" title="1. 直接使用运算符"></a>1. 直接使用运算符</h4><pre><code class="golang">func BenchmarkAddStringWithOperator(b *testing.B) {
     hello := &quot;hello&quot;
@@ -472,7 +472,7 @@ int add(int a, int b) {
     
     <entry>
       <title><![CDATA[golang slice 性能分析]]></title>
-      <url>/2018/01/18/golang%20slice%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</url>
+      <url>/2018/01/18/golang-slice-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</url>
       <content type="html"><![CDATA[<p>golang 在 gc 这块的做得比较弱，频繁地申请和释放内存会消耗很多的资源。另外 slice 使用数组实现，有一个容量和长度的问题，当 slice 的容量用完再继续添加元素时需要扩容，而这个扩容会把申请新的空间，把老的内容复制到新的空间，这是一个非常耗时的操作。有两种方式可以减少这个问题带来的性能开销：</p>
 <ol>
 <li>在 slice 初始化的时候设置 capacity（但更多的时候我们可能并不知道 capacity 的大小）</li>
@@ -583,7 +583,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
     
     <entry>
       <title><![CDATA[golang开发目录结构]]></title>
-      <url>/2018/01/16/golang%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
+      <url>/2018/01/16/golang-%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
       <content type="html"><![CDATA[<p>在实际的项目中发现大家的目录结构都比较凌乱，基本每个人都有每个人的风格，一个项目在不断地变大，一些新的文件或目录又不断地被添加进来，从这里面去找到自己需要的信息的成本越来越高，一个统一的通用的目录结构非常有必要。</p>
 <p>以下内容来自于github上的这个项目（<a href="https://github.com/golang-standards/project-layout" target="_blank" rel="noopener">https://github.com/golang-standards/project-layout</a>）</p>
 <h3 id="cmd"><a href="#cmd" class="headerlink" title="/cmd"></a><code>/cmd</code></h3><p>main函数文件（比如 <code>/cmd/myapp.go</code>）目录，这个目录下面，每个文件在编译之后都会生成一个可执行的文件。</p>
@@ -619,7 +619,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
     
     <entry>
       <title><![CDATA[《microservice & serverless》by蔡超的一点感想]]></title>
-      <url>/2018/01/12/%E3%80%8Amicroservice%20&amp;%20serverless%E3%80%8Bby%E8%94%A1%E8%B6%85%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/</url>
+      <url>/2018/01/12/%E3%80%8Amicroservice-&amp;-serverless%E3%80%8Bby-%E8%94%A1%E8%B6%85%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/</url>
       <content type="html"><![CDATA[<p>超哥是来自Amazon的顶级的架构师，经历了Amazon整个向微服务架构迁移的过程，以及向serverless的演化过程，有着极其丰富的经验，年过40，一直站在技术的最前沿，始终保持对技术的执着追求和热情，是名副其实的技术大牛，能与之一起工作，荣幸之至！今天超哥给我们分享的主题《microservice &amp; serverless》，是超哥实际工作经验的一些分享，也为公司架构的演化提供了新的思路和指导。</p>
 <p>microservice（微服务）这个可能是这些年最火的一种架构设计了，频繁地出现在各种技术大会上，各大互联网巨头纷纷向这种架构演化，很多小的互联网公司也往这些概念上去靠，大有一种不做微服务就要落伍的趋势。事实上，很多对于微服务的理解比较粗浅，盲目的微服务化甚至会带来更多的负面影响。</p>
 <p>目前Amazon内部运行着超过2w过微服务，但是这些微服务并不是凭空产生的，在这之前，运行的服务都是超大的单体服务，但是随着业务的发展，这种服务在整个研发的pipeline（设计→研发→编译→测试→发布→部署→运维）中都出现了一些问题。设计阶段，老的单体服务会给我们带来一些技术限制，比如有些技术只有python语言的实现，但是我们的服务使用java开发，这样我们不得不拿出一个更复杂的设计去解决类似的问题；研发阶段，随着开发人数越来越多，代码冲突的问题越来越多，我们不得不花更多的时间去做这种无趣又没有什么意义的事情；编译阶段，越来越多的依赖很容易造成版本冲突，不同的版本也会引发兼容性的问题，而这种问题如果在运行时才暴露出来可能会造成严重业务影响；部署阶段，很多的特性打包在一起发布，特性越多，出问题的概率也就越大；而最致命的是运维阶段没有回滚方案，一次上线中可能包含很多的特性，而其中任何一条特性的bug就需要回滚，然后可能有些特性需要变更数据格式，新特性能向前兼容老的数据格式，但是回滚后却无法处理新的数据格式，因此无法回滚……就是在这样的背景下，Amazon开始朝微服务的架构演化。</p>
