@@ -15,20 +15,21 @@ func StopCPUProfile()
 </code></pre>
 <p>使用上面比较简单，只需要将文件指针传给对应的函数即可，性能数据将写入到文件中，然后可以使用 golang 自带的 pprof 工具生成 svg，pdf 的可视化图，然后就可以很直观地从这些图里面看到主要的性能消耗了</p>
 <h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><h4 id="首先需要一个程序"><a href="#首先需要一个程序" class="headerlink" title="首先需要一个程序"></a>首先需要一个程序</h4><p>首先需要在你的程序里面注入 pprof 代码，下面是一段示例代码，完整代码在：<a href="https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go</a>，这里使用的 <code>PPCmd</code> 方法，是为了方便使用，做的一个简单封装，代码在：<a href="https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go</a></p>
-<pre><code>func main() {
+<pre><code class="golang">func main() {
     go doSomething1()
     go doSomething2()
     go doSomething3()
 
-    if err := pprof.PPCmd(&quot;mem&quot;); err != nil {
-        panic(err)
-    }
-
     if err := pprof.PPCmd(&quot;cpu 10s&quot;); err != nil {
         panic(err)
     }
+
+    if err := pprof.PPCmd(&quot;mem&quot;); err != nil {
+        panic(err)
+    }
 }
-</code></pre><p>编译，运行上面代码会生成两个 pprof 文件，<code>cpu.pprof.yyyymmddhhmmss</code> 和 <code>cpu.pprof.yyyymmddhhmmss</code>，编译运行的方法如下：</p>
+</code></pre>
+<p>编译，运行上面代码会生成两个 pprof 文件，<code>cpu.pprof.yyyymmddhhmmss</code> 和 <code>cpu.pprof.yyyymmddhhmmss</code>，编译运行的方法如下：</p>
 <pre><code>cd $GOPATH/src
 git clone git@github.com:hatlonely/hellogolang.git
 cd hellogolang
@@ -55,6 +56,7 @@ export PATH=$PATH:/path/to/FlameGraph
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li>Package pprof: <a href="https://golang.org/pkg/runtime/pprof/" target="_blank" rel="noopener">https://golang.org/pkg/runtime/pprof/</a></li>
 <li>Profiling Go Programs: <a href="https://blog.golang.org/profiling-go-programs" target="_blank" rel="noopener">https://blog.golang.org/profiling-go-programs</a></li>
+<li>Go torch: <a href="https://github.com/uber/go-torch" target="_blank" rel="noopener">https://github.com/uber/go-torch</a></li>
 </ul>
 ]]></content>
       
@@ -63,9 +65,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> pprof </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -152,9 +154,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> json </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> json </tag>
             
         </tags>
         
