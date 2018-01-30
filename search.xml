@@ -582,7 +582,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
     </entry>
     
     <entry>
-      <title><![CDATA[golang开发目录结构]]></title>
+      <title><![CDATA[golang 开发目录结构]]></title>
       <url>/2018/01/16/golang-%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84/</url>
       <content type="html"><![CDATA[<p>在实际的项目中发现大家的目录结构都比较凌乱，基本每个人都有每个人的风格，一个项目在不断地变大，一些新的文件或目录又不断地被添加进来，从这里面去找到自己需要的信息的成本越来越高，一个统一的通用的目录结构非常有必要。</p>
 <p>以下内容来自于github上的这个项目（<a href="https://github.com/golang-standards/project-layout" target="_blank" rel="noopener">https://github.com/golang-standards/project-layout</a>）</p>
@@ -613,12 +613,14 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
             
             <tag> 开发 </tag>
             
+            <tag> 目录结构 </tag>
+            
         </tags>
         
     </entry>
     
     <entry>
-      <title><![CDATA[《microservice & serverless》by蔡超的一点感想]]></title>
+      <title><![CDATA[《microservice & serverless》by 蔡超的一点感想]]></title>
       <url>/2018/01/12/%E3%80%8Amicroservice-&amp;-serverless%E3%80%8Bby-%E8%94%A1%E8%B6%85%E7%9A%84%E4%B8%80%E7%82%B9%E6%84%9F%E6%83%B3/</url>
       <content type="html"><![CDATA[<p>超哥是来自Amazon的顶级的架构师，经历了Amazon整个向微服务架构迁移的过程，以及向serverless的演化过程，有着极其丰富的经验，年过40，一直站在技术的最前沿，始终保持对技术的执着追求和热情，是名副其实的技术大牛，能与之一起工作，荣幸之至！今天超哥给我们分享的主题《microservice &amp; serverless》，是超哥实际工作经验的一些分享，也为公司架构的演化提供了新的思路和指导。</p>
 <p>microservice（微服务）这个可能是这些年最火的一种架构设计了，频繁地出现在各种技术大会上，各大互联网巨头纷纷向这种架构演化，很多小的互联网公司也往这些概念上去靠，大有一种不做微服务就要落伍的趋势。事实上，很多对于微服务的理解比较粗浅，盲目的微服务化甚至会带来更多的负面影响。</p>
