@@ -29,7 +29,7 @@ func StopCPUProfile()
     }
 }
 </code></pre>
-<p>编译，运行上面代码会生成两个 pprof 文件，<code>cpu.pprof.yyyymmddhhmmss</code> 和 <code>cpu.pprof.yyyymmddhhmmss</code>，编译运行的方法如下：</p>
+<p>编译，运行上面代码会生成两个 pprof 文件，<code>cpu.pprof.yyyymmddhhmmss</code> 和 <code>mem.pprof.yyyymmddhhmmss</code>，编译运行的方法如下：</p>
 <pre><code>cd $GOPATH/src
 git clone git@github.com:hatlonely/hellogolang.git
 cd hellogolang
