@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?tUYpX4s6W77JX6zXuQ4y8Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?sGJ5O7wjyPFiR+nJcdxf9A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -245,7 +245,7 @@
 
     
         <meta property="article:published_time" content="Mon Jan 29 2018 21:29:49 GMT+0800">
-        <meta property="article:modified_time" content="Wed Jan 31 2018 16:22:08 GMT+0800">
+        <meta property="article:modified_time" content="Sun Feb 04 2018 19:00:01 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -268,7 +268,7 @@
     "mainEntityOfPage": "http://hatlonely.github.io/2018/01/29/golang-pprof-性能分析工具/index.html",
     "headline": "golang pprof 性能分析工具",
     "datePublished": "Mon Jan 29 2018 21:29:49 GMT+0800",
-    "dateModified": "Wed Jan 31 2018 16:22:08 GMT+0800",
+    "dateModified": "Sun Feb 04 2018 19:00:01 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -398,11 +398,15 @@
 
     <!-- Author Avatar -->
     <div id="author-avatar">
-        <img src="/img/avatar/hatlonely12.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+            <img src="/img/avatar/hatlonely10.png" width="44px" height="44px" alt="'s avatar">
+        
     </div>
     <!-- Author Name & Date -->
     <div>
-        <strong>hatlonely</strong>
+        
+            <strong>hatlonely</strong>
+        
         <span>1月 29, 2018</span>
     </div>
 
@@ -523,7 +527,7 @@ func StartCPUProfile(w io.Writer) error
 func StopCPUProfile()
 </code></pre>
 <p>使用上面比较简单，只需要将文件指针传给对应的函数即可，性能数据将写入到文件中，然后可以使用 golang 自带的 pprof 工具生成 svg，pdf 的可视化图，然后就可以很直观地从这些图里面看到主要的性能消耗了</p>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><h4 id="首先需要一个程序"><a href="#首先需要一个程序" class="headerlink" title="首先需要一个程序"></a>首先需要一个程序</h4><p>首先需要在你的程序里面注入 pprof 代码，下面是一段示例代码，完整代码在：<a href="https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go</a>，这里使用的 <code>PPCmd</code> 方法，是为了方便使用，做的一个简单封装，代码在：<a href="https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go</a></p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><h4 id="首先需要一个程序"><a href="#首先需要一个程序" class="headerlink" title="首先需要一个程序"></a>首先需要一个程序</h4><p>首先需要在你的程序里面注入 pprof 代码，下面是一段示例代码，完整代码在：<a href="https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof/pprof_runtime.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof/pprof_runtime.go</a>，这里使用的 <code>PPCmd</code> 方法，是为了方便使用，做的一个简单封装，代码在：<a href="https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go</a></p>
 <pre><code class="golang">func main() {
     go doSomething1()
     go doSomething2()
@@ -598,6 +602,14 @@ export PATH=$PATH:/path/to/FlameGraph
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
+        <a href="/2018/01/31/golang-单元测试/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
@@ -627,7 +639,7 @@ export PATH=$PATH:/path/to/FlameGraph
 <aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
     <div id="sidebar-main">
         <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/bridge.jpg);">
+        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/coco1.jpg);">
     <!-- Top bar -->
     <div class="top-bar"></div>
 
@@ -700,7 +712,7 @@ export PATH=$PATH:/path/to/FlameGraph
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">11</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -720,14 +732,20 @@ export PATH=$PATH:/path/to/FlameGraph
                 
                     
                         <li>
+                            <a class="sidebar_archives-link" href="/tags/程序人生"> 程序人生
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
                             <a class="sidebar_archives-link" href="/tags/golang"> golang
-                                <span class="sidebar_archives-count"> 6 </span>
+                                <span class="sidebar_archives-count"> 9 </span>
                             </a>
                         </li>
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/性能"> 性能
-                                <span class="sidebar_archives-count"> 2 </span>
+                                <span class="sidebar_archives-count"> 3 </span>
                             </a>
                         </li>
                     

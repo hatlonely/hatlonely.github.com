@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content=",golang,slice">
+    <meta name="keywords" content=",golang,slice,性能">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?tUYpX4s6W77JX6zXuQ4y8Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?sGJ5O7wjyPFiR+nJcdxf9A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -241,11 +241,11 @@
     <meta property="og:title" content="golang slice 性能分析 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely12.png">
     <meta property="og:description" content="">
-    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="slice"> 
+    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="slice"> <meta property="og:article:tag" content="性能"> 
 
     
         <meta property="article:published_time" content="Thu Jan 18 2018 21:56:24 GMT+0800">
-        <meta property="article:modified_time" content="Wed Jan 31 2018 16:14:55 GMT+0800">
+        <meta property="article:modified_time" content="Mon Feb 05 2018 10:54:41 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -268,7 +268,7 @@
     "mainEntityOfPage": "http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html",
     "headline": "golang slice 性能分析",
     "datePublished": "Thu Jan 18 2018 21:56:24 GMT+0800",
-    "dateModified": "Wed Jan 31 2018 16:14:55 GMT+0800",
+    "dateModified": "Mon Feb 05 2018 10:54:41 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -286,7 +286,7 @@
             "url": "/img/avatar/hatlonely12.png"
         }
     },
-    "keywords": ",golang,slice",
+    "keywords": ",golang,slice,性能",
     "description": "",
 }
 </script>
@@ -398,11 +398,15 @@
 
     <!-- Author Avatar -->
     <div id="author-avatar">
-        <img src="/img/avatar/hatlonely12.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+            <img src="/img/avatar/hatlonely13.png" width="44px" height="44px" alt="'s avatar">
+        
     </div>
     <!-- Author Name & Date -->
     <div>
-        <strong>hatlonely</strong>
+        
+            <strong>hatlonely</strong>
+        
         <span>1月 18, 2018</span>
     </div>
 
@@ -439,7 +443,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/slice/">slice</a>
+        <a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/slice/">slice</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/性能/">性能</a>
     </ul>
     
 
@@ -531,7 +535,7 @@ BenchmarkAppendWithCapGreaterLen10thReuse-8          300       4903230 ns/op
 </code></pre><h3 id="主要结论"><a href="#主要结论" class="headerlink" title="主要结论"></a>主要结论</h3><ol>
 <li>在已知 capacity 的情况下，直接设置 capacity 减少内存的重新分配，有效提高性能</li>
 <li>capacity &lt; length，capacity 越接近 length，性能越好</li>
-<li>capacity &gt; lenght，如果太大，反而会造成性能下降，这里当 capacity &gt; 10 * length时，与不设置 capacity 的性能差不太多</li>
+<li>capacity &gt; length，如果太大，反而会造成性能下降，这里当 capacity &gt; 10 * length时，与不设置 capacity 的性能差不太多</li>
 <li>多次使用复用同一块内存能有效提高性能</li>
 </ol>
 <h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre><code class="go">func BenchmarkAppendWithoutCapacity(b *testing.B) {
@@ -677,7 +681,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
 <aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
     <div id="sidebar-main">
         <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/bridge.jpg);">
+        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/coco1.jpg);">
     <!-- Top bar -->
     <div class="top-bar"></div>
 
@@ -750,7 +754,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">11</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -770,14 +774,20 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
                 
                     
                         <li>
+                            <a class="sidebar_archives-link" href="/tags/程序人生"> 程序人生
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
                             <a class="sidebar_archives-link" href="/tags/golang"> golang
-                                <span class="sidebar_archives-count"> 6 </span>
+                                <span class="sidebar_archives-count"> 9 </span>
                             </a>
                         </li>
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/性能"> 性能
-                                <span class="sidebar_archives-count"> 2 </span>
+                                <span class="sidebar_archives-count"> 3 </span>
                             </a>
                         </li>
                     

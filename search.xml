@@ -3,6 +3,607 @@
   
     
     <entry>
+      <title><![CDATA[几种实用的 pythonic 语法]]></title>
+      <url>/2018/02/04/%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%94%A8%E7%9A%84-pythonic-%E8%AF%AD%E6%B3%95/</url>
+      <content type="html"><![CDATA[<p>python 是一门简单而优雅的语言，可能是过于简单了，不用花太多时间学习就能使用，其实 python 里面还有一些很好的特性，能大大简化你代码的逻辑，提高代码的可读性</p>
+<p>关于 pythonic，你可以在终端打开 python，然后输入 <code>import this</code>，看看输出什么，这就是 Tim Peters 的 <a href="https://www.python.org/dev/peps/pep-0020/" target="_blank" rel="noopener">《The Zen of Python》</a>，这首充满诗意的诗篇里概况了 python 的设计哲学，而这些思想，其实在所有语言也基本上是通用的</p>
+<blockquote>
+<p>Beautiful is better than ugly.<br>Explicit is better than implicit.<br>Simple is better than complex.<br>Complex is better than complicated.<br>Flat is better than nested.<br>Sparse is better than dense.<br>Readability counts.<br>Special cases aren’t special enough to break the rules.<br>Although practicality beats purity.<br>Errors should never pass silently.<br>Unless explicitly silenced.<br>In the face of ambiguity, refuse the temptation to guess.<br>There should be one– and preferably only one –obvious way to do it.<br>Although that way may not be obvious at first unless you’re Dutch.<br>Now is better than never.<br>Although never is often better than *right* now.<br>If the implementation is hard to explain, it’s a bad idea.<br>If the implementation is easy to explain, it may be a good idea.<br>Namespaces are one honking great idea – let’s do more of those!</p>
+</blockquote>
+<h3 id="使用生成器-yield"><a href="#使用生成器-yield" class="headerlink" title="使用生成器 yield"></a>使用生成器 yield</h3><p>生成器是 python 里面一个非常有用的语法特性，却也是最容易被忽视的一个，可能是因为大部分能用生成器的地方也能用列表吧。</p>
+<p>生成器可以简单理解成一个函数，每次执行到 yield 语句就返回一个值，通过不停地调用这个函数，就能获取到所有的值，这些值就能构成了一个等效的列表，但是与列表不同的是，这些值是不断计算得出，而列表是在一开始就计算好了，这就是 lazy evaluation 的思想。这个特性在数据量特别大的场景非常有用，比如大数据处理，一次无法加载所有的文件，使用生成器就能做到一行一行处理，而不用担心内存溢出</p>
+<pre><code class="python">def fibonacci():
+    num0 = 0
+    num1 = 1
+    for i in range(10):
+        num2 = num0 + num1
+        yield num2
+        num0 = num1
+        num1 = num2
+
+for i in fibonacci():
+    print(i)
+</code></pre>
+<h3 id="用-else-子句简化循环和异常"><a href="#用-else-子句简化循环和异常" class="headerlink" title="用 else 子句简化循环和异常"></a>用 else 子句简化循环和异常</h3><p><code>if / else</code> 大家都用过，但是在 python 里面，<code>else</code> 还可以用在循环和异常里面</p>
+<pre><code class="python"># pythonic 写法
+for cc in [&#39;UK&#39;, &#39;ID&#39;, &#39;JP&#39;, &#39;US&#39;]:
+    if cc == &#39;CN&#39;:
+        break
+else:
+    print(&#39;no CN&#39;)
+
+# 一般写法
+no_cn = True
+for cc in [&#39;UK&#39;, &#39;ID&#39;, &#39;JP&#39;, &#39;US&#39;]:
+    if cc == &#39;CN&#39;:
+        no_cn = False
+        break
+if no_cn:
+    print(&#39;no CN&#39;)
+</code></pre>
+<p><code>else</code> 放在循环里面的含义是，如果循环全部遍历完成，没有执行 <code>break</code>，则执行 <code>else</code> 子句</p>
+<pre><code class="python"># pythonic 写法
+try:
+    db.execute(&#39;UPDATE table SET xx=xx WHERE yy=yy&#39;)
+except DBError:
+    db.rollback()
+else:
+    db.commit()
+
+# 一般写法
+has_error = False
+try:
+    db.execute(&#39;UPDATE table SET xx=xx WHERE yy=yy&#39;)
+except DBError:
+    db.rollback()
+    has_error = True
+if not has_error:
+    db.commit()
+</code></pre>
+<p><code>else</code> 放到异常里面可以表示，如果没有异常发生需要执行的操作</p>
+<h3 id="用-with-子句自动管理资源"><a href="#用-with-子句自动管理资源" class="headerlink" title="用 with 子句自动管理资源"></a>用 with 子句自动管理资源</h3><p>我们都知道，打开的文件需要在用完之后关闭，要不就会造成资源泄露，但是实际编程的时候经常会忘记关闭，特别是在一些逻辑复杂的场景中，更是如此，python 有一个优雅地解决方案，那就是 <code>with</code> 子句</p>
+<pre><code class="python"># pythonic 写法
+with open(&#39;pythonic.py&#39;) as fp:
+    for line in fp:
+        print(line[:-1])
+
+# 一般写法
+fp = open(&#39;pythonic.py&#39;)
+for line in fp:
+    print(line[:-1])
+fp.close()
+</code></pre>
+<p>使用 <code>with as</code> 语句后，无需手动调用 <code>fp.close()</code>, 在作用域结束后，文件会被自动 close 掉，完整的执行过如下:</p>
+<ol>
+<li>调用 <code>open(&#39;pythonic.py&#39;)</code>，返回的一个对象 <code>obj</code>,</li>
+<li>调用 <code>obj.__enter__()</code> 方法，返回的值赋给 <code>fp</code></li>
+<li>执行 <code>with</code> 中的代码块</li>
+<li>执行 <code>obj.__exit__()</code></li>
+<li>如果这个过程发生异常，将异常传给 <code>obj.__exit__()</code>，如果 <code>obj.__exit__()</code> 返回 <code>False</code>, 异常将被继续抛出，如果返回 <code>True</code>，异常被挂起，程序继续运行</li>
+</ol>
+<h3 id="列表推导与生成器表达式"><a href="#列表推导与生成器表达式" class="headerlink" title="列表推导与生成器表达式"></a>列表推导与生成器表达式</h3><blockquote>
+<p>列表推导<br><code>[expr for iter_var in iterable if cond_expr]</code></p>
+<p>生成器表达式<br><code>(expr for iter_var in iterable if cond_expr)</code></p>
+</blockquote>
+<p>列表推导和生成器表达式提供了一种非常简洁高效的方式来创建列表或者迭代器</p>
+<pre><code class="python"># pythonic 写法
+squares = [x * x for x in range(10)]
+
+# 一般写法
+squares = []
+for x in range(10):
+    squares.append(x * x)
+</code></pre>
+<h3 id="用-items-遍历-map"><a href="#用-items-遍历-map" class="headerlink" title="用 items 遍历 map"></a>用 items 遍历 map</h3><p>python 里面 map 的遍历有很多种方式，在需要同事使用 key 和 value 的场合，建议使用 <code>items()</code> 函数</p>
+<pre><code class="python">m = {&#39;one&#39;: 1, &#39;two&#39;: 2, &#39;three&#39;: 3}
+for k, v in m.items():
+    print(k, v)
+
+for k, v in sorted(m.items()):
+    print(k, v)
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>Google python 语言规范: <a href="http://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/" target="_blank" rel="noopener">http://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_language_rules/</a></li>
+<li>《编写高质量代码：改善 Python 程序的91个建议》</li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> pythonic </tag>
+            
+            <tag> 语法糖 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang 网络框架之 thrift]]></title>
+      <url>/2018/02/04/golang-%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6%E4%B9%8B-thrift/</url>
+      <content type="html"><![CDATA[<p>thrift 最初是 facebook 开发使用的 rpc 通信框架，后来贡献给了 apache 基金会，出来得比较早，几乎支持所有的后端语言，使用非常广泛，是不可不知的一个网络框架</p>
+<p>和 <a href="http://hatlonely.github.io/2018/02/03/golang-网络框架之-grpc/">grpc</a> 一样，需要先定义通信协议，然后实现自己业务逻辑，下面还是通过一个简单示例（之前的echo程序）说明 thrift 的用法，下面示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift</a></p>
+<h3 id="简单-echo-服务"><a href="#简单-echo-服务" class="headerlink" title="简单 echo 服务"></a>简单 echo 服务</h3><h4 id="获取-thrift"><a href="#获取-thrift" class="headerlink" title="获取 thrift"></a>获取 thrift</h4><pre><code>go get git.apache.org/thrift.git/lib/go
+</code></pre><h4 id="定义协议文件"><a href="#定义协议文件" class="headerlink" title="定义协议文件"></a>定义协议文件</h4><pre><code>namespace go echo
+
+struct EchoReq {
+    1: string msg;
+}
+
+struct EchoRes {
+    1: string msg;
+}
+
+service Echo {
+    EchoRes echo(1: EchoReq req);
+}
+</code></pre><p>执行 <code>thrift -r --gen go echo.thrift</code> 命令会生成 <code>gen-go</code> 文件夹，这个过程其实是将上面的协议翻译成 golang 代码</p>
+<p>这个命令依赖于 thrift 工具，可以通过下面命令获取</p>
+<p>Mac</p>
+<pre><code>brew install thrift
+</code></pre><p>Linux</p>
+<pre><code>wget http://www-us.apache.org/dist/thrift/0.11.0/thrift-0.11.0.tar.gz
+tar -xzvf thrift-0.11.0.tar.gz
+cd thrift-0.11.0
+./configure
+make -j8
+[sudo] make install
+</code></pre><h4 id="实现服务端"><a href="#实现服务端" class="headerlink" title="实现服务端"></a>实现服务端</h4><pre><code>type EchoServerImp struct {
+}
+
+func (e *EchoServerImp) Echo(ctx context.Context, req *echo.EchoReq) (*echo.EchoRes, error) {
+    fmt.Printf(&quot;message from client: %v\n&quot;, req.GetMsg())
+
+    res := &amp;echo.EchoRes{
+        Msg: req.GetMsg(),
+    }
+
+    return res, nil
+}
+
+func main() {
+    transport, err := thrift.NewTServerSocket(&quot;:3000&quot;)
+    if err != nil {
+        panic(err)
+    }
+
+    processor := echo.NewEchoProcessor(&amp;EchoServerImp{})
+    server := thrift.NewTSimpleServer4(
+        processor,
+        transport,
+        thrift.NewTBufferedTransportFactory(8192),
+        thrift.NewTCompactProtocolFactory(),
+    )
+    if err := server.Serve(); err != nil {
+        panic(err)
+    }
+}
+</code></pre><p>这个过程和 grpc 类似，不同的地方在于，thrift 支持更多的服务器类型，支持不同的协议打包方式，方便用户选择，这里的 compact 协议是一种压缩的协议，使用比较多</p>
+<h4 id="实现客户端"><a href="#实现客户端" class="headerlink" title="实现客户端"></a>实现客户端</h4><pre><code>func main() {
+    var transport thrift.TTransport
+    var err error
+    transport, err = thrift.NewTSocket(&quot;localhost:3000&quot;)
+    if err != nil {
+        fmt.Errorf(&quot;NewTSocket failed. err: [%v]\n&quot;, err)
+        return
+    }
+
+    transport, err = thrift.NewTBufferedTransportFactory(8192).GetTransport(transport)
+    if err != nil {
+        fmt.Errorf(&quot;NewTransport failed. err: [%v]\n&quot;, err)
+        return
+    }
+    defer transport.Close()
+
+    if err := transport.Open(); err != nil {
+        fmt.Errorf(&quot;Transport.Open failed. err: [%v]\n&quot;, err)
+        return
+    }
+
+    protocolFactory := thrift.NewTCompactProtocolFactory()
+    iprot := protocolFactory.GetProtocol(transport)
+    oprot := protocolFactory.GetProtocol(transport)
+    client := echo.NewEchoClient(thrift.NewTStandardClient(iprot, oprot))
+
+    var res *echo.EchoRes
+    res, err = client.Echo(context.Background(), &amp;echo.EchoReq{
+        Msg: strings.Join(os.Args[1:], &quot; &quot;),
+    })
+    if err != nil {
+        fmt.Errorf(&quot;client echo failed. err: [%v]&quot;, err)
+        return
+    }
+
+    fmt.Printf(&quot;message from server: %v&quot;, res.GetMsg())
+}
+</code></pre><p>这个 client 相对复杂一些，需要和 server 端设置一致的打包方式，如果不一致会出现通信失败，这一点需要特别注意一下</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>thrift go 官网: <a href="http://thrift.apache.org/tutorial/go" target="_blank" rel="noopener">http://thrift.apache.org/tutorial/go</a></li>
+<li>thrift github: <a href="https://github.com/apache/thrift/" target="_blank" rel="noopener">https://github.com/apache/thrift/</a></li>
+<li>thrift go tutorial: <a href="https://github.com/apache/thrift/tree/master/tutorial/go/src" target="_blank" rel="noopener">https://github.com/apache/thrift/tree/master/tutorial/go/src</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 网络框架 </tag>
+            
+            <tag> thrift </tag>
+            
+            <tag> 微服务 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[我为什么写博客]]></title>
+      <url>/2018/02/04/%E6%88%91%E4%B8%BA%E4%BB%80%E4%B9%88%E5%86%99%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<p>最近有点沉迷于这个博客了，除了工作，吃饭，睡觉，基本所有的时间都花在这里了，经常弄到夜里两点，和之前沉迷 dota 有得一拼😏</p>
+<p>一直有一个博客梦，总是羡慕那些有个人网站的人，有那么一块地方，可以尽情地书写自己的感受，施展自己的才华，展现自己的个性。用过 csdn，试过 qq 空间，后来自己用 nodejs 自己打了一个，断断续续的，由于各种各样的原因最终都没有坚持下去</p>
+<p>直到最近，那么多曾今的伙伴各奔东西，各种思绪在脑海里涌动。你知道，一个人的时候，总是会想很多事情。想得最多的就是，我将要做什么以及我做了什么。工作三年多了，好像懂了很多，但是真的当我想要去总结的时候，却发现好像什么都不懂，什么东西都好像知道一点，却又什么东西都说不清楚，总觉得比别人厉害一点，却又不知道厉害在哪里。开始怀疑自己，也不过庸人一个，还谈什么梦想，只不过空想</p>
+<p>回想起来，自己其实也并不怎么努力，书买了一大堆，但是真正读完的没几本；一直想学英语，也只是说说而已；办过好几张健身卡，也只能坚持三天；花了那么多时间打游戏，水平也还是不咋地。这样下去，再过三年，又会怎样，我还是我，还是一样没有女朋友😔</p>
+<p>我需要一些变化，开始看书，背单词，然后开始写博客</p>
+<p>写博客可能会很耗时间，但实际上却是一件极大提升效率的事情。IT是个深不见底行业，你永远都在学习，却永远都学不完，而人是会遗忘的，很多时候，我们在重复解决着之前解决过的问题，浪费了很多时间。而写博客，不仅能避免这个问题，而且能帮你理清思路，对这个问题有更深的理解，如果写得好的话，分享出来还能帮更多人节省时间，反过来还能提升个人影响力。</p>
+<p>之前就有使用过 hexo 这个博客模板，最近突然在 github 上看到 material 主题，早在 material design 出来的时候，就对这种设计感到惊叹，一直想做一个 material 风格的博客，由于设计天分有限，再加上没有经验，一直也没有实现，这个主题正好满足了我的需求。那天晚上我折腾到凌晨4点，第二天起来花了半天时间设计我的头像，只为了和这个主题风格更搭一些，又陆陆续续花了两天的时间，修改这个主题，包括手机的适配，一些小 bug 的修复，一些 ui 配色和一些小细节的调整等等，每一次小小的改进都让我开心不已。每篇博客还可以配一张图片作为背景图，找一张好看图片作为背景，为写博客增添了不少乐趣。</p>
+<p>折腾了那么久，现在这个小站，算是基本满意吧，希望自己可以坚持写下去。</p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 程序人生 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang 网络框架之 grpc]]></title>
+      <url>/2018/02/03/golang-%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6%E4%B9%8B-grpc/</url>
+      <content type="html"><![CDATA[<p>grpc 是 google 开源的一款网络框架，具有极好的性能，可能是目前性能最好的网络框架，支持流式 rpc，可以很方便地构建消息订阅发布系统，支持几乎所有主流的语言，使用上面也很简单，公司很多服务基于 grpc 框架构建，运行非常稳定</p>
+<p>开始之前首先你要知道网络框架为你做了哪些事情：</p>
+<blockquote>
+<ol>
+<li>网络协议序列化与反序列化</li>
+<li>网络底层通信</li>
+<li>并发管理</li>
+</ol>
+</blockquote>
+<p>以及需要你做哪些事情：</p>
+<blockquote>
+<ol>
+<li>定义通信的内容（通过协议文件）</li>
+<li>实现通信的方法（实现协议接口）</li>
+</ol>
+</blockquote>
+<p>以下面两个例子来分别说明两种 rpc 服务的简单用法</p>
+<p>示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/grpc" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/grpc</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api</a></p>
+<h3 id="简单-echo-服务"><a href="#简单-echo-服务" class="headerlink" title="简单 echo 服务"></a>简单 echo 服务</h3><p>要实现的这个服务很简单，功能和 echo 命令类似，用一个字符串请求服务器，返回相同的字符串</p>
+<h4 id="获取-grpc"><a href="#获取-grpc" class="headerlink" title="获取 grpc"></a>获取 grpc</h4><pre><code>go get google.golang.org/grpc
+go get google.golang.org/genproto/
+</code></pre><p><code>go get</code> 上面两个库就可以了。可能被墙了，需要 vpn；如果没有 vpn，可以找一台能下载的服务器下载下来再传到本地；如果也没有服务器，可以点击<a href="/resource/google.golang.org.tar.gz">这里</a>下载，解压后放到 <code>vendor/</code> 目录下即可，不过可能不是最新版本</p>
+<h4 id="定义协议文件"><a href="#定义协议文件" class="headerlink" title="定义协议文件"></a>定义协议文件</h4><p>首先要定义通信的协议，grpc 使用的是 proto3 序列化协议，这是一个高效的协议，关于这个协议的跟多内容可以参考下面链接：<a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener">https://developers.google.com/protocol-buffers/docs/proto3</a></p>
+<pre><code>syntax = &quot;proto3&quot;;
+
+package echo;
+
+message EchoReq {
+    string msg = 1;
+}
+
+message EchoRes {
+    string msg = 1;
+}
+
+service Echo {
+    rpc echo (EchoReq) returns (EchoRes);
+}
+</code></pre><p>执行如下命令会自动生成 <code>echo.pb.go</code> 文件，这个过程其实是把上面这个协议翻译成 golang：</p>
+<pre><code>protoc --go_out=plugins=grpc:. echo.proto
+</code></pre><p>实际项目中可以把这个命令放到一个 <a href="https://github.com/hatlonely/hellogolang/blob/master/api/echo_proto/Makefile" target="_blank" rel="noopener">Makefile</a> 文件中，执行 <code>make</code> 命令即可生成代码</p>
+<p>上面命令依赖 <code>protoc</code> 工具，以及 golang 插件 <code>protoc-gen-go</code>，可以通过如下命令获取</p>
+<p>Mac</p>
+<pre><code>brew install grpc
+go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+</code></pre><p>Linux</p>
+<pre><code>wget https://github.com/google/protobuf/releases/download/v3.2.0/protobuf-cpp-3.2.0.tar.gz
+tar -xzvf protobuf-cpp-3.2.0.tar.gz
+cd protobuf-3.2.0
+./configure
+make -j8
+[sudo] make install
+go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+</code></pre><h4 id="实现协议接口"><a href="#实现协议接口" class="headerlink" title="实现协议接口"></a>实现协议接口</h4><pre><code>type EchoServerImp struct {
+
+}
+
+func (e *EchoServerImp) Echo(ctx context.Context, req *echo.EchoReq) (*echo.EchoRes, error) {
+    fmt.Printf(&quot;message from client: %v\n&quot;, req.GetMsg())
+
+    res := &amp;echo.EchoRes{
+        Msg: req.GetMsg(),
+    }
+
+    return res, nil
+}
+</code></pre><p>首先要定义一个接口的实现类 <code>EchoServerImp</code>，接口的的定义可以在上面生成的文件 <code>echo.pb.go</code> 中找到，这个类里面也可以有一些和业务逻辑相关的成员变量，这里我们的需求比较简单，没有其他的成员</p>
+<p>然后需要在接口函数里面实现我们具体的业务逻辑，这里仅仅把请求里面的内容读出来，再写回到响应里面</p>
+<p>你还可以为这个类增加其他的函数，比如初始化之类的，根据你具体的业务需求就好</p>
+<h4 id="实现服务端"><a href="#实现服务端" class="headerlink" title="实现服务端"></a>实现服务端</h4><pre><code>func main() {
+    server := grpc.NewServer()
+    echo.RegisterEchoServer(server, &amp;EchoServerImp{})
+
+    address, err := net.Listen(&quot;tcp&quot;, &quot;:3000&quot;)
+    if err != nil {
+        panic(err)
+    }
+
+    if err := server.Serve(address); err != nil {
+        panic(err)
+    }
+}
+</code></pre><p>把我们刚刚实现的类实例注册到 grpc 里，再绑定到本地的一个端口上就可以了，现在可以启动服务了 <code>go run echo_server.go</code></p>
+<h4 id="实现客户端"><a href="#实现客户端" class="headerlink" title="实现客户端"></a>实现客户端</h4><pre><code>func main() {
+    conn, err := grpc.Dial(&quot;127.0.0.1:3000&quot;, grpc.WithInsecure())
+    if err != nil {
+        fmt.Errorf(&quot;dial failed. err: [%v]\n&quot;, err)
+        return
+    }
+
+    client := echo.NewEchoClient(conn)
+    res, err := client.Echo(context.Background(), &amp;echo.EchoReq{
+        Msg: strings.Join(os.Args[1:], &quot; &quot;),
+    })
+
+    if err != nil {
+        fmt.Errorf(&quot;client echo failed. err: [%v]&quot;, err)
+        return
+    }
+
+    fmt.Printf(&quot;message from server: %v&quot;, res.GetMsg())
+}
+</code></pre><p>创建一个 client 之后，就可以像访问本地方法一样访问我们的服务了，<code>go run echo_client.go hellogrpc</code></p>
+<h3 id="流式-rpc-服务"><a href="#流式-rpc-服务" class="headerlink" title="流式 rpc 服务"></a>流式 rpc 服务</h3><p>实现一个 counter 服务，客户端传过来一个数字，服务端从这个数字开始，不停地向下计数返回</p>
+<h4 id="定义协议文件-1"><a href="#定义协议文件-1" class="headerlink" title="定义协议文件"></a>定义协议文件</h4><pre><code>syntax = &quot;proto3&quot;;
+
+package counter;
+
+message CountReq {
+    int64 start = 1;
+}
+
+message CountRes {
+    int64 num = 1;
+}
+
+service Counter {
+    rpc count (CountReq) returns (stream CountRes);
+}
+</code></pre><p>定义一个流式的 rpc 只需要在返回的字段前加一个 stream 关键字就可以</p>
+<h4 id="实现服务端-1"><a href="#实现服务端-1" class="headerlink" title="实现服务端"></a>实现服务端</h4><pre><code>type CounterServerImp struct {
+
+}
+
+func (c *CounterServerImp) Count(req *counter.CountReq, stream counter.Counter_CountServer) error {
+    fmt.Printf(&quot;request from client. start: [%v]\n&quot;, req.GetStart())
+
+    i := req.GetStart()
+    for {
+        i++
+        stream.Send(&amp;counter.CountRes{
+            Num: i,
+        })
+        time.Sleep(time.Duration(500) * time.Millisecond)
+    }
+
+    return nil
+}
+
+func main() {
+    server := grpc.NewServer()
+    counter.RegisterCounterServer(server, &amp;CounterServerImp{})
+
+    address, err := net.Listen(&quot;tcp&quot;, &quot;:3000&quot;)
+    if err != nil {
+        panic(err)
+    }
+
+    if err := server.Serve(address); err != nil {
+        panic(err)
+    }
+}
+</code></pre><p>接口实现上需要写一个死循环，不停地调用 <code>Send</code> 函数返回结果即可</p>
+<h4 id="实现客户端-1"><a href="#实现客户端-1" class="headerlink" title="实现客户端"></a>实现客户端</h4><pre><code>func main() {
+    start, _ := strconv.ParseInt(os.Args[1], 10, 64)
+
+    conn, err := grpc.Dial(&quot;127.0.0.1:3000&quot;, grpc.WithInsecure())
+    if err != nil {
+        fmt.Errorf(&quot;dial failed. err: [%v]\n&quot;, err)
+        return
+    }
+    client := counter.NewCounterClient(conn)
+
+    stream, err := client.Count(context.Background(), &amp;counter.CountReq{
+        Start: start,
+    })
+    if err != nil {
+        fmt.Errorf(&quot;count failed. err: [%v]\n&quot;, err)
+        return
+    }
+
+    for {
+        res, err := stream.Recv()
+        if err != nil {
+            fmt.Errorf(&quot;client count failed. err: [%v]&quot;, err)
+            return
+        }
+
+        fmt.Printf(&quot;server count: %v\n&quot;, res.GetNum())
+    }
+}
+</code></pre><p>客户端的 <code>Count</code> 接口返回的是一个 <code>stream</code>，不断地调用这个 <code>stream</code> 的 <code>Recv</code> 方法，可以不断地获取来自服务端的返回</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>grpc 官方文档中文版: <a href="http://doc.oschina.net/grpc?t=60133" target="_blank" rel="noopener">http://doc.oschina.net/grpc?t=60133</a></li>
+<li>grpc 官方示例: <a href="https://github.com/grpc/grpc-go/tree/master/examples/route_guide" target="_blank" rel="noopener">https://github.com/grpc/grpc-go/tree/master/examples/route_guide</a></li>
+<li>proto3 语法: <a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener">https://developers.google.com/protocol-buffers/docs/proto3</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 网络框架 </tag>
+            
+            <tag> 微服务 </tag>
+            
+            <tag> grpc </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang 单元测试]]></title>
+      <url>/2018/01/31/golang-%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/</url>
+      <content type="html"><![CDATA[<p>单元测试是质量保证十分重要的一环，好的单元测试不仅能及时地发现问题，更能够方便地调试，提高生产效率，所以很多人认为写单元测试是需要额外的时间，会降低生产效率，是对单元测试最大的偏见和误解</p>
+<p>go 语言原生支持了单元测试，使用上非常简单，测试代码只需要放到以 <code>_test.go</code> 结尾的文件中即可。golang的测试分为单元测试和性能测试，单元测试的测试用例以 <code>Test</code> 开头，性能测试以 <code>Benchmark</code> 开头</p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><p>实现排列组合函数对应的单元测试和性能测试</p>
+<h4 id="实现排列组合函数"><a href="#实现排列组合函数" class="headerlink" title="实现排列组合函数"></a>实现排列组合函数</h4><pre><code>// combination.go
+
+package hmath
+
+func combination(m, n int) int {
+    if n &gt; m-n {
+        n = m - n
+    }
+
+    c := 1
+    for i := 0; i &lt; n; i++ {
+        c *= m - i
+        c /= i + 1
+    }
+
+    return c
+}
+</code></pre><h4 id="实现单元测试和性能测试"><a href="#实现单元测试和性能测试" class="headerlink" title="实现单元测试和性能测试"></a>实现单元测试和性能测试</h4><pre><code>// combination_test.go
+
+package hmath
+
+import (
+    &quot;math/rand&quot;
+    &quot;testing&quot;
+)
+
+// 单元测试
+// 测试全局函数，以TestFunction命名
+// 测试类成员函数，以TestClass_Function命名
+func TestCombination(t *testing.T) {
+    // 这里定义一个临时的结构体来存储测试case的参数以及期望的返回值
+    for _, unit := range []struct {
+        m        int
+        n        int
+        expected int
+    }{
+        {1, 0, 1},
+        {4, 1, 4},
+        {4, 2, 6},
+        {4, 3, 4},
+        {4, 4, 1},
+        {10, 1, 10},
+        {10, 3, 120},
+        {10, 7, 120},
+    } {
+        // 调用排列组合函数，与期望的结果比对，如果不一致输出错误
+        if actually := combination(unit.m, unit.n); actually != unit.expected {
+            t.Errorf(&quot;combination: [%v], actually: [%v]&quot;, unit, actually)
+        }
+    }
+}
+
+// 性能测试
+func BenchmarkCombination(b *testing.B) {
+    // b.N会根据函数的运行时间取一个合适的值
+    for i := 0; i &lt; b.N; i++ {
+        combination(i+1, rand.Intn(i+1))
+    }
+}
+
+// 并发性能测试
+func BenchmarkCombinationParallel(b *testing.B) {
+    // 测试一个对象或者函数在多线程的场景下面是否安全
+    b.RunParallel(func(pb *testing.PB) {
+        for pb.Next() {
+            m := rand.Intn(100) + 1
+            n := rand.Intn(m)
+            combination(m, n)
+        }
+    })
+}
+</code></pre><h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><pre><code>go test combination_test.go combination.go           # 单元测试
+go test --cover combination_test.go combination.go   # 单元测试覆盖率
+go test -bench=. combination_test.go combination.go  # 性能测试
+</code></pre><h4 id="setup-和-teardown"><a href="#setup-和-teardown" class="headerlink" title="setup 和 teardown"></a>setup 和 teardown</h4><p>setup 和 teardown 是在每个 case 执行前后都需要执行的操作，golang 没有直接的实现，可以通过下面这个方法实现全局的 setup 和 teardown，具体每个 case 的 setup 和 teardown 需要自己实现</p>
+<pre><code>func TestMain(m *testing.M) {
+    // setup code...
+    os.Exit(m.Run())
+    // teardown code...
+}
+</code></pre><h3 id="goconvey"><a href="#goconvey" class="headerlink" title="goconvey"></a>goconvey</h3><p>这个第三方工具会自动帮我们跑测试，并且以非常友好的可视化界面帮我们展示测试的结果，包括测试失败的原因，测试覆盖率等等，内部还提供了很多友好的断言，能提高测试代码的可读性</p>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre><code>go get github.com/smartystreets/goconvey
+</code></pre><p>然后用终端在测试代码的目录下运行 <code>goconvey</code> 命令即可</p>
+<h4 id="测试例子"><a href="#测试例子" class="headerlink" title="测试例子"></a>测试例子</h4><pre><code>package package_name
+
+import (
+    &quot;testing&quot;
+    . &quot;github.com/smartystreets/goconvey/convey&quot;
+)
+
+func TestIntegerStuff(t *testing.T) {
+    Convey(&quot;Given some integer with a starting value&quot;, t, func() {
+        x := 1
+
+        Convey(&quot;When the integer is incremented&quot;, func() {
+            x++
+
+            Convey(&quot;The value should be greater by one&quot;, func() {
+                So(x, ShouldEqual, 2)
+            })
+        })
+    })
+}
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>go testing: <a href="http://docs.studygolang.com/pkg/testing/" target="_blank" rel="noopener">http://docs.studygolang.com/pkg/testing/</a></li>
+<li>goconvey: <a href="https://github.com/smartystreets/goconvey" target="_blank" rel="noopener">https://github.com/smartystreets/goconvey</a></li>
+<li>goconvey 文档: <a href="https://github.com/smartystreets/goconvey/wiki/Documentation" target="_blank" rel="noopener">https://github.com/smartystreets/goconvey/wiki/Documentation</a></li>
+<li>goconvey 标准断言: <a href="https://github.com/smartystreets/goconvey/wiki/Assertions" target="_blank" rel="noopener">https://github.com/smartystreets/goconvey/wiki/Assertions</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang pprof 性能分析工具]]></title>
       <url>/2018/01/29/golang-pprof-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/</url>
       <content type="html"><![CDATA[<p>性能优化是个永恒的话题，而很多时候我们在作性能优化的时候，往往基于代码上面的直觉，把所有能想到的优化都优化了一遍，不错过任何小的优化点，结果整个代码的逻辑变得极其复杂，而性能上面并没有太大的提升。事实上，性能问题往往集中在某些小点，有时候很小的改动就能有巨大的提升，所以问题的关键是是怎么去找出这些优化点，幸运的是 golang 在设计的时候就考虑了这个问题，原生提供了性能分析的工具，可以很方便地帮我们找到性能瓶颈</p>
@@ -14,7 +615,7 @@ func StartCPUProfile(w io.Writer) error
 func StopCPUProfile()
 </code></pre>
 <p>使用上面比较简单，只需要将文件指针传给对应的函数即可，性能数据将写入到文件中，然后可以使用 golang 自带的 pprof 工具生成 svg，pdf 的可视化图，然后就可以很直观地从这些图里面看到主要的性能消耗了</p>
-<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><h4 id="首先需要一个程序"><a href="#首先需要一个程序" class="headerlink" title="首先需要一个程序"></a>首先需要一个程序</h4><p>首先需要在你的程序里面注入 pprof 代码，下面是一段示例代码，完整代码在：<a href="https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof_runtime.go</a>，这里使用的 <code>PPCmd</code> 方法，是为了方便使用，做的一个简单封装，代码在：<a href="https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go</a></p>
+<h3 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h3><h4 id="首先需要一个程序"><a href="#首先需要一个程序" class="headerlink" title="首先需要一个程序"></a>首先需要一个程序</h4><p>首先需要在你的程序里面注入 pprof 代码，下面是一段示例代码，完整代码在：<a href="https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof/pprof_runtime.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/cmd/pprof/pprof_runtime.go</a>，这里使用的 <code>PPCmd</code> 方法，是为了方便使用，做的一个简单封装，代码在：<a href="https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/pprof/pprof.go</a></p>
 <pre><code class="golang">func main() {
     go doSomething1()
     go doSomething2()
@@ -154,9 +755,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> json </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> json </tag>
             
         </tags>
         
@@ -174,7 +775,13 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
 <pre><code>brew install glide
 </code></pre><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><pre><code>glide init
 </code></pre><p>这个命令会自动分析你代码里面的依赖，然后创建一个 <code>glide.yaml</code> 来描述你当前项目的依赖，生成的这个文件是可以手动编辑的，可以手动修改一些版本之类的信息</p>
-<p>提醒一下，这个操作必须在 <code>$GOPATH/src/</code> 的子目录下面，这个和 golang 本身的包管理机制有关，如果没有设置 <code>$GOPATH</code>，记得设置一下 <code>export GOPATH=&lt;directory&gt;</code></p>
+<p>如果有些文件夹不希望被扫描，可以通过修改 <code>glide.yaml</code>，增加 <code>excludeDirs</code>，希望忽略某些引入的包可以使用 <code>ignore</code>，更多信息可以参考：<a href="https://glide.readthedocs.io/en/latest/glide.yaml/" target="_blank" rel="noopener">https://glide.readthedocs.io/en/latest/glide.yaml/</a></p>
+<pre><code>ignore:
+- api
+excludeDirs:
+- api
+- cmd
+</code></pre><p>提醒一下，这个操作必须在 <code>$GOPATH/src/</code> 的子目录下面，这个和 golang 本身的包管理机制有关，如果没有设置 <code>$GOPATH</code>，记得设置一下 <code>export GOPATH=&lt;directory&gt;</code></p>
 <h4 id="依赖下载"><a href="#依赖下载" class="headerlink" title="依赖下载"></a>依赖下载</h4><pre><code>glide update
 </code></pre><p>这个命令会下载 <code>glide.yaml</code> 里面的依赖库，并且同样会分析并下载依赖库依赖的其他第三方库，下载的依赖会放到与 <code>glide.yaml</code> 同级的 <code>vendor</code> 目录，同时还会生成一个 <code>glide.lock</code> 文件，这个文件里面描述了当前依赖的版本信息，不要手工编辑这个文件</p>
 <p>如果你在中国，这个步骤里面可能会碰到有些 <code>gopkg</code> 的库拉不下来，也不知道为啥要把这个也禁了……如果你碰到这个问题，你可以手动把这些库下载到 <code>${GOROOT}/src/golang.org/x</code> 下面</p>
@@ -189,11 +796,17 @@ git clone https://github.com/golang/net.git
 </code></pre><p>除了 <code>github</code> 上的依赖，也可以是其他的平台，比如 <code>gitee</code>，或者自己公司搭建的 gitlab，只要有权限就可以，还有一点需要注意，版本必须是三位数字的版本号，否则可能识别不了</p>
 <h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><pre><code>glide install
 </code></pre><p>这个命令是在一个已经使用 glide 管理依赖的项目里，需要在新环境下重新安装依赖使用的，这个命令会按照 <code>glide.lock</code> 的信息，把所有的依赖拉取到本地，和 <code>glide update</code> 不同的是，<code>glide update</code> 会来去最新的版本，并且会修改 <code>glide.lock</code>，而 <code>glide install</code> 只下载之前的依赖</p>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<h4 id="依赖镜像"><a href="#依赖镜像" class="headerlink" title="依赖镜像"></a>依赖镜像</h4><pre><code>glide mirror set [original] [replacement]
+</code></pre><p>有些库如果访问不了可以通过这种方式设置镜像，golang.org 被禁的问题也可以用如下方法解决</p>
+<pre><code>glide mirror set https://golang.org/x/crypto https://github.com/golang/crypto --vcs git
+glide mirror set https://golang.org/x/net https://github.com/golang/net --vcs git
+glide mirror set https://golang.org/x/text https://github.com/golang/text --vcs git
+glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs git
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li>glide github: <a href="https://github.com/Masterminds/glide" target="_blank" rel="noopener">https://github.com/Masterminds/glide</a></li>
 <li>glide 官网: <a href="https://glide.sh/" target="_blank" rel="noopener">https://glide.sh/</a></li>
 <li>glide 文档: <a href="https://glide.readthedocs.io/en/latest/" target="_blank" rel="noopener">https://glide.readthedocs.io/en/latest/</a></li>
-<li>go依赖包管理工具对比: <a href="https://ieevee.com/tech/2017/07/10/go-import.html" target="_blank" rel="noopener">https://ieevee.com/tech/2017/07/10/go-import.html</a></li>
+<li>go 依赖包管理工具对比: <a href="https://ieevee.com/tech/2017/07/10/go-import.html" target="_blank" rel="noopener">https://ieevee.com/tech/2017/07/10/go-import.html</a></li>
 </ul>
 ]]></content>
       
@@ -392,6 +1005,8 @@ BenchmarkAddStringWithBuffer-8              2000000000           0.00 ns/op
             
             <tag> 程序人生 </tag>
             
+            <tag> 招聘 </tag>
+            
         </tags>
         
     </entry>
@@ -490,7 +1105,7 @@ BenchmarkAppendWithCapGreaterLen10thReuse-8          300       4903230 ns/op
 </code></pre><h3 id="主要结论"><a href="#主要结论" class="headerlink" title="主要结论"></a>主要结论</h3><ol>
 <li>在已知 capacity 的情况下，直接设置 capacity 减少内存的重新分配，有效提高性能</li>
 <li>capacity &lt; length，capacity 越接近 length，性能越好</li>
-<li>capacity &gt; lenght，如果太大，反而会造成性能下降，这里当 capacity &gt; 10 * length时，与不设置 capacity 的性能差不太多</li>
+<li>capacity &gt; length，如果太大，反而会造成性能下降，这里当 capacity &gt; 10 * length时，与不设置 capacity 的性能差不太多</li>
 <li>多次使用复用同一块内存能有效提高性能</li>
 </ol>
 <h3 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h3><pre><code class="go">func BenchmarkAppendWithoutCapacity(b *testing.B) {
@@ -576,6 +1191,8 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
             <tag> golang </tag>
             
             <tag> slice </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
