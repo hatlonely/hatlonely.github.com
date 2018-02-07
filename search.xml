@@ -234,9 +234,9 @@ func main() {
             
             <tag> 网络框架 </tag>
             
-            <tag> thrift </tag>
-            
             <tag> 微服务 </tag>
+            
+            <tag> thrift </tag>
             
         </tags>
         
@@ -467,9 +467,9 @@ func main() {
             
             <tag> 网络框架 </tag>
             
-            <tag> 微服务 </tag>
-            
             <tag> grpc </tag>
+            
+            <tag> 微服务 </tag>
             
         </tags>
         
@@ -755,9 +755,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> json </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -1190,9 +1190,9 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
             
             <tag> golang </tag>
             
-            <tag> slice </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> slice </tag>
             
         </tags>
         

@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?sGJ5O7wjyPFiR+nJcdxf9A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?W5+MVzV3Zjy3WHWzFmEmYQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -125,7 +125,6 @@
     color: #0097A7 !important;
   }
 
-  #post_entry-right-info,
   .sidebar-colored .sidebar-nav li:hover > a,
   .sidebar-colored .sidebar-nav li:hover > a i,
   .sidebar-colored .sidebar-nav li > a:hover,
@@ -516,10 +515,58 @@
 <p>微服务架构同时也带来了一些新的问题。相比与单体服务，微服务的架构数据的传输依赖于rpc的调用，这个调用会带来一些额外的网络耗时，这种耗时往往需要业务上面去考虑是否能容忍，这种rpc的调用收到网络环境的影响，失败是很正常事情，因此需要失败重试机制，于是代码里面到处都充斥着失败重试的冗余代码，影响代码的可读性，更糟糕的是会有雪崩效应，当某个底层服务出现问题时，比如响应时间过长，或者无法访问，这种影响会层层传递到上层，最终导致整个业务系统挂掉；在测试上面也会变得更加困难，之前都在一个实例里面，现在一个服务依赖很多其他的微服务，测试的时候都需要去mock，日志也会分布在不同的服务下面，问题排查比较困难；此外，数据分布在不同的微服务上，在数据一致性上也会有些问题。所以在进行微服务设计的时候也要特别注意这些额外的负面影响，封装重试逻辑，引入熔断和限流机制，统一的日志收集方式。</p>
 <p>serverless（无服务器）架构可能是为了让devOps从繁复的运维工作中解放出来的全新架构，最大的特点是整个系统基于AWS提供的各种服务，能够做到自动的拓展以及按流量计费，不再需要人力去维护，大大提高了效率，同时按真实流量的计费对成本也有可能会有优化。而Fass架构，把业务需求封装在一个函数内部，开发人员只需要关注自己的业务逻辑，然后通过网页提交就能完成上线。我在想，当这些技术真正成熟和普及的时候，可能每个普通人，随便花点时间学点python，也能做出一个的服务，而那个时候，我的价值又是什么！？</p>
 
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+                });
+            });
+        </script>
+
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
                     <p><strong>
-                         
+                        
                             转载请注明出处
                         </strong>
                         <br>
@@ -565,6 +612,23 @@
         </div>
     </div>
 
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "《microservice &amp; serverless》by 蔡超的一点感想"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
 
 
                     

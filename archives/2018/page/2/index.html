@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?sGJ5O7wjyPFiR+nJcdxf9A==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?W5+MVzV3Zjy3WHWzFmEmYQ==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -122,7 +122,6 @@
     color: #0097A7 !important;
   }
 
-  #post_entry-right-info,
   .sidebar-colored .sidebar-nav li:hover > a,
   .sidebar-colored .sidebar-nav li:hover > a i,
   .sidebar-colored .sidebar-nav li > a:hover,
@@ -303,6 +302,7 @@
 
     <!-- Pin on top -->
     
+    
         
     
 
@@ -349,7 +349,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "第一次写JD"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "第一次写JD"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -364,6 +404,7 @@
 
             
             
+        
         
     
         
@@ -407,7 +448,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-2">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "与vim的一段往事"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-2').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "与vim的一段往事"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-2').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -422,6 +503,7 @@
 
             
             
+        
         
     
         
@@ -465,7 +547,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-3">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "谈谈注释"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-3').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "谈谈注释"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-3').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -480,6 +602,7 @@
 
             
             
+        
         
     
         
@@ -523,7 +646,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-4">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "golang slice 性能分析"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-4').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "golang slice 性能分析"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-4').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -538,6 +701,7 @@
 
             
             
+        
         
     
         
@@ -581,7 +745,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-5">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "golang 开发目录结构"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-5').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "golang 开发目录结构"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-5').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -596,6 +800,7 @@
 
             
             
+        
         
     
         
@@ -639,7 +844,47 @@
             </div>
         </div>
         <div id="post_entry-right-info">
-          
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-6">0</span>&nbsp;&nbsp;
+            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function(){
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-6').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-6').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+                });
+            </script>
+
+            
 
             
 
@@ -654,6 +899,7 @@
 
             
             
+        
         
     
 
