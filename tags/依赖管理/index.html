@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?DB/3iC4DlZn6CYbWAAZVcw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -352,11 +352,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
             <span id="post-like-num-1">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -385,6 +385,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang 依赖管理"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-1').css('color','#c4291c')
+                                $('#post-like-thumb-1').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-1').css("color","#758591");
+                                $('#post-like-thumb-1').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-1').click(function() {
+                        num = $('#post-like-num-1').text()
+                        if ($('#post-like-thumb-1').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-1').css('color', '#758591');
+                            $('#post-like-thumb-1').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-1').css('color','#c4291c');
+                            $('#post-like-thumb-1').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-1').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang 依赖管理"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -511,7 +559,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -538,7 +586,7 @@
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/golang"> golang
-                                <span class="sidebar_archives-count"> 9 </span>
+                                <span class="sidebar_archives-count"> 11 </span>
                             </a>
                         </li>
                     

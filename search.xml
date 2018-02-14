@@ -3,6 +3,297 @@
   
     
     <entry>
+      <title><![CDATA[markdown 一个优雅的写作工具]]></title>
+      <url>/2018/02/14/markdown-%E4%B8%80%E4%B8%AA%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/</url>
+      <content type="html"><![CDATA[<p>说到写作工具，不得不提的就是 word 了吧，现在有哪个公司能不用这个软件吗？作为最流行的写作软件，word 确实有很多优点，操作比较直观，所见即所得等等，但是大家也一定遇到过样式调整起来比较繁琐的问题，不同的内容可能需要频繁地调整字体、大小、行距等等，而且还很容易出现不一致，整体都显得很不协调，当然你是 word 的高级用户的话，可能知道有模板这个东西，帮你定义了统一的样式，但是首先你要成为一个高级用户，总之你需要花很多额外的时间在样式的调整上面，编辑体验很差；另一方面不同的用户都有自己的样式偏好，风格不统一也很影响阅读体验；此外，修订功能真的做得很难看……难看到不太想……</p>
+<p>其实 word 的主要的问题根源来自于将内容和样式绑定在一起了，写作者需要同时编辑文章的内容和样式，虽然很灵活，但是实际上是一种很低效的方式，因为创作本身只与内容有关。相比之下 LaTeX 通过为内容定义一些标签，再统一对这些标签定义样式，编辑体验可能会更好一些，但是其复杂甚至有些古怪的语法，在使用上有比较高的门槛。事实上，word 也提供了内容和样式分离的方式，就是模板样式，但是当你的初级用户已经习惯了同时编辑内容和样式，就很难再改变他们了，如果你也在使用 word 我建议你多用一用模板相关的功能，可以提高你不少效率，当然我更建议你使用我下面要将的 markdown 啦，你看到的这篇文章，包括这个小站里面所有的文章也都是 markdown 编辑而成</p>
+<p>markdown 其实就是一种标记语言，类似于 html，但是比 html 简单很多，简单到只需要三分钟就可以学会😏，也没有那么多冗余的标签，写作者只需要关注在内容上，但是写出来的东西只是纯文本文件，如果需要展示出来就需要一些专业的 markdown 软件了，比如 <a href="http://www.mweb.im/" target="_blank" rel="noopener">mweb</a>、<a href="http://25.io/mou/" target="_blank" rel="noopener">mou</a>、<a href="http://macdown.uranusjr.com/" target="_blank" rel="noopener">macdown</a> 之类的，可以通过导入 css 文件来定义样式，可以通过不同的 css 文件来定义不同的样式，非常灵活，如果你没有 css 文件，通常会有一个默认的显示，或者可以使用 github 上面的样式文件，当然你懂前端的话完全可以按自己的审美编写 css 文件啦。这里 markdown 将内容和样式完全分离，写作时完全不用关注样式，编辑体验大大提升；而另一方面，每个人都可以有自己喜好的样式，同样的内容在不同的用户面前能够按照他们习惯的方式展示出不同的风格，阅读体验也有较大提升；由于是纯文本文件，还可以配合 git 之类的版本管理工具，可以很清晰地看出不同版本的修改</p>
+<p>当然还有一种情况，你只关注编辑，不需要展示，那你可能只需要一个像 sublime text 3 或者 vscode 之类的文本编辑器就可以了。大部分博客网站都是直接支持 markdown 的，写完整个文件内容帖进去即可，或者你用 hexo 之类的软件搭建的博客小站，更是直接基于 markdown 的</p>
+<p>目前 markdown 已经成为了最流行的博客写作工具，也有越来越多的文档开始使用 markdown 来管理，快点开始使用 markdown 来提升你的工作效率吧</p>
+<p>下面附上 markdown 的语法</p>
+<pre><code># 一级标题
+### 三级标题
+##### 五级标题
+
+正文正文正文正文正文正文正文正文正文
+
+**加粗**
+_倾斜_
+
+1. 有序列表
+2. 有序李彪
+
+- 无序列表
+- 无序列表
+
+&gt; 引用
+
+[链接点这里](http://xxx.com)
+[!图片链接](/img/xxx.jpg)
+&lt;http://xxx.com&gt;
+
+| header1 | header2 | header3 |
+|---------|---------|---------|
+| column1 | column2 | column3 |
+| column1 | column2 | column3 |
+</code></pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> markdown </tag>
+            
+            <tag> 写作 </tag>
+            
+            <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang restful 框架之 go-swagger]]></title>
+      <url>/2018/02/08/golang-restful-%E6%A1%86%E6%9E%B6%E4%B9%8B-go-swagger/</url>
+      <content type="html"><![CDATA[<p>restful 是这些年的高频词汇了，各大互联网公司也都纷纷推出了自己的 restful api，其实 restful 和 thrift，grpc 类似，就是一种协议，但是这种协议有点特殊的就是使用 http 接口，返回的对象一般是 json 格式，这样有个好处，就是可以供前端的 js 直接调用，使用非常方便，但 http 本身并不是一个高效的协议，后端的内部通信还是使用 grpc 或者 thrift 可以获得更高的性能</p>
+<p>其实如果只是要用 http 返回 json 本身并不是一件很难的事情，不用任何框架，golang 本身也能很方便做到，但是当你有很多 api 的时候，这些 api 的维护和管理就会变得很复杂，你自己都无法记住这些 api 应该填什么参数，返回什么，当然你可以花很多时间去维护一份接口文档，这样不仅耗时而且很难保证文档的即时性，准确性以及一致性</p>
+<p>swagger 有一整套规范来定义一个接口文件，类似于 thrift 和 proto 文件，定义了服务的请求内容和返回内容，同样也有工具可以生成各种不同语言的框架代码，在 golang 里面我们使用 go-swagger 这个工具，这个工具还提供了额外的功能，可以可视化显示这个接口，方便阅读</p>
+<p>下面通过一个例子来简单介绍一下这个框架的使用，还是之前的点赞评论系统：<a href="https://github.com/hatlonely/microservices" target="_blank" rel="noopener">https://github.com/hatlonely/microservices</a></p>
+<h3 id="go-swagger-使用方法"><a href="#go-swagger-使用方法" class="headerlink" title="go-swagger 使用方法"></a>go-swagger 使用方法</h3><h4 id="api-定义文件"><a href="#api-定义文件" class="headerlink" title="api 定义文件"></a>api 定义文件</h4><p>首先需要写一个 api 定义文件，这里我只展示其中一个接口 <code>countlike</code>，请求中带有某篇文章，返回点赞的次数</p>
+<pre><code>paths:
+  /countlike:
+    get:
+      tags:
+        - like
+      summary: 有多少赞
+      description: &#39;&#39;
+      operationId: countLike
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: title
+          in: query
+          description: 文章标题
+          required: true
+          type: string
+      responses:
+        &#39;200&#39;:
+          description: 成功
+          schema:
+            $ref: &#39;#/definitions/CountLikeModel&#39;
+        &#39;500&#39;:
+          description: 内部错误
+          schema:
+            $ref: &#39;#/definitions/ErrorModel&#39;
+definitions:
+  CountLikeModel:
+    type: object
+    properties:
+      count:
+        type: integer
+      title:
+        type: string
+        example: golang json 性能分析
+  ErrorModel:
+    type: object
+    properties:
+      message:
+        type: string
+        example: error message
+      code:
+        type: integer
+        example: 400
+</code></pre><p>这个是 yaml 语法，有点像去掉了括号的 json</p>
+<p>这里完整地定义了请求方法、请求参数、正常返回接口、异常返回结果，有了这个文件只需要执行下面命令就能生成框架代码了</p>
+<pre><code>swagger generate server -f api/comment_like/comment_like.yaml
+</code></pre><p>还可以下面这个命令可视化查看这个接口文件</p>
+<pre><code>swagger serve api/comment_like/comment_like.yaml
+</code></pre><p>这个命令依赖 swagger 工具，可以通过下面命令获取</p>
+<p>Mac</p>
+<pre><code>brew tap go-swagger/go-swagger
+brew install go-swagger
+</code></pre><p>Linux</p>
+<pre><code>go get -u github.com/go-swagger/go-swagger/cmd/swagger
+export PATH=$GOPATH/bin:$PATH
+</code></pre><p>执行完了之后，你发现多了几个文件夹，其中 <code>cmd</code> 目录里面包含 main 函数，是整个程序的入口，<code>restapi</code> 文件夹下面包含协议相关代码，其中 <code>configure_xxx.go</code> 是需要特别关注的，你需要在这个文件里面实现你具体的业务逻辑</p>
+<p>现在你就其实已经可以运行程序了，<code>go run cmd/comment-like-server/main.go</code>，在浏览器里面访问一下你的 api，会返回一个错误信息，告诉你 api 还没有实现，下面就来实现一下吧</p>
+<h4 id="业务逻辑实现"><a href="#业务逻辑实现" class="headerlink" title="业务逻辑实现"></a>业务逻辑实现</h4><pre><code>api.LikeCountLikeHandler = like.CountLikeHandlerFunc(func(params like.CountLikeParams) middleware.Responder {
+    count, err := comment_like.CountLike(params.Title)
+    if err != nil {
+        return like.NewCountLikeInternalServerError().WithPayload(&amp;models.ErrorModel{
+            Code: http.StatusInternalServerError,
+            Message: err.Error(),
+        })
+    }
+    return like.NewCountLikeOK().WithPayload(&amp;models.CountLikeModel{
+        Count: count,
+        Title: params.Title,
+    })
+})
+</code></pre><p>你只需要在这些 handler 里面实现自己的业务逻辑即可，这里对协议的封装非常好，除了业务逻辑以及打包返回，没有多余的逻辑</p>
+<p>再次运行，现在返回已经正常了</p>
+<h4 id="统一处理"><a href="#统一处理" class="headerlink" title="统一处理"></a>统一处理</h4><p>如果你对请求有一些操作需要统一处理，比如输出统一的日志之类的，可以重写这个函数，也在 <code>configure_xxx.go</code> 这个文件中</p>
+<pre><code>func setupGlobalMiddleware(handler http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        w.Header().Set(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;)
+        handler.ServeHTTP(w, r)
+    })
+}
+</code></pre><p>这里我统一设置了一下头部，解决跨域访问问题</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>go-swagger 官方文档：<a href="https://goswagger.io" target="_blank" rel="noopener">https://goswagger.io</a></li>
+<li>go-swagger github：<a href="https://github.com/go-swagger/go-swagger" target="_blank" rel="noopener">https://github.com/go-swagger/go-swagger</a></li>
+<li>OpenApi 2.0：<a href="https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md" target="_blank" rel="noopener">https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> swagger </tag>
+            
+            <tag> restful </tag>
+            
+            <tag> go-swagger </tag>
+            
+            <tag> 微服务 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[golang orm 框架之 gorm]]></title>
+      <url>/2018/02/08/golang-orm-%E6%A1%86%E6%9E%B6%E4%B9%8B-gorm/</url>
+      <content type="html"><![CDATA[<p>最近在想给这个小站增加点赞和评论功能，第三方系统又有各种限制，就想自己弄个后端，实现类似的功能，对于个人来说，数据量不是很大，单机的 mysql 足够存下所有数据，mysql 作为底层存储是个不错的选择</p>
+<p>之前在公司是直接用的 <code>github.com/go-sql-driver/mysql</code> 访问数据库都是直接用写 sql，取出结果然后自己拼成对象，使用上面不是很方便，可读性也不好。想起之前研究 php laravel 框架的时候，直接把数据库层屏蔽了，用户看到的只有对象，使用非常方便，java 里面这种操作方式基本上已经成了标准做法，就去 github 上找了一下 golang 里面有没有类似的东西，果然已经有非常成熟的框架了，<code>github.com/jinzhu/gorm</code> 已经有 7k+ 的 star 了</p>
+<p>ORM（Object Relation Mapping），对象关系映射，实际上就是对数据库的操作进行封装，对上层开发人员屏蔽数据操作的细节，开发人员看到的就是一个个对象，大大简化了开发工作，提高了生产效率</p>
+<p>好了，下面我以这个点赞评论系统为例，介绍一下 gorm 的简单用法，以下使用的完整代码：<a href="https://github.com/hatlonely/microservices/blob/master/internal/comment_like/comment_like.go" target="_blank" rel="noopener">https://github.com/hatlonely/microservices/blob/master/internal/comment_like/comment_like.go</a></p>
+<h3 id="gorm-用法介绍"><a href="#gorm-用法介绍" class="headerlink" title="gorm 用法介绍"></a>gorm 用法介绍</h3><h4 id="库安装"><a href="#库安装" class="headerlink" title="库安装"></a>库安装</h4><pre><code>go get -u github.com/jinzhu/gorm
+</code></pre><h4 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h4><pre><code class="golang">import (
+    &quot;github.com/jinzhu/gorm&quot;
+    _ &quot;github.com/jinzhu/gorm/dialects/mysql&quot;
+）
+
+var db *gorm.DB
+
+func init() {
+    var err error
+    db, err = gorm.Open(&quot;mysql&quot;, &quot;&lt;user&gt;:&lt;password&gt;/&lt;database&gt;?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;)
+    if err != nil {
+        panic(err)
+    }
+}
+</code></pre>
+<p>连接比较简单，直接调用 <code>gorm.Open</code> 传入数据库地址即可</p>
+<p><code>github.com/jinzhu/gorm/dialects/mysql</code> 是 golang 的 mysql 驱动，实际上就是 <code>github.com/go-sql-driver/mysql</code> 作者这里为了好记，重新弄了个名字</p>
+<p>这里我用的 mysql，实际上支持基本上所有主流的关系数据库，连接方式上略有不同</p>
+<pre><code class="golang">db.DB().SetMaxIdleConns(10)
+db.DB().SetMaxOpenConns(100)
+</code></pre>
+<p>还可以使用 <code>db.DB()</code> 对象设置连接池信息</p>
+<h4 id="表定义"><a href="#表定义" class="headerlink" title="表定义"></a>表定义</h4><p>先来定义一个点赞表，这里面一条记录表示某个用户在某个时刻对某篇文章点了一个赞，用 ip + ua 来标识用户，title 标识文章标题</p>
+<pre><code class="golang">type Like struct {
+    ID        int    `gorm:&quot;primary_key&quot;`
+    Ip        string `gorm:&quot;type:varchar(20);not null;index:ip_idx&quot;`
+    Ua        string `gorm:&quot;type:varchar(256);not null;&quot;`
+    Title     string `gorm:&quot;type:varchar(128);not null;index:title_idx&quot;`
+    Hash      uint64 `gorm:&quot;unique_index:hash_idx;&quot;`
+    CreatedAt time.Time
+}
+</code></pre>
+<p>gorm 用 tag 的方式来标识 mysql 里面的约束</p>
+<p>创建索引只需要直接指定列即可，这里创建了两个索引，<code>ip_idx</code> 和 <code>title_idx</code>；如果需要多列组合索引，直接让索引的名字相同即可；如果需要创建唯一索引，指定为 <code>unique_index</code> 即可</p>
+<p>支持时间类型，直接使用 <code>time.Time</code> 即可</p>
+<h4 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h4><pre><code class="golang">if !db.HasTable(&amp;Like{}) {
+    if err := db.Set(&quot;gorm:table_options&quot;, &quot;ENGINE=InnoDB DEFAULT CHARSET=utf8&quot;).CreateTable(&amp;Like{}).Error; err != nil {
+        panic(err)
+    }
+}
+</code></pre>
+<p>直接通过 <code>db.CreateTable</code> 就可以创建表了，非常方便，还可以通过 <code>db.Set</code> 设置一些额外的表属性</p>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><pre><code class="golang">like := &amp;Like{
+    Ip:        ip,
+    Ua:        ua,
+    Title:     title,
+    Hash:      murmur3.Sum64([]byte(strings.Join([]string{ip, ua, title}, &quot;-&quot;))) &gt;&gt; 1,
+    CreatedAt: time.Now(),
+}
+
+if err := db.Create(like).Error; err != nil {
+    return err
+}
+</code></pre>
+<p>先构造已给对象，直接调用 <code>db.Create()</code> 就可以插入一条记录了</p>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><pre><code class="golang">if err := db.Where(&amp;Like{Hash: hash}).Delete(Like{}).Error; err != nil {
+    return err
+}
+</code></pre>
+<p>先用 <code>db.Where()</code> 构造查询条件，再调用 <code>db.Delete()</code> 就可以删除</p>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><pre><code class="golang">var count int
+err := db.Model(&amp;Like{}).Where(&amp;Like{Ip: ip, Ua: ua, Title: title}).Count(&amp;count).Error
+if err != nil {
+    return false, err
+}
+</code></pre>
+<p>先用 <code>db.Model()</code> 选择一个表，再用 <code>db.Where()</code> 构造查询条件，后面可以使用 <code>db.Count()</code> 计算数量，如果要获取对象，可以使用 <code>db.Find(&amp;Likes)</code> 或者只需要查一条记录 <code>db.First(&amp;Like)</code></p>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><pre><code class="golang">db.Model(&amp;user).Update(&quot;name&quot;, &quot;hello&quot;)
+db.Model(&amp;user).Updates(User{Name: &quot;hello&quot;, Age: 18})
+db.Model(&amp;user).Updates(User{Name: &quot;&quot;, Age: 0, Actived: false}) // nothing update
+</code></pre>
+<p>我这个系统里面没有更新需求，这几个例子来自于官网，第一个是更新单条记录；第二个是更新整条记录，注意只有非空字段才会更新；第三个例子是不会更新的，在系统设计的时候要尽量避免这些空值有特殊的含义，如果一定要更新，可以使用第一种方式，设置单个值</p>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><p>其实你已经看到了，这里基本上所有的函数都是链式的，全部都返回 <code>db</code> 对象，任何时候调用 <code>db.Error</code> 就能获取到错误信息，非常方便</p>
+<h4 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h4><pre><code class="golang">func CreateAnimals(db *gorm.DB) err {
+    tx := db.Begin()
+    if err := tx.Create(&amp;Animal{Name: &quot;Giraffe&quot;}).Error; err != nil {
+        tx.Rollback()
+        return err
+    }
+    if err := tx.Create(&amp;Animal{Name: &quot;Lion&quot;}).Error; err != nil {
+        tx.Rollback()
+        return err
+    }
+    tx.Commit()
+    return nil
+}
+</code></pre>
+<p>事务的处理也很简单，用 <code>db.Begin()</code> 声明开启事务，结束的时候调用 <code>tx.Commit()</code>，异常的时候调用 <code>tx.Rollback()</code></p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>还可以使用如下方式设置日志输出级别以及改变日志输出地方</p>
+<pre><code>db.LogMode(true)
+db.SetLogger(gorm.Logger{revel.TRACE})
+db.SetLogger(log.New(os.Stdout, &quot;\r\n&quot;, 0))
+</code></pre><p>也支持普通的 sql，但是建议尽量不要使用</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>gorm 官方文档: <a href="http://gorm.io/" target="_blank" rel="noopener">http://gorm.io/</a></li>
+<li>gorm github: <a href="https://github.com/jinzhu/gorm" target="_blank" rel="noopener">https://github.com/jinzhu/gorm</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> orm </tag>
+            
+            <tag> gorm </tag>
+            
+            <tag> 数据库 </tag>
+            
+            <tag> mysql </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[几种实用的 pythonic 语法]]></title>
       <url>/2018/02/04/%E5%87%A0%E7%A7%8D%E5%AE%9E%E7%94%A8%E7%9A%84-pythonic-%E8%AF%AD%E6%B3%95/</url>
       <content type="html"><![CDATA[<p>python 是一门简单而优雅的语言，可能是过于简单了，不用花太多时间学习就能使用，其实 python 里面还有一些很好的特性，能大大简化你代码的逻辑，提高代码的可读性</p>
@@ -232,9 +523,9 @@ func main() {
             
             <tag> golang </tag>
             
-            <tag> 网络框架 </tag>
-            
             <tag> 微服务 </tag>
+            
+            <tag> 网络框架 </tag>
             
             <tag> thrift </tag>
             
@@ -258,11 +549,11 @@ func main() {
         
         <tags>
             
-            <tag> 程序人生 </tag>
-            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
+            
+            <tag> 程序人生 </tag>
             
         </tags>
         
@@ -465,11 +756,11 @@ func main() {
             
             <tag> golang </tag>
             
+            <tag> 微服务 </tag>
+            
             <tag> 网络框架 </tag>
             
             <tag> grpc </tag>
-            
-            <tag> 微服务 </tag>
             
         </tags>
         

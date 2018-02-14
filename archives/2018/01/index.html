@@ -79,7 +79,7 @@
     <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
     
         <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?DB/3iC4DlZn6CYbWAAZVcw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
             
@@ -352,11 +352,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
             <span id="post-like-num-1">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -385,6 +385,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang 单元测试"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-1').css('color','#c4291c')
+                                $('#post-like-thumb-1').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-1').css("color","#758591");
+                                $('#post-like-thumb-1').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-1').click(function() {
+                        num = $('#post-like-num-1').text()
+                        if ($('#post-like-thumb-1').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-1').css('color', '#758591');
+                            $('#post-like-thumb-1').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-1').css('color','#c4291c');
+                            $('#post-like-thumb-1').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-1').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang 单元测试"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -451,11 +499,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-2">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
             <span id="post-like-num-2">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -484,6 +532,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang pprof 性能分析工具"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-2').css('color','#c4291c')
+                                $('#post-like-thumb-2').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-2').css("color","#758591");
+                                $('#post-like-thumb-2').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-2').click(function() {
+                        num = $('#post-like-num-2').text()
+                        if ($('#post-like-thumb-2').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-2').css('color', '#758591');
+                            $('#post-like-thumb-2').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-2').css('color','#c4291c');
+                            $('#post-like-thumb-2').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-2').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang pprof 性能分析工具"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -550,11 +646,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-3">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
             <span id="post-like-num-3">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -583,6 +679,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang json 性能分析"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-3').css('color','#c4291c')
+                                $('#post-like-thumb-3').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-3').css("color","#758591");
+                                $('#post-like-thumb-3').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-3').click(function() {
+                        num = $('#post-like-num-3').text()
+                        if ($('#post-like-thumb-3').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-3').css('color', '#758591');
+                            $('#post-like-thumb-3').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-3').css('color','#c4291c');
+                            $('#post-like-thumb-3').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-3').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang json 性能分析"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -649,11 +793,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-4">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
             <span id="post-like-num-4">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -682,6 +826,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang 依赖管理"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-4').css('color','#c4291c')
+                                $('#post-like-thumb-4').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-4').css("color","#758591");
+                                $('#post-like-thumb-4').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-4').click(function() {
+                        num = $('#post-like-num-4').text()
+                        if ($('#post-like-thumb-4').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-4').css('color', '#758591');
+                            $('#post-like-thumb-4').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-4').css('color','#c4291c');
+                            $('#post-like-thumb-4').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-4').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang 依赖管理"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -749,11 +941,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-5">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
             <span id="post-like-num-5">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -782,6 +974,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "蓄水池算法"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-5').css('color','#c4291c')
+                                $('#post-like-thumb-5').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-5').css("color","#758591");
+                                $('#post-like-thumb-5').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-5').click(function() {
+                        num = $('#post-like-num-5').text()
+                        if ($('#post-like-thumb-5').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-5').css('color', '#758591');
+                            $('#post-like-thumb-5').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-5').css('color','#c4291c');
+                            $('#post-like-thumb-5').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-5').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "蓄水池算法"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -849,11 +1089,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-6">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
             <span id="post-like-num-6">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -882,6 +1122,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang 几种字符串的连接方式"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-6').css('color','#c4291c')
+                                $('#post-like-thumb-6').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-6').css("color","#758591");
+                                $('#post-like-thumb-6').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-6').click(function() {
+                        num = $('#post-like-num-6').text()
+                        if ($('#post-like-thumb-6').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-6').css('color', '#758591');
+                            $('#post-like-thumb-6').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-6').css('color','#c4291c');
+                            $('#post-like-thumb-6').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-6').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang 几种字符串的连接方式"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -948,11 +1236,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-7">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-7">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-7">thumb_up</i>&nbsp;
             <span id="post-like-num-7">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -981,6 +1269,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "第一次写JD"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-7').css('color','#c4291c')
+                                $('#post-like-thumb-7').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-7').css("color","#758591");
+                                $('#post-like-thumb-7').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-7').click(function() {
+                        num = $('#post-like-num-7').text()
+                        if ($('#post-like-thumb-7').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-7').css('color', '#758591');
+                            $('#post-like-thumb-7').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-7').css('color','#c4291c');
+                            $('#post-like-thumb-7').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-7').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "第一次写JD"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -1047,11 +1383,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-8">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-8">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-8">thumb_up</i>&nbsp;
             <span id="post-like-num-8">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -1080,6 +1416,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "与vim的一段往事"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-8').css('color','#c4291c')
+                                $('#post-like-thumb-8').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-8').css("color","#758591");
+                                $('#post-like-thumb-8').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-8').click(function() {
+                        num = $('#post-like-num-8').text()
+                        if ($('#post-like-thumb-8').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-8').css('color', '#758591');
+                            $('#post-like-thumb-8').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-8').css('color','#c4291c');
+                            $('#post-like-thumb-8').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-8').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "与vim的一段往事"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -1146,11 +1530,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-9">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-9">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-9">thumb_up</i>&nbsp;
             <span id="post-like-num-9">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -1179,6 +1563,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "谈谈注释"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-9').css('color','#c4291c')
+                                $('#post-like-thumb-9').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-9').css("color","#758591");
+                                $('#post-like-thumb-9').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-9').click(function() {
+                        num = $('#post-like-num-9').text()
+                        if ($('#post-like-thumb-9').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-9').css('color', '#758591');
+                            $('#post-like-thumb-9').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-9').css('color','#c4291c');
+                            $('#post-like-thumb-9').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-9').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "谈谈注释"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -1245,11 +1677,11 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-10">0</span>&nbsp;&nbsp;
-            <i class="material-icons">thumb_up</i>&nbsp;
+            <span id="post-view-num-10">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-10">thumb_up</i>&nbsp;
             <span id="post-like-num-10">0</span>&nbsp;&nbsp;
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
@@ -1278,6 +1710,54 @@
                             }
                         },
                         async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang slice 性能分析"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-10').css('color','#c4291c')
+                                $('#post-like-thumb-10').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-10').css("color","#758591");
+                                $('#post-like-thumb-10').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-10').click(function() {
+                        num = $('#post-like-num-10').text()
+                        if ($('#post-like-thumb-10').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-10').css('color', '#758591');
+                            $('#post-like-thumb-10').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-10').css('color','#c4291c');
+                            $('#post-like-thumb-10').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-10').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang slice 性能分析"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
                     });
                 });
             </script>
@@ -1409,7 +1889,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -1436,7 +1916,7 @@
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/golang"> golang
-                                <span class="sidebar_archives-count"> 9 </span>
+                                <span class="sidebar_archives-count"> 11 </span>
                             </a>
                         </li>
                     
