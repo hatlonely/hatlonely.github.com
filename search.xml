@@ -11,14 +11,15 @@
 <p>当然还有一种情况，你只关注编辑，不需要展示，那你可能只需要一个像 sublime text 3 或者 vscode 之类的文本编辑器就可以了。大部分博客网站都是直接支持 markdown 的，写完整个文件内容帖进去即可，或者你用 hexo 之类的软件搭建的博客小站，更是直接基于 markdown 的</p>
 <p>目前 markdown 已经成为了最流行的博客写作工具，也有越来越多的文档开始使用 markdown 来管理，快点开始使用 markdown 来提升你的工作效率吧</p>
 <p>下面附上 markdown 的语法</p>
-<pre><code># 一级标题
+<pre><code>
+# 一级标题
 ### 三级标题
 ##### 五级标题
 
 正文正文正文正文正文正文正文正文正文
 
+*强调*
 **加粗**
-_倾斜_
 
 1. 有序列表
 2. 有序李彪
@@ -26,17 +27,24 @@ _倾斜_
 - 无序列表
 - 无序列表
 
-&gt; 引用
+> 引用
 
 [链接点这里](http://xxx.com)
-[!图片链接](/img/xxx.jpg)
-&lt;http://xxx.com&gt;
+![图片链接](/img/xxx.jpg)
+<http: xxx.com="">
 
 | header1 | header2 | header3 |
 |---------|---------|---------|
 | column1 | column2 | column3 |
 | column1 | column2 | column3 |
-</code></pre>]]></content>
+
+`代码`
+
+```
+代码块
+```
+</http:></code></pre>
+]]></content>
       
         
         <tags>
