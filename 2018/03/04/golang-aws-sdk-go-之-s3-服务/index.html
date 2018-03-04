@@ -43,7 +43,7 @@
     
     <title>
         
-            标签: serverless | 
+            golang aws-sdk-go 之 s3 服务 | 
         
         hatlonely的小站
     </title>
@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",golang,aws-sdk-go,s3,aws">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -82,6 +82,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?Za8gfWOCG/wBJQAgLgzW0Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/sons-of-obsidian.min.css?LAydzRcKlmrD364lwsfmyw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -217,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="hatlonely的小站">
-    <meta name="msapplication-starturl" content="http://hatlonely.github.io/tags/serverless/">
+    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
@@ -232,13 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://hatlonely.github.io/tags/serverless/">
+    <meta property="og:url" content="http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: serverless | hatlonely的小站">
+    <meta property="og:title" content="golang aws-sdk-go 之 s3 服务 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely11.png">
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="aws-sdk-go"> <meta property="og:article:tag" content="s3"> <meta property="og:article:tag" content="aws"> 
 
+    
+        <meta property="article:published_time" content="Sun Mar 04 2018 18:04:18 GMT+0800">
+        <meta property="article:modified_time" content="Sun Mar 04 2018 19:31:00 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,13 +252,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://hatlonely.github.io/tags/serverless/index.html" />
+        <link rel="canonical" href="http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html",
+    "headline": "golang aws-sdk-go 之 s3 服务",
+    "datePublished": "Sun Mar 04 2018 18:04:18 GMT+0800",
+    "dateModified": "Sun Mar 04 2018 19:31:00 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "hatlonely",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        },
+        "description": "Try new, go far, see more"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "hatlonely的小站",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        }
+    },
+    "keywords": ",golang,aws-sdk-go,s3,aws",
+    "description": "",
+}
+</script>
 
 
     
@@ -295,187 +331,370 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
     
     
-        
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建会话"><span class="post-toc-number">1.</span> <span class="post-toc-text">创建会话</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#上传文件"><span class="post-toc-number">2.</span> <span class="post-toc-text">上传文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载文件"><span class="post-toc-number">3.</span> <span class="post-toc-text">下载文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#遍历目录"><span class="post-toc-number">4.</span> <span class="post-toc-text">遍历目录</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/01/12/《microservice-&amp;-serverless》by-蔡超的一点感想/'">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/serverless.png">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/ship.jpg)">
+    
+            <p class="article-headline-p">
+                golang aws-sdk-go 之 s3 服务
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        
+            <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        
+            <strong>hatlonely</strong>
+        
+        <span>3月 04, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC6UlEQVR42u3awXLiMBAEUP7/p3evW5XCdGucBaTnU4qA0fMhE3Xr8efI64GNjY2NjY2NjY39kexHfP37/p+fffbbZ++8XkP7+vWasbGxsU9gv/jT//MW118QLOIaf/364pqxsbGxD2CvDa38MV2/czImk0eDjY2NjZ2MnMlGIlkVNjY2NvZd7HzR7bhauw82NjY2dh7QtEVCu2lJVvWGLA0bGxv749mTovddP7+538bGxsb+GPbadW+52x4AWlwzNjY29qbsu2qAdiPRDq22Tq6zNGxsbOyvZV8vKA+AJgflJ+VEUR5jY2NjH8aej6t8HOabn7XACxsbG3tvdh2y/0J9+xvboShUwsbGxt6CnYyuPPTP4/4iDAoOAyVjFRsbG3tX9iRIakdg/l35/bGxsbGxJ//oJ9uVthJoa+DR4UtsbGzsLdjzMZOEUGvfmNfA0d2wsbGxt2ZPthlrNXB+6CcfUfUODBsbG3sL9r1Rfhv3J0tfG7HY2NjYp7HzkdZi5oPnrqM/2NjY2Luyk4HUjo0EmRcA+dpePCxsbGzsTdltHJ+8fy3ib4dTfcwIGxsbe1N2Hu4/br3aqjhn37AVwcbGxv5Cdr6sKIiPD1yuBVVr9QY2Njb2mex2mOVbjjxgmtS92NjY2Kex80MzbQ08r5PzqqBoRbCxsbG3YLe8ZGOQgNeOXRYbj/bMKTY2NvbXsvMQv42H8k/9xmFNbGxs7HPY+RZisoh8K7JWTtx2+BIbGxv7C9n5oclkcUk9kBfG7aB98S3Y2NjYm7LXIqE80J9sPOYlMTY2NvYJ7Ed8tduVNpZqP5UPYGxsbOwT2G0AtPbI5vfPw6koVMLGxsbejp0PrXYg5Y9jfrciS8PGxsY+mL0WG62VBEkZ8J8GGDY2NvYW7LamTRjF0oPHV4dK2NjY2Bux89CnrW8nIVE7CJ8qsLGxsbdm31X05oz8GFBeML+t38bGxsZ+K/ucCxsbGxsbGxsbG/tjrr+H0mg6VMzLZAAAAABJRU5ErkJggg==">
+    
+</ul>
+
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/01/12/《microservice-&amp;-serverless》by-蔡超的一点感想/">《microservice &amp; serverless》by 蔡超的一点感想</a></p>
-    </div>
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/aws/">aws</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/aws-sdk-go/">aws-sdk-go</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/s3/">s3</a>
+    </ul>
+    
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            超哥是来自Amazon的顶级的架构师，经历了Amazon整个向微服务架构迁移的过程，以及向serverless的演化过程，有着极其丰富的经验，年过4...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/01/12/《microservice-&amp;-serverless》by-蔡超的一点感想/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                
-                    <img src="/img/avatar/hatlonely1.png" width="44px" height="44px" alt="'s avatar">
-                
-            </div>
-            <div>
-                
-                    <strong>hatlonely</strong>
-                
-                <span>1月 12, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
 
-            <!-- 浏览和点赞功能 by hatlonely -->
-            <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
-            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
-            <script>
-                $(document).ready(function() {
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countview",
-                        data: {
-                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-view-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
+    
 
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countlike",
-                        data: {
-                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-like-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang aws-sdk-go 之 s3 服务&url=http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
 
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/showlike",
-                        data: {
-                            title: "《microservice &amp; serverless》by 蔡超的一点感想"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.islike) {
-                                $('#post-like-thumb-1').css('color','#c4291c')
-                                $('#post-like-thumb-1').prop('islike', true)
-                            } else {
-                                $('#post-like-thumb-1').css("color","#758591");
-                                $('#post-like-thumb-1').prop('islike', false)
-                            }
-                        },
-                        async: true
-                    });
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang aws-sdk-go 之 s3 服务&url=http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html&via=hatlonely" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
 
-                    $('#post-like-thumb-1').click(function() {
-                        num = $('#post-like-num-1').text()
-                        if ($('#post-like-thumb-1').prop('islike')) {
-                            url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-1').css('color', '#758591');
-                            $('#post-like-thumb-1').prop('islike', false);
-                            num--
-                        } else {
-                            url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-1').css('color','#c4291c');
-                            $('#post-like-thumb-1').prop('islike', true);
-                            num++
-                        }
-                        $('#post-like-num-1').text(num)
-                        $.ajax({
-                            url: url,
-                            data: {
-                                title: "《microservice &amp; serverless》by 蔡超的一点感想"
-                            },
-                            type: 'GET',
-                            dataType: 'JSON',
-                            success: function(res) {
-                            },
-                            async: true
-                        });
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
 
-                        return false;
-                    });
-                });
-            </script>
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
 
-            
+    <!-- Share LinkedIn -->
+    
 
-            
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang aws-sdk-go 之 s3 服务&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
 
-            
+    <!-- Share Telegram -->
+    
+</ul>
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    
 </div>
 
-            
-            
-        
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
+        <p>s3 是 aws 提供的分布式文件服务，价格比较优惠，经常被用来作为日志的持久化存储，大数据处理结果的输入输出等</p>
+<p>s3 服务提供命令行工具，可以很方便地上传、下载、删除文件，普通 golang 程序如果需要访问 s3 上文件，一种简单方式可以先将 s3 上文件下载到本地，然后直接访问本地文件即可，但是这种方式需要一个额外的步骤，下载到本地，有额外的运维成本，需要额外的磁盘空间，使用上面不是很灵活，此外，微服务应该尽可能地降低对本地数据的依赖，这种设计也不符合微服务的设计思想</p>
+<p>使用 aws-sdk-go 可以直接访问 s3 服务，实现文件的上传和读取</p>
+<p>以下使用的代码：<a href="https://github.com/hatlonely/hellogolang/blob/master/internal/aws-sdk-go/s3_test.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/internal/aws-sdk-go/s3_test.go</a></p>
+<h3 id="创建会话"><a href="#创建会话" class="headerlink" title="创建会话"></a>创建会话</h3><p>首先需要创建一个会话，后续的访问都可以通过这个会话进行，如果访问的服务需要授权，也可以在 config 里面指定授权文件</p>
+<pre><code>sess := session.Must(session.NewSession(&amp;aws.Config{
+    Region: aws.String(endpoints.ApSoutheast1RegionID),
+}))
+service := s3.New(sess)
+</code></pre><p>这里必须指定 s3 桶所在的地区</p>
+<h3 id="上传文件"><a href="#上传文件" class="headerlink" title="上传文件"></a>上传文件</h3><pre><code>fp, err := os.Open(&quot;s3_test.go&quot;)
+So(err, ShouldBeNil)
+defer fp.Close()
 
-    
+ctx, cancel := context.WithTimeout(context.Background(), time.Duration(30)*time.Second)
+defer cancel()
 
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
+_, err = service.PutObjectWithContext(ctx, &amp;s3.PutObjectInput{
+    Bucket: aws.String(&quot;hatlonely&quot;),
+    Key:    aws.String(&quot;test/s3_test.go&quot;),
+    Body:   fp,
+})
+So(err, ShouldBeNil)
+</code></pre><p>使用 <code>PutObjectWithContext</code> 实现文件的上传，这里只能实现文件的上传，不能实现文件的写入，所以只能先将文件写入到本地，然后再整个上传</p>
+<p>可以通过 context 设置访问超时时间</p>
+<h3 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h3><pre><code>ctx, cancel := context.WithTimeout(context.Background(), time.Duration(30)*time.Second)
+defer cancel()
 
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
+out, err := service.GetObjectWithContext(ctx, &amp;s3.GetObjectInput{
+    Bucket: aws.String(&quot;hatlonely&quot;),
+    Key: aws.String(&quot;test/s3_test.go&quot;),
+})
+So(err, ShouldBeNil)
+defer out.Body.Close()
+scanner := bufio.NewScanner(out.Body)
+for scanner.Scan() {
+    Println(scanner.Text())
+}
+</code></pre><p>使用 <code>GetObjectWithContext</code> 接口读取文件，文件的内容在 out.Body 中，可以使用 scanner 接口，不断地按行读取文件内容</p>
+<p>最后要记得调用 <code>out.Body.Close()</code>，释放资源</p>
+<h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><pre><code>var objkeys []string
 
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
+ctx, cancel := context.WithTimeout(context.Background(), time.Duration(30)*time.Second)
+defer cancel()
 
-        locatePost = locatePost.next();
+err := service.ListObjectsPagesWithContext(ctx, &amp;s3.ListObjectsInput{
+    Bucket: aws.String(&quot;hatlonely&quot;),
+    Prefix: aws.String(&quot;test/&quot;),
+}, func(output *s3.ListObjectsOutput, b bool) bool {
+    for _, content := range output.Contents {
+        objkeys = append(objkeys, aws.StringValue(content.Key))
     }
-</script>
+    return true
+})
+So(err, ShouldBeNil)
+Println(objkeys)
+</code></pre><p>大数据一般都是并发输出，每个节点都会输出一个文件，到一个指定的目录下面，所以有时候我们需要去获取一个目录下面到底有哪些文件，可以使用 <code>ListObjectsPagesWithContext</code> 遍历一个目录下所有的文件，这个函数是递归的</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>aws-sdk-go：<a href="https://github.com/aws/aws-sdk-go" target="_blank" rel="noopener">https://github.com/aws/aws-sdk-go</a></li>
+<li>aws-sdk-go api：<a href="https://docs.aws.amazon.com/sdk-for-go/api/" target="_blank" rel="noopener">https://docs.aws.amazon.com/sdk-for-go/api/</a></li>
+</ul>
+
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "golang aws-sdk-go 之 s3 服务"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "golang aws-sdk-go 之 s3 服务"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                        
+                            转载请注明出处
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/">http://hatlonely.github.io/2018/03/04/golang-aws-sdk-go-之-s3-服务/</a>
+                    </p>
+                </blockquote>
+        
+    
 
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/04/基于-aws-的-vpn-服务器搭建/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "golang aws-sdk-go 之 s3 服务"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
 
 
                     
@@ -696,6 +915,14 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
@@ -848,6 +1075,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -860,6 +1091,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
