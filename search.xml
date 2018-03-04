@@ -3,6 +3,102 @@
   
     
     <entry>
+      <title><![CDATA[基于 aws 的 vpn 服务器搭建]]></title>
+      <url>/2018/03/04/%E5%9F%BA%E4%BA%8E-aws-%E7%9A%84-vpn-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>搭 vpn 的原因主要有两个：</p>
+<ol>
+<li>google，“内事不知问百度，外事不知问 google”，技术这件事情明显是外事，百度在技术搜索上面要不就是和问题不太相关，要不就是已经是过时的内容，确实体验比较差</li>
+<li>一些 golang 库没有办法通过 <code>go get</code> 正常下载</li>
+</ol>
+<p>之前在淘宝上还可以买到这种 vpn 账号，现在也越来越难买了，还是自己搭一个比较省事</p>
+<h3 id="墙外的服务器"><a href="#墙外的服务器" class="headerlink" title="墙外的服务器"></a>墙外的服务器</h3><p>要搭 vpn 首先需要有一台墙外的服务器，香港的或者国外的都可以，操作系统建议安装 <code>CentOS 7</code></p>
+<p>这里我使用 aws 的服务，主要是可以免费一年，唯一需要的是绑定一个 visa 信用卡。然后创建一台 EC2 实例，选择 <code>Centos 7</code> 系统镜像，在 <code>AWS Marketplace</code> 中搜索 “centos” 关键字即可</p>
+<h3 id="安装-vpn-服务"><a href="#安装-vpn-服务" class="headerlink" title="安装 vpn 服务"></a>安装 vpn 服务</h3><p>github 上有个大神写了个一键安装的脚本：<a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md" target="_blank" rel="noopener">https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md</a>，直接执行下列命令即可完成安装: </p>
+<pre><code>wget https://git.io/vpnsetup-centos -O vpnsetup.sh &amp;&amp; sudo sh vpnsetup.sh
+</code></pre><p>安装成功后，会在屏幕上显示 vpn 凭证</p>
+<pre><code>Server IP: xx.xx.xx.xx
+IPsec PSK: xxxxxxxxxxx
+Username: vpnuser
+Password: xxxxxxxxxxxx
+</code></pre><p>现在 vpn 服务还不能访问，需要将 vpn 服务端口对外网开放，vpn 服务使用到的端口有 500/4500/50/51/1701，通过设置安全组可以开放这些端口，也可以暴力一点，开发所有端口</p>
+<h3 id="客户端访问"><a href="#客户端访问" class="headerlink" title="客户端访问"></a>客户端访问</h3><h4 id="Mac"><a href="#Mac" class="headerlink" title="Mac"></a>Mac</h4><ol>
+<li><code>打开系统偏好设置</code> → <code>网络</code></li>
+<li>点 <code>+</code> 添加网络，接口选 <code>vpn</code>，vpn 类型选 <code>IPSec 上的 L2TP</code>，服务名称随意</li>
+<li>选中刚刚创建的网络，将上面生成的 vpn 凭证填入，服务器地址填 <code>Server Ip</code>，账户名称填 <code>Username</code>，点开鉴定设置，密码填 <code>Password</code>，共享的秘钥填 <code>IPsec PSK</code></li>
+<li>点击 <code>连接</code> 即可</li>
+</ol>
+<h4 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h4><ol>
+<li><code>设置</code> → <code>通用</code> → <code>vpn</code></li>
+<li>添加 vpn 配置 → 类型选择 <code>L2TP</code> → 填入上述 vpn 凭证即可</li>
+</ol>
+<h3 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h3><p>直接编辑 <code>/etc/ppp/chap-secrets</code> 文件，新增用户即可，无需重启服务</p>
+<pre><code>sudo vim /etc/ppp/chap-secrets
+</code></pre><p>文件样例如下:</p>
+<pre><code>&quot;user1&quot; l2tpd &quot;password1&quot; *
+&quot;user2&quot; l2tpd &quot;password2&quot; *
+&quot;user3&quot; l2tpd &quot;password3&quot; *
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>IPsec VPN 服务器一键安装脚本：<a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md" target="_blank" rel="noopener">https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/README-zh.md</a></li>
+<li>IPsec 服务端口: <a href="https://serverfault.com/questions/451381/which-ports-for-ipsec-lt2p" target="_blank" rel="noopener">https://serverfault.com/questions/451381/which-ports-for-ipsec-lt2p</a></li>
+<li>配置 IPsec/L2TP VPN 客户端：<a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients-zh.md" target="_blank" rel="noopener">https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/clients-zh.md</a></li>
+<li>管理 VPN 用户：<a href="https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/manage-users-zh.md" target="_blank" rel="noopener">https://github.com/hwdsl2/setup-ipsec-vpn/blob/master/docs/manage-users-zh.md</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> vpn </tag>
+            
+            <tag> aws </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[Mac 必备工具之 brew]]></title>
+      <url>/2018/02/21/Mac-%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7%E4%B9%8B-brew/</url>
+      <content type="html"><![CDATA[<p>brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具</p>
+<h3 id="安装-brew"><a href="#安装-brew" class="headerlink" title="安装 brew"></a>安装 brew</h3><p>首先要通过如下命令安装 brew</p>
+<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><h4 id="安装-卸载-更新"><a href="#安装-卸载-更新" class="headerlink" title="安装/卸载/更新"></a>安装/卸载/更新</h4><p>以 nodejs 为例，执行下面命令即可，安装目录在 <code>/usr/local/Cellar</code></p>
+<pre><code>brew install nodejs
+</code></pre><p>如果需要更新或卸载</p>
+<pre><code>brew upgrade nodejs
+brew remove nodejs
+</code></pre><h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><pre><code>brew list                   # 列出当前安装的软件
+brew search nodejs          # 查询与 nodejs 相关的可用软件
+brew info nodejs            # 查询 nodejs 的安装信息
+</code></pre><p>如果需要指定版本，可以在 <code>brew search</code> 查看有没有需要的版本，在 <code>@</code> 后面指定版本号，例如 <code>brew install thrift@0.9</code></p>
+<h3 id="brew-services"><a href="#brew-services" class="headerlink" title="brew services"></a>brew services</h3><p><code>brew services</code> 是一个非常强大的工具，可以用来管理各种服务的启停，有点像 linux 里面的 services，非常方便，以 elasticsearch 为例</p>
+<pre><code>brew install elasticsearch          # 安装 elasticsearch
+brew services start elasticsearch   # 启动 elasticsearch
+brew services stop elasticsearch    # 停止 elasticsearch
+brew services restart elasticsearch # 重启 elasticsearch
+brew services list                  # 列出当前的状态
+</code></pre><p>brew services 服务相关配置以及日志路径</p>
+<ul>
+<li>配置路径：<code>/usr/local/etc/</code></li>
+<li>日志路径：<code>/usr/local/var/log</code></li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>brew 官网：<a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> Mac </tag>
+            
+            <tag> brew </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[markdown 一个优雅的写作工具]]></title>
       <url>/2018/02/14/markdown-%E4%B8%80%E4%B8%AA%E4%BC%98%E9%9B%85%E7%9A%84%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7/</url>
       <content type="html"><![CDATA[<p>说到写作工具，不得不提的就是 word 了吧，现在有哪个公司能不用这个软件吗？作为最流行的写作软件，word 确实有很多优点，操作比较直观，所见即所得等等，但是大家也一定遇到过样式调整起来比较繁琐的问题，不同的内容可能需要频繁地调整字体、大小、行距等等，而且还很容易出现不一致，整体都显得很不协调，当然你是 word 的高级用户的话，可能知道有模板这个东西，帮你定义了统一的样式，但是首先你要成为一个高级用户，总之你需要花很多额外的时间在样式的调整上面，编辑体验很差；另一方面不同的用户都有自己的样式偏好，风格不统一也很影响阅读体验；此外，修订功能真的做得很难看……难看到不太想……</p>
