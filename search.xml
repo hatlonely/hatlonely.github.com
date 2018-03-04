@@ -50,6 +50,21 @@ for scanner.Scan() {
 ctx, cancel := context.WithTimeout(context.Background(), time.Duration(30)*time.Second)
 defer cancel()
 
+out, err := service.ListObjectsWithContext(ctx, &amp;s3.ListObjectsInput{
+    Bucket: aws.String(&quot;hatlonely&quot;),
+    Prefix: aws.String(&quot;test/&quot;),
+})
+So(err, ShouldBeNil)
+for _, content := range out.Contents  {
+    objkeys = append(objkeys, aws.StringValue(content.Key))
+}
+Println(objkeys)
+</code></pre><p>大数据一般都是并发输出，每个节点都会输出一个文件，到一个指定的目录下面，所以有时候我们需要去获取一个目录下面到底有哪些文件，可以使用 <code>ListObjectsWithContext</code> 遍历一个目录下所有的文件，这个函数是递归的</p>
+<pre><code>var objkeys []string
+
+ctx, cancel := context.WithTimeout(context.Background(), time.Duration(30)*time.Second)
+defer cancel()
+
 err := service.ListObjectsPagesWithContext(ctx, &amp;s3.ListObjectsInput{
     Bucket: aws.String(&quot;hatlonely&quot;),
     Prefix: aws.String(&quot;test/&quot;),
@@ -61,7 +76,7 @@ err := service.ListObjectsPagesWithContext(ctx, &amp;s3.ListObjectsInput{
 })
 So(err, ShouldBeNil)
 Println(objkeys)
-</code></pre><p>大数据一般都是并发输出，每个节点都会输出一个文件，到一个指定的目录下面，所以有时候我们需要去获取一个目录下面到底有哪些文件，可以使用 <code>ListObjectsPagesWithContext</code> 遍历一个目录下所有的文件，这个函数是递归的</p>
+</code></pre><p>也可以使用 <code>ListObjectsPagesWithContext</code> 传入一个回调函数，用于处理每个文件</p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li>aws-sdk-go：<a href="https://github.com/aws/aws-sdk-go" target="_blank" rel="noopener">https://github.com/aws/aws-sdk-go</a></li>
 <li>aws-sdk-go api：<a href="https://docs.aws.amazon.com/sdk-for-go/api/" target="_blank" rel="noopener">https://docs.aws.amazon.com/sdk-for-go/api/</a></li>
