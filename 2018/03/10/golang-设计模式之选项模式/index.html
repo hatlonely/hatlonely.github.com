@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            golang 设计模式之选项模式 | 
+        
+        hatlonely的小站
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar/hatlonely11.png">
+    <link rel="icon" href="/img/avatar/hatlonely11.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content=",golang,设计模式,选项模式">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?Za8gfWOCG/wBJQAgLgzW0Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/sons-of-obsidian.min.css?LAydzRcKlmrD364lwsfmyw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+
+  code {
+    font-family: 'SF Mono', Menlo, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="hatlonely的小站">
+    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/avatar/hatlonely11.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="golang 设计模式之选项模式 | hatlonely的小站">
+    <meta property="og:image" content="/img/avatar/hatlonely11.png">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="设计模式"> <meta property="og:article:tag" content="选项模式"> 
+
+    
+        <meta property="article:published_time" content="Sat Mar 10 2018 22:25:25 GMT+0800">
+        <meta property="article:modified_time" content="Sun Mar 11 2018 01:53:21 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html",
+    "headline": "golang 设计模式之选项模式",
+    "datePublished": "Sat Mar 10 2018 22:25:25 GMT+0800",
+    "dateModified": "Sun Mar 11 2018 01:53:21 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "hatlonely",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        },
+        "description": "Try new, go far, see more"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "hatlonely的小站",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        }
+    },
+    "keywords": ",golang,设计模式,选项模式",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?633cb5fd05b598aceeda727f031fa7e4';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#可变长参数列表"><span class="post-toc-number">1.</span> <span class="post-toc-text">可变长参数列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#选项模式"><span class="post-toc-number">2.</span> <span class="post-toc-text">选项模式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定义可选项和默认值"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">定义可选项和默认值</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现-With-方法"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">实现 With 方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#实现函数功能"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">实现函数功能</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#选项模式的应用"><span class="post-toc-number">3.</span> <span class="post-toc-text">选项模式的应用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/fish.jpg)">
+    
+            <p class="article-headline-p">
+                golang 设计模式之选项模式
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        
+            <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        
+            <strong>hatlonely</strong>
+        
+        <span>3月 10, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0ElEQVR42u3aQW7cQAwEwP3/p5OrgcTa7qGMlWdKp0BYSFMKEIZsvv4ceb2wsbGxsbGxsbGxH8l+xdd3v/96/98nX78rOcl/AOWZsbGxsU9gv/mnf8BLnnn9m+SNyfOxsbGxT2DfVZySO/MCVp8ZGxsbGzsuKnlLkzw/Pw82NjY29qSAJcVsUsawsbGxse8aKiVlbFL8kjsfmKVhY2NjP57dBr1P+PMH8m1sbGzsR7Lbqz1iPiqah7tvTo6NjY29KXstmp0MhuaBRB5OYGNjY5/Gzu9PGoM8Kp4vCWFjY2Ofw06KUB4btGXmJ4ooNjY29mns5EO0w6NJWDsJD7CxsbFPY+cvWytp+RPa3ySNEDY2NvbJ7Db6XTti8sycWsQD2NjY2Buxk//Q5wUsHzy1jcRahICNjY19AnvymrsG+m1UnEcU2NjY2Gey2+XIu8phjmwjDWxsbOwz2VF0Gq9aro2N2r+MxVkaNjY29i9nX7+yHsGXR0+ambztwcbGxsbOi0q+BJk/LY9+8+ABGxsb+wT2/AX5MmXb9qyt5nx7ZmxsbOxN2W3Ryo84b3XyQDcagWFjY2Nvys7HPfkoZ62BWSucxfoRNjY29sHsNhLOm4Q80M0XjIoODBsbG3s79hy/FgBftxz5/ToewMbGxt6IvTaOz3+/NjBaW+Wpd06xsbGxt2C364zJ0duP20YUdanDxsbG3pTdrlFGyzFxScuHSvmHwMbGxj6NnQMmd9p4IG82sLGxsbHbqz3o2nA/aX7qsoqNjY29KXs+4mmHU214kLRMdTyAjY2NvR07L1r5n5Ph0Q2jojyWwMbGxj6APVmyWVsDaoPk/HNgY2NjY09aiLYhST7lfKEHGxsbG3st1p20PW1s8ObDYWNjYx/Abo/bNgbzRc/rM/zgLA0bGxv78ex50LsW8baFarKCiY2Njb0r+5wLGxsbGxsbGxsb+zHXX3PRw6bZ3DAFAAAAAElFTkSuQmCC">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/设计模式/">设计模式</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/选项模式/">选项模式</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang 设计模式之选项模式&url=http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang 设计模式之选项模式&url=http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html&via=hatlonely" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang 设计模式之选项模式&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>有时候一个函数会有很多参数，为了方便函数的使用，我们会给希望给一些参数设定默认值，调用时只需要传与默认值不同的参数即可，类似于 python 里面的默认参数和字典参数，虽然 golang 里面既没有默认参数也没有字典参数，但是我们有选项模式</p>
+<h3 id="可变长参数列表"><a href="#可变长参数列表" class="headerlink" title="可变长参数列表"></a>可变长参数列表</h3><p>在这之前，首先需要介绍一下可变长参数列表，顾名思义，就是参数的个数不固定，可以是一个也可以是多个，最典型的用法就是标准库里面的 <code>fmt.Printf</code>，语法比较简单，如下面例子实现任意多个参数的加法</p>
+<pre><code class="go">func add(nums ...int) int {
+    sum := 0
+    for _, num := range nums {
+        sum += num
+    }
+    return sum
+}
+
+So(add(1, 2), ShouldEqual, 3)
+So(add(1, 2, 3), ShouldEqual, 6)
+</code></pre>
+<p>在类型前面加 <code>...</code> 来表示这个类型的变长参数列表，使用上把参数当成 <code>slice</code> 来用即可</p>
+<h3 id="选项模式"><a href="#选项模式" class="headerlink" title="选项模式"></a>选项模式</h3><p>假设我们要实现这样一个函数，这个函数接受5个参数，三个 <code>string</code>（其中第一个参数是必填参数），两个 <code>int</code>，这里功能只是简单输出这个参数，于是我们可以简单用如下代码实现</p>
+<pre><code class="go">func MyFunc1(requiredStr string, str1 string, str2 string, int1 int, int2 int) {
+    fmt.Println(requiredStr, str1, str2, int1, int2)
+}
+
+// 调用方法
+MyFunc1(&quot;requiredStr&quot;, &quot;defaultStr1&quot;, &quot;defaultStr2&quot;, 1, 2)
+</code></pre>
+<p>这种实现比较简单，但是同时传入参数较多，对调用方来说，使用的成本就会比较高，而且每个参数的具体含义这里并不清晰，很容易出错</p>
+<p>那选项模式怎么实现这个需求呢？先来看下最终的效果</p>
+<pre><code class="go">MyFunc2(&quot;requiredStr&quot;)
+MyFunc2(&quot;requiredStr&quot;, WithOptionStr1(&quot;mystr1&quot;))
+MyFunc2(&quot;requiredStr&quot;, WithOptionStr2AndInt2(&quot;mystr2&quot;, 22), WithOptionInt1(11))
+</code></pre>
+<p>如上面代码所示，你可以根据自己的需求选择你需要传入的参数，大大简化了函数调用的复杂度，并且每个参数都有了清晰明确的含义</p>
+<p>那怎么实现上面的功能呢</p>
+<h4 id="定义可选项和默认值"><a href="#定义可选项和默认值" class="headerlink" title="定义可选项和默认值"></a>定义可选项和默认值</h4><p>首先定义可选项和默认值，这里有4个可选项，第一个参数为必填项</p>
+<pre><code class="go">type MyFuncOptions struct {
+    optionStr1 string
+    optionStr2 string
+    optionInt1 int
+    optionInt2 int
+}
+
+var defaultMyFuncOptions = MyFuncOptions{
+    optionStr1: &quot;defaultStr1&quot;,
+    optionStr2: &quot;defaultStr2&quot;,
+    optionInt1: 1,
+    optionInt2: 2,
+}
+</code></pre>
+<h4 id="实现-With-方法"><a href="#实现-With-方法" class="headerlink" title="实现 With 方法"></a>实现 With 方法</h4><p>这些 With 方法看起来有些古怪，接受一个选项参数，返回一个选项方法，而选项方法以选项作为参数负责修改选项的值，如果没看明白没关系，可以先看函数功能如何实现</p>
+<pre><code class="go">type MyFuncOption func(options *MyFuncOptions)
+
+func WithOptionStr1(str1 string) MyFuncOption {
+    return func(options *MyFuncOptions) {
+        options.optionStr1 = str1
+    }
+}
+
+func WithOptionInt1(int1 int) MyFuncOption {
+    return func(options *MyFuncOptions) {
+        options.optionInt1 = int1
+    }
+}
+
+func WithOptionStr2AndInt2(str2 string, int2 int) MyFuncOption {
+    return func(options *MyFuncOptions) {
+        options.optionStr2 = str2
+        options.optionInt2 = int2
+    }
+}
+</code></pre>
+<p>这里我们让 optionStr2 和 optionInt2 合并一起设置，实际应用场景中可以用这种方式将相关的参数放到一起设置</p>
+<h4 id="实现函数功能"><a href="#实现函数功能" class="headerlink" title="实现函数功能"></a>实现函数功能</h4><pre><code class="go">func MyFunc2(requiredStr string, opts ...MyFuncOption) {
+    options := defaultMyFuncOptions
+    for _, o := range opts {
+        o(&amp;options)
+    }
+
+    fmt.Println(requiredStr, options.optionStr1, options.optionStr2, options.optionInt1, options.optionInt2)
+}
+</code></pre>
+<p>使用 With 方法返回的选项方法作为参数列表，用这些方法去设置选项</p>
+<h3 id="选项模式的应用"><a href="#选项模式的应用" class="headerlink" title="选项模式的应用"></a>选项模式的应用</h3><p>从这里可以看到，为了实现选项的功能，我们增加了很多的代码，实现成本相对还是较高的，所以实践中需要根据自己的业务场景去权衡是否需要使用。个人总结满足下面条件可以考虑使用选项模式</p>
+<ol>
+<li>参数确实比较复杂，影响调用方使用</li>
+<li>参数确实有比较清晰明确的默认值</li>
+<li>为参数的后续拓展考虑</li>
+</ol>
+<p>在 golang 的很多开源项目里面也用到了选项模式，比如 grpc 中的 rpc 方法就是采用选项模式设计的，除了必填的 rpc 参数外，还可以一些选项参数，grpc_retry 就是通过这个机制实现的，可以实现自动重试功能</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>Go 函数式选项模式：<a href="https://studygolang.com/articles/12329" target="_blank" rel="noopener">https://studygolang.com/articles/12329</a></li>
+<li>Functional Options Pattern in Go：<a href="https://halls-of-valhalla.org/beta/articles/functional-options-pattern-in-go,54/" target="_blank" rel="noopener">https://halls-of-valhalla.org/beta/articles/functional-options-pattern-in-go,54/</a></li>
+</ul>
+
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "golang 设计模式之选项模式"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "golang 设计模式之选项模式"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                        
+                            转载请注明出处
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/">http://hatlonely.github.io/2018/03/10/golang-设计模式之选项模式/</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/04/golang-aws-sdk-go-之-s3-服务/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "golang 设计模式之选项模式"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/coco1.jpg);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <!--
+    <div class="sidebar-image">
+        <img src="/img/avatar/hatlonely11.png" alt="hatlonely's avatar">
+    </div>
+    -->
+
+    <!-- Sidebar Email -->
+    <!--
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        hatlonely@foxmail.com
+        <b class="caret"></b>
+    </a>
+    -->
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:hatlonely@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">folder</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/程序人生"> 程序人生
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/golang"> golang
+                                <span class="sidebar_archives-count"> 13 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/性能"> 性能
+                                <span class="sidebar_archives-count"> 3 </span>
+                            </a>
+                        </li>
+                    
+                
+                <!--
+                <li>
+                
+                -->
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">link</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/profile.php?id=100002314767374" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>hatlonely的小站
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?yvbglk2xb/g60XhlYY9COA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
