@@ -43,7 +43,7 @@
     
     <title>
         
-            标签: aws-sdk-go | 
+            golang 并发编程之生产者消费者 | 
         
         hatlonely的小站
     </title>
@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content="">
+    <meta name="keywords" content=",golang,并发编程,生产者消费者,多线程,sync.WaitGroup">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -82,6 +82,9 @@
         <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
         
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?Za8gfWOCG/wBJQAgLgzW0Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/sons-of-obsidian.min.css?LAydzRcKlmrD364lwsfmyw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
             
         
 
@@ -217,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="hatlonely的小站">
-    <meta name="msapplication-starturl" content="http://hatlonely.github.io/tags/aws-sdk-go/">
+    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
@@ -232,13 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://hatlonely.github.io/tags/aws-sdk-go/">
+    <meta property="og:url" content="http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="标签: aws-sdk-go | hatlonely的小站">
+    <meta property="og:title" content="golang 并发编程之生产者消费者 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely11.png">
     <meta property="og:description" content="">
-    
+    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="并发编程"> <meta property="og:article:tag" content="生产者消费者"> <meta property="og:article:tag" content="多线程"> <meta property="og:article:tag" content="sync.WaitGroup"> 
 
+    
+        <meta property="article:published_time" content="Sun Mar 11 2018 16:53:07 GMT+0800">
+        <meta property="article:modified_time" content="Sun Mar 11 2018 19:17:06 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,13 +252,43 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://hatlonely.github.io/tags/aws-sdk-go/index.html" />
+        <link rel="canonical" href="http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html" />
     
 
     <!-- Structured-data for SEO -->
     
         
 
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html",
+    "headline": "golang 并发编程之生产者消费者",
+    "datePublished": "Sun Mar 11 2018 16:53:07 GMT+0800",
+    "dateModified": "Sun Mar 11 2018 19:17:06 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "hatlonely",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        },
+        "description": "Try new, go far, see more"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "hatlonely的小站",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        }
+    },
+    "keywords": ",golang,并发编程,生产者消费者,多线程,sync.WaitGroup",
+    "description": "",
+}
+</script>
 
 
     
@@ -295,188 +331,375 @@
                         </button>
                     
 
-                    <!-- Index Module -->
-<div class="material-index mdl-grid">
-    
-    <div class="locate-thumbnail-symbol"></div>
+                    <!-- Post TOC -->
 
-    <!-- Pin on top -->
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
     
     
-        
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#go-并发语法"><span class="post-toc-number">1.</span> <span class="post-toc-text">go 并发语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#协程-go"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">协程 go</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#同步信号-sync-WaitGroup"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">同步信号 sync.WaitGroup</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#通道-chan"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">通道 chan</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#生产者消费者实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">生产者消费者实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#定义产品类"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">定义产品类</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#生产者"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">生产者</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#消费者"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">消费者</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#主线程"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">主线程</span></a></li></ol></li></ol>
+    </ul>
     
 
-    <!-- Normal Post -->
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/03/04/golang-aws-sdk-go-之-s3-服务/'">
-    <!-- Post Thumbnail -->
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/ship.jpg">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/kid1.jpg)">
+    
+            <p class="article-headline-p">
+                golang 并发编程之生产者消费者
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        
+            <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        
+            <strong>hatlonely</strong>
+        
+        <span>3月 11, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAADjklEQVR42u3ay27bMBAFUP//T7fbAm2Ue2dIxygOV0FsSeTRYjyP1y/rj/VCgAMHDhw4cODAgQPHB3O84pVf9Y9HPt5n9vfzU4qz4MCBAweOCxzfhKLHQz4fuD1qgvvVrmZnwYEDBw4c9zi+2kr+nSQkPwfg56dvcHHgwIEDxydz5IlZkm7lEDhw4MCB43/lyANhnuDlCVteasSBAwcOHD/LkW9l1vipNzoK/G+tleLAgQMHjvVAw+f//db5Dhw4cODA8RdHu/ZBrh2wm6WFxYlw4MCBA8dRjjxQ7ccU8lQtL/9tuHHgwIEDxz2OtvGTHzv/z76VlbS16owWBw4cOHCMOPLt5onTvUGHWcq3+t2BAwcOHDhKjrxUVzd1ysGFHHczSIEDBw4cOG5zJAeIbl0WBPN0axPsv9kJDhw4cOC4wDEbjGsDZJJ6tSMUbXkRBw4cOHDc5pilQ3lobEPgZngif5E4cODAgeM2R37TvDiYJ1r5AVqsYaDFgQMHDhwXOM4G2tV2yzSyfi4OHDhw4DjK0RbX9unWpoDYjk0ke8CBAwcOHDc48lu3adsesR2zaAcgcODAgQPHDY42fUoaS+3KQ/um1TT83YEDBw4cOEYd/FNjBHmgbVPHnLJ4qThw4MCB4yjHjVDatqySq9rCX1EuxIEDBw4cb+HIU6B21GA/KjFrmxUDDThw4MCBY80xa/y0rEkbKU/D9qkdDhw4cOC4wZEkPLOEKt/67Lntq4pSOBw4cODAseZox8vyolue2uUDDbNXtSoO4sCBAweOEcc+fWpDYIsyo1kVB3HgwIEDx5qjHY+blQs3AwqzphQOHDhw4Hg/R9u8ya/KQ2AOdGr8DgcOHDhw3OZoC3bJMdqDteXIdpCiCLQ4cODAgWPNMQuryaebYYiizFc2zHDgwIEDx22OZFAgH0pot5UE0XZ8IWqM4cCBAweOyxyzsYO8NdUWFtt0rn06Dhw4cOA4y9GuzUhcu/b7iVI7HDhw4MBxlGO2uTaI5slYPrLQtp2KFA4HDhw4cByqhiXBLBlZuMfaFhkjJhw4cODAcY0jD2BFghS0pvJPNz8OcODAgQPH53Pk4wvttbOGUw6KAwcOHDg+mWP2/byE1xYK2/YVDhw4cOC4x5EPDRRNnUVBcEacB28cOHDgwHGPIw9XbQPp1PE2AxPPrxwHDhw4cJzlsHDgwIEDBw4cOHDgwPFh6zc/34ZftI35BgAAAABJRU5ErkJggg==">
+    
+</ul>
+
     
 
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/03/04/golang-aws-sdk-go-之-s3-服务/">golang aws-sdk-go 之 s3 服务</a></p>
-    </div>
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/sync-WaitGroup/">sync.WaitGroup</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/多线程/">多线程</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/并发编程/">并发编程</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/生产者消费者/">生产者消费者</a>
+    </ul>
+    
 
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            s3 是 aws 提供的分布式文件服务，价格比较优惠，经常被用来作为日志的持久化存储，大数据处理结果的输入输出等
-s3 服务提供命令行...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/03/04/golang-aws-sdk-go-之-s3-服务/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                
-                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
-                
-            </div>
-            <div>
-                
-                    <strong>hatlonely</strong>
-                
-                <span>3月 04, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
 
-            <!-- 浏览和点赞功能 by hatlonely -->
-            <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
-            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
-            <script>
-                $(document).ready(function() {
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countview",
-                        data: {
-                            title: "golang aws-sdk-go 之 s3 服务"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-view-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
+    
 
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countlike",
-                        data: {
-                            title: "golang aws-sdk-go 之 s3 服务"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-like-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang 并发编程之生产者消费者&url=http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
 
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/showlike",
-                        data: {
-                            title: "golang aws-sdk-go 之 s3 服务"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.islike) {
-                                $('#post-like-thumb-1').css('color','#c4291c')
-                                $('#post-like-thumb-1').prop('islike', true)
-                            } else {
-                                $('#post-like-thumb-1').css("color","#758591");
-                                $('#post-like-thumb-1').prop('islike', false)
-                            }
-                        },
-                        async: true
-                    });
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang 并发编程之生产者消费者&url=http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html&via=hatlonely" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
 
-                    $('#post-like-thumb-1').click(function() {
-                        num = $('#post-like-num-1').text()
-                        if ($('#post-like-thumb-1').prop('islike')) {
-                            url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-1').css('color', '#758591');
-                            $('#post-like-thumb-1').prop('islike', false);
-                            num--
-                        } else {
-                            url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-1').css('color','#c4291c');
-                            $('#post-like-thumb-1').prop('islike', true);
-                            num++
-                        }
-                        $('#post-like-num-1').text(num)
-                        $.ajax({
-                            url: url,
-                            data: {
-                                title: "golang aws-sdk-go 之 s3 服务"
-                            },
-                            type: 'GET',
-                            dataType: 'JSON',
-                            success: function(res) {
-                            },
-                            async: true
-                        });
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
 
-                        return false;
-                    });
-                });
-            </script>
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
 
-            
+    <!-- Share LinkedIn -->
+    
 
-            
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang 并发编程之生产者消费者&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
 
-            
+    <!-- Share Telegram -->
+    
+</ul>
 
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
+    
 </div>
 
-            
-            
-        
-        
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
+        <p>golang 最吸引人的地方可能就是并发了，无论代码的编写上，还是性能上面，golang 都有绝对的优势</p>
+<p>学习一个语言的并发特性，我喜欢实现一个生产者消费者模型，这个模型非常经典，适用于很多的并发场景，下面我通过这个模型，来简单介绍一下 golang 的并发编程</p>
+<h3 id="go-并发语法"><a href="#go-并发语法" class="headerlink" title="go 并发语法"></a>go 并发语法</h3><h4 id="协程-go"><a href="#协程-go" class="headerlink" title="协程 go"></a>协程 <code>go</code></h4><p><strong>协程</strong>是 golang 并发的最小单元，类似于其他语言的线程，只不过线程的实现借助了操作系统的实现，每次线程的调度都是一次系统调用，需要从用户态切换到内核态，这是一项非常耗时的操作，因此一般的程序里面线程太多会导致大量的性能耗费在线程切换上。而在 golang 内部实现了这种调度，协程在这种调度下面的切换非常的轻量级，成百上千的协程跑在一个 golang 程序里面是很正常的事情</p>
+<p>golang 为并发而生，启动一个协程的语法非常简单，使用 <code>go</code> 关键字即可</p>
+<pre><code class="go">go func () {
+    // do something
+}
+</code></pre>
+<h4 id="同步信号-sync-WaitGroup"><a href="#同步信号-sync-WaitGroup" class="headerlink" title="同步信号 sync.WaitGroup"></a>同步信号 <code>sync.WaitGroup</code></h4><p>多个协程之间可以通过 <code>sync.WaitGroup</code> 同步，这个类似于 Linux 里面的信号量</p>
+<pre><code class="go">var wg sync.WaitGroup  // 申明一个信号量
+wg.Add(1)   // 信号量加一
+wg.Done()   // 信号量减一
+wg.Wait()   // 信号量为正时阻塞，直到信号量为0时被唤醒
+</code></pre>
+<h4 id="通道-chan"><a href="#通道-chan" class="headerlink" title="通道 chan"></a>通道 <code>chan</code></h4><p>通道可以理解为一个消息队列，生产者往队列里面放，消费者从队列里面取。通道可以使用 <code>close</code> 关闭</p>
+<pre><code class="go">ic := make(chan int, 10)  // 申明一个通道
+ic &lt;- 10        // 往通道里面放
+i := &lt;- ic      // 从通道里面取
 
-    
-
-    
-        <script type="text/ls-javascript" id="thumbnail-script">
-    var randomNum;
-
-    var locatePost = $('.locate-thumbnail-symbol').next();
-    for(var i = 0; i < 10; i++) {
-        randomNum = Math.floor(Math.random() * 19 + 1);
-
-        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
-        locatePost.children('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-
-        locatePost = locatePost.next();
+close(ic)       // 关闭通道
+</code></pre>
+<h3 id="生产者消费者实现"><a href="#生产者消费者实现" class="headerlink" title="生产者消费者实现"></a>生产者消费者实现</h3><h4 id="定义产品类"><a href="#定义产品类" class="headerlink" title="定义产品类"></a>定义产品类</h4><p>这个产品类根据具体的业务需求定义</p>
+<pre><code class="go">type Product struct {
+    name  int
+    value int
+}
+</code></pre>
+<h4 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h4><p>如果 <code>stop</code> 标志不为 <code>false</code>，不断地往通道里面放 <code>product</code>，完成之后信号量完成</p>
+<pre><code class="go">func producer(wg *sync.WaitGroup, products chan&lt;- Product, name int, stop *bool) {
+    for !*stop {
+        product := Product{name: name, value: rand.Int()}
+        products &lt;- product
+        fmt.Printf(&quot;producer %v produce a product: %#v\n&quot;, name, product)
+        time.Sleep(time.Duration(200+rand.Intn(1000)) * time.Millisecond)
     }
-</script>
+    wg.Done()
+}
+</code></pre>
+<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><p>不断地从通道里面取 product，然后作对应的处理，直到通道被关闭，并且 products 里面为空， for 循环才会终止，而这正是我们期望的</p>
+<pre><code class="go">func consumer(wg *sync.WaitGroup, products &lt;-chan Product, name int) {
+    for product := range products {
+        fmt.Printf(&quot;consumer %v consume a product: %#v\n&quot;, name, product)
+        time.Sleep(time.Duration(200+rand.Intn(1000)) * time.Millisecond)
+    }
+    wg.Done()
+}
+</code></pre>
+<h4 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h4><pre><code class="go">var wgp sync.WaitGroup
+var wgc sync.WaitGroup
+stop := false
+products := make(chan Product, 10)
+
+// 创建 5 个生产者和 5 个消费者
+for i := 0; i &lt; 5; i++ {
+    go producer(&amp;wgp, products, i, &amp;stop)
+    go consumer(&amp;wgc, products, i)
+    wgp.Add(1)
+    wgc.Add(1)
+}
+
+time.Sleep(time.Duration(1) * time.Second)
+stop = true     // 设置生产者终止信号
+wgp.Wait()      // 等待生产者退出
+close(products) // 关闭通道
+wgc.Wait()      // 等待消费者退出
+</code></pre>
+
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "golang 并发编程之生产者消费者"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "golang 并发编程之生产者消费者"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                        
+                            转载请注明出处
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/">http://hatlonely.github.io/2018/03/11/golang-并发编程之生产者消费者/</a>
+                    </p>
+                </blockquote>
+        
+    
 
     
 </div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/10/golang-设计模式之选项模式/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "golang 并发编程之生产者消费者"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
 
 
                     
@@ -709,6 +932,14 @@ It will not impact the appearance and can give developers a lot of support :)
                     
 
                     
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
 
                     <!--Footer-->
 <footer class="mdl-mini-footer" id="bottom">
@@ -861,6 +1092,10 @@ It will not impact the appearance and can give developers a lot of support :)
 <!-- Import prettify js  -->
 
     
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
 
 
 
@@ -873,6 +1108,11 @@ It will not impact the appearance and can give developers a lot of support :)
     });
 
     
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
         
     
     
