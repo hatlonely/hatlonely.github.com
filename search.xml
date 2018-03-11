@@ -261,7 +261,7 @@ Password: xxxxxxxxxxxx
     
     <entry>
       <title><![CDATA[Mac 必备工具之 brew]]></title>
-      <url>/2018/02/21/Mac-%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7%E4%B9%8B-brew/</url>
+      <url>/2018/02/21/mac-%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7%E4%B9%8B-brew/</url>
       <content type="html"><![CDATA[<p>brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具</p>
 <h3 id="安装-brew"><a href="#安装-brew" class="headerlink" title="安装 brew"></a>安装 brew</h3><p>首先要通过如下命令安装 brew</p>
 <pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
