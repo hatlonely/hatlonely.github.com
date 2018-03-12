@@ -11,7 +11,7 @@
 <p>golang 为并发而生，启动一个协程的语法非常简单，使用 <code>go</code> 关键字即可</p>
 <pre><code class="go">go func () {
     // do something
-}
+}()
 </code></pre>
 <h4 id="同步信号-sync-WaitGroup"><a href="#同步信号-sync-WaitGroup" class="headerlink" title="同步信号 sync.WaitGroup"></a>同步信号 <code>sync.WaitGroup</code></h4><p>多个协程之间可以通过 <code>sync.WaitGroup</code> 同步，这个类似于 Linux 里面的信号量</p>
 <pre><code class="go">var wg sync.WaitGroup  // 申明一个信号量
@@ -1354,9 +1354,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> pprof </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -1443,9 +1443,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> json </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> json </tag>
             
         </tags>
         
