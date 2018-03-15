@@ -1354,9 +1354,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> pprof </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> pprof </tag>
             
         </tags>
         
@@ -1443,9 +1443,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> json </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
