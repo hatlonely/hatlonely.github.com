@@ -43,7 +43,7 @@
     
     <title>
         
-            Mac 必备工具之 brew | 
+            golang 字节对齐 | 
         
         hatlonely的小站
     </title>
@@ -54,7 +54,7 @@
 
     <meta name="format-detection" content="telephone=no"/>
     <meta name="description" itemprop="description" content="">
-    <meta name="keywords" content=",Mac,brew">
+    <meta name="keywords" content=",golang,字节对齐,结构体">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -220,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="hatlonely的小站">
-    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/">
+    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/03/17/golang-字节对齐/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
@@ -235,16 +235,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/">
+    <meta property="og:url" content="http://hatlonely.github.io/2018/03/17/golang-字节对齐/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Mac 必备工具之 brew | hatlonely的小站">
+    <meta property="og:title" content="golang 字节对齐 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely11.png">
     <meta property="og:description" content="">
-    <meta property="og:article:tag" content="Mac"> <meta property="og:article:tag" content="brew"> 
+    <meta property="og:article:tag" content="golang"> <meta property="og:article:tag" content="字节对齐"> <meta property="og:article:tag" content="结构体"> 
 
     
-        <meta property="article:published_time" content="Wed Feb 21 2018 19:17:31 GMT+0800">
-        <meta property="article:modified_time" content="Sun Mar 11 2018 01:55:23 GMT+0800">
+        <meta property="article:published_time" content="Sat Mar 17 2018 00:20:52 GMT+0800">
+        <meta property="article:modified_time" content="Sat Mar 17 2018 01:41:14 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -252,7 +252,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html" />
+        <link rel="canonical" href="http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -264,10 +264,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html",
-    "headline": "Mac 必备工具之 brew",
-    "datePublished": "Wed Feb 21 2018 19:17:31 GMT+0800",
-    "dateModified": "Sun Mar 11 2018 01:55:23 GMT+0800",
+    "mainEntityOfPage": "http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html",
+    "headline": "golang 字节对齐",
+    "datePublished": "Sat Mar 17 2018 00:20:52 GMT+0800",
+    "dateModified": "Sat Mar 17 2018 01:41:14 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -285,7 +285,7 @@
             "url": "/img/avatar/hatlonely11.png"
         }
     },
-    "keywords": ",Mac,brew",
+    "keywords": ",golang,字节对齐,结构体",
     "description": "",
 }
 </script>
@@ -360,7 +360,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装-brew"><span class="post-toc-number">1.</span> <span class="post-toc-text">安装 brew</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本用法"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本用法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#安装-卸载-更新"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">安装/卸载/更新</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#其他命令"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">其他命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#brew-services"><span class="post-toc-number">3.</span> <span class="post-toc-text">brew services</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本数据大小"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本数据大小</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字节对齐"><span class="post-toc-number">2.</span> <span class="post-toc-text">字节对齐</span></a></li></ol>
     </ul>
     
 
@@ -380,10 +380,10 @@
     <!-- Paradox Post Header -->
     
         <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/leonthe_professional.jpg)">
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/field.jpg)">
     
             <p class="article-headline-p">
-                Mac 必备工具之 brew
+                golang 字节对齐
             </p>
         </div>
 
@@ -406,7 +406,7 @@
         
             <strong>hatlonely</strong>
         
-        <span>2月 21, 2018</span>
+        <span>3月 17, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -428,7 +428,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC50lEQVR42u3awW7jMAwE0Pz/T7fXXuLOiC7qSM+nosjGelqgBId8fR35vLCxsbGxsbGxsbEfyX7FT/L5n5959/P1t12fbe3M2NjY2Cewf/nT/+Yz715wfbjkvflV5mfGxsbGPoGdHzEpGG3RSn4zOjM2NjY29rhotZikOGFjY2NjT9g5KQ+Y2jYGGxsbG7sNaPIruOvzecj1h1kaNjY29uPZ7aD3CT//w3wbGxsb+5HseoWxfFkSJCWjiK/xg42Njb0r+y9aiGQ8nA8e2tXPUQeGjY2N/eHs/BB5mWlXduYR0tvvwcbGxt6UnZSffAS7FhJNRs75BWFjY2Pvym5LVFt+1tqMtVZnsW5jY2Njfzg7ef3isuP4X7XxVj3oxcbGxt6IPRnNtheXh01521OPB7CxsbE3Yl+XlslSZh42tfHT9X/S4s4pNjY29sey16Kl5MXJN18HSXlcFV0rNjY29tbs/Ary4951TTn4lwEDNjY29qbsfDkybyryoKptZtrvwcbGxj6BPYl12lFr/m15i1KsDWFjY2MfwJ7ETHkhTAa3Sfx0WwHDxsbG3pqdF6S15mFtPNyOLrCxsbH3ZrdBf1KW2mAoXxjKCy02Njb2aex5VLQW97T4fPwc7ZxiY2Njb8dO2oA81o+OEsdGk2YJGxsbe292W7TaIUEbD+VjifYKsLGxsXdlz8tGO3Zdi5/WhrvY2NjYJ7AnkVAb/ax9w3XxK96CjY2NfQy7LR7t1RTNw3jhEhsbG/sE9it+1oa4SRQ1GQYkYGxsbOy92e0zWaC5Lj9rBbK4OGxsbOxN2ZPjtqPZnNo2IdGpsLGxsbdm59FSQs2bhCRUSgrYaOcUGxsbeyP22jrOWmmZtCvtYig2NjY2dttU5FFUfpIbGiRsbGxs7HiZpr2syXuLwQY2Njb2Aew2VFpbspkUy3YIgY2NjX0O+67ly2Sxpm1pigHA9bABGxsbe1P2OQ82NjY2NjY2Njb2Y55vnrpJS1eMGxgAAAAASUVORK5CYII=">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACz0lEQVR42u3aS27cMBAFQN//0sk2i1h5j80JZLK0Gsi0yNIAbvfn69eV1xc2NjY2NjY2Njb2K9lf8fWXB8Vrkt/9c+Xzk9fOjI2NjX02+x9/+ss1+frouMGd5MzY2NjYN7Cfw8ka8jm8Jbxk9+jM2NjY2NhBEvLd054xkwCJjY2NjT1nJ3fy9ZOXi42NjY29FjyS5KQu5Zdlpo/X0rCxsbFfz86P9Z7P/7W/jY2Njf1i9vxKwknePEjKUot7YWNjYx/KztuobfGobQa3SUv7OrCxsbFPZSf455DTrkl+Ogl4UVEJGxsb+1D2WiBpG8Btg3ZXAoONjY19KnvvYGVCXXvdeZo0ysCwsbGxfyx7bXSmLUu1Jar2JHUAw8bGxj6InRyxDTzty52UlqJdsLGxsa9hPz8oDyRJYjN56fle2NjY2DezkyGbHDwf4pk0jLGxsbFPZbejMPmLaMeA1p6fB1dsbGzss9n5lbRdk/SjZbShCxsbG/s2dnvcXSM1+RBP2xjAxsbGvpk9SSTqoBI3JyZrsLGxsc9mr4WEyZ3k0G2YjL4ebGxs7GvY+UBMe6yW/bx73RjGxsbGPprdfm6pybH2toSxsbGx72HvGpHJw8laMzjf8ds72NjY2BezJwdtWxH5czZ0RbCxsbEPYk+OPikDtffXClXY2NjYZ7MnaUM7uNOGxkkhCRsbG/sedl6Oz4PKpEnQtpCLLwYbGxv7UPba9nUaUCYY7ajQhkklbGxs7B/Lbq9JyJm3HyblMGxsbOxT2W14aMs99WBNEPy2tQewsbGxD2Lnx92bonwiUflWgY2NjX0Bu/i3fqmcNGHkwXU0soONjY19ATtp3+bN3TykrbUcsLGxsbE/MdCTjGZOhns+GLexsbGxX8+elPV3FaR2NY8319KwsbGxX89uRxtz8BovSW/qZgM2Njb2oex7LmxsbGxsbGxsbOzXXL8BPjRyFMO15mkAAAAASUVORK5CYII=">
     
 </ul>
 
@@ -442,7 +442,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/Mac/">Mac</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/brew/">brew</a>
+        <a class="post_tag-link" href="/tags/golang/">golang</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/字节对齐/">字节对齐</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/结构体/">结构体</a>
     </ul>
     
 
@@ -459,7 +459,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Mac 必备工具之 brew&url=http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang 字节对齐&url=http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -468,7 +468,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Mac 必备工具之 brew&url=http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html&via=hatlonely" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang 字节对齐&url=http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html&via=hatlonely" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -477,7 +477,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -486,7 +486,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -498,7 +498,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=Mac 必备工具之 brew&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang 字节对齐&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/03/17/golang-字节对齐/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -517,32 +517,83 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>brew 是 Mac 下的一个包管理工具，类似于 centos 下的 yum，可以很方便地进行安装/卸载/更新各种软件包，例如：nodejs, elasticsearch, kibana, mysql, mongodb 等等，可以用来快速搭建各种本地环境，程序员必备工具</p>
-<h3 id="安装-brew"><a href="#安装-brew" class="headerlink" title="安装 brew"></a>安装 brew</h3><p>首先要通过如下命令安装 brew</p>
-<pre><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
-</code></pre><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><h4 id="安装-卸载-更新"><a href="#安装-卸载-更新" class="headerlink" title="安装/卸载/更新"></a>安装/卸载/更新</h4><p>以 nodejs 为例，执行下面命令即可，安装目录在 <code>/usr/local/Cellar</code></p>
-<pre><code>brew install nodejs
-</code></pre><p>如果需要更新或卸载</p>
-<pre><code>brew upgrade nodejs
-brew remove nodejs
-</code></pre><h4 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h4><pre><code>brew list                   # 列出当前安装的软件
-brew search nodejs          # 查询与 nodejs 相关的可用软件
-brew info nodejs            # 查询 nodejs 的安装信息
-</code></pre><p>如果需要指定版本，可以在 <code>brew search</code> 查看有没有需要的版本，在 <code>@</code> 后面指定版本号，例如 <code>brew install thrift@0.9</code></p>
-<h3 id="brew-services"><a href="#brew-services" class="headerlink" title="brew services"></a>brew services</h3><p><code>brew services</code> 是一个非常强大的工具，可以用来管理各种服务的启停，有点像 linux 里面的 services，非常方便，以 elasticsearch 为例</p>
-<pre><code>brew install elasticsearch          # 安装 elasticsearch
-brew services start elasticsearch   # 启动 elasticsearch
-brew services stop elasticsearch    # 停止 elasticsearch
-brew services restart elasticsearch # 重启 elasticsearch
-brew services list                  # 列出当前的状态
-</code></pre><p>brew services 服务相关配置以及日志路径</p>
+        <p>最近在做一些性能优化的工作，其中有个结构体占用的空间比较大，而且在内存中的数量又特别多，就在想有没有优化的空间，想起了 c 语言里面的字节对齐，通过简单地调整一下字段的顺序，就能省出不少内存，这个思路在 golang 里面同样适用</p>
+<h3 id="基本数据大小"><a href="#基本数据大小" class="headerlink" title="基本数据大小"></a>基本数据大小</h3><p>在这之前先来看下 golang 里面基本的类型所占数据的大小</p>
+<pre><code class="golang">So(unsafe.Sizeof(true), ShouldEqual, 1)
+So(unsafe.Sizeof(int8(0)), ShouldEqual, 1)
+So(unsafe.Sizeof(int16(0)), ShouldEqual, 2)
+So(unsafe.Sizeof(int32(0)), ShouldEqual, 4)
+So(unsafe.Sizeof(int64(0)), ShouldEqual, 8)
+So(unsafe.Sizeof(int(0)), ShouldEqual, 8)
+So(unsafe.Sizeof(float32(0)), ShouldEqual, 4)
+So(unsafe.Sizeof(float64(0)), ShouldEqual, 8)
+So(unsafe.Sizeof(&quot;&quot;), ShouldEqual, 16)
+So(unsafe.Sizeof(&quot;hello world&quot;), ShouldEqual, 16)
+So(unsafe.Sizeof([]int{}), ShouldEqual, 24)
+So(unsafe.Sizeof([]int{1, 2, 3}), ShouldEqual, 24)
+So(unsafe.Sizeof([3]int{1, 2, 3}), ShouldEqual, 24)
+So(unsafe.Sizeof(map[string]string{}), ShouldEqual, 8)
+So(unsafe.Sizeof(map[string]string{&quot;1&quot;: &quot;one&quot;, &quot;2&quot;: &quot;two&quot;}), ShouldEqual, 8)
+So(unsafe.Sizeof(struct{}{}), ShouldEqual, 0)
+</code></pre>
 <ul>
-<li>配置路径：<code>/usr/local/etc/</code></li>
-<li>日志路径：<code>/usr/local/var/log</code></li>
+<li>bool 类型虽然只有一位，但也需要占用1个字节，因为计算机是以字节为单位</li>
+<li>64为的机器，一个 int 占8个字节</li>
+<li>string 类型占16个字节，内部包含一个指向数据的指针（8个字节）和一个 int 的长度（8个字节）</li>
+<li>slice 类型占24个字节，内部包含一个指向数据的指针（8个字节）和一个 int 的长度（8个字节）和一个 int 的容量（8个字节）</li>
+<li>map 类型占8个字节，是一个指向 map 结构的指针</li>
+<li>可以用 struct{} 表示空类型，这个类型不占用任何空间，用这个作为 map 的 value，可以讲 map 当做 set 来用</li>
 </ul>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
-<li>brew 官网：<a href="https://brew.sh/" target="_blank" rel="noopener">https://brew.sh/</a></li>
-</ul>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>结构体中的各个字段在内存中并不是紧凑排列的，而是按照字节对齐的，比如 int 占8个字节，那么就只能写在地址为8的倍数的地址处，至于为什么要字节对齐，主要是为了效率考虑，而更深层的原理看了一下网上的说法，感觉不是很靠谱，就不瞎说了，感兴趣可以自己研究下</p>
+<pre><code class="golang">// |x---|
+So(unsafe.Sizeof(struct {
+    i8 int8
+}{}), ShouldEqual, 1)
+</code></pre>
+<p>简单封装一个 int8 的结构体，和 int8 一样，仅占1个字节，没有额外空间</p>
+<pre><code class="golang">// |x---|xxxx|xx--|
+So(unsafe.Sizeof(struct {
+    i8  int8
+    i32 int32
+    i16 int16
+}{}), ShouldEqual, 12)
+
+// |x-xx|xxxx|
+So(unsafe.Sizeof(struct {
+    i8  int8
+    i16 int16
+    i32 int32
+}{}), ShouldEqual, 8)
+</code></pre>
+<p>这两个结构体里面的内容完全一样，调整了一下字段顺序，节省了 33% 的空间</p>
+<pre><code class="golang">// |x---|xxxx|xx--|----|xxxx|xxxx|
+So(unsafe.Sizeof(struct {
+    i8  int8
+    i32 int32
+    i16 int16
+    i64 int64
+}{}), ShouldEqual, 24)
+
+// |x-xx|xxxx|xxxx|xxxx|
+So(unsafe.Sizeof(struct {
+    i8  int8
+    i16 int16
+    i32 int32
+    i64 int64
+}{}), ShouldEqual, 16)
+</code></pre>
+<p>这里需要注意的是 int64 只能出现在8的倍数的地址处，因此第一个结构体中，有连续的4个字节是空的</p>
+<pre><code class="golang">type I8 int8
+type I16 int16
+type I32 int32
+
+So(unsafe.Sizeof(struct {
+    i8  I8
+    i16 I16
+    i32 I32
+}{}), ShouldEqual, 8)
+</code></pre>
+<p>给类型重命名之后，类型的大小并没有发生改变</p>
 
         <!-- 增加点赞功能 by hatlonely -->
         <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
@@ -551,7 +602,7 @@ brew services list                  # 列出当前的状态
                 $.ajax({
                     url: "http://123.207.136.97:3001/api/showlike",
                     data: {
-                        title: "Mac 必备工具之 brew"
+                        title: "golang 字节对齐"
                     },
                     type: 'GET',
                     dataType: 'JSON',
@@ -580,7 +631,7 @@ brew services list                  # 列出当前的状态
                     $.ajax({
                         url: url,
                         data: {
-                            title: "Mac 必备工具之 brew"
+                            title: "golang 字节对齐"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -601,7 +652,7 @@ brew services list                  # 列出当前的状态
                             转载请注明出处
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/">http://hatlonely.github.io/2018/02/21/mac-必备工具之-brew/</a>
+                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/03/17/golang-字节对齐/">http://hatlonely.github.io/2018/03/17/golang-字节对齐/</a>
                     </p>
                 </blockquote>
         
@@ -624,21 +675,13 @@ brew services list                  # 列出当前的状态
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2018/03/04/基于-aws-的-vpn-服务器搭建/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2018/02/14/markdown-一个优雅的写作工具/" id="post_nav-older" class="next-content">
+        <a href="/2018/03/11/golang-并发编程之生产者消费者/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -658,7 +701,7 @@ brew services list                  # 列出当前的状态
         $.ajax({
             url: "http://123.207.136.97:3001/api/doview",
             data: {
-                title: "Mac 必备工具之 brew"
+                title: "golang 字节对齐"
             },
             type: 'GET',
             dataType: 'JSON',
