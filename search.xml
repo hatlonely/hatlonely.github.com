@@ -531,15 +531,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
-            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -1041,11 +1041,11 @@ func main() {
         
         <tags>
             
-            <tag> 程序人生 </tag>
-            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
+            
+            <tag> 程序人生 </tag>
             
         </tags>
         

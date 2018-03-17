@@ -220,7 +220,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="hatlonely的小站">
-    <meta name="msapplication-starturl" content="http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/">
+    <meta name="msapplication-starturl" content="http://hatlonely.com/2018/01/18/golang-slice-性能分析/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
@@ -235,7 +235,7 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/">
+    <meta property="og:url" content="http://hatlonely.com/2018/01/18/golang-slice-性能分析/">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="golang slice 性能分析 | hatlonely的小站">
     <meta property="og:image" content="/img/avatar/hatlonely11.png">
@@ -252,7 +252,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html" />
+        <link rel="canonical" href="http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -264,7 +264,7 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html",
+    "mainEntityOfPage": "http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html",
     "headline": "golang slice 性能分析",
     "datePublished": "Thu Jan 18 2018 21:56:24 GMT+0800",
     "dateModified": "Mon Feb 05 2018 10:54:41 GMT+0800",
@@ -428,7 +428,7 @@
 <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
     <li class="mdl-menu__item">在其它设备中阅读本文章</li>
     
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3UlEQVR42u3a0a7aMBAEUP7/p29fK7UkM+ugUvv4KYJAfIzEyjt+/Rw5XtjY2NjY2NjY2NhfyX7F48/7f38leffdE6/v/AugnDM2Njb2Ceybv/7LCeXvvptQTlqaMzY2NvYB7KdKyzUmefrsUzdzxsbGxsYul6BdoNkTsbGxsbFn7HazMSuK7XywsbGxsZMilDR32g1GwnigEYaNjY29NbsNer/h+h/k29jY2NhfyW7HzVcvt5xmsW40c2xsbOxN2e12Imn9tIcvZ0c/6x8AGxsbe1N2Uqjydk9b9toFnZVVbGxs7HPYK8Hq9ZJdv94GxsNtDzY2NvYB7Lzdk0e5dRM/xiQzwcbGxj6H3baB8s+2BSm/J1lobGxs7BPY+aGclUbPrGmVF7ykyYWNjY19GrstG7PDPbPY4IF4ABsbG3sjdrslyNtAbXFKtjd5uR3uwLCxsbE3ZScB8CdaSHls8FgvDRsbG/u/ZT9bxmZtqXwr0kbF2NjY2Huz1zcSs2KWNIaS+OEnHtjY2Ni7stvy0y5ZG0K0G6QiWsbGxsY+gJ1Hufl2YhYnzwLdm89iY2Njb8peBz/VGGrb/e2GBBsbG/sEdtIS+mCBicewCYWNjY29Kbtor4/igdl3JuUqXyBsbGzsvdmzEDcve+09Ty1BvQPDxsbG3oKdR7krx3GeOoKTg7GxsbH3ZieTa4/XXIe+w/ITb0KwsbGxT2Yn+Hw52qA35w3DCWxsbOxN2bPmTnLdLmXefppFFNjY2Ni7smdNnOT6E8Upnw82Njb2OezZkcfoMXFUfF0+8yW++cGwsbGxt2bnRSuPBNrgoY0fHsi3sbGxsbdjz4pWXk5eo5GHuzfzxMbGxsZeONzTBrSzAzrY2NjY2MMAtSxvxSGbeLmH8QA2Njb2duy8qbTSPGqD3vxZN9+DjY2NvTV7/YBjXrraGKA91vN26bGxsbE3ZZ8zsLGxsbGxsbGxsb9m/AJ5dnIURFBKygAAAABJRU5ErkJggg==">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC4klEQVR42u3aQZLbMAwEwP3/p5MHJJZnQDmRydZJ5V1LbPqAAoY/v468frCxsbGxsbGxsbEfyf6Jr1ff+ssLgie8+taf96/+Wq8ZGxsbe2t2vqBX7Ov7duPydxVrxsbGxj6A/aoAtMVjZXFJSWvXjI2NjY2dNwnXDcm9rQg2NjY29l0FrP08aU6wsbGxsWfsWUuwUvaS8paXzA/O0rCxsbEfz56Niv7v/T/Nt7GxsbEfzG6vtizNDgPNxlJvVo6NjY29KXs2AJptU3sYqD3c+eZd2NjY2Aew84XOjmPOotx8JW82CxsbG/sAdtIeXC9r/WltJFz8MNjY2Nibsq8bgNmAfjZyysdYw2gZGxsb+wB2u9z1yDZpM5KWZhj0YmNjY2/NzluIfDyUYGZDq2G+jY2Njb0dO28w7hoetU3OytgLGxsbe1d2Hr4mwUC+HUnA0DZCS6kINjY29teyZ8dxrluLfFSUPzlvTrCxsbFPY+cNQ1vGZiFuXtLqEouNjY29NXsWpraD+7saleHgCRsbG3tr9vrBmlkcuxIhtDEwNjY29gnslrceKqyXt2KkhY2Njb0pux3c5y1B28bMAuBiW7GxsbE3ZSetwl2HJmeYfOvfFD9sbGzsTdnXj0gW1Ba8WTDcFsVh3cbGxsb+cvZ60Uo2MR/0z+KKKB7AxsbG3ojdLrHdlGSsvxI/LKUi2NjY2Buxk6FSG7uukJKfoQ6JsbGxsY9h12P3BdKsaWnLKjY2NvZp7PxAzMp4qG17Zhc2Njb2Cez2ugszC4NnETU2Njb23uxhMRgd08mblpVWpKjb2NjY2Bux26Mw7dbkpXHWDt2cimBjY2N/LTuPZpNPVrbvrkESNjY2Nna+3HaElIyHZoFuHfRiY2NjH8leaSragVH73g+2ItjY2NiPZ+eM2Sh/FiHk7cebI0TY2NjYW7NXHr0e+kblJ/j/D+bb2NjY2A9mn3NhY2NjY2NjY2NjP+b6DQ4dFUdGg56lAAAAAElFTkSuQmCC">
     
 </ul>
 
@@ -459,7 +459,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang slice 性能分析&url=http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html&pic=http://hatlonely.github.io/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=golang slice 性能分析&url=http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html&pic=http://hatlonely.com/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -468,7 +468,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang slice 性能分析&url=http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html&via=hatlonely" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=golang slice 性能分析&url=http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html&via=hatlonely" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -477,7 +477,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -486,7 +486,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -498,7 +498,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang slice 性能分析&summary=&pics=http://hatlonely.github.io/img/avatar/hatlonely11.png&url=http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=golang slice 性能分析&summary=&pics=http://hatlonely.com/img/avatar/hatlonely11.png&url=http://hatlonely.com/2018/01/18/golang-slice-性能分析/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -670,7 +670,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
                             转载请注明出处
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/">http://hatlonely.github.io/2018/01/18/golang-slice-性能分析/</a>
+                        <strong>本文链接：</strong><a href="http://hatlonely.com/2018/01/18/golang-slice-性能分析/">http://hatlonely.com/2018/01/18/golang-slice-性能分析/</a>
                     </p>
                 </blockquote>
         
