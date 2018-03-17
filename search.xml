@@ -3,6 +3,200 @@
   
     
     <entry>
+      <title><![CDATA[java 多线程]]></title>
+      <url>/2018/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
+      <content type="html"><![CDATA[<p>java 的多线程有好几种，可以继承 Thread，也可以实现 Runnable 接口，还可以实现 Callable 接口</p>
+<h3 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h3><pre><code class="golang">class MyThread extends Thread {
+    private String name;
+
+    public MyThread(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5; i++) {
+            try {
+                Thread.sleep(100L);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.printf(&quot;%s is running %d\n&quot;, name, i);
+        }
+    }
+}
+
+{
+    Thread t1 = new MyThread(&quot;t1&quot;);
+    Thread t2 = new MyThread(&quot;t2&quot;);
+
+    t1.start();
+    t2.start();
+    try {
+        t1.join();
+        t2.join();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>继承 Thread，自己实现 <code>run</code> 方法，就可以定一个线程类，调用 <code>start</code> 就可以在一个新的线程里面调用 <code>run</code> 方法，如果需要等待线程结束，可以调用 <code>join</code> 方法</p>
+<h3 id="Runnable"><a href="#Runnable" class="headerlink" title="Runnable"></a>Runnable</h3><pre><code class="golang">class MyRunnable implements Runnable {
+    private String name;
+
+    public MyRunnable(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 5; i++) {
+            try {
+                Thread.sleep(100L);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.printf(&quot;%s is running %d\n&quot;, name, i);
+        }
+    }
+}
+
+{
+    Thread r1 = new Thread(new MyRunnable(&quot;r1&quot;));
+    Thread r2 = new Thread(new MyRunnable(&quot;r2&quot;));
+
+    r1.start();
+    r2.start();
+    try {
+        r1.join();
+        r2.join();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>和 Thread 差不多，只不过不直接继承 Thread，而是实现 Runnable 接口（Runable 只有一个 <code>run</code> 方法），使用上面用这个 Runnable 去构造一个 Thread，这种方式相对直接继承 Thread 的方式要更加灵活，因为 java 是单继承，如果继承了 Thread 就不能再继承别的类</p>
+<p>事实上，建议永远不要直接继承 Thread 类，因为从语义上来讲，Thread 也应该也只是方法运行的方式，你的类应该是可以在这种方式下运行，而不是一种 Thread 对象，从这个角度讲，Runnable 提供了更好的语义，用一个 Thread 对象去运行一个 Runable</p>
+<h3 id="Callable"><a href="#Callable" class="headerlink" title="Callable"></a>Callable</h3><pre><code class="golang">class MyCallable implements Callable&lt;Integer&gt; {
+    private Random random;
+
+    public MyCallable() {
+        this.random = new Random();
+    }
+
+    @Override
+    public Integer call() throws Exception {
+        Thread.sleep(100L);
+        return this.random.nextInt();
+    }
+}
+
+{
+    FutureTask&lt;Integer&gt; future1 = new FutureTask&lt;&gt;(new MyCallable());
+    FutureTask&lt;Integer&gt; future2 = new FutureTask&lt;&gt;(new MyCallable());
+    new Thread(future1).start();
+    new Thread(future2).start();
+
+    try {
+        System.out.println(future1.get(50, TimeUnit.MILLISECONDS));
+    } catch (TimeoutException e) {
+        System.out.println(&quot;future1 timeout&quot;);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    try {
+        System.out.println(future2.get());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+</code></pre>
+<p>Callable 接口也只有一个方法 <code>call</code>，和 Runnable 不同的是 Callable 允许有返回值，而这个返回值可以通过 <code>FutureTask.get</code> 获取，还可以设置任务运行的超时时间，超时后会抛出一个异常</p>
+<h3 id="ThreadPool"><a href="#ThreadPool" class="headerlink" title="ThreadPool"></a>ThreadPool</h3><pre><code class="golang">class MyCallable implements Callable&lt;Integer&gt; {
+    private Random random;
+
+    public MyCallable() {
+        this.random = new Random();
+    }
+
+    @Override
+    public Integer call() throws Exception {
+        Thread.sleep(100L);
+        return this.random.nextInt();
+    }
+}
+
+{
+    ExecutorService es = Executors.newFixedThreadPool(5);
+    Future&lt;Integer&gt; future1 = es.submit(new MyCallable());
+    Future&lt;Integer&gt; future2 = es.submit(new MyCallable());
+
+    try {
+        System.out.println(future1.get(50, TimeUnit.MILLISECONDS));
+    } catch (TimeoutException e) {
+        System.out.println(&quot;future1 timeout&quot;);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    try {
+        System.out.println(future2.get());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    es.shutdown();
+}
+</code></pre>
+<p>java 里面线程的创建和销毁成本比较大，所以一般会需要放到线程池里面跑，java 的基础设施就是好，这些在标准库里面都有实现，使用上面也很简单，直接 new 出一个线程池就好了，然后就可以往里面 submit Callable 对象，线程池也有很多种，上面用到的 <code>newFixedThreadPool</code> 是固定线程数的线程池，下面用到的 <code>newCachedThreadPool</code> 在线程不够用的时候会创建新线程，同时也会不断复用之前创建的线程</p>
+<pre><code>{
+    ExecutorService es = Executors.newCachedThreadPool();
+    CompletionService&lt;Integer&gt; cs = new ExecutorCompletionService&lt;&gt;(es);
+    cs.submit(new MyCallable());
+    cs.submit(new MyCallable());
+    cs.submit(new MyCallable());
+    cs.submit(new MyCallable());
+
+    try {
+        System.out.println(cs.take().get());
+        System.out.println(cs.take().get());
+        System.out.println(cs.take().get());
+        System.out.println(cs.take().get());
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    es.shutdown();
+}
+</code></pre><p>典型的生成者消费者模型里面，我们需要把生产的结果放到一个队列里面，而消费者从这个队列里面不断地去消费，<code>ExecutorCompletionService</code> 就相当于这个队列，MyCallable 的结果会写入到缓存里面，使用 <code>cs.take().get()</code> 从里面取出结果</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>线程的创建，销毁，切换在 java 里面都是耗性能的操作，如果有需求要大量地创建线程，尽量使用线程池去复用线程</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>测试代码链接：<a href="https://github.com/hatlonely/hellojava/blob/master/src/test/java/javase/ThreadTest.java" target="_blank" rel="noopener">https://github.com/hatlonely/hellojava/blob/master/src/test/java/javase/ThreadTest.java</a></li>
+<li>“implements Runnable” vs. “extends Thread” ：<a href="https://stackoverflow.com/questions/541487/implements-runnable-vs-extends-thread" target="_blank" rel="noopener">https://stackoverflow.com/questions/541487/implements-runnable-vs-extends-thread</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 多线程 </tag>
+            
+            <tag> java </tag>
+            
+            <tag> 并发 </tag>
+            
+            <tag> runnable </tag>
+            
+            <tag> thread </tag>
+            
+            <tag> callable </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang slice 和 string 重用]]></title>
       <url>/2018/03/17/golang-slice-%E5%92%8C-string-%E9%87%8D%E7%94%A8/</url>
       <content type="html"><![CDATA[<p>相比于 c/c++，golang 的一个很大的改进就是引入了 gc 机制，不再需要用户自己管理内存，大大减少了程序由于内存泄露而引入的 bug，但是同时 gc 也带来了额外的性能开销，有时甚至会因为使用不当，导致 gc 成为性能瓶颈，所以 golang 程序设计的时候，应特别注意对象的重用，以减少 gc 的压力。而 slice 和 string 是 golang 的基本类型，了解这些基本类型的内部机制，有助于我们更好地重用这些对象</p>
@@ -1575,9 +1769,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> pprof </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -1664,9 +1858,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> json </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> json </tag>
             
         </tags>
         
