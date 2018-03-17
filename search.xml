@@ -30,7 +30,7 @@ So(unsafe.Sizeof(struct{}{}), ShouldEqual, 0)
 <li>string 类型占16个字节，内部包含一个指向数据的指针（8个字节）和一个 int 的长度（8个字节）</li>
 <li>slice 类型占24个字节，内部包含一个指向数据的指针（8个字节）和一个 int 的长度（8个字节）和一个 int 的容量（8个字节）</li>
 <li>map 类型占8个字节，是一个指向 map 结构的指针</li>
-<li>可以用 struct{} 表示空类型，这个类型不占用任何空间，用这个作为 map 的 value，可以讲 map 当做 set 来用</li>
+<li>可以用 struct{} 表示空类型，这个类型不占用任何空间，用这个作为 map 的 value，可以将 map 当做 set 来用</li>
 </ul>
 <h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>结构体中的各个字段在内存中并不是紧凑排列的，而是按照字节对齐的，比如 int 占8个字节，那么就只能写在地址为8的倍数的地址处，至于为什么要字节对齐，主要是为了效率考虑，而更深层的原理看了一下网上的说法，感觉不是很靠谱，就不瞎说了，感兴趣可以自己研究下</p>
 <pre><code class="golang">// |x---|
@@ -908,7 +908,7 @@ for k, v in sorted(m.items()):
       <title><![CDATA[golang 网络框架之 thrift]]></title>
       <url>/2018/02/04/golang-%E7%BD%91%E7%BB%9C%E6%A1%86%E6%9E%B6%E4%B9%8B-thrift/</url>
       <content type="html"><![CDATA[<p>thrift 最初是 facebook 开发使用的 rpc 通信框架，后来贡献给了 apache 基金会，出来得比较早，几乎支持所有的后端语言，使用非常广泛，是不可不知的一个网络框架</p>
-<p>和 <a href="http://hatlonely.github.io/2018/02/03/golang-网络框架之-grpc/">grpc</a> 一样，需要先定义通信协议，然后实现自己业务逻辑，下面还是通过一个简单示例（之前的echo程序）说明 thrift 的用法，下面示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift</a></p>
+<p>和 <a href="http://hatlonely.github.io/2018/02/03/golang-网络框架之-grpc/" target="_blank" rel="noopener">grpc</a> 一样，需要先定义通信协议，然后实现自己业务逻辑，下面还是通过一个简单示例（之前的echo程序）说明 thrift 的用法，下面示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift</a></p>
 <h3 id="简单-echo-服务"><a href="#简单-echo-服务" class="headerlink" title="简单 echo 服务"></a>简单 echo 服务</h3><h4 id="获取-thrift"><a href="#获取-thrift" class="headerlink" title="获取 thrift"></a>获取 thrift</h4><pre><code>go get git.apache.org/thrift.git/lib/go
 </code></pre><h4 id="定义协议文件"><a href="#定义协议文件" class="headerlink" title="定义协议文件"></a>定义协议文件</h4><pre><code>namespace go echo
 

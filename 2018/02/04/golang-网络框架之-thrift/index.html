@@ -518,7 +518,7 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p>thrift 最初是 facebook 开发使用的 rpc 通信框架，后来贡献给了 apache 基金会，出来得比较早，几乎支持所有的后端语言，使用非常广泛，是不可不知的一个网络框架</p>
-<p>和 <a href="http://hatlonely.github.io/2018/02/03/golang-网络框架之-grpc/">grpc</a> 一样，需要先定义通信协议，然后实现自己业务逻辑，下面还是通过一个简单示例（之前的echo程序）说明 thrift 的用法，下面示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift</a></p>
+<p>和 <a href="http://hatlonely.github.io/2018/02/03/golang-网络框架之-grpc/" target="_blank" rel="noopener">grpc</a> 一样，需要先定义通信协议，然后实现自己业务逻辑，下面还是通过一个简单示例（之前的echo程序）说明 thrift 的用法，下面示例使用的完整代码在下列地址：<br>实现文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/cmd/thrift</a><br>协议文件：<a href="https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/api/echo_thrift</a></p>
 <h3 id="简单-echo-服务"><a href="#简单-echo-服务" class="headerlink" title="简单 echo 服务"></a>简单 echo 服务</h3><h4 id="获取-thrift"><a href="#获取-thrift" class="headerlink" title="获取 thrift"></a>获取 thrift</h4><pre><code>go get git.apache.org/thrift.git/lib/go
 </code></pre><h4 id="定义协议文件"><a href="#定义协议文件" class="headerlink" title="定义协议文件"></a>定义协议文件</h4><pre><code>namespace go echo
 
