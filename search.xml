@@ -3,6 +3,125 @@
   
     
     <entry>
+      <title><![CDATA[golang slice 和 string 重用]]></title>
+      <url>/2018/03/17/golang-slice-%E5%92%8C-string-%E9%87%8D%E7%94%A8/</url>
+      <content type="html"><![CDATA[<p>相比于 c/c++，golang 的一个很大的改进就是引入了 gc 机制，不再需要用户自己管理内存，大大减少了程序由于内存泄露而引入的 bug，但是同时 gc 也带来了额外的性能开销，有时甚至会因为使用不当，导致 gc 成为性能瓶颈，所以 golang 程序设计的时候，应特别注意对象的重用，以减少 gc 的压力。而 slice 和 string 是 golang 的基本类型，了解这些基本类型的内部机制，有助于我们更好地重用这些对象</p>
+<h3 id="slice-和-string-内部结构"><a href="#slice-和-string-内部结构" class="headerlink" title="slice 和 string 内部结构"></a>slice 和 string 内部结构</h3><p>slice 和 string 的内部结构可以在 <code>$GOROOT/src/reflect/value.go</code> 里面找到</p>
+<pre><code class="golang">type StringHeader struct {
+    Data uintptr
+    Len  int
+}
+
+type SliceHeader struct {
+    Data uintptr
+    Len  int
+    Cap  int
+}
+</code></pre>
+<p>可以看到一个 string 包含一个数据指针和一个长度，长度是不可变的</p>
+<p>slice 包含一个数据指针、一个长度和一个容量，当容量不够时会重新申请新的内存，Data 指针将指向新的地址，原来的地址空间将被释放</p>
+<p>从这些结构就可以看出，string 和 slice 的赋值，包括当做参数传递，和自定义的结构体一样，都仅仅是 Data 指针的浅拷贝</p>
+<h3 id="slice-重用"><a href="#slice-重用" class="headerlink" title="slice 重用"></a>slice 重用</h3><h4 id="append-操作"><a href="#append-操作" class="headerlink" title="append 操作"></a>append 操作</h4><pre><code class="golang">si1 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+si2 := si1
+si2 = append(si2, 0)
+Convey(&quot;重新分配内存&quot;, func() {
+    header1 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si1))
+    header2 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si2))
+    fmt.Println(header1.Data)
+    fmt.Println(header2.Data)
+    So(header1.Data, ShouldNotEqual, header2.Data)
+})
+</code></pre>
+<p>si1 和 si2 开始都指向同一个数组，当对 si2 执行 append 操作时，由于原来的 Cap 值不够了，需要重新申请新的空间，因此 Data 值发生了变化，在 <code>$GOROOT/src/reflect/value.go</code> 这个文件里面还有关于新的 cap 值的策略，在 <code>grow</code> 这个函数里面，当 cap 小于 1024 的时候，是成倍的增长，超过的时候，每次增长 25%，而这种内存增长不仅仅数据拷贝（从旧的地址拷贝到新的地址）需要消耗额外的性能，旧地址内存的释放对 gc 也会造成额外的负担，所以如果能够知道数据的长度的情况下，尽量使用 <code>make([]int, len, cap)</code> 预分配内存，不知道长度的情况下，可以考虑下面的内存重用的方法</p>
+<h4 id="内存重用"><a href="#内存重用" class="headerlink" title="内存重用"></a>内存重用</h4><pre><code class="golang">si1 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+si2 := si1[:7]
+Convey(&quot;不重新分配内存&quot;, func() {
+    header1 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si1))
+    header2 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si2))
+    fmt.Println(header1.Data)
+    fmt.Println(header2.Data)
+    So(header1.Data, ShouldEqual, header2.Data)
+})
+
+Convey(&quot;往切片里面 append 一个值&quot;, func() {
+    si2 = append(si2, 10)
+    Convey(&quot;改变了原 slice 的值&quot;, func() {
+        header1 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si1))
+        header2 := (*reflect.SliceHeader)(unsafe.Pointer(&amp;si2))
+        fmt.Println(header1.Data)
+        fmt.Println(header2.Data)
+        So(header1.Data, ShouldEqual, header2.Data)
+        So(si1[7], ShouldEqual, 10)
+    })
+})
+</code></pre>
+<p>si2 是 si1 的一个切片，从第一段代码可以看到切片并不重新分配内存，si2 和 si1 的 Data 指针指向同一片地址，而第二段代码可以看出，当我们往 si2 里面 append 一个新的值的时候，我们发现仍然没有内存分配，而且这个操作使得 si1 的值也发生了改变，因为两者本就是指向同一片 Data 区域，利用这个特性，我们只需要让 <code>si1 = si1[:0]</code> 就可以不断地清空 si1 的内容，实现内存的复用了</p>
+<p><strong>PS</strong>: 你可以使用 <code>copy(si2, si1)</code> 实现深拷贝</p>
+<h3 id="string"><a href="#string" class="headerlink" title="string"></a>string</h3><pre><code class="golang">Convey(&quot;字符串常量&quot;, func() {
+    str1 := &quot;hello world&quot;
+    str2 := &quot;hello world&quot;
+    Convey(&quot;地址相同&quot;, func() {
+        header1 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str1))
+        header2 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str2))
+        fmt.Println(header1.Data)
+        fmt.Println(header2.Data)
+        So(header1.Data, ShouldEqual, header2.Data)
+    })
+})
+</code></pre>
+<p>这个例子比较简单，字符串常量使用的是同一片地址区域</p>
+<pre><code class="golang">Convey(&quot;相同字符串的不同子串&quot;, func() {
+    str1 := &quot;hello world&quot;[:6]
+    str2 := &quot;hello world&quot;[:5]
+    Convey(&quot;地址相同&quot;, func() {
+        header1 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str1))
+        header2 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str2))
+        fmt.Println(header1.Data, str1)
+        fmt.Println(header2.Data, str2)
+        So(str1, ShouldNotEqual, str2)
+        So(header1.Data, ShouldEqual, header2.Data)
+    })
+})
+</code></pre>
+<p>相同字符串的不同子串，不会额外申请新的内存，但是要注意的是这里的相同字符串，指的是 <code>str1.Data == str2.Data &amp;&amp; str1.Len == str2.Len</code>，而不是 <code>str1 == str2</code>，下面这个例子可以说明 <code>str1 == str2</code> 但是其 Data 并不相同</p>
+<pre><code class="golang">Convey(&quot;不同字符串的相同子串&quot;, func() {
+    str1 := &quot;hello world&quot;[:5]
+    str2 := &quot;hello golang&quot;[:5]
+    Convey(&quot;地址不同&quot;, func() {
+        header1 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str1))
+        header2 := (*reflect.StringHeader)(unsafe.Pointer(&amp;str2))
+        fmt.Println(header1.Data, str1)
+        fmt.Println(header2.Data, str2)
+        So(str1, ShouldEqual, str2)
+        So(header1.Data, ShouldNotEqual, header2.Data)
+    })
+})
+</code></pre>
+<p>实际上对于字符串，你只需要记住一点，字符串是不可变的，任何字符串的操作都不会申请额外的内存（对于仅内部数据指针而言），我曾自作聪明地设计了一个 cache 去存储字符串，以减少重复字符串所占用的空间，事实上，除非这个字符串本身就是由 <code>[]byte</code> 创建而来，否则，这个字符串本身就是另一个字符串的子串（比如通过 <code>strings.Split</code> 获得的字符串），本来就不会申请额外的空间，这么做简直就是多此一举</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>Go Slices: usage and internals：<a href="https://blog.golang.org/go-slices-usage-and-internals" target="_blank" rel="noopener">https://blog.golang.org/go-slices-usage-and-internals</a></li>
+<li>测试代码链接：<a href="https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/reuse_test.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/reuse_test.go</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> slice </tag>
+            
+            <tag> string </tag>
+            
+            <tag> 重用 </tag>
+            
+            <tag> 性能优化 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 字节对齐]]></title>
       <url>/2018/03/17/golang-%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/</url>
       <content type="html"><![CDATA[<p>最近在做一些性能优化的工作，其中有个结构体占用的空间比较大，而且在内存中的数量又特别多，就在想有没有优化的空间，想起了 c 语言里面的字节对齐，通过简单地调整一下字段的顺序，就能省出不少内存，这个思路在 golang 里面同样适用</p>
@@ -82,6 +201,9 @@ So(unsafe.Sizeof(struct {
 }{}), ShouldEqual, 8)
 </code></pre>
 <p>给类型重命名之后，类型的大小并没有发生改变</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>测试代码链接：<a href="https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/struct_test.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/struct_test.go</a></li>
+</ul>
 ]]></content>
       
         
@@ -89,11 +211,11 @@ So(unsafe.Sizeof(struct {
             
             <tag> golang </tag>
             
+            <tag> 性能优化 </tag>
+            
             <tag> 字节对齐 </tag>
             
             <tag> 结构体 </tag>
-            
-            <tag> 性能优化 </tag>
             
             <tag> 内存优化 </tag>
             
