@@ -3,6 +3,89 @@
   
     
     <entry>
+      <title><![CDATA[java json 库之 jackson]]></title>
+      <url>/2018/03/18/java-json-%E5%BA%93%E4%B9%8B-jackson/</url>
+      <content type="html"><![CDATA[<p>jackson 是一个 java json 库，提供了完备的 json 解析，序列化以及反序列化功能</p>
+<h3 id="依赖配置"><a href="#依赖配置" class="headerlink" title="依赖配置"></a>依赖配置</h3><p>在 build.gradle 里面添加依赖配置</p>
+<pre><code>compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-core&#39;, version: &#39;2.9.4&#39;
+compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-databind&#39;, version: &#39;2.9.4&#39;
+compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-annotations&#39;, version: &#39;2.9.4&#39;
+</code></pre><h3 id="json-解析"><a href="#json-解析" class="headerlink" title="json 解析"></a>json 解析</h3><pre><code class="golang">String jsonString = &quot;{\&quot;name\&quot;: \&quot;hatlonely\&quot; /* comment */, \&quot;birthday\&quot;: \&quot;2018-03-18 15:26:37\&quot;, \&quot;mails\&quot;: [\&quot;hatlonely@foxmail.com\&quot;, \&quot;hatlonely@gmail.com\&quot;]}&quot;;
+
+JsonFactory jsonFactory = new JsonFactory();
+jsonFactory.enable(Feature.ALLOW_COMMENTS);
+ObjectMapper objectMapper = new ObjectMapper(jsonFactory);
+JsonNode node = objectMapper.readTree(jsonString);
+
+assertThat(node.path(&quot;name&quot;).asText(), equalTo(&quot;hatlonely&quot;));
+assertThat(node.path(&quot;birthday&quot;).asText(), equalTo(&quot;2018-03-18 15:26:37&quot;));
+assertThat(node.path(&quot;mails&quot;).size(), equalTo(2));
+assertThat(node.path(&quot;mails&quot;).path(0).asText(), equalTo(&quot;hatlonely@foxmail.com&quot;));
+assertThat(node.path(&quot;mails&quot;).path(1).asText(), equalTo(&quot;hatlonely@gmail.com&quot;));
+</code></pre>
+<p>调用 <code>ObjectMapper.readTree</code> 就能讲 json 字符串解析成一个 <code>JsonNode</code> 对象，然后通过 <code>path</code> 方法就可以获取 json 中各个字段的值了，这种方式可以用来读取 json 格式的配置文件，可以用一个 JsonFactory 打开 ALLOW_COMMENTS 特性，可以在 json 里面加入注释</p>
+<h3 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h3><h4 id="首先定义一个对象"><a href="#首先定义一个对象" class="headerlink" title="首先定义一个对象"></a>首先定义一个对象</h4><pre><code class="golang">class Person {
+    String name;
+
+    @JsonFormat(pattern = &quot;yyyy-MM-dd hh:mm:ss&quot;)
+    Date birthday;
+
+    @JsonProperty(&quot;mails&quot;)
+    List&lt;String&gt; emails;
+
+    // 省略了 getter/setter
+}
+</code></pre>
+<p>除了支持基本的数据类型，还支持 List 和 Map 类型，甚至还支持 Date 类型，Date 类型默认的格式是 ISO8601 格式，也可以通过 <code>@JsonFormat</code> 指定日期格式，通过 <code>@JsonProperty</code> 指定字段在 json 中的字段名</p>
+<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><pre><code class="golang">SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);
+dateFormat.setTimeZone(TimeZone.getTimeZone(&quot;GMT&quot;));
+
+Person person = new Person();
+person.setName(&quot;hatlonely&quot;);
+person.setBirthday(dateFormat.parse(&quot;2018-03-18 15:26:37&quot;));
+person.setEmails(Arrays.asList(&quot;hatlonely@foxmail.com&quot;, &quot;hatlonely@gmail.com&quot;));
+
+ObjectMapper objectMapper = new ObjectMapper();
+String jsonString = objectMapper.writeValueAsString(person);
+
+assertThat(jsonString, equalTo(
+        &quot;{\&quot;name\&quot;:\&quot;hatlonely\&quot;,\&quot;birthday\&quot;:\&quot;2018-03-18 03:26:37\&quot;,\&quot;mails\&quot;:[\&quot;hatlonely@foxmail.com\&quot;,\&quot;hatlonely@gmail.com\&quot;]}&quot;));
+</code></pre>
+<p>使用 <code>ObjectMapper.writeValueAsString</code> 方法就可以序列化成 string</p>
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><pre><code class="golang">String jsonString = &quot;{\&quot;name\&quot;: \&quot;hatlonely\&quot;, \&quot;birthday\&quot;: \&quot;2018-03-18 15:26:37\&quot;, \&quot;mails\&quot;: [\&quot;hatlonely@foxmail.com\&quot;, \&quot;hatlonely@gmail.com\&quot;]}&quot;;
+
+ObjectMapper objectMapper = new ObjectMapper();
+objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+Person person = objectMapper.readValue(jsonString, Person.class);
+
+assertThat(person.getName(), equalTo(&quot;hatlonely&quot;));
+SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);
+dateFormat.setTimeZone(TimeZone.getTimeZone(&quot;GMT&quot;));
+assertThat(person.getBirthday(), equalTo(dateFormat.parse(&quot;2018-03-18 15:26:37&quot;)));
+assertThat(person.getEmails(), equalTo(Arrays.asList(&quot;hatlonely@foxmail.com&quot;, &quot;hatlonely@gmail.com&quot;)));
+</code></pre>
+<p>使用 <code>ObjectMapper.readValue</code> 方法就能实现反序列化，可以通过 <code>configure</code> 方法设置碰到未知的属性不抛异常</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>Jackson JSON Tutorial：<a href="http://www.baeldung.com/jackson" target="_blank" rel="noopener">http://www.baeldung.com/jackson</a></li>
+<li>Jackson maven 仓库：<a href="http://mvnrepository.com/search?q=jackson" target="_blank" rel="noopener">http://mvnrepository.com/search?q=jackson</a></li>
+<li>测试代码链接：<a href="https://github.com/hatlonely/hellojava/blob/master/src/test/java/jackson/JacksonTest.java" target="_blank" rel="noopener">https://github.com/hatlonely/hellojava/blob/master/src/test/java/jackson/JacksonTest.java</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> json </tag>
+            
+            <tag> java </tag>
+            
+            <tag> jackson </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[java 多线程]]></title>
       <url>/2018/03/17/java-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
       <content type="html"><![CDATA[<p>java 的多线程有好几种，可以继承 Thread，也可以实现 Runnable 接口，还可以实现 Callable 接口</p>
@@ -1769,9 +1852,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> pprof </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> pprof </tag>
             
         </tags>
         
@@ -1858,9 +1941,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> json </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
