@@ -68,6 +68,7 @@ assertThat(person.getEmails(), equalTo(Arrays.asList(&quot;hatlonely@foxmail.com
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li>Jackson JSON Tutorial：<a href="http://www.baeldung.com/jackson" target="_blank" rel="noopener">http://www.baeldung.com/jackson</a></li>
 <li>Jackson maven 仓库：<a href="http://mvnrepository.com/search?q=jackson" target="_blank" rel="noopener">http://mvnrepository.com/search?q=jackson</a></li>
+<li>Jackson 框架的高阶应用：<a href="https://www.ibm.com/developerworks/cn/java/jackson-advanced-application/index.html" target="_blank" rel="noopener">https://www.ibm.com/developerworks/cn/java/jackson-advanced-application/index.html</a></li>
 <li>测试代码链接：<a href="https://github.com/hatlonely/hellojava/blob/master/src/test/java/jackson/JacksonTest.java" target="_blank" rel="noopener">https://github.com/hatlonely/hellojava/blob/master/src/test/java/jackson/JacksonTest.java</a></li>
 </ul>
 ]]></content>
