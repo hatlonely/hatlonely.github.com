@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            gradle 开发语言 groovy 入门 | 
+        
+        hatlonely的小站
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar/hatlonely11.png">
+    <link rel="icon" href="/img/avatar/hatlonely11.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content=",groovy,gradle,closure">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?Za8gfWOCG/wBJQAgLgzW0Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/sons-of-obsidian.min.css?LAydzRcKlmrD364lwsfmyw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+
+  code {
+    font-family: 'SF Mono', Menlo, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="hatlonely的小站">
+    <meta name="msapplication-starturl" content="http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/avatar/hatlonely11.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="gradle 开发语言 groovy 入门 | hatlonely的小站">
+    <meta property="og:image" content="/img/avatar/hatlonely11.png">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="groovy"> <meta property="og:article:tag" content="gradle"> <meta property="og:article:tag" content="closure"> 
+
+    
+        <meta property="article:published_time" content="Wed Mar 21 2018 16:38:45 GMT+0800">
+        <meta property="article:modified_time" content="Wed Mar 21 2018 18:38:50 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html",
+    "headline": "gradle 开发语言 groovy 入门",
+    "datePublished": "Wed Mar 21 2018 16:38:45 GMT+0800",
+    "dateModified": "Wed Mar 21 2018 18:38:50 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "hatlonely",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        },
+        "description": "Try new, go far, see more"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "hatlonely的小站",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        }
+    },
+    "keywords": ",groovy,gradle,closure",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?633cb5fd05b598aceeda727f031fa7e4';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本数据类型"><span class="post-toc-number">2.</span> <span class="post-toc-text">基本数据类型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#字符串"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">字符串</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#容器"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">容器</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#闭包"><span class="post-toc-number">3.</span> <span class="post-toc-text">闭包</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#gradle-的-dependencies-原理"><span class="post-toc-number">4.</span> <span class="post-toc-text">gradle 的 dependencies 原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考链接"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考链接</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/cliff.jpg)">
+    
+            <p class="article-headline-p">
+                gradle 开发语言 groovy 入门
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        
+            <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        
+            <strong>hatlonely</strong>
+        
+        <span>3月 21, 2018</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC10lEQVR42u3aUW7jMAwE0Nz/0u0BFnFmKLf1Ss9fAZpYejbQgUi+vo68XtjY2NjY2NjY2NiPZL/i69/vv13gzfev75ncZ7ZnbGxs7BPYH/71Xy5/vZXkr+9WTNZN9oyNjY19DjsJmOtNf4iQMiDb/Vw/GmxsbGzs5Fdt/OT4G/aMjY2NjR0cA9oDRh6Bj8htbGxs7MezW0zbNsjLRnkx65dqadjY2NiPZ7eN3id8/oP+NjY2NvYj2bMrj5+8uZuH5XDP2NjY2Juy23bsbGSnLTwlh5O8wISNjY19DrtdclYMWm/0zgpb2NjY2LuyV8rxdx1FZm3d+mVgY2Njb83OByiTyLm+c1skWjmQYGNjY5/AXhmRz8tMbfjNXkkRYNjY2NgbsZOWQFIAaqltQyIPyGFuY2NjY2/BXinx5EGVM1aKTVF7ABsbG3sLdt5GnW1u1hjOGwnFC8DGxsbelL2ObwtD64M7bUMaGxsbe2/2SgjNBjRzRvvXDw1jbGxs7E3ZK1tZGaxsGxKzZgY2Njb2Cex2u+3nuogfD+jUUYeNjY29NTsfiGlLOW0ctk3i5FFiY2Nj781uCzQrxf27xiiHxydsbGzsTdltM3V2/Jg1gPPAS1bExsbG3ps9a7KujPisPIjbAgwbGxt7I3YbIbMxnXsbEu2usLGxsU9mt/i8ATArSw0fBDY2NvYx7CgMykJP+9ul4tG7u2FjY2Nvzc43MSsStQWse9fFxsbGPoc9i4r2YNDe7fpYko9gYmNjY+/Kbq+fG9CcNYmLIMTGxsbelN0Gw3qhJ19lPSyxsbGxz2G3haH1wlP7zRuCDRsbG/sA9mw4Jt9W3tBtYy96AdjY2NjYowBrH0R7EMrjEBsbGxs7KRUVmwjun4fcjx9FsLGxsf8Tdt7cbQ8nswNJezj5cH9sbGzsrdmzFmwy+Lg+xDlrEmBjY2Ofwz7nwsbGxsbGxsbGxn7M9Q3M6veqlXSASQAAAABJRU5ErkJggg==">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/closure/">closure</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/gradle/">gradle</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/groovy/">groovy</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=gradle 开发语言 groovy 入门&url=http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html&pic=http://hatlonely.com/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=gradle 开发语言 groovy 入门&url=http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html&via=hatlonely" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=gradle 开发语言 groovy 入门&summary=&pics=http://hatlonely.com/img/avatar/hatlonely11.png&url=http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>gradle 是 java 的构建工具的一种，同类的工具还有 maven，ant。我比较喜欢 gradle 主要是其语法简洁，而且功能强大。除此之外，还支持很多其他语言的构建</p>
+<p>gradle 使用的是 groovy 开发，以前没有接触过这个语言，以后可能也不太会用，了解这个语言只是想看懂 <code>build.gradle</code> 这个脚本，以及后续能在此基础上作简单的拓展开发</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>groovy 是基于 jvm 的语言，支持很多动态和静态两种模式，既可以用作脚本开发，也可以用来构建大型的服务，建立在强大的 java 生态之上，同时支持很多现代的语法特性，可以说是非常强大，使用上面也非常方便</p>
+<h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><h4 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h4><pre><code class="groovy">assert &quot;hello world&quot;.contains(&quot;hello&quot;)
+assert &quot;hello world&quot;.startsWith(&quot;hello&quot;)
+assert &quot;hello world&quot;.endsWith(&quot;world&quot;)
+assert &quot;0123456789&quot;.indexOf(&quot;678&quot;) == 6
+assert &quot;0123456789&quot;.charAt(6) == &quot;6&quot;
+assert &quot;0123456789&quot;.length() == 10
+assert &quot;0123456789&quot;.substring(5) == &quot;56789&quot;
+assert &quot;0123456789&quot;.substring(5, 8) == &quot;567&quot;
+
+assert &quot;0123456789&quot;[6] == &quot;6&quot;
+assert &quot;0123456789&quot;[6..8] == &quot;678&quot;
+assert &quot;0123456789&quot;[2, 3, 7] == &quot;237&quot;
+assert &quot;0123456789&quot;[1, 3..&lt;6, 8] == &quot;13458&quot;
+assert &quot;0123456789&quot; == &quot;0123456789&quot;
+assert &quot;0123456789&quot;.is(&quot;0123456789&quot;)
+assert !&quot;&quot;
+</code></pre>
+<ul>
+<li>字符串可以用双引号也可以用单引号，</li>
+<li>可以直接调用 java 中的字符串方法</li>
+<li>的函数调用的括号可以省略，如上面的 <code>assert</code> 函数</li>
+<li>相比较 java，groovy 增加了很多运算符，如上面用到的 <code>==</code>, <code>[]</code>, <code>..</code>, <code>is</code> 等等</li>
+<li>空字符串会被当做 false 处理，类似的，<code>0</code>，<code>null</code>，<code>[]</code> 也会被当做 false 处理</li>
+</ul>
+<h4 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h4><pre><code class="groovy">assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].contains(3)
+assert 3 in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].indexOf(6) == 6
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].get(6) == 6
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9][6] == 6
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9][6, 8] == [6, 8]
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9][6..8] == [6, 7, 8]
+assert [[2, 3],[4, 5, 6]].combinations() == [[2, 4], [3, 4], [2, 5], [3, 5], [2, 6], [3, 6]]
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].each { ++it } == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+assert [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].collect { ++it } == [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+assert [&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3][&quot;b&quot;] == 2
+assert &quot;a&quot; in [&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3]
+
+[&quot;a&quot;: 1, &quot;b&quot;: 2, &quot;c&quot;: 3].each {
+    println(it.key + &quot; =&gt; &quot; + it.value)
+}
+
+def items = [4, 5]
+def list = [1, 2, 3, *items, 6]
+assert list == [1, 2, 3, 4, 5, 6]
+
+def m1 = [c: 3, d: 4]
+def map = [a: 1, b: 2, *:m1]
+assert map == [a: 1, b: 2, c: 3, d: 4]
+</code></pre>
+<ul>
+<li>相比 java，groovy 支持字面语法，定义 list 和 map 方便了很多</li>
+<li>可以使用 def 定义变量，而无需显式的写明类型</li>
+<li>可以用 <code>each</code> 实现循环遍历，实际上 each 的参数是一个闭包，闭包里面的 <code>it</code> 是个关键字，其实代表的是第一个参数</li>
+<li>使用 <code>collect</code> 方法实现列表的转化</li>
+</ul>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>这个东西很有意思，简单理解就是一段代码，这段代码可以传入参数，也可以有上下文，这个东西也是一个对象，可以用来赋值，也可传递</p>
+<pre><code class="groovy">def add = { a,b -&gt; a+b }
+assert add(1, 2) == 3
+assert add(&quot;a&quot;, &quot;b&quot;) == &quot;ab&quot;
+</code></pre>
+<p><code>{ a,b -&gt; a+b }</code> 这就是一个闭包，<code>a,b</code> 是传入的参数，如果不需要参数也可以省略，当只有一个参数的时候也可以省略，因为有个默认参数 <code>it</code>，<code>-&gt;</code> 后面是要执行的代码，如果没有显式地指定 return 语句，默认会以最后一个语句返回，这里返回值就是 <code>a+b</code>，因此这个闭包可以被用来当做 add 函数使用</p>
+<pre><code class="groovy">def ncopies = {int n, String str -&gt; str*n}
+def twice = ncopies.curry(2)    // curry 参数绑定
+assert twice(&quot;bla&quot;) == ncopies(2, &quot;bla&quot;)
+</code></pre>
+<p>可以用 <code>curry</code> 绑定参数值</p>
+<pre><code class="groovy">fib = { long n -&gt; n &lt; 2 ? n : fib(n-1)+fib(n-2) }.memoize()
+assert fib(15) == 610
+</code></pre>
+<p>这还能自动帮你缓存递归的结果……感觉有点过分了……</p>
+<pre><code class="groovy">def plus2  = { it + 2 }
+def times3 = { it * 3 }
+def times3plus2 = plus2 &lt;&lt; times3
+assert times3plus2(3) == 11
+assert times3plus2(4) == plus2(times3(4))
+</code></pre>
+<p>可以把多个闭包连起来组成新的闭包</p>
+<pre><code class="groovy">class Thing1 {
+    String name
+}
+class Thing2 {
+    String name
+}
+
+def t1 = new Thing1(name: &#39;Norman&#39;)
+def t2 = new Thing2(name: &#39;Teapot&#39;)
+def upperCasedName = { delegate.name.toUpperCase() }
+upperCasedName.delegate = t1
+assert upperCasedName() == &#39;NORMAN&#39;
+upperCasedName.delegate = t2
+assert upperCasedName() == &#39;TEAPOT&#39;
+</code></pre>
+<p><strong>代理</strong>，我的理解是闭包运行的上下文，每个闭包都会有一个代理，默认是闭包本身（owner），这个代理可以设置成别的对象，然后就可以再闭包里面调用这个对象的方法了，<code>delegate</code> 也可以省略，<code>def upperCasedName = { name.toUpperCase() }</code> 也是可以的</p>
+<p>仔细想想，就这个功能其实把 t1 当做参数传给 upperCaseName() 也是可以的，没必要整这么个复杂的概念，但是有意思的事情才刚刚开始，往下看你就知道了</p>
+<h3 id="gradle-的-dependencies-原理"><a href="#gradle-的-dependencies-原理" class="headerlink" title="gradle 的 dependencies 原理"></a>gradle 的 dependencies 原理</h3><pre><code class="groovy">dependencies {
+    testCompile group: &#39;junit&#39;, name: &#39;junit&#39;, version: &#39;4.11&#39;
+    compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-core&#39;, version: &#39;2.9.4&#39;
+    compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-databind&#39;, version: &#39;2.9.4&#39;
+    compile group: &#39;com.fasterxml.jackson.core&#39;, name: &#39;jackson-annotations&#39;, version: &#39;2.9.4&#39;
+}
+</code></pre>
+<p>在 <code>build.gradle</code> 里面有这么一段依赖管理的代码，那这段代码是怎么工作的呢，dependencies 看起来像是一个函数，而且参数是一个闭包，闭包里面有条语句，调用了几个函数，这些函数接受一个 Map 的参数，那这些函数在哪里呢，可以是全局的，也可以像下面这样，通过代理的方式传进去</p>
+<pre><code class="groovy">class Dependency {
+    void testCompile(Map map) {
+        println(&quot;download dependency: &quot; + map)
+    }
+
+    void compile(Map map) {
+        println(&quot;download dependency: &quot; + map)
+    }
+}
+
+def dependencies(Closure cl) {
+    def dependency = new Dependency()
+    def code = cl.rehydrate(dependency, this, this)
+    code()
+}
+</code></pre>
+<p><code>rehydrate</code> 的功能是 <code>clone</code> 一个闭包，第一个参数就是代理，将代理设置成一个 <code>Dependency</code> 对象后，就用调用代理对象的方法了</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>官方文档：<a href="http://www.groovy-lang.org/documentation.html#gettingstarted" target="_blank" rel="noopener">http://www.groovy-lang.org/documentation.html#gettingstarted</a></li>
+</ul>
+
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "gradle 开发语言 groovy 入门"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "gradle 开发语言 groovy 入门"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                        
+                            转载请注明出处
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/">http://hatlonely.com/2018/03/21/gradle-开发语言-groovy-入门/</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2018/03/18/java-json-库之-jackson/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "gradle 开发语言 groovy 入门"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/coco1.jpg);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <!--
+    <div class="sidebar-image">
+        <img src="/img/avatar/hatlonely11.png" alt="hatlonely's avatar">
+    </div>
+    -->
+
+    <!-- Sidebar Email -->
+    <!--
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        hatlonely@foxmail.com
+        <b class="caret"></b>
+    </a>
+    -->
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:hatlonely@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">folder</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/golang"> golang
+                                <span class="sidebar_archives-count"> 16 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/java"> java
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/性能"> 性能
+                                <span class="sidebar_archives-count"> 3 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/微服务"> 微服务
+                                <span class="sidebar_archives-count"> 4 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/网络框架"> 网络框架
+                                <span class="sidebar_archives-count"> 3 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/程序人生"> 程序人生
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                
+                <!--
+                <li>
+                
+                -->
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">link</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/profile.php?id=100002314767374" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>hatlonely的小站
+            
+                <br>
+                
+                    <a href="http://www.miitbeian.gov.cn" rel="nofollow">京ICP备18012308号</a>
+                
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?yvbglk2xb/g60XhlYY9COA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
