@@ -1885,7 +1885,8 @@ func BenchmarkCombinationParallel(b *testing.B) {
 }
 </code></pre><h4 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h4><pre><code>go test combination_test.go combination.go           # 单元测试
 go test --cover combination_test.go combination.go   # 单元测试覆盖率
-go test -bench=. combination_test.go combination.go  # 性能测试
+go test -bench=. combination_test.go combination.go  # 性能测试 cpu
+go test -bench=. -benchmem combination_test.go combination.go   # 性能测试 cpu + 内存
 </code></pre><h4 id="setup-和-teardown"><a href="#setup-和-teardown" class="headerlink" title="setup 和 teardown"></a>setup 和 teardown</h4><p>setup 和 teardown 是在每个 case 执行前后都需要执行的操作，golang 没有直接的实现，可以通过下面这个方法实现全局的 setup 和 teardown，具体每个 case 的 setup 和 teardown 需要自己实现</p>
 <pre><code>func TestMain(m *testing.M) {
     // setup code...
