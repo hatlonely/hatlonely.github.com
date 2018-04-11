@@ -3,6 +3,193 @@
   
     
     <entry>
+      <title><![CDATA[golang 构建工具之 Makefile]]></title>
+      <url>/2018/04/11/golang-%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E4%B9%8B-Makefile/</url>
+      <content type="html"><![CDATA[<p>可能是因为编译太简单了，golang 并没有一个官方的构建工具（类似于 java 的 maven 和 gradle之类的），但是除了编译，我们可能还需要下载依赖，运行测试，甚至像 easyjson，protobuf，thrift 这样的工具下载和代码生成，如果没有构建工具，这些工作就会非常麻烦</p>
+<p>为了解决这个问题，之前写过一个 <code>everything.sh</code> 的脚本，把所有的操作都封装在这个脚本里面，只需要执行类似于 <code>sh everything.sh dependency</code> 的命令就可以完成对应的工作，大大简化了构建过程，但是也有一个问题，shell 脚本本身的可读性并不是很好，而且对于各个操作之间的依赖不好描述</p>
+<p>一次偶然的机会，在 github 上看到有人用 Makefile，就尝试了一下，发现真的非常合适，Makefile 本身就是用来描述依赖的，可读性非常好，而且与强大的 shell 结合在一起，基本可以实现任何想要的功能</p>
+<p>下面是我在实际项目中使用的一个 Makefile，支持的功能包括</p>
+<ul>
+<li><code>make build</code>: 编译</li>
+<li><code>make vendor</code>: 下载依赖</li>
+<li><code>make api</code>: 生成协议代码</li>
+<li><code>make json</code>: easyjson 代码生成</li>
+<li><code>make test</code>: 运行单元测试</li>
+<li><code>make benchmark</code>: 运行性能测试</li>
+<li><code>make stat</code>: 代码复杂度统计，代码行数统计</li>
+<li><code>make clean</code>: 清理 build 目录</li>
+<li><code>make deep_clean</code>: 清理所有代码以外的其他文件</li>
+<li><code>make third</code>: 下载所有依赖的第三方工具</li>
+<li><code>make protoc</code>: 下载 protobuf 工具</li>
+<li><code>make glide</code>: 下载 glide 依赖管理工具</li>
+<li><code>make golang</code>: 下载 golang 环境</li>
+<li><code>make cloc</code>: 下载 cloc 统计工具</li>
+<li><code>make gocyclo</code>: 下载 gocyclo 圈复杂度计算工具</li>
+<li><code>make easyjson</code>: 下载 easyjson 工具</li>
+</ul>
+<pre><code class="Makefile">export PATH:=${PATH}:${GOPATH}/bin:$(shell pwd)/third/go/bin:$(shell pwd)/third/protobuf/bin:$(shell pwd)/third/cloc-1.76
+
+.PHONY: all
+all: third vendor api json build test stat
+
+build: cmd/rta_server/*.go internal/*/*.go scripts/version.sh Makefile vendor api json
+    @echo &quot;编译&quot;
+    @rm -rf build/ &amp;&amp; mkdir -p build/bin/ &amp;&amp; \
+    go build -ldflags &quot;-X &#39;main.AppVersion=`sh scripts/version.sh`&#39;&quot; cmd/rta_server/main.go &amp;&amp; \
+    mv main build/bin/rta_server &amp;&amp; \
+    cp -r configs build/configs/
+
+vendor: glide.lock glide.yaml
+    @echo &quot;下载 golang 依赖&quot;
+    glide install
+
+api: vendor
+    @echo &quot;生成协议文件&quot;
+    @rm -rf api &amp;&amp; mkdir api &amp;&amp; \
+    cd vendor/gitlab.mobvista.com/vta/rta_proto.git/ &amp;&amp; \
+    protoc --go_out=plugins=grpc:. *.proto &amp;&amp; \
+    cd - &amp;&amp; \
+    cp vendor/gitlab.mobvista.com/vta/rta_proto.git/* api/
+
+json: internal/rcommon/rta_common_easyjson.go
+
+internal/rcommon/rta_common_easyjson.go: internal/rcommon/rta_common.go Makefile
+    easyjson internal/rcommon/rta_common.go
+
+.PHONY: test
+test: vendor api json
+    @echo &quot;运行单元测试&quot;
+    go test -cover internal/rranker/*.go
+    go test -cover internal/rserver/*.go
+    go test -cover internal/rworker/*.go
+    go test -cover internal/rloader/*.go
+    go test -cover internal/rrecall/*.go
+    go test -cover internal/rmaster/*.go
+    go test -cover internal/rsender/*.go
+
+benchmark: benchmarkloader benchmarkall
+
+.PHONY: benchmarkloader
+benchmarkloader: vendor api json
+    @echo &quot;运行 loader 性能测试&quot;
+    go test -timeout 2h -bench BenchmarkS3Loader_Load -benchmem -cpuprofile cpu.out -memprofile mem.out -run=^$$ internal/rloader/*
+    go tool pprof -svg ./rloader.test cpu.out &gt; cpu.benchmarkloader.svg
+    go tool pprof -svg ./rloader.test mem.out &gt; mem.benchmarkloader.svg
+
+.PHONY: benchmarkserver
+benchmarkserver: vendor api json
+    @echo &quot;运行 server 性能测试&quot;
+    go test -timeout 2h -bench BenchmarkServer -benchmem -cpuprofile cpu.out -memprofile mem.out -run=^$$ internal/rserver/*
+    go tool pprof -svg ./rserver.test cpu.out &gt; cpu.benchmarkserver.svg
+    go tool pprof -svg ./rserver.test mem.out &gt; mem.benchmarkserver.svg
+
+.PHONY: benchmarkall
+benchmarkall: vendor api json
+    @echo &quot;运行 server 性能测试&quot;
+    go test -timeout 2h -bench BenchmarkAll -benchmem -cpuprofile cpu.out -memprofile mem.out -run=^$$ internal/rserver/*
+    go tool pprof -svg ./rserver.test cpu.out &gt; cpu.benchmarkall.svg    
+    go tool pprof -svg ./rserver.test mem.out &gt; mem.benchmarkall.svg
+
+.PHONY: benchmarkcache
+benchmarkcache: vendor api json
+    @echo &quot;测试 redis 集群性能&quot;
+    go test -timeout 5m -bench BenchmarkRtaCacheBatch -benchmem -cpuprofile cpu.out -memprofile mem.out -run=^$$ internal/rserver/*
+
+.PHONY: stat
+stat: cloc gocyclo
+    @echo &quot;代码行数统计&quot;
+    @ls internal/*/* scripts/* configs/* Makefile | xargs cloc --by-file
+    @echo &quot;圈复杂度统计&quot;
+    @ls internal/*/* | grep -v _test | xargs gocyclo
+    @ls internal/*/* | grep -v _test | xargs gocyclo | awk &#39;{sum+=$$1}END{printf(&quot;总圈复杂度: %s&quot;, sum)}&#39;
+
+.PHONY: clean
+clean:
+    rm -rf build
+
+.PHONY: deep_clean
+deep_clean:
+    rm -rf vendor api build third
+
+third: protoc glide golang cloc gocyclo easyjson
+
+.PHONY: protoc
+protoc: golang
+    @hash protoc 2&gt;/dev/null || { \
+        echo &quot;安装 protobuf 代码生成工具 protoc&quot; &amp;&amp; \
+        mkdir -p third &amp;&amp; cd third &amp;&amp; \
+        wget https://github.com/google/protobuf/releases/download/v3.2.0/protobuf-cpp-3.2.0.tar.gz &amp;&amp; \
+        tar -xzvf protobuf-cpp-3.2.0.tar.gz &amp;&amp; \
+        cd protobuf-3.2.0 &amp;&amp; \
+        ./configure --prefix=`pwd`/../protobuf &amp;&amp; \
+        make -j8 &amp;&amp; \
+        make install &amp;&amp; \
+        cd ../.. &amp;&amp; \
+        protoc --version; \
+    }
+    @hash protoc-gen-go 2&gt;/dev/null || { \
+        echo &quot;安装 protobuf golang 插件 protoc-gen-go&quot; &amp;&amp; \
+        go get -u github.com/golang/protobuf/{proto,protoc-gen-go}; \
+    }
+
+.PHONY: glide
+glide: golang
+    @mkdir -p $$GOPATH/bin
+    @hash glide 2&gt;/dev/null || { \
+        echo &quot;安装依赖管理工具 glide&quot; &amp;&amp; \
+        curl https://glide.sh/get | sh; \
+    }
+
+.PHONY: golang
+golang:
+    @hash go 2&gt;/dev/null || { \
+        echo &quot;安装 golang 环境 go1.10&quot; &amp;&amp; \
+        mkdir -p third &amp;&amp; cd third &amp;&amp; \
+        wget https://dl.google.com/go/go1.10.linux-amd64.tar.gz &amp;&amp; \
+        tar -xzvf go1.10.linux-amd64.tar.gz &amp;&amp; \
+        cd .. &amp;&amp; \
+        go version; \
+    }
+
+.PHONY: cloc
+cloc:
+    @hash cloc 2&gt;/dev/null || { \
+        echo &quot;安装代码统计工具 cloc&quot; &amp;&amp; \
+        mkdir -p third &amp;&amp; cd third &amp;&amp; \
+        wget https://github.com/AlDanial/cloc/archive/v1.76.zip &amp;&amp; \
+        unzip v1.76.zip; \
+    }
+
+.PHONY: gocyclo
+gocyclo: golang
+    @hash gocyclo 2&gt;/dev/null || { \
+        echo &quot;安装代码圈复杂度统计工具 gocyclo&quot; &amp;&amp; \
+        go get -u github.com/fzipp/gocyclo; \
+    }
+
+.PHONY: easyjson
+easyjson: golang
+    @hash easyjson 2&gt;/dev/null || { \
+        echo &quot;安装 json 编译工具 easyjson&quot; &amp;&amp; \
+        go get -u github.com/mailru/easyjson/...; \
+    }
+</code></pre>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> Makefile </tag>
+            
+            <tag> 构建工具 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[gradle 开发语言 groovy 入门]]></title>
       <url>/2018/03/21/gradle-%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80-groovy-%E5%85%A5%E9%97%A8/</url>
       <content type="html"><![CDATA[<p>gradle 是 java 的构建工具的一种，同类的工具还有 maven，ant。我比较喜欢 gradle 主要是其语法简洁，而且功能强大。除此之外，还支持很多其他语言的构建</p>
