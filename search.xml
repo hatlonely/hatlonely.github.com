@@ -3,6 +3,76 @@
   
     
     <entry>
+      <title><![CDATA[golang 性能优化之 bitset 代替 hashset]]></title>
+      <url>/2018/04/12/golang-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B-bitset-%E4%BB%A3%E6%9B%BF-hashset/</url>
+      <content type="html"><![CDATA[<p>hashset 是一种非常高效的数据结构，插入和查询的复杂度都是 O(1)，基本上能满足大部分场景的性能需求，但在一些特殊的场景下，频次非常高的调用依然会成为性能瓶颈（用 pprof 分析），比如广告里面的定向逻辑，在一次请求中过滤逻辑可能会执行上千次，而其中有些过滤刚好都是一些枚举值，比如性别定向，年龄定向等等，对于这种可以用枚举表示的值可以用 bitset 优化，能有20多倍的性能提升</p>
+<p>bitset 的本质也是一种 hashset，只不过哈希桶用一个 uint64 来表示了，uint64 中的每一位用来代表一个元素是否存在，如果为1表示存在，为0表示不存在，而插入和查询操作就变成了位运算</p>
+<h3 id="bitset-实现"><a href="#bitset-实现" class="headerlink" title="bitset 实现"></a>bitset 实现</h3><p>bitset 的实现比较容易，下面这个是一个只支持枚举值不超过64的版本，当然也可以拓展到任意长度，使用一个 uint64 数组作为 hash 桶即可</p>
+<pre><code class="golang">type BitSet struct {
+    bit uint64
+}
+
+func (bs *BitSet) Add(i uint64) {
+    bs.bit |= 1 &lt;&lt; i
+}
+
+func (bs *BitSet) Del(i uint64) {
+    bs.bit &amp;= ^(1 &lt;&lt; i)
+}
+
+func (bs BitSet) Has(i uint64) bool {
+    return bs.bit&amp;(1&lt;&lt;i) != 0
+}
+</code></pre>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><pre><code class="golang">func BenchmarkSetContains(b *testing.B) {
+    bitset := NewBitSet()
+    hashset := map[uint64]struct{}{}
+    for _, i := range []uint64{1, 2, 4, 10} {
+        bitset.Add(i)
+        hashset[i] = struct{}{}
+    }
+
+    b.Run(&quot;bitset&quot;, func(b *testing.B) {
+        for i := 0; i &lt; b.N; i++ {
+            for i := uint64(0); i &lt; uint64(10); i++ {
+                _ = bitset.Has(i)
+            }
+        }
+    })
+
+    b.Run(&quot;hashset&quot;, func(b *testing.B) {
+        for i := 0; i &lt; b.N; i++ {
+            for i := uint64(0); i &lt; uint64(10); i++ {
+                _, _ = hashset[i]
+            }
+        }
+    })
+}
+</code></pre>
+<pre><code>BenchmarkSetContains/bitset-8             500000000             3.81 ns/op           0 B/op           0 allocs/op
+BenchmarkSetContains/hashset-8            20000000            89.4 ns/op           0 B/op           0 allocs/op
+</code></pre><p>可以看到 bitset 相比 hashset 有20多倍的性能提升</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>代码地址：<a href="https://github.com/hatlonely/easygolang/blob/master/datastruct/bitset.go" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/datastruct/bitset.go</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 性能优化 </tag>
+            
+            <tag> bitset </tag>
+            
+            <tag> set </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 构建工具之 Makefile]]></title>
       <url>/2018/04/11/golang-%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%E4%B9%8B-Makefile/</url>
       <content type="html"><![CDATA[<p>可能是因为编译太简单了，golang 并没有一个官方的构建工具（类似于 java 的 maven 和 gradle之类的），但是除了编译，我们可能还需要下载依赖，运行测试，甚至像 easyjson，protobuf，thrift 这样的工具下载和代码生成，如果没有构建工具，这些工作就会非常麻烦</p>
