@@ -3,6 +3,77 @@
   
     
     <entry>
+      <title><![CDATA[elasticsearch + kibana 集群环境搭建]]></title>
+      <url>/2018/04/12/elasticsearch-kibana-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>elk 提供了完备且成熟的日志存储和分析的解决方案，虽然不开源，但是可以免费使用，本文主要介绍 elasticsearch 集群以及 kibana 的环境搭建</p>
+<h3 id="elasticsearch"><a href="#elasticsearch" class="headerlink" title="elasticsearch"></a>elasticsearch</h3><p>elasticsearch 可以理解为一个支持模糊查询的数据库，用来存储日志</p>
+<h4 id="下载-elasticsearch"><a href="#下载-elasticsearch" class="headerlink" title="下载 elasticsearch"></a>下载 elasticsearch</h4><pre><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.3.tar.gz
+tar -xzvf elasticsearch-6.2.3.tar.gz
+</code></pre><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>修改 <code>config/elasticsearch.yml</code></p>
+<pre><code>cluster.name: rlogger       # 集群名称，所有节点统一一个
+node.name: node-2           # 节点名称，每个节点一个即可
+network.host: 0.0.0.0       # 绑定的地址，设置成 0.0.0.0 表示接受来自任何地址的请求
+http.port: 9200
+discovery.zen.ping.unicast.hosts: [&quot;172.31.22.165&quot;, &quot;172.31.17.241&quot;, &quot;172.31.30.84&quot;, &quot;172.31.18.178&quot;]
+discovery.zen.minimum_master_nodes: 3
+</code></pre><p>如果需要修改 java 堆栈区大小，可以修改 <code>config/jvm.options</code></p>
+<pre><code>-Xms8g
+-Xmx8g
+</code></pre><h4 id="启动-elasticsearch"><a href="#启动-elasticsearch" class="headerlink" title="启动 elasticsearch"></a>启动 elasticsearch</h4><pre><code>nohup bin/elasticsearch &amp;
+</code></pre><p>节点之间的 9200 端口需要互通</p>
+<h4 id="检查是否生效"><a href="#检查是否生效" class="headerlink" title="检查是否生效"></a>检查是否生效</h4><pre><code>curl -XGET &#39;http://172.31.17.241:9200/_cat/nodes?pretty&#39;
+</code></pre><p>会有如下输出</p>
+<pre><code>172.31.18.178 61 99 0 0.01 0.04 0.09 mdi - node-4
+172.31.17.241 27 99 0 0.06 0.04 0.05 mdi - node-1
+172.31.30.84  27 99 0 0.06 0.07 0.06 mdi - node-2
+172.31.22.165 68 99 0 0.00 0.01 0.05 mdi * node-3
+</code></pre><h3 id="kibana"><a href="#kibana" class="headerlink" title="kibana"></a>kibana</h3><p>kibana 通过一个 web 界面提供日志的检索分析功能，还可以绘制各种图表，非常方便</p>
+<h4 id="下载-kibana"><a href="#下载-kibana" class="headerlink" title="下载 kibana"></a>下载 kibana</h4><pre><code>wget https://artifacts.elastic.co/downloads/kibana/kibana-6.2.3-linux-x86_64.tar.gz
+tar -xzvf kibana-6.2.3-linux-x86_64.tar.gz
+</code></pre><h4 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>修改 <code>config/kibana.yml</code></p>
+<pre><code>server.host: &quot;0.0.0.0&quot;      # 绑定的地址，设置成 0.0.0.0 表示接受来自任何地址的请求
+elasticsearch.url: &quot;http://localhost:9200&quot;
+</code></pre><p>由于我的 kibana 直接部署在 elasticsearch 节点机器上，所以这里 <code>elasticsearch.url</code> 配成默认的就行</p>
+<h4 id="启动-kibana"><a href="#启动-kibana" class="headerlink" title="启动 kibana"></a>启动 kibana</h4><pre><code>nohup bin/kibana &amp;
+</code></pre><p>注意开放 5601 端口</p>
+<h4 id="检查是否生效-1"><a href="#检查是否生效-1" class="headerlink" title="检查是否生效"></a>检查是否生效</h4><p>在浏览器里面访问 <code>http://&lt;kibana ip&gt;:5601</code>，即可</p>
+<p>到这里 elasticsearch + kibana 集群环境已经搭建完成了，下面这个 metricbeat 是机器基本指标的一些监控，在上面 kibana 地址的首页就有引导</p>
+<h3 id="metricbeat"><a href="#metricbeat" class="headerlink" title="metricbeat"></a>metricbeat</h3><p>metricbeat 会自动收集一些机器指标发到 elasticsearch，并在 kibana 有可视化的图表展示</p>
+<h4 id="下载-metricbeat"><a href="#下载-metricbeat" class="headerlink" title="下载 metricbeat"></a>下载 metricbeat</h4><pre><code>curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-6.2.3-x86_64.rpm
+sudo rpm -vi metricbeat-6.2.3-x86_64.rpm
+</code></pre><h4 id="修改配置文件-2"><a href="#修改配置文件-2" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>修改 <code>/etc/metricbeat/metricbeat.yml</code></p>
+<pre><code>output.elasticsearch:
+  hosts: [&quot;172.31.17.241:9200&quot;, &quot;172.31.30.84:9200&quot;, &quot;172.31.22.165:9200&quot;, &quot;172.31.18.178:9200&quot;]
+setup.kibana:
+  host: &quot;172.31.17.241:5601&quot;
+</code></pre><h4 id="启动-metricbeat"><a href="#启动-metricbeat" class="headerlink" title="启动 metricbeat"></a>启动 metricbeat</h4><pre><code>sudo metricbeat modules enable system
+sudo metricbeat setup
+sudo service metricbeat start
+</code></pre><h4 id="查看机器状态"><a href="#查看机器状态" class="headerlink" title="查看机器状态"></a>查看机器状态</h4><p>现在可以在 kibana 的 <code>Dashboard</code> 里面看到 <code>[Metricbeat System] Host overview</code>，点进去就可以看到 cpu 内存情况了</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>elasticsearch 下载: <a href="https://www.elastic.co/cn/downloads/elasticsearch" target="_blank" rel="noopener">https://www.elastic.co/cn/downloads/elasticsearch</a></li>
+<li>kibana 下载: <a href="https://www.elastic.co/cn/downloads/kibana" target="_blank" rel="noopener">https://www.elastic.co/cn/downloads/kibana</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> elasticsearch </tag>
+            
+            <tag> kibana </tag>
+            
+            <tag> 日志收集 </tag>
+            
+            <tag> 日志分析 </tag>
+            
+            <tag> 环境搭建 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 性能优化之累加哈希]]></title>
       <url>/2018/04/12/golang-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%AF%E5%8A%A0%E5%93%88%E5%B8%8C/</url>
       <content type="html"><![CDATA[<p>很多时候性能问题总是发生在一些不起眼的地方。最近做一个性能问题分析的时候发现，一个函数里面使用由于字符串拼接产生的临时字符串导致内存上涨了40%（120G 内存的机器），而这些临时字符串给 GC 也带来了非常大的负担，成为主要的性能瓶颈，而这些字符串作为 map 的 key，又必须要拼接，所以想到了直接使用 hash 后的值作为 map 的 key，而这个 hash 值使用累加 hash 计算得出。</p>
@@ -1396,15 +1467,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
-            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -1906,11 +1977,11 @@ func main() {
         
         <tags>
             
-            <tag> 程序人生 </tag>
-            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
+            
+            <tag> 程序人生 </tag>
             
         </tags>
         
