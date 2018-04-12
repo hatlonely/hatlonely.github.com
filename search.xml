@@ -3,6 +3,62 @@
   
     
     <entry>
+      <title><![CDATA[golang 性能优化之累加哈希]]></title>
+      <url>/2018/04/12/golang-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B%E7%B4%AF%E5%8A%A0%E5%93%88%E5%B8%8C/</url>
+      <content type="html"><![CDATA[<p>很多时候性能问题总是发生在一些不起眼的地方。最近做一个性能问题分析的时候发现，一个函数里面使用由于字符串拼接产生的临时字符串导致内存上涨了40%（120G 内存的机器），而这些临时字符串给 GC 也带来了非常大的负担，成为主要的性能瓶颈，而这些字符串作为 map 的 key，又必须要拼接，所以想到了直接使用 hash 后的值作为 map 的 key，而这个 hash 值使用累加 hash 计算得出。</p>
+<p>所谓累加 hash，就是对字符串的 hash 可以分为任意多段，对每一段连续 hash，结果累加，对于任意一种分段方式，最后能得到一致的 hash 结果，比如：<code>H.hash(&quot;hello world&quot;)</code>, <code>H.hash(&quot;hello&quot;).hash(&quot; &quot;).hash(&quot;world&quot;)</code>, <code>H.hash(&quot;hello wo&quot;).hash(&quot;rld)&quot;</code> 这些结果最后都应该是一致的，利用这个特性，就能做到对多个字符串哈希而不用拼接</p>
+<h3 id="BKDR-hash-实现"><a href="#BKDR-hash-实现" class="headerlink" title="BKDR hash 实现"></a>BKDR hash 实现</h3><pre><code class="golang">type StringHasherBKDR uint64
+
+// NewStringHasherBKDR 创建一个新的 Hasher
+func NewStringHasherBKDR() StringHasherBKDR {
+    return StringHasherBKDR(0)
+}
+
+// AddStr 增加一个字符串
+func (bkdr StringHasherBKDR) AddStr(str string) StringHasherBKDR {
+    val := uint64(bkdr)
+    for i := 0; i &lt; len(str); i++ {
+        val = val*131 + uint64(str[i])
+    }
+    return StringHasherBKDR(val)
+}
+
+// AddInt 添加一个 int 值
+func (bkdr StringHasherBKDR) AddInt(i uint64) StringHasherBKDR {
+    val := uint64(bkdr)
+    val = val*131 + i
+    return StringHasherBKDR(val)
+}
+
+// Val 转成 uint64 的值
+func (bkdr StringHasherBKDR) Val() uint64 {
+    return uint64(bkdr)
+}
+</code></pre>
+<p>使用上也很简单</p>
+<pre><code>hasher := NewStringHasherBKDR()
+So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quot;hello&quot;).AddStr(&quot; &quot;).AddStr(&quot;world&quot;).Val())
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>代码地址: <a href="https://github.com/hatlonely/easygolang/blob/master/hashopt/" target="_blank" rel="noopener">https://github.com/hatlonely/easygolang/blob/master/hashopt/</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 性能优化 </tag>
+            
+            <tag> hash </tag>
+            
+            <tag> 数据结构 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 性能优化之 bitset 代替 hashset]]></title>
       <url>/2018/04/12/golang-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E4%B9%8B-bitset-%E4%BB%A3%E6%9B%BF-hashset/</url>
       <content type="html"><![CDATA[<p>hashset 是一种非常高效的数据结构，插入和查询的复杂度都是 O(1)，基本上能满足大部分场景的性能需求，但在一些特殊的场景下，频次非常高的调用依然会成为性能瓶颈（用 pprof 分析），比如广告里面的定向逻辑，在一次请求中过滤逻辑可能会执行上千次，而其中有些过滤刚好都是一些枚举值，比如性别定向，年龄定向等等，对于这种可以用枚举表示的值可以用 bitset 优化，能有20多倍的性能提升</p>
@@ -64,13 +120,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
+            <tag> 数据结构 </tag>
+            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
-            
-            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -1340,15 +1396,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
             
         </tags>
         
@@ -1850,11 +1906,11 @@ func main() {
         
         <tags>
             
+            <tag> 程序人生 </tag>
+            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
-            
-            <tag> 程序人生 </tag>
             
         </tags>
         
