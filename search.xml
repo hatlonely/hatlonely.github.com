@@ -5,7 +5,7 @@
     <entry>
       <title><![CDATA[elasticsearch + kibana 集群环境搭建]]></title>
       <url>/2018/04/12/elasticsearch-kibana-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
-      <content type="html"><![CDATA[<p>elk 提供了完备且成熟的日志存储和分析的解决方案，虽然不开源，但是可以免费使用，本文主要介绍 elasticsearch 集群以及 kibana 的环境搭建</p>
+      <content type="html"><![CDATA[<p>elk 提供了完备且成熟的日志存储和分析的解决方案，免费开源，本文主要介绍 elasticsearch 集群以及 kibana 的环境搭建</p>
 <h3 id="elasticsearch"><a href="#elasticsearch" class="headerlink" title="elasticsearch"></a>elasticsearch</h3><p>elasticsearch 可以理解为一个支持模糊查询的数据库，用来存储日志</p>
 <h4 id="下载-elasticsearch"><a href="#下载-elasticsearch" class="headerlink" title="下载 elasticsearch"></a>下载 elasticsearch</h4><pre><code>wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.2.3.tar.gz
 tar -xzvf elasticsearch-6.2.3.tar.gz
@@ -121,9 +121,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> hash </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> hash </tag>
             
         </tags>
         
@@ -191,13 +191,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
