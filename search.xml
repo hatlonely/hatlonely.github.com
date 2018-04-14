@@ -3,6 +3,111 @@
   
     
     <entry>
+      <title><![CDATA[logstash mysql 准实时同步到 elasticsearch]]></title>
+      <url>/2018/04/14/logstash-mysql-%E5%87%86%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E5%88%B0-elasticsearch/</url>
+      <content type="html"><![CDATA[<p>mysql 作为成熟稳定的数据持久化解决方案，广泛地应用在各种领域，但是在数据分析方面稍有不足，而 elasticsearch 作为数据分析领域的佼佼者，刚好可以弥补这项不足，而我们要做的只需要将 mysql 中的数据同步到 elasticsearch 中即可，而 logstash 刚好就可以支持，所有你需要做的只是写一个配置文件而已</p>
+<h3 id="logstash-获取"><a href="#logstash-获取" class="headerlink" title="logstash 获取"></a>logstash 获取</h3><p>获取 logstash</p>
+<pre><code>wget https://artifacts.elastic.co/downloads/logstash/logstash-6.2.3.zip
+unzip logstash-6.2.3.zip &amp;&amp; cd logstash-6.2.3
+</code></pre><p>安装 jdbc 和 elasticsearch 插件</p>
+<pre><code>bin/logstash-plugin install logstash-input-jdbc &amp;&amp; \
+bin/logstash-plugin install logstash-output-elasticsearch; \
+</code></pre><p>获取 jdbc mysql 驱动</p>
+<pre><code>wget https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.zip &amp;&amp; \
+unzip mysql-connector-java-5.1.46.zip &amp;&amp; \
+</code></pre><h3 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h3><h4 id="logstash-input-jdbc"><a href="#logstash-input-jdbc" class="headerlink" title="logstash-input-jdbc"></a>logstash-input-jdbc</h4><p>使用 logstash-input-jdbc 插件读取 mysql 的数据，这个插件的工作原理比较简单，就是定时执行一个 sql，然后将 sql 执行的结果写入到流中，增量获取的方式没有通过 binlog 方式同步，而是用一个递增字段作为条件去查询，每次都记录当前查询的位置，由于递增的特性，只需要查询比当前大的记录即可获取这段时间内的全部增量，一般的递增字段有两种，<code>AUTO_INCREMENT</code> 的主键 <code>id</code> 和 <code>ON UPDATE CURRENT_TIMESTAMP</code> 的 <code>update_time</code> 字段，<code>id</code> 字段只适用于那种只有插入没有更新的表，<code>update_time</code> 更加通用一些，建议在 mysql 表设计的时候都增加一个 <code>update_time</code> 字段</p>
+<pre><code class="ruby">input {
+  jdbc {
+    jdbc_driver_library =&gt; &quot;../mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar&quot;
+    jdbc_driver_class =&gt; &quot;com.mysql.jdbc.Driver&quot;
+    jdbc_connection_string =&gt; &quot;jdbc:mysql://&lt;mysql_host&gt;:3306/rta&quot;
+    jdbc_user =&gt; &quot;&lt;username&gt;&quot;
+    jdbc_password =&gt; &quot;&lt;password&gt;&quot;
+    schedule =&gt; &quot;* * * * *&quot;
+    statement =&gt; &quot;SELECT * FROM table WHERE update_time &gt; :sql_last_value&quot;
+    use_column_value =&gt; true
+    tracking_column_type =&gt; &quot;timestamp&quot;
+    tracking_column =&gt; &quot;update_time&quot;
+    last_run_metadata_path =&gt; &quot;syncpoint_table&quot;
+  }
+}
+</code></pre>
+<ul>
+<li><code>jdbc_driver_library</code>: jdbc mysql 驱动的路径，在上一步中已经下载</li>
+<li><code>jdbc_driver_class</code>: 驱动类的名字，mysql 填 <code>com.mysql.jdbc.Driver</code> 就好了</li>
+<li><code>jdbc_connection_string</code>: mysql 地址</li>
+<li><code>jdbc_user</code>: mysql 用户</li>
+<li><code>jdbc_password</code>: mysql 密码</li>
+<li><code>schedule</code>: 执行 sql 时机，类似 crontab 的调度</li>
+<li><code>statement</code>: 要执行的 sql，以 “:” 开头是定义的变量，可以通过 parameters 来设置变量，这里的 <code>sql_last_value</code> 是内置的变量，表示上一次 sql 执行中 update_time 的值</li>
+<li><code>use_column_value</code>: 使用递增列的值</li>
+<li><code>tracking_column_type</code>: 递增字段的类型，<code>numeric</code> 表示数值类型, <code>timestamp</code> 表示时间戳类型</li>
+<li><code>tracking_column</code>: 递增字段的名称，这里使用 update_time 这一列，这列的类型是 <code>timestamp</code></li>
+<li><code>last_run_metadata_path</code>: 同步点文件，这个文件记录了上次的同步点，重启时会读取这个文件，这个文件可以手动修改</li>
+</ul>
+<h4 id="logstash-output-elasticsearch"><a href="#logstash-output-elasticsearch" class="headerlink" title="logstash-output-elasticsearch"></a>logstash-output-elasticsearch</h4><pre><code class="ruby">output {
+  elasticsearch {
+    hosts =&gt; [&quot;172.31.22.165&quot;, &quot;172.31.17.241&quot;, &quot;172.31.30.84&quot;, &quot;172.31.18.178&quot;]
+    user =&gt; &quot;&lt;user&gt;&quot;
+    password =&gt; &quot;&lt;password&gt;&quot;
+    index =&gt; &quot;table&quot;
+    document_id =&gt; &quot;%{id}&quot;
+  }
+}
+</code></pre>
+<ul>
+<li><code>hosts</code>: es 集群地址</li>
+<li><code>user</code>: es 用户名</li>
+<li><code>password</code>: es 密码</li>
+<li><code>index</code>: 导入到 es 中的 index 名，这里我直接设置成了 mysql 表的名字</li>
+<li><code>document_id</code>: 导入到 es 中的文档 id，这个需要设置成主键，否则同一条记录更新后在 es 中会出现两条记录，<code>%{id}</code> 表示引用 mysql 表中 <code>id</code> 字段的值</li>
+</ul>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>把上面的代码保存到一个配置文件里面 <code>sync_table.cfg</code>，执行下面命令即可</p>
+<pre><code>cd logstash-6.2.3 &amp;&amp; bin/logstash -f config/sync_table.cfg
+</code></pre><p>如果成功了会在标准输出输出执行的 sql 语句</p>
+<pre><code>[2018-04-14T18:12:00,278][INFO ][logstash.inputs.jdbc     ] (0.001011s) SELECT version()
+[2018-04-14T18:12:00,284][INFO ][logstash.inputs.jdbc     ] (0.000723s) SELECT * FROM table WHERE update_time &gt; &#39;2018-04-14 17:55:00&#39;
+</code></pre><h3 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h3><h4 id="多表同步"><a href="#多表同步" class="headerlink" title="多表同步"></a>多表同步</h4><p>一个 logstash 实例可以借助 pipelines 机制同步多个表，只需要写多个配置文件就可以了，假设我们有两个表 table1 和 table2，对应两个配置文件 <code>sync_table1.cfg</code> 和 <code>sync_table2.cfg</code></p>
+<p>在 <code>config/pipelines.yml</code> 中配置</p>
+<pre><code>- pipeline.id: table1
+  path.config: &quot;config/sync_table1.cfg&quot;
+- pipeline.id: table2
+  path.config: &quot;config/sync_table2.cfg&quot;
+</code></pre><p>直接 <code>bin/logstash</code> 启动即可</p>
+<h4 id="timestamp-字段"><a href="#timestamp-字段" class="headerlink" title="@timestamp 字段"></a><code>@timestamp</code> 字段</h4><p>默认情况下 <code>@timestamp</code> 字段是 logstash-input-jdbc 添加的字段，默认是当前时间，这个字段在数据分析的时候非常有用，但是有时候我们希望使用数据中的某些字段来指定这个字段，这个时候可以使用 filter.date, 这个插件是专门用来设置 <code>@timestamp</code> 这个字段的</p>
+<p>比如我有我希望用字段 <code>timeslice</code> 来表示 <code>@timestamp</code>，<code>timeslice</code> 是一个字符串，格式为 <code>%Y%m%d%H%M</code></p>
+<pre><code class="ruby">filter {
+  date {
+    match =&gt; [ &quot;timeslice&quot;, &quot;yyyyMMddHHmm&quot; ]
+    timezone =&gt; &quot;Asia/Shanghai&quot;
+  }
+}
+</code></pre>
+<p>把这一段配置加到 <code>sync_table.cfg</code> 中，现在 <code>@timestamp</code> 和 <code>timeslice</code> 一致了</p>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>logstash-input-jdbc 插件: <a href="https://www.elastic.co/guide/en/logstash/current/plugins-inputs-jdbc.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/logstash/current/plugins-inputs-jdbc.html</a></li>
+<li>logstash-output-elasticsearch 插件: <a href="https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html</a></li>
+<li>logstash-multiple-piplines: <a href="https://www.elastic.co/blog/logstash-multiple-pipelines" target="_blank" rel="noopener">https://www.elastic.co/blog/logstash-multiple-pipelines</a></li>
+<li>logstash-filter-date 插件: <a href="https://www.elastic.co/guide/en/logstash/current/plugins-filters-date.html" target="_blank" rel="noopener">https://www.elastic.co/guide/en/logstash/current/plugins-filters-date.html</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> mysql </tag>
+            
+            <tag> elasticsearch </tag>
+            
+            <tag> logstash </tag>
+            
+            <tag> 数据同步 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[elasticsearch + kibana 集群环境搭建]]></title>
       <url>/2018/04/12/elasticsearch-kibana-%E9%9B%86%E7%BE%A4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<p>elk 提供了完备且成熟的日志存储和分析的解决方案，免费开源，本文主要介绍 elasticsearch 集群以及 kibana 的环境搭建</p>
@@ -121,9 +226,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> hash </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -191,13 +296,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
+            <tag> 数据结构 </tag>
+            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
-            
-            <tag> 数据结构 </tag>
             
         </tags>
         
