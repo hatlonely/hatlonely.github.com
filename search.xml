@@ -10,11 +10,11 @@
 <pre><code>wget https://artifacts.elastic.co/downloads/logstash/logstash-6.2.3.zip
 unzip logstash-6.2.3.zip &amp;&amp; cd logstash-6.2.3
 </code></pre><p>安装 jdbc 和 elasticsearch 插件</p>
-<pre><code>bin/logstash-plugin install logstash-input-jdbc &amp;&amp; \
-bin/logstash-plugin install logstash-output-elasticsearch; \
+<pre><code>bin/logstash-plugin install logstash-input-jdbc
+bin/logstash-plugin install logstash-output-elasticsearch
 </code></pre><p>获取 jdbc mysql 驱动</p>
-<pre><code>wget https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.zip &amp;&amp; \
-unzip mysql-connector-java-5.1.46.zip &amp;&amp; \
+<pre><code>wget https://cdn.mysql.com//Downloads/Connector-J/mysql-connector-java-5.1.46.zip
+unzip mysql-connector-java-5.1.46.zip
 </code></pre><h3 id="编写配置文件"><a href="#编写配置文件" class="headerlink" title="编写配置文件"></a>编写配置文件</h3><h4 id="logstash-input-jdbc"><a href="#logstash-input-jdbc" class="headerlink" title="logstash-input-jdbc"></a>logstash-input-jdbc</h4><p>使用 logstash-input-jdbc 插件读取 mysql 的数据，这个插件的工作原理比较简单，就是定时执行一个 sql，然后将 sql 执行的结果写入到流中，增量获取的方式没有通过 binlog 方式同步，而是用一个递增字段作为条件去查询，每次都记录当前查询的位置，由于递增的特性，只需要查询比当前大的记录即可获取这段时间内的全部增量，一般的递增字段有两种，<code>AUTO_INCREMENT</code> 的主键 <code>id</code> 和 <code>ON UPDATE CURRENT_TIMESTAMP</code> 的 <code>update_time</code> 字段，<code>id</code> 字段只适用于那种只有插入没有更新的表，<code>update_time</code> 更加通用一些，建议在 mysql 表设计的时候都增加一个 <code>update_time</code> 字段</p>
 <pre><code class="ruby">input {
   jdbc {
@@ -95,9 +95,9 @@ unzip mysql-connector-java-5.1.46.zip &amp;&amp; \
         
         <tags>
             
-            <tag> mysql </tag>
-            
             <tag> elasticsearch </tag>
+            
+            <tag> mysql </tag>
             
             <tag> logstash </tag>
             
@@ -226,9 +226,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> hash </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> hash </tag>
             
         </tags>
         
@@ -296,13 +296,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
