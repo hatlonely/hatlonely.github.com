@@ -3,6 +3,61 @@
   
     
     <entry>
+      <title><![CDATA[linux 日志管理服务 logrotate]]></title>
+      <url>/2018/04/16/linux-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1-logrotate/</url>
+      <content type="html"><![CDATA[<p>logrotate 是操作系统用来管理日志的工具，支持日志的切割、压缩、清理以及邮件报警等，通过 crontab 服务定时运行，也可以用这个工具来管理我们自己的服务日志，只需要简单配置下配置文件即可</p>
+<h3 id="logrotate-配置"><a href="#logrotate-配置" class="headerlink" title="logrotate 配置"></a>logrotate 配置</h3><p><code>logrotate.conf</code>，多份日志可以直接写在一个配置文件里面，也可以分成多个文件 <code>include</code> 进来</p>
+<pre><code>log/hello.log
+log/world.err
+{
+    hourly
+    rotate 24
+    notifempty
+    nocompress
+    missingok
+    copytruncate
+    dateext
+    dateformat .%Y%m%d%H
+    olddir log/bk/
+    postrotate
+        echo &quot;update to aws s3&quot;
+    endscript
+}
+</code></pre><ul>
+<li><code>hourly</code>: 日志切割按照小时来切割，logrotate 3.9.0 以后版本才支持，但是其实真正的调度是在 crontab 里面配置的</li>
+<li><code>rotate</code>: 保留多少个历史文件</li>
+<li><code>notifempty</code>: 如果文件为空，则不切分文件，默认是 <code>ifempty</code></li>
+<li><code>nocompress</code>: 不压缩文件</li>
+<li><code>missingok</code>: 忽略文件缺失信息</li>
+<li><code>copytruncate</code>: 创建一个日志的拷贝，并且截断老的日志，适合那种一直写一个文件，也不关闭的服务。由于这个阶段的过程会有一小段时间，可能会有数据丢失</li>
+<li><code>dateext</code>: 使用日期后缀</li>
+<li><code>dateformat</code>: 日期后缀的格式</li>
+<li><code>olddir</code>: 备份目录</li>
+<li><code>postrotate/endscript</code>: 切割后执行的命令，这个选项非常灵活，可以实现一些强大的功能，比如日志上传，日志分析等等</li>
+</ul>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>直接执行 <code>logrotate -f logrotate.conf</code> 可以强制执行切割，测试是否生效</p>
+<h3 id="加入到-crontab"><a href="#加入到-crontab" class="headerlink" title="加入到 crontab"></a>加入到 crontab</h3><p>上面测试没有问题之后，<code>crontab -e</code> 加入到 crontab 里面即可</p>
+<pre><code>59 * * * * /usr/local/sbin/logrotate /etc/logrotate.conf &gt;/dev/null 2&gt;&amp;1
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>logrotate man: <a href="https://linux.die.net/man/8/logrotate" target="_blank" rel="noopener">https://linux.die.net/man/8/logrotate</a></li>
+<li>logrotate 日期后缀支持小时: <a href="https://stackoverflow.com/questions/31132995/logrotate-dateformat-seems-not-supporting-hms" target="_blank" rel="noopener">https://stackoverflow.com/questions/31132995/logrotate-dateformat-seems-not-supporting-hms</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> linux </tag>
+            
+            <tag> logrotate </tag>
+            
+            <tag> 日志 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[logstash mysql 准实时同步到 elasticsearch]]></title>
       <url>/2018/04/14/logstash-mysql-%E5%87%86%E5%AE%9E%E6%97%B6%E5%90%8C%E6%AD%A5%E5%88%B0-elasticsearch/</url>
       <content type="html"><![CDATA[<p>mysql 作为成熟稳定的数据持久化解决方案，广泛地应用在各种领域，但是在数据分析方面稍有不足，而 elasticsearch 作为数据分析领域的佼佼者，刚好可以弥补这项不足，而我们要做的只需要将 mysql 中的数据同步到 elasticsearch 中即可，而 logstash 刚好就可以支持，所有你需要做的只是写一个配置文件而已</p>
@@ -2491,9 +2546,9 @@ export PATH=$PATH:/path/to/FlameGraph
             
             <tag> golang </tag>
             
-            <tag> 性能 </tag>
-            
             <tag> pprof </tag>
+            
+            <tag> 性能 </tag>
             
         </tags>
         
@@ -2580,9 +2635,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
             
             <tag> golang </tag>
             
-            <tag> json </tag>
-            
             <tag> 性能 </tag>
+            
+            <tag> json </tag>
             
         </tags>
         
