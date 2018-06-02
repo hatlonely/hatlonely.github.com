@@ -3,6 +3,90 @@
   
     
     <entry>
+      <title><![CDATA[aerospike 集群搭建]]></title>
+      <url>/2018/06/02/aerospike-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
+      <content type="html"><![CDATA[<p>aerospike 是一个分布式的 kv 存储服务，与 redis，memcached 等相比，最大的特点是支持内存和磁盘的混合存储，并且对 ssd 的支<br>持非常好，将索引存在内存中，数据存在 ssd 中，保持极高性能的同时，能有效的节约成本</p>
+<h3 id="单机安装"><a href="#单机安装" class="headerlink" title="单机安装"></a>单机安装</h3><p>安装</p>
+<pre><code>wget -O aerospike.tgz &#39;https://www.aerospike.com/download/server/latest/artifact/el6&#39;
+tar -xvf aerospike.tgz
+cd aerospike-server-community-*-el6
+sudo ./asinstall
+</code></pre><p>启动</p>
+<pre><code>sudo service aerospike start
+</code></pre><p>查看日志</p>
+<pre><code>tail -f /var/log/aerospike/aerospike.log
+</code></pre><h3 id="集群安装"><a href="#集群安装" class="headerlink" title="集群安装"></a>集群安装</h3><p>首先用上面的步骤在每个节点安装 aerospike，再修改配置文件 <code>/etc/aerospike/aerospike.conf</code>，添加集群的地址列表，启动服务即可</p>
+<p>下面是一个配置文件样例</p>
+<pre><code>service {
+    user root
+    group root
+    paxos-single-replica-limit 1
+    pidfile /var/run/aerospike/asd.pid
+    proto-fd-max 15000
+}
+
+logging {
+    file /var/log/aerospike/aerospike.log {
+        context any info
+    }
+}
+
+network {
+    service {
+        address 0.0.0.0
+        port 3000
+        # add current node address here
+        access-address 172.31.25.40 3002
+    }
+
+    heartbeat {
+        mode mesh
+        # add current node address here        
+        address 172.31.25.40
+        port 3002
+        # add all cluster node address here
+        mesh-seed-address-port 172.31.25.40 3002
+        mesh-seed-address-port 172.31.23.48 3002
+        mesh-seed-address-port 172.31.19.27 3002
+        interval 150
+        timeout 10
+    }
+
+    fabric {
+        address any
+        port 3001
+    }
+
+    info {
+        address any
+        port 3003
+    }
+}
+
+namespace test {
+    memory-size 8G
+    storage-engine memory
+}
+</code></pre><h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>Install on Red Hat: <a href="https://www.aerospike.com/docs/operations/install/linux/el6" target="_blank" rel="noopener">https://www.aerospike.com/docs/operations/install/linux/el6</a></li>
+<li>Network Heartbeat: <a href="https://www.aerospike.com/docs/operations/configure/network/heartbeat/index.html" target="_blank" rel="noopener">https://www.aerospike.com/docs/operations/configure/network/heartbeat/index.html</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> aerospike </tag>
+            
+            <tag> kv存储 </tag>
+            
+            <tag> 数据库 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[cmake 的正确打开方式]]></title>
       <url>/2018/05/30/cmake-%E7%9A%84%E6%AD%A3%E7%A1%AE%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F/</url>
       <content type="html"><![CDATA[<p>用了那么多年 c++，今天才搞明白 cmake 该怎么用……</p>
@@ -263,11 +347,11 @@ install(DIRECTORY ${DMP_CLIENT_SOURCE_DIR}/include/dmpval DESTINATION include/dm
         
         <tags>
             
+            <tag> c++ </tag>
+            
             <tag> cmake </tag>
             
             <tag> cmakelists.txt </tag>
-            
-            <tag> c++ </tag>
             
             <tag> 构建工具 </tag>
             
@@ -429,9 +513,9 @@ unzip mysql-connector-java-5.1.46.zip
         
         <tags>
             
-            <tag> mysql </tag>
-            
             <tag> elasticsearch </tag>
+            
+            <tag> mysql </tag>
             
             <tag> logstash </tag>
             
@@ -560,9 +644,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> hash </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> hash </tag>
             
         </tags>
         
@@ -630,13 +714,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -819,9 +903,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> 构建工具 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 构建工具 </tag>
             
             <tag> Makefile </tag>
             
@@ -1906,15 +1990,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
-            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -2146,13 +2230,13 @@ db.SetLogger(log.New(os.Stdout, &quot;\r\n&quot;, 0))
         
         <tags>
             
+            <tag> 数据库 </tag>
+            
             <tag> golang </tag>
             
             <tag> orm </tag>
             
             <tag> gorm </tag>
-            
-            <tag> 数据库 </tag>
             
             <tag> mysql </tag>
             
@@ -2416,11 +2500,11 @@ func main() {
         
         <tags>
             
-            <tag> 程序人生 </tag>
-            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
+            
+            <tag> 程序人生 </tag>
             
         </tags>
         
@@ -2754,9 +2838,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> 单元测试 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
             
         </tags>
         
@@ -2972,9 +3056,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> 依赖管理 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 依赖管理 </tag>
             
         </tags>
         
