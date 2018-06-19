@@ -3,6 +3,121 @@
   
     
     <entry>
+      <title><![CDATA[golang 面向对象特性]]></title>
+      <url>/2018/06/19/golang-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7/</url>
+      <content type="html"><![CDATA[<p>和其他高级语言一样，golang 也支持面向对象编程，支持得比较简单，有些特性并不支持，但是够用了</p>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p>接口使用 interface 关键字声明，任何实现接口定义方法的类都可以实例化该接口，接口和实现类之间没有任何依赖，你可以实现一个新的类当做 Sayer 来使用，而不需要依赖 Sayer 接口，也可以为已有的类创建一个新的接口，而不需要修改任何已有的代码，和其他静态语言相比，这可以算是 golang 的特色了吧</p>
+<pre><code class="go">type Sayer interface {
+    Say(message string)
+    SayHi()
+}
+</code></pre>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>继承使用组合的方式实现</p>
+<pre><code class="go">type Animal struct {
+    Name string
+}
+
+func (a *Animal) Say(message string) {
+    fmt.Printf(&quot;Animal[%v] say: %v\n&quot;, a.Name, message)
+}
+
+type Dog struct {
+    Animal
+}
+</code></pre>
+<p>Dog 将继承 Animal 的 Say 方法，以及其成员 Name</p>
+<h3 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h3><p>子类可以重新实现父类的方法</p>
+<pre><code class="go">// override Animal.Say
+func (d *Dog) Say(message string) {
+    fmt.Printf(&quot;Dog[%v] say: %v\n&quot;, d.Name, message)
+}
+</code></pre>
+<p>Dog.Say 将覆盖 Animal.Say</p>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>接口可以用任何实现该接口的指针来实例化</p>
+<pre><code class="go">var sayer Sayer
+
+sayer = &amp;Dog{Animal{Name: &quot;Yoda&quot;}}
+sayer.Say(&quot;hello world&quot;)
+</code></pre>
+<p>但是不支持父类指针指向子类，下面这种写法是不允许的</p>
+<pre><code class="go">var animal *Animal
+animal = &amp;Dog{Animal{Name: &quot;Yoda&quot;}}
+</code></pre>
+<p>同样子类继承的父类的方法引用的父类的其他方法也没有多态特性</p>
+<pre><code class="go">func (a *Animal) Say(message string) {
+    fmt.Printf(&quot;Animal[%v] say: %v\n&quot;, a.Name, message)
+}
+
+func (a *Animal) SayHi() {
+    a.Say(&quot;Hi&quot;)
+}
+
+func (d *Dog) Say(message string) {
+    fmt.Printf(&quot;Dog[%v] say: %v\n&quot;, d.Name, message)
+}
+
+func main() {
+    var sayer Sayer
+
+    sayer = &amp;Dog{Animal{Name: &quot;Yoda&quot;}}
+    sayer.Say(&quot;hello world&quot;)  // Dog[Yoda] say: hello world
+    sayer.SayHi()             // Animal[Yoda] say: Hi
+}
+</code></pre>
+<p>上面这段代码中，子类 Dog 没有实现 SayHi 方法，调用的是从父类 Animal.SayHi，而 Animal.SayHi 调用的是 Animal.Say 而不是Dog.Say，这一点和其他面向对象语言有所区别，需要特别注意，但是可以用下面的方式来实现类似的功能，以提高代码的复用性</p>
+<pre><code class="go">func SayHi(s Sayer) {
+    s.Say(&quot;Hi&quot;)
+}
+
+type Cat struct {
+    Animal
+}
+
+func (c *Cat) Say(message string) {
+    fmt.Printf(&quot;Cat[%v] say: %v\n&quot;, c.Name, message)
+}
+
+func (c *Cat) SayHi() {
+    SayHi(c)
+}
+
+func main() {
+    var sayer Sayer
+
+    sayer = &amp;Cat{Animal{Name: &quot;Jerry&quot;}}
+    sayer.Say(&quot;hello world&quot;) // Cat[Jerry] say: hello world
+    sayer.SayHi()            // Cat[Jerry] say: Hi
+}
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>完整代码参考: <a href="https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/object_oriented_test.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/internal/buildin/object_oriented_test.go</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 面向对象 </tag>
+            
+            <tag> 接口 </tag>
+            
+            <tag> 继承 </tag>
+            
+            <tag> 多态 </tag>
+            
+            <tag> 组合 </tag>
+            
+            <tag> 覆盖 </tag>
+            
+            <tag> interface </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[aerospike 集群搭建]]></title>
       <url>/2018/06/02/aerospike-%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/</url>
       <content type="html"><![CDATA[<p>aerospike 是一个分布式的 kv 存储服务，与 redis，memcached 等相比，最大的特点是支持内存和磁盘的混合存储，并且对 ssd 的支<br>持非常好，将索引存在内存中，数据存在 ssd 中，保持极高性能的同时，能有效的节约成本</p>
@@ -347,11 +462,11 @@ install(DIRECTORY ${DMP_CLIENT_SOURCE_DIR}/include/dmpval DESTINATION include/dm
         
         <tags>
             
-            <tag> c++ </tag>
-            
             <tag> cmake </tag>
             
             <tag> cmakelists.txt </tag>
+            
+            <tag> c++ </tag>
             
             <tag> 构建工具 </tag>
             
@@ -903,9 +1018,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 构建工具 </tag>
+            
+            <tag> golang </tag>
             
             <tag> Makefile </tag>
             
@@ -1990,15 +2105,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
             
         </tags>
         
@@ -2500,11 +2615,11 @@ func main() {
         
         <tags>
             
+            <tag> 程序人生 </tag>
+            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
-            
-            <tag> 程序人生 </tag>
             
         </tags>
         
@@ -2838,9 +2953,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 单元测试 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
@@ -3056,9 +3171,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 依赖管理 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
