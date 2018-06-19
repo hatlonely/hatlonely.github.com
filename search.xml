@@ -191,11 +191,11 @@ namespace test {
         
         <tags>
             
+            <tag> 数据库 </tag>
+            
             <tag> aerospike </tag>
             
             <tag> kv存储 </tag>
-            
-            <tag> 数据库 </tag>
             
         </tags>
         
@@ -759,9 +759,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> hash </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -829,13 +829,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
+            <tag> 数据结构 </tag>
+            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
-            
-            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -1018,9 +1018,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> 构建工具 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 构建工具 </tag>
             
             <tag> Makefile </tag>
             
@@ -1683,7 +1683,7 @@ So(unsafe.Sizeof(struct {
 }()
 </code></pre>
 <h4 id="同步信号-sync-WaitGroup"><a href="#同步信号-sync-WaitGroup" class="headerlink" title="同步信号 sync.WaitGroup"></a>同步信号 <code>sync.WaitGroup</code></h4><p>多个协程之间可以通过 <code>sync.WaitGroup</code> 同步，这个类似于 Linux 里面的信号量</p>
-<pre><code class="go">var wg sync.WaitGroup  // 申明一个信号量
+<pre><code class="go">var wg sync.WaitGroup  // 声明一个信号量
 wg.Add(1)   // 信号量加一
 wg.Done()   // 信号量减一
 wg.Wait()   // 信号量为正时阻塞，直到信号量为0时被唤醒
@@ -2105,15 +2105,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
-            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -2345,13 +2345,13 @@ db.SetLogger(log.New(os.Stdout, &quot;\r\n&quot;, 0))
         
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> golang </tag>
             
             <tag> orm </tag>
             
             <tag> gorm </tag>
+            
+            <tag> 数据库 </tag>
             
             <tag> mysql </tag>
             
@@ -2615,11 +2615,11 @@ func main() {
         
         <tags>
             
-            <tag> 程序人生 </tag>
-            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
+            
+            <tag> 程序人生 </tag>
             
         </tags>
         
@@ -2953,9 +2953,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> 单元测试 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
             
         </tags>
         
@@ -3171,9 +3171,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> 依赖管理 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 依赖管理 </tag>
             
         </tags>
         

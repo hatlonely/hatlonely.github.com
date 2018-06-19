@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Sun Mar 11 2018 16:53:07 GMT+0800">
-        <meta property="article:modified_time" content="Tue Mar 13 2018 01:52:27 GMT+0800">
+        <meta property="article:modified_time" content="Tue Jun 19 2018 21:29:15 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://www.hatlonely.com/2018/03/11/golang-并发编程之生产者消费者/index.html",
     "headline": "golang 并发编程之生产者消费者",
     "datePublished": "Sun Mar 11 2018 16:53:07 GMT+0800",
-    "dateModified": "Tue Mar 13 2018 01:52:27 GMT+0800",
+    "dateModified": "Tue Jun 19 2018 21:29:15 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -526,7 +526,7 @@
 }()
 </code></pre>
 <h4 id="同步信号-sync-WaitGroup"><a href="#同步信号-sync-WaitGroup" class="headerlink" title="同步信号 sync.WaitGroup"></a>同步信号 <code>sync.WaitGroup</code></h4><p>多个协程之间可以通过 <code>sync.WaitGroup</code> 同步，这个类似于 Linux 里面的信号量</p>
-<pre><code class="go">var wg sync.WaitGroup  // 申明一个信号量
+<pre><code class="go">var wg sync.WaitGroup  // 声明一个信号量
 wg.Add(1)   // 信号量加一
 wg.Done()   // 信号量减一
 wg.Wait()   // 信号量为正时阻塞，直到信号量为0时被唤醒
