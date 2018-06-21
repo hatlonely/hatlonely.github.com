@@ -244,7 +244,7 @@
 
     
         <meta property="article:published_time" content="Thu Jun 21 2018 14:43:50 GMT+0800">
-        <meta property="article:modified_time" content="Thu Jun 21 2018 16:11:46 GMT+0800">
+        <meta property="article:modified_time" content="Thu Jun 21 2018 16:20:20 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -267,7 +267,7 @@
     "mainEntityOfPage": "http://www.hatlonely.com/2018/06/21/微服务组件之限流器与熔断器/index.html",
     "headline": "微服务组件之限流器与熔断器",
     "datePublished": "Thu Jun 21 2018 14:43:50 GMT+0800",
-    "dateModified": "Thu Jun 21 2018 16:11:46 GMT+0800",
+    "dateModified": "Thu Jun 21 2018 16:20:20 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "hatlonely",
@@ -546,7 +546,7 @@ limiter := rate.NewLimiter(rate.Every(time.Duration(800)*time.Millisecond), 1)
         Timeout:                100,  // 超时时间 100ms
         MaxConcurrentRequests:  2,    // 最大并发数，超过并发返回错误
         RequestVolumeThreshold: 4,    // 请求数量的阀值，用这些数量的请求来计算阀值
-        ErrorPercentThreshold:  25,   // 错误数量阀值，达到阀值，启动熔断
+        ErrorPercentThreshold:  25,   // 错误率阀值，达到阀值，启动熔断，25%
         SleepWindow:            1000, // 熔断尝试恢复时间，1000ms
     },
 )
