@@ -3,6 +3,136 @@
   
     
     <entry>
+      <title><![CDATA[微服务组件之限流器与熔断器]]></title>
+      <url>/2018/06/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%99%90%E6%B5%81%E5%99%A8%E4%B8%8E%E7%86%94%E6%96%AD%E5%99%A8/</url>
+      <content type="html"><![CDATA[<p>在微服务架构里面一个很常见的问题就是服务之间的延迟和通信失败问题，极端的情况下，甚至会因为某个服务的性能下降或者故障宕机，导致访问超时，层层传递，引发雪崩，最终导致整个系统崩溃，而限流器和熔断器(这两个组件都是客户端的)能很好的解决这个问题，提高系统的可靠性和稳定性</p>
+<h3 id="限流器"><a href="#限流器" class="headerlink" title="限流器"></a>限流器</h3><p>限流器，从字面上理解就是用来限制流量，有时候流量突增(可预期的比如“双11”，不可预期的微博的热门话题等)，会将后端服务压垮，甚至直接宕机，使用限流器能限制访问后端的流量，起到一个保护作用，被限制的流量，可以根据具体的业务逻辑去处理，直接返回错误或者返回默认值等等</p>
+<p>golang 提供了拓展库(<code>golang.org/x/time/rate</code>)提供了限流器组件，用法上也很简单直观，通过下面这段代码就可以创建一个限流器</p>
+<pre><code class="go">// 每 800ms 产生 1 个 token，最多缓存 1 个 token，如果缓存满了，新的 token 会被丢弃
+limiter := rate.NewLimiter(rate.Every(time.Duration(800)*time.Millisecond), 1)
+</code></pre>
+<p>限流器提供三种使用方式，<code>Allow</code>, <code>Wait</code>, <code>Reserve</code></p>
+<p><code>Allow</code>: 返回是否有 token，没有 token 返回 false，或者消耗 1 个 token 返回 true<br><code>Wait</code>: 阻塞等待，知道取到 1 个 token<br><code>Reserve</code>: 返回 token 信息，<code>Allow</code> 其实相当于 <code>Reserve().OK</code>，此外还会返回需要等待多久才有新的 token</p>
+<p>一般使用 Wait 的场景会比较多一些</p>
+<pre><code class="go">if err := limiter.Wait(context.Background()); err != nil {
+    panic(err)
+}
+
+// do you business logic
+</code></pre>
+<h3 id="熔断器"><a href="#熔断器" class="headerlink" title="熔断器"></a>熔断器</h3><p>和限流器对依赖服务的保护机制不一样，熔断器是当依赖的服务已经出现故障时，为了保证自身服务的正常运行不再访问依赖的服务，防止雪崩效应</p>
+<p>熔断器有三种状态：</p>
+<ul>
+<li><code>关闭</code>状态：服务正常，并维护一个失败率统计，当失败率达到阀值时，转到<code>开启</code>状态</li>
+<li><code>开启</code>状态：服务异常，调用 fallback 函数，一段时间之后，进入<code>半开启</code>状态</li>
+<li><code>半开启</code>装态：尝试恢复服务，失败率高于阀值，进入<code>开启</code>状态，低于阀值，进入<code>关闭</code>状态</li>
+</ul>
+<p><code>github.com/afex/hystrix-go</code>，提供了 go 熔断器实现，使用上面也很方便，首先创建一个熔断器</p>
+<pre><code class="go">hystrix.ConfigureCommand(
+    &quot;addservice&quot;, // 熔断器名字，可以用服务名称命名，一个名字对应一个熔断器，对应一份熔断策略
+    hystrix.CommandConfig{
+        Timeout:                100,  // 超时时间 100ms
+        MaxConcurrentRequests:  2,    // 最大并发数，超过并发返回错误
+        RequestVolumeThreshold: 4,    // 请求数量的阀值，用这些数量的请求来计算阀值
+        ErrorPercentThreshold:  25,   // 错误数量阀值，达到阀值，启动熔断
+        SleepWindow:            1000, // 熔断尝试恢复时间
+    },
+)
+</code></pre>
+<p>提供了阻塞和非阻塞两种使用方式，完整代码可以参考如下链接: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go</a></p>
+<p>阻塞使用 <code>Do</code> 方法，返回一个 err</p>
+<pre><code class="go">err := hystrix.Do(&quot;addservice&quot;, func() error {
+    // 正常业务逻辑，一般是访问其他资源
+    var err error
+    // 设置总体超时时间 10 ms 超时
+    ctx, cancel := context.WithTimeout(context.Background(), time.Duration(50*time.Millisecond))
+    defer cancel()
+    res, err = client.Add(
+        ctx, req,
+        // 这里可以再次设置重试次数，重试时间，重试返回码
+        grpc_retry.WithMax(3),
+        grpc_retry.WithPerRetryTimeout(time.Duration(5)*time.Millisecond),
+        grpc_retry.WithCodes(codes.DeadlineExceeded),
+    )
+    return err
+}, func(err error) error {
+    // 失败处理逻辑，访问其他资源失败时，或者处于熔断开启状态时，会调用这段逻辑
+    // 可以简单构造一个response返回，也可以有一定的策略，比如访问备份资源
+    // 也可以直接返回 err，这样不用和远端失败的资源通信，防止雪崩
+    // 这里因为我们的场景太简单，所以我们可以在本地在作一个加法就可以了
+    fmt.Println(err)
+    res = &amp;addservice.AddResponse{V: req.A + req.B}
+    return nil
+})
+</code></pre>
+<p>非阻塞方法使用 <code>Go</code> 方法，返回一个 error 的 channel，建议在有多个资源需要并发访问的场景下是使用</p>
+<pre><code class="go">errc1 := hystrix.Go(&quot;addservice&quot;, func() error {
+    var err error
+    ctx, cancel := context.WithTimeout(context.Background(), time.Duration(50*time.Millisecond))
+    defer cancel()
+    res1, err = client.Add(ctx, req)
+    if err == nil {
+        success &lt;- struct{}{}
+    }
+    return err
+}, nil)
+
+// 有 fallback 处理
+errc2 := hystrix.Go(&quot;addservice&quot;, func() error {
+    var err error
+    ctx, cancel := context.WithTimeout(context.Background(), time.Duration(50*time.Millisecond))
+    defer cancel()
+    res2, err = client.Add(ctx, req)
+    if err == nil {
+        success &lt;- struct{}{}
+    }
+    return err
+}, func(err error) error {
+    fmt.Println(err)
+    res2 = &amp;addservice.AddResponse{V: req.A + req.B}
+    success &lt;- struct{}{}
+    return nil
+})
+
+for i := 0; i &lt; 2; i++ {
+    select {
+    case &lt;-success:
+        fmt.Println(&quot;success&quot;, i)
+    case err := &lt;-errc1:
+        fmt.Println(&quot;err1:&quot;, err)
+    case err := &lt;-errc2:
+        // 这个分支永远不会走到，因为熔断机制里面永远不会返回错误
+        fmt.Println(&quot;err2:&quot;, err)
+    }
+}
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>测试代码: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go</a></li>
+<li>Circuit Breaker Pattern: <a href="https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589784(v%3dpandp.10)" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/previous-versions/msp-n-p/dn589784(v%3dpandp.10)</a></li>
+<li>hystrix-go: <a href="https://github.com/afex/hystrix-go/" target="_blank" rel="noopener">https://github.com/afex/hystrix-go/</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> 微服务 </tag>
+            
+            <tag> 限流器 </tag>
+            
+            <tag> 熔断器 </tag>
+            
+            <tag> ratelimiter </tag>
+            
+            <tag> circuitbreaker </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang 面向对象特性]]></title>
       <url>/2018/06/19/golang-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%89%B9%E6%80%A7/</url>
       <content type="html"><![CDATA[<p>和其他高级语言一样，golang 也支持面向对象编程，支持得比较简单，有些特性并不支持，但是够用了</p>
@@ -191,11 +321,11 @@ namespace test {
         
         <tags>
             
-            <tag> 数据库 </tag>
-            
             <tag> aerospike </tag>
             
             <tag> kv存储 </tag>
+            
+            <tag> 数据库 </tag>
             
         </tags>
         
@@ -462,11 +592,11 @@ install(DIRECTORY ${DMP_CLIENT_SOURCE_DIR}/include/dmpval DESTINATION include/dm
         
         <tags>
             
+            <tag> c++ </tag>
+            
             <tag> cmake </tag>
             
             <tag> cmakelists.txt </tag>
-            
-            <tag> c++ </tag>
             
             <tag> 构建工具 </tag>
             
@@ -759,9 +889,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> hash </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> hash </tag>
             
         </tags>
         
@@ -829,13 +959,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -2345,13 +2475,13 @@ db.SetLogger(log.New(os.Stdout, &quot;\r\n&quot;, 0))
         
         <tags>
             
+            <tag> 数据库 </tag>
+            
             <tag> golang </tag>
             
             <tag> orm </tag>
             
             <tag> gorm </tag>
-            
-            <tag> 数据库 </tag>
             
             <tag> mysql </tag>
             
