@@ -3,6 +3,102 @@
   
     
     <entry>
+      <title><![CDATA[golang consul-grpc 服务注册与发现]]></title>
+      <url>/2018/06/23/golang-consul-grpc-%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</url>
+      <content type="html"><![CDATA[<p>在微服务架构里面，每个小服务都是由很多节点组成，节点的添加删除故障希望能对下游透明，因此有必要引入一种服务的自动注册和发现机制，而 consul 提供了完整的解决方案，并且内置了对 GRPC 以及 HTTP 服务的支持</p>
+<h3 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h3><p><img src="/img/architecture/service_register_and_find.png" alt="服务注册与发现"></p>
+<ul>
+<li>服务调用: client 直连 server 调用服务</li>
+<li>服务注册: 服务端将服务的信息注册到 consul 里</li>
+<li>服务发现: 客户端从 consul 里发现服务信息，主要是服务的地址</li>
+<li>健康检查: consul 检查服务器的健康状态</li>
+</ul>
+<h3 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h3><p>服务端将服务信息注册到 consul 里，这个注册可以在服务启动可以提供服务的时候完成</p>
+<p>完整代码参考: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/internal/grpcsr/consul_register.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/internal/grpcsr/consul_register.go</a></p>
+<pre><code class="go">config := api.DefaultConfig()
+config.Address = r.Address
+client, err := api.NewClient(config)
+if err != nil {
+    panic(err)
+}
+agent := client.Agent()
+
+IP := localIP()
+reg := &amp;api.AgentServiceRegistration{
+        ID:      fmt.Sprintf(&quot;%v-%v-%v&quot;, r.Service, IP, r.Port), // 服务节点的名称
+        Name:    fmt.Sprintf(&quot;grpc.health.v1.%v&quot;, r.Service),    // 服务名称
+        Tags:    r.Tag,                                          // tag，可以为空
+        Port:    r.Port,                                         // 服务端口
+        Address: IP,                                             // 服务 IP
+        Check: &amp;api.AgentServiceCheck{     // 健康检查
+            Interval: r.Interval.String(), // 健康检查间隔
+            // grpc 支持，执行健康检查的地址，service 会传到 Health.Check 函数中
+            GRPC:     fmt.Sprintf(&quot;%v:%v/%v&quot;, IP, r.Port, r.Service), 
+            DeregisterCriticalServiceAfter: r.DeregisterCriticalServiceAfter.String(), // 注销时间，相当于过期时间
+        },
+    }
+
+if err := agent.ServiceRegister(reg); err != nil {
+    panic(err)
+}
+</code></pre>
+<h3 id="服务发现"><a href="#服务发现" class="headerlink" title="服务发现"></a>服务发现</h3><p>客户端从 consul 里发现服务信息，主要是服务的地址</p>
+<p>完整代码参考: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/internal/grpclb/consul_resolver.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/internal/grpclb/consul_resolver.go</a></p>
+<pre><code class="go">services, metainfo, err := w.client.Health().Service(w.service, &quot;&quot;, true, &amp;api.QueryOptions{
+    WaitIndex: w.lastIndex, // 同步点，这个调用将一直阻塞，直到有新的更新
+})
+if err != nil {
+    logrus.Warn(&quot;error retrieving instances from Consul: %v&quot;, err)
+}
+w.lastIndex = metainfo.LastIndex
+
+addrs := map[string]struct{}{}
+for _, service := range services {
+    addrs[net.JoinHostPort(service.Service.Address, strconv.Itoa(service.Service.Port))] = struct{}{}
+}
+</code></pre>
+<h3 id="健康检查"><a href="#健康检查" class="headerlink" title="健康检查"></a>健康检查</h3><p>consul 检查服务器的健康状态，consul 用 <code>google.golang.org/grpc/health/grpc_health_v1.HealthServer</code> 接口，实现了对 grpc健康检查的支持，所以我们只需要实现先这个接口，consul 就能利用这个接口作健康检查了</p>
+<p>完整代码参考: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/server/main.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/server/main.go</a></p>
+<pre><code class="go">// HealthImpl 健康检查实现
+type HealthImpl struct{}
+
+// Check 实现健康检查接口，这里直接返回健康状态，这里也可以有更复杂的健康检查策略，比如根据服务器负载来返回
+func (h *HealthImpl) Check(ctx context.Context, req *grpc_health_v1.HealthCheckRequest) (*grpc_health_v1.HealthCheckResponse, error) {
+    return &amp;grpc_health_v1.HealthCheckResponse{
+        Status: grpc_health_v1.HealthCheckResponse_SERVING,
+    }, nil
+}
+
+grpc_health_v1.RegisterHealthServer(server, &amp;HealthImpl{})
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>完整工程代码: <a href="https://github.com/hatlonely/hellogolang/tree/master/sample/addservice" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/tree/master/sample/addservice</a></li>
+<li>consul 健康检查 api: <a href="https://www.consul.io/api/agent/check.html" target="_blank" rel="noopener">https://www.consul.io/api/agent/check.html</a></li>
+<li>consul 服务注册 api: <a href="https://www.consul.io/api/agent/service.html" target="_blank" rel="noopener">https://www.consul.io/api/agent/service.html</a></li>
+<li>grpc 健康检查: <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md" target="_blank" rel="noopener">https://github.com/grpc/grpc/blob/master/doc/health-checking.md</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> consul </tag>
+            
+            <tag> grpc </tag>
+            
+            <tag> 服务注册与发现 </tag>
+            
+            <tag> 健康检查 </tag>
+            
+            <tag> 微服务 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[微服务组件之限流器与熔断器]]></title>
       <url>/2018/06/21/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%99%90%E6%B5%81%E5%99%A8%E4%B8%8E%E7%86%94%E6%96%AD%E5%99%A8/</url>
       <content type="html"><![CDATA[<p>在微服务架构里面一个很常见的问题就是服务之间的延迟和通信失败问题，极端的情况下，甚至会因为某个服务的性能下降或者故障宕机，导致访问超时，层层传递，引发雪崩，最终导致整个系统崩溃，而限流器和熔断器(这两个组件都是客户端的)能很好的解决这个问题，提高系统的可靠性和稳定性</p>
@@ -2952,11 +3048,11 @@ func main() {
             
             <tag> golang </tag>
             
+            <tag> grpc </tag>
+            
             <tag> 微服务 </tag>
             
             <tag> 网络框架 </tag>
-            
-            <tag> grpc </tag>
             
         </tags>
         

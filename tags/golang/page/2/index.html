@@ -311,6 +311,154 @@
         
             
                 <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/03/04/golang-aws-sdk-go-之-s3-服务/'">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/ship.jpg">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2018/03/04/golang-aws-sdk-go-之-s3-服务/">golang aws-sdk-go 之 s3 服务</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            s3 是 aws 提供的分布式文件服务，价格比较优惠，经常被用来作为日志的持久化存储，大数据处理结果的输入输出等
+s3 服务提供命令行...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2018/03/04/golang-aws-sdk-go-之-s3-服务/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                
+                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
+                
+            </div>
+            <div>
+                
+                    <strong>hatlonely</strong>
+                
+                <span>3月 04, 2018</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
+            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function() {
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "golang aws-sdk-go 之 s3 服务"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "golang aws-sdk-go 之 s3 服务"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "golang aws-sdk-go 之 s3 服务"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-1').css('color','#c4291c')
+                                $('#post-like-thumb-1').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-1').css("color","#758591");
+                                $('#post-like-thumb-1').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-1').click(function() {
+                        num = $('#post-like-num-1').text()
+                        if ($('#post-like-thumb-1').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-1').css('color', '#758591');
+                            $('#post-like-thumb-1').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-1').css('color','#c4291c');
+                            $('#post-like-thumb-1').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-1').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "golang aws-sdk-go 之 s3 服务"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
+                    });
+                });
+            </script>
+
+            
+
+            
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+        
+    
+        
+            
+                <!-- Paradox Thumbnail -->
                 <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/02/08/golang-restful-框架之-go-swagger/'">
     <!-- Post Thumbnail -->
     
@@ -352,9 +500,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
-            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
+            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -366,7 +514,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-1').text(res.count)
+                                $('#post-view-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -381,7 +529,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-1').text(res.count)
+                                $('#post-like-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -396,30 +544,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-1').css('color','#c4291c')
-                                $('#post-like-thumb-1').prop('islike', true)
+                                $('#post-like-thumb-2').css('color','#c4291c')
+                                $('#post-like-thumb-2').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-1').css("color","#758591");
-                                $('#post-like-thumb-1').prop('islike', false)
+                                $('#post-like-thumb-2').css("color","#758591");
+                                $('#post-like-thumb-2').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-1').click(function() {
-                        num = $('#post-like-num-1').text()
-                        if ($('#post-like-thumb-1').prop('islike')) {
+                    $('#post-like-thumb-2').click(function() {
+                        num = $('#post-like-num-2').text()
+                        if ($('#post-like-thumb-2').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-1').css('color', '#758591');
-                            $('#post-like-thumb-1').prop('islike', false);
+                            $('#post-like-thumb-2').css('color', '#758591');
+                            $('#post-like-thumb-2').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-1').css('color','#c4291c');
-                            $('#post-like-thumb-1').prop('islike', true);
+                            $('#post-like-thumb-2').css('color','#c4291c');
+                            $('#post-like-thumb-2').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-1').text(num)
+                        $('#post-like-num-2').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -499,9 +647,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
-            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
+            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -513,7 +661,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-2').text(res.count)
+                                $('#post-view-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -528,7 +676,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-2').text(res.count)
+                                $('#post-like-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -543,30 +691,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-2').css('color','#c4291c')
-                                $('#post-like-thumb-2').prop('islike', true)
+                                $('#post-like-thumb-3').css('color','#c4291c')
+                                $('#post-like-thumb-3').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-2').css("color","#758591");
-                                $('#post-like-thumb-2').prop('islike', false)
+                                $('#post-like-thumb-3').css("color","#758591");
+                                $('#post-like-thumb-3').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-2').click(function() {
-                        num = $('#post-like-num-2').text()
-                        if ($('#post-like-thumb-2').prop('islike')) {
+                    $('#post-like-thumb-3').click(function() {
+                        num = $('#post-like-num-3').text()
+                        if ($('#post-like-thumb-3').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-2').css('color', '#758591');
-                            $('#post-like-thumb-2').prop('islike', false);
+                            $('#post-like-thumb-3').css('color', '#758591');
+                            $('#post-like-thumb-3').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-2').css('color','#c4291c');
-                            $('#post-like-thumb-2').prop('islike', true);
+                            $('#post-like-thumb-3').css('color','#c4291c');
+                            $('#post-like-thumb-3').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-2').text(num)
+                        $('#post-like-num-3').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -646,9 +794,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
-            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
+            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -660,7 +808,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-3').text(res.count)
+                                $('#post-view-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -675,7 +823,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-3').text(res.count)
+                                $('#post-like-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -690,30 +838,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-3').css('color','#c4291c')
-                                $('#post-like-thumb-3').prop('islike', true)
+                                $('#post-like-thumb-4').css('color','#c4291c')
+                                $('#post-like-thumb-4').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-3').css("color","#758591");
-                                $('#post-like-thumb-3').prop('islike', false)
+                                $('#post-like-thumb-4').css("color","#758591");
+                                $('#post-like-thumb-4').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-3').click(function() {
-                        num = $('#post-like-num-3').text()
-                        if ($('#post-like-thumb-3').prop('islike')) {
+                    $('#post-like-thumb-4').click(function() {
+                        num = $('#post-like-num-4').text()
+                        if ($('#post-like-thumb-4').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-3').css('color', '#758591');
-                            $('#post-like-thumb-3').prop('islike', false);
+                            $('#post-like-thumb-4').css('color', '#758591');
+                            $('#post-like-thumb-4').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-3').css('color','#c4291c');
-                            $('#post-like-thumb-3').prop('islike', true);
+                            $('#post-like-thumb-4').css('color','#c4291c');
+                            $('#post-like-thumb-4').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-3').text(num)
+                        $('#post-like-num-4').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -793,9 +941,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
-            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
+            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -807,7 +955,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-4').text(res.count)
+                                $('#post-view-num-5').text(res.count)
                             }
                         },
                         async: true
@@ -822,7 +970,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-4').text(res.count)
+                                $('#post-like-num-5').text(res.count)
                             }
                         },
                         async: true
@@ -837,30 +985,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-4').css('color','#c4291c')
-                                $('#post-like-thumb-4').prop('islike', true)
+                                $('#post-like-thumb-5').css('color','#c4291c')
+                                $('#post-like-thumb-5').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-4').css("color","#758591");
-                                $('#post-like-thumb-4').prop('islike', false)
+                                $('#post-like-thumb-5').css("color","#758591");
+                                $('#post-like-thumb-5').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-4').click(function() {
-                        num = $('#post-like-num-4').text()
-                        if ($('#post-like-thumb-4').prop('islike')) {
+                    $('#post-like-thumb-5').click(function() {
+                        num = $('#post-like-num-5').text()
+                        if ($('#post-like-thumb-5').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-4').css('color', '#758591');
-                            $('#post-like-thumb-4').prop('islike', false);
+                            $('#post-like-thumb-5').css('color', '#758591');
+                            $('#post-like-thumb-5').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-4').css('color','#c4291c');
-                            $('#post-like-thumb-4').prop('islike', true);
+                            $('#post-like-thumb-5').css('color','#c4291c');
+                            $('#post-like-thumb-5').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-4').text(num)
+                        $('#post-like-num-5').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -940,9 +1088,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
-            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
+            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -954,7 +1102,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-5').text(res.count)
+                                $('#post-view-num-6').text(res.count)
                             }
                         },
                         async: true
@@ -969,7 +1117,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-5').text(res.count)
+                                $('#post-like-num-6').text(res.count)
                             }
                         },
                         async: true
@@ -984,30 +1132,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-5').css('color','#c4291c')
-                                $('#post-like-thumb-5').prop('islike', true)
+                                $('#post-like-thumb-6').css('color','#c4291c')
+                                $('#post-like-thumb-6').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-5').css("color","#758591");
-                                $('#post-like-thumb-5').prop('islike', false)
+                                $('#post-like-thumb-6').css("color","#758591");
+                                $('#post-like-thumb-6').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-5').click(function() {
-                        num = $('#post-like-num-5').text()
-                        if ($('#post-like-thumb-5').prop('islike')) {
+                    $('#post-like-thumb-6').click(function() {
+                        num = $('#post-like-num-6').text()
+                        if ($('#post-like-thumb-6').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-5').css('color', '#758591');
-                            $('#post-like-thumb-5').prop('islike', false);
+                            $('#post-like-thumb-6').css('color', '#758591');
+                            $('#post-like-thumb-6').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-5').css('color','#c4291c');
-                            $('#post-like-thumb-5').prop('islike', true);
+                            $('#post-like-thumb-6').css('color','#c4291c');
+                            $('#post-like-thumb-6').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-5').text(num)
+                        $('#post-like-num-6').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1087,9 +1235,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
-            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-7">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-7">thumb_up</i>&nbsp;
+            <span id="post-like-num-7">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1101,7 +1249,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-6').text(res.count)
+                                $('#post-view-num-7').text(res.count)
                             }
                         },
                         async: true
@@ -1116,7 +1264,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-6').text(res.count)
+                                $('#post-like-num-7').text(res.count)
                             }
                         },
                         async: true
@@ -1131,30 +1279,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-6').css('color','#c4291c')
-                                $('#post-like-thumb-6').prop('islike', true)
+                                $('#post-like-thumb-7').css('color','#c4291c')
+                                $('#post-like-thumb-7').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-6').css("color","#758591");
-                                $('#post-like-thumb-6').prop('islike', false)
+                                $('#post-like-thumb-7').css("color","#758591");
+                                $('#post-like-thumb-7').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-6').click(function() {
-                        num = $('#post-like-num-6').text()
-                        if ($('#post-like-thumb-6').prop('islike')) {
+                    $('#post-like-thumb-7').click(function() {
+                        num = $('#post-like-num-7').text()
+                        if ($('#post-like-thumb-7').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-6').css('color', '#758591');
-                            $('#post-like-thumb-6').prop('islike', false);
+                            $('#post-like-thumb-7').css('color', '#758591');
+                            $('#post-like-thumb-7').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-6').css('color','#c4291c');
-                            $('#post-like-thumb-6').prop('islike', true);
+                            $('#post-like-thumb-7').css('color','#c4291c');
+                            $('#post-like-thumb-7').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-6').text(num)
+                        $('#post-like-num-7').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1234,9 +1382,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-7">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-7">thumb_up</i>&nbsp;
-            <span id="post-like-num-7">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-8">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-8">thumb_up</i>&nbsp;
+            <span id="post-like-num-8">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1248,7 +1396,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-7').text(res.count)
+                                $('#post-view-num-8').text(res.count)
                             }
                         },
                         async: true
@@ -1263,7 +1411,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-7').text(res.count)
+                                $('#post-like-num-8').text(res.count)
                             }
                         },
                         async: true
@@ -1278,30 +1426,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-7').css('color','#c4291c')
-                                $('#post-like-thumb-7').prop('islike', true)
+                                $('#post-like-thumb-8').css('color','#c4291c')
+                                $('#post-like-thumb-8').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-7').css("color","#758591");
-                                $('#post-like-thumb-7').prop('islike', false)
+                                $('#post-like-thumb-8').css("color","#758591");
+                                $('#post-like-thumb-8').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-7').click(function() {
-                        num = $('#post-like-num-7').text()
-                        if ($('#post-like-thumb-7').prop('islike')) {
+                    $('#post-like-thumb-8').click(function() {
+                        num = $('#post-like-num-8').text()
+                        if ($('#post-like-thumb-8').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-7').css('color', '#758591');
-                            $('#post-like-thumb-7').prop('islike', false);
+                            $('#post-like-thumb-8').css('color', '#758591');
+                            $('#post-like-thumb-8').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-7').css('color','#c4291c');
-                            $('#post-like-thumb-7').prop('islike', true);
+                            $('#post-like-thumb-8').css('color','#c4291c');
+                            $('#post-like-thumb-8').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-7').text(num)
+                        $('#post-like-num-8').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1381,9 +1529,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-8">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-8">thumb_up</i>&nbsp;
-            <span id="post-like-num-8">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-9">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-9">thumb_up</i>&nbsp;
+            <span id="post-like-num-9">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1395,7 +1543,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-8').text(res.count)
+                                $('#post-view-num-9').text(res.count)
                             }
                         },
                         async: true
@@ -1410,7 +1558,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-8').text(res.count)
+                                $('#post-like-num-9').text(res.count)
                             }
                         },
                         async: true
@@ -1425,30 +1573,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-8').css('color','#c4291c')
-                                $('#post-like-thumb-8').prop('islike', true)
+                                $('#post-like-thumb-9').css('color','#c4291c')
+                                $('#post-like-thumb-9').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-8').css("color","#758591");
-                                $('#post-like-thumb-8').prop('islike', false)
+                                $('#post-like-thumb-9').css("color","#758591");
+                                $('#post-like-thumb-9').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-8').click(function() {
-                        num = $('#post-like-num-8').text()
-                        if ($('#post-like-thumb-8').prop('islike')) {
+                    $('#post-like-thumb-9').click(function() {
+                        num = $('#post-like-num-9').text()
+                        if ($('#post-like-thumb-9').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-8').css('color', '#758591');
-                            $('#post-like-thumb-8').prop('islike', false);
+                            $('#post-like-thumb-9').css('color', '#758591');
+                            $('#post-like-thumb-9').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-8').css('color','#c4291c');
-                            $('#post-like-thumb-8').prop('islike', true);
+                            $('#post-like-thumb-9').css('color','#c4291c');
+                            $('#post-like-thumb-9').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-8').text(num)
+                        $('#post-like-num-9').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1529,153 +1677,6 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-9">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-9">thumb_up</i>&nbsp;
-            <span id="post-like-num-9">0</span>&nbsp;&nbsp;
-            <script>
-                $(document).ready(function() {
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countview",
-                        data: {
-                            title: "golang 几种字符串的连接方式"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-view-num-9').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countlike",
-                        data: {
-                            title: "golang 几种字符串的连接方式"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-like-num-9').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/showlike",
-                        data: {
-                            title: "golang 几种字符串的连接方式"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.islike) {
-                                $('#post-like-thumb-9').css('color','#c4291c')
-                                $('#post-like-thumb-9').prop('islike', true)
-                            } else {
-                                $('#post-like-thumb-9').css("color","#758591");
-                                $('#post-like-thumb-9').prop('islike', false)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $('#post-like-thumb-9').click(function() {
-                        num = $('#post-like-num-9').text()
-                        if ($('#post-like-thumb-9').prop('islike')) {
-                            url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-9').css('color', '#758591');
-                            $('#post-like-thumb-9').prop('islike', false);
-                            num--
-                        } else {
-                            url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-9').css('color','#c4291c');
-                            $('#post-like-thumb-9').prop('islike', true);
-                            num++
-                        }
-                        $('#post-like-num-9').text(num)
-                        $.ajax({
-                            url: url,
-                            data: {
-                                title: "golang 几种字符串的连接方式"
-                            },
-                            type: 'GET',
-                            dataType: 'JSON',
-                            success: function(res) {
-                            },
-                            async: true
-                        });
-
-                        return false;
-                    });
-                });
-            </script>
-
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/01/18/golang-slice-性能分析/'">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/seventy_seven_days.jpg">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/01/18/golang-slice-性能分析/">golang slice 性能分析</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            golang 在 gc 这块的做得比较弱，频繁地申请和释放内存会消耗很多的资源。另外 slice 使用数组实现，有一个容量和长度的问题，当 slic...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/01/18/golang-slice-性能分析/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                
-                    <img src="/img/avatar/hatlonely13.png" width="44px" height="44px" alt="'s avatar">
-                
-            </div>
-            <div>
-                
-                    <strong>hatlonely</strong>
-                
-                <span>1月 18, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-
-            <!-- 浏览和点赞功能 by hatlonely -->
-            <i class="material-icons">remove_red_eye</i>&nbsp;
             <span id="post-view-num-10">0</span>&nbsp;&nbsp;&nbsp;
             <i class="material-icons like-hover" id="post-like-thumb-10">thumb_up</i>&nbsp;
             <span id="post-like-num-10">0</span>&nbsp;&nbsp;
@@ -1684,7 +1685,7 @@
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
-                            title: "golang slice 性能分析"
+                            title: "golang 几种字符串的连接方式"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1699,7 +1700,7 @@
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countlike",
                         data: {
-                            title: "golang slice 性能分析"
+                            title: "golang 几种字符串的连接方式"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1714,7 +1715,7 @@
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/showlike",
                         data: {
-                            title: "golang slice 性能分析"
+                            title: "golang 几种字符串的连接方式"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1747,7 +1748,7 @@
                         $.ajax({
                             url: url,
                             data: {
-                                title: "golang slice 性能分析"
+                                title: "golang 几种字符串的连接方式"
                             },
                             type: 'GET',
                             dataType: 'JSON',
@@ -1888,7 +1889,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -1909,7 +1910,7 @@
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/golang"> golang
-                                <span class="sidebar_archives-count"> 21 </span>
+                                <span class="sidebar_archives-count"> 22 </span>
                             </a>
                         </li>
                     
@@ -1927,7 +1928,7 @@
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/微服务"> 微服务
-                                <span class="sidebar_archives-count"> 5 </span>
+                                <span class="sidebar_archives-count"> 6 </span>
                             </a>
                         </li>
                     
