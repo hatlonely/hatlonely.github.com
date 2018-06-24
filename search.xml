@@ -3,6 +3,124 @@
   
     
     <entry>
+      <title><![CDATA[golang grpc 负载均衡]]></title>
+      <url>/2018/06/23/golang-grpc-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/</url>
+      <content type="html"><![CDATA[<p>微服务架构里面，每个服务都会有很多节点，如果流量分配不均匀，会造成资源的浪费，甚至将一些机器压垮，这个时候就需要负载均衡，最简单的一种策略就是轮询，顺序依次选择不同的节点访问</p>
+<p>grpc 在客户端提供了负载均衡的实现，并提供了服务地址解析和更新的接口(默认提供了 DNS 域名解析的支持)，方便不同服务的集成</p>
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><pre><code class="go">conn, err := grpc.Dial(
+    &quot;&quot;,
+    grpc.WithInsecure(),
+    // 负载均衡，使用 consul 作服务发现
+    grpc.WithBalancer(grpc.RoundRobin(grpclb.NewConsulResolver(
+        &quot;127.0.0.1:8500&quot;, &quot;grpc.health.v1.add&quot;,
+    ))),
+)
+</code></pre>
+<p>创建连接的时候可以使用 <code>WithBalancer</code> 选项来指定负载均衡策略，这里使用 RoundRobin 算法，其实就是轮询策略</p>
+<h3 id="与-consul-的集成"><a href="#与-consul-的集成" class="headerlink" title="与 consul 的集成"></a>与 consul 的集成</h3><p>有了负载均衡策略，还需要一个地址解析和更新策略，可以使用 DNS 服务来实现，但如果我们使用 consul 来做服务的注册和发现，可以通过实现 <code>naming.Resolver</code> 和 <code>naming.Watcher</code> 接口来支持</p>
+<ul>
+<li><code>naming.Resolver</code>: 实现地址解析</li>
+<li><code>naming.Watcher</code>: 实现节点的变更，添加或者删除</li>
+</ul>
+<pre><code class="go">func NewConsulResolver(address string, service string) naming.Resolver {
+    return &amp;consulResolver{
+        address: address,
+        service: service,
+    }
+}
+
+type consulResolver struct {
+    address string
+    service string
+}
+
+func (r *consulResolver) Resolve(target string) (naming.Watcher, error) {
+    config := api.DefaultConfig()
+    config.Address = r.address
+    client, err := api.NewClient(config)
+    if err != nil {
+        return nil, err
+    }
+
+    return &amp;consulWatcher{
+        client:  client,
+        service: r.service,
+        addrs:   map[string]struct{}{},
+    }, nil
+}
+
+type consulWatcher struct {
+    client    *api.Client
+    service   string
+    addrs     map[string]struct{}
+    lastIndex uint64
+}
+
+func (w *consulWatcher) Next() ([]*naming.Update, error) {
+    for {
+        services, metainfo, err := w.client.Health().Service(w.service, &quot;&quot;, true, &amp;api.QueryOptions{
+            WaitIndex: w.lastIndex, // 同步点，这个调用将一直阻塞，直到有新的更新
+        })
+        if err != nil {
+            logrus.Warn(&quot;error retrieving instances from Consul: %v&quot;, err)
+        }
+        w.lastIndex = metainfo.LastIndex
+
+        addrs := map[string]struct{}{}
+        for _, service := range services {
+            addrs[net.JoinHostPort(service.Service.Address, strconv.Itoa(service.Service.Port))] = struct{}{}
+        }
+
+        var updates []*naming.Update
+        for addr := range w.addrs {
+            if _, ok := addrs[addr]; !ok {
+                updates = append(updates, &amp;naming.Update{Op: naming.Delete, Addr: addr})
+            }
+        }
+
+        for addr := range addrs {
+            if _, ok := w.addrs[addr]; !ok {
+                updates = append(updates, &amp;naming.Update{Op: naming.Add, Addr: addr})
+            }
+        }
+
+        if len(updates) != 0 {
+            w.addrs = addrs
+            return updates, nil
+        }
+    }
+}
+
+func (w *consulWatcher) Close() {
+    // nothing to do
+}
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>gRPC Name Resolution: <a href="https://github.com/grpc/grpc/blob/master/doc/naming.md" target="_blank" rel="noopener">https://github.com/grpc/grpc/blob/master/doc/naming.md</a></li>
+<li>Load Balancing in gRPC: <a href="https://github.com/grpc/grpc/blob/master/doc/load-balancing.md" target="_blank" rel="noopener">https://github.com/grpc/grpc/blob/master/doc/load-balancing.md</a></li>
+<li>dns_resolver: <a href="https://github.com/grpc/grpc-go/blob/30fb59a4304034ce78ff68e21bd25776b1d79488/naming/dns_resolver.go" target="_blank" rel="noopener">https://github.com/grpc/grpc-go/blob/30fb59a4304034ce78ff68e21bd25776b1d79488/naming/dns_resolver.go</a></li>
+<li>代码地址: <a href="https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go" target="_blank" rel="noopener">https://github.com/hatlonely/hellogolang/blob/master/sample/addservice/cmd/client/main.go</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> golang </tag>
+            
+            <tag> grpc </tag>
+            
+            <tag> 负载均衡 </tag>
+            
+            <tag> load balancer </tag>
+            
+            <tag> consul </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[golang consul-grpc 服务注册与发现]]></title>
       <url>/2018/06/23/golang-consul-grpc-%E6%9C%8D%E5%8A%A1%E6%B3%A8%E5%86%8C%E4%B8%8E%E5%8F%91%E7%8E%B0/</url>
       <content type="html"><![CDATA[<p>在微服务架构里面，每个小服务都是由很多节点组成，节点的添加删除故障希望能对下游透明，因此有必要引入一种服务的自动注册和发现机制，而 consul 提供了完整的解决方案，并且内置了对 GRPC 以及 HTTP 服务的支持</p>
@@ -84,9 +202,9 @@ grpc_health_v1.RegisterHealthServer(server, &amp;HealthImpl{})
             
             <tag> golang </tag>
             
-            <tag> consul </tag>
-            
             <tag> grpc </tag>
+            
+            <tag> consul </tag>
             
             <tag> 服务注册与发现 </tag>
             
@@ -688,11 +806,11 @@ install(DIRECTORY ${DMP_CLIENT_SOURCE_DIR}/include/dmpval DESTINATION include/dm
         
         <tags>
             
-            <tag> c++ </tag>
-            
             <tag> cmake </tag>
             
             <tag> cmakelists.txt </tag>
+            
+            <tag> c++ </tag>
             
             <tag> 构建工具 </tag>
             
@@ -2447,13 +2565,13 @@ export PATH=$GOPATH/bin:$PATH
             
             <tag> golang </tag>
             
+            <tag> 微服务 </tag>
+            
             <tag> swagger </tag>
             
             <tag> restful </tag>
             
             <tag> go-swagger </tag>
-            
-            <tag> 微服务 </tag>
             
             <tag> 网络框架 </tag>
             
