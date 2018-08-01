@@ -311,6 +311,153 @@
         
             
                 <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/08/01/c-map-查找性能测试/'">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/city_chongqing.jpg">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2018/08/01/c-map-查找性能测试/">c++ map 查找性能测试</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            最近在为推荐服务作性能调优，这个服务的主要逻辑是用离线计算的模型数据给请求中的每个广告打分，再返回这些广告的排序结果，这里面打分的过程其实就用请求中...
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2018/08/01/c-map-查找性能测试/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                
+                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
+                
+            </div>
+            <div>
+                
+                    <strong>hatlonely</strong>
+                
+                <span>8月 01, 2018</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
+            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function() {
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "c++ map 查找性能测试"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "c++ map 查找性能测试"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-1').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "c++ map 查找性能测试"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-1').css('color','#c4291c')
+                                $('#post-like-thumb-1').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-1').css("color","#758591");
+                                $('#post-like-thumb-1').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-1').click(function() {
+                        num = $('#post-like-num-1').text()
+                        if ($('#post-like-thumb-1').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-1').css('color', '#758591');
+                            $('#post-like-thumb-1').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-1').css('color','#c4291c');
+                            $('#post-like-thumb-1').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-1').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "c++ map 查找性能测试"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
+                    });
+                });
+            </script>
+
+            
+
+            
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+        
+    
+        
+            
+                <!-- Paradox Thumbnail -->
                 <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/06/23/golang-grpc-负载均衡/'">
     <!-- Post Thumbnail -->
     
@@ -352,9 +499,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
-            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
+            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -366,7 +513,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-1').text(res.count)
+                                $('#post-view-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -381,7 +528,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-1').text(res.count)
+                                $('#post-like-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -396,30 +543,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-1').css('color','#c4291c')
-                                $('#post-like-thumb-1').prop('islike', true)
+                                $('#post-like-thumb-2').css('color','#c4291c')
+                                $('#post-like-thumb-2').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-1').css("color","#758591");
-                                $('#post-like-thumb-1').prop('islike', false)
+                                $('#post-like-thumb-2').css("color","#758591");
+                                $('#post-like-thumb-2').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-1').click(function() {
-                        num = $('#post-like-num-1').text()
-                        if ($('#post-like-thumb-1').prop('islike')) {
+                    $('#post-like-thumb-2').click(function() {
+                        num = $('#post-like-num-2').text()
+                        if ($('#post-like-thumb-2').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-1').css('color', '#758591');
-                            $('#post-like-thumb-1').prop('islike', false);
+                            $('#post-like-thumb-2').css('color', '#758591');
+                            $('#post-like-thumb-2').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-1').css('color','#c4291c');
-                            $('#post-like-thumb-1').prop('islike', true);
+                            $('#post-like-thumb-2').css('color','#c4291c');
+                            $('#post-like-thumb-2').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-1').text(num)
+                        $('#post-like-num-2').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -499,9 +646,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
-            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
+            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -513,7 +660,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-2').text(res.count)
+                                $('#post-view-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -528,7 +675,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-2').text(res.count)
+                                $('#post-like-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -543,30 +690,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-2').css('color','#c4291c')
-                                $('#post-like-thumb-2').prop('islike', true)
+                                $('#post-like-thumb-3').css('color','#c4291c')
+                                $('#post-like-thumb-3').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-2').css("color","#758591");
-                                $('#post-like-thumb-2').prop('islike', false)
+                                $('#post-like-thumb-3').css("color","#758591");
+                                $('#post-like-thumb-3').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-2').click(function() {
-                        num = $('#post-like-num-2').text()
-                        if ($('#post-like-thumb-2').prop('islike')) {
+                    $('#post-like-thumb-3').click(function() {
+                        num = $('#post-like-num-3').text()
+                        if ($('#post-like-thumb-3').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-2').css('color', '#758591');
-                            $('#post-like-thumb-2').prop('islike', false);
+                            $('#post-like-thumb-3').css('color', '#758591');
+                            $('#post-like-thumb-3').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-2').css('color','#c4291c');
-                            $('#post-like-thumb-2').prop('islike', true);
+                            $('#post-like-thumb-3').css('color','#c4291c');
+                            $('#post-like-thumb-3').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-2').text(num)
+                        $('#post-like-num-3').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -646,9 +793,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
-            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
+            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -660,7 +807,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-3').text(res.count)
+                                $('#post-view-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -675,7 +822,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-3').text(res.count)
+                                $('#post-like-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -690,30 +837,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-3').css('color','#c4291c')
-                                $('#post-like-thumb-3').prop('islike', true)
+                                $('#post-like-thumb-4').css('color','#c4291c')
+                                $('#post-like-thumb-4').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-3').css("color","#758591");
-                                $('#post-like-thumb-3').prop('islike', false)
+                                $('#post-like-thumb-4').css("color","#758591");
+                                $('#post-like-thumb-4').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-3').click(function() {
-                        num = $('#post-like-num-3').text()
-                        if ($('#post-like-thumb-3').prop('islike')) {
+                    $('#post-like-thumb-4').click(function() {
+                        num = $('#post-like-num-4').text()
+                        if ($('#post-like-thumb-4').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-3').css('color', '#758591');
-                            $('#post-like-thumb-3').prop('islike', false);
+                            $('#post-like-thumb-4').css('color', '#758591');
+                            $('#post-like-thumb-4').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-3').css('color','#c4291c');
-                            $('#post-like-thumb-3').prop('islike', true);
+                            $('#post-like-thumb-4').css('color','#c4291c');
+                            $('#post-like-thumb-4').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-3').text(num)
+                        $('#post-like-num-4').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -794,9 +941,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
-            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
+            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -808,7 +955,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-4').text(res.count)
+                                $('#post-view-num-5').text(res.count)
                             }
                         },
                         async: true
@@ -823,7 +970,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-4').text(res.count)
+                                $('#post-like-num-5').text(res.count)
                             }
                         },
                         async: true
@@ -838,30 +985,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-4').css('color','#c4291c')
-                                $('#post-like-thumb-4').prop('islike', true)
+                                $('#post-like-thumb-5').css('color','#c4291c')
+                                $('#post-like-thumb-5').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-4').css("color","#758591");
-                                $('#post-like-thumb-4').prop('islike', false)
+                                $('#post-like-thumb-5').css("color","#758591");
+                                $('#post-like-thumb-5').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-4').click(function() {
-                        num = $('#post-like-num-4').text()
-                        if ($('#post-like-thumb-4').prop('islike')) {
+                    $('#post-like-thumb-5').click(function() {
+                        num = $('#post-like-num-5').text()
+                        if ($('#post-like-thumb-5').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-4').css('color', '#758591');
-                            $('#post-like-thumb-4').prop('islike', false);
+                            $('#post-like-thumb-5').css('color', '#758591');
+                            $('#post-like-thumb-5').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-4').css('color','#c4291c');
-                            $('#post-like-thumb-4').prop('islike', true);
+                            $('#post-like-thumb-5').css('color','#c4291c');
+                            $('#post-like-thumb-5').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-4').text(num)
+                        $('#post-like-num-5').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -941,9 +1088,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
-            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
+            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -955,7 +1102,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-5').text(res.count)
+                                $('#post-view-num-6').text(res.count)
                             }
                         },
                         async: true
@@ -970,7 +1117,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-5').text(res.count)
+                                $('#post-like-num-6').text(res.count)
                             }
                         },
                         async: true
@@ -985,30 +1132,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-5').css('color','#c4291c')
-                                $('#post-like-thumb-5').prop('islike', true)
+                                $('#post-like-thumb-6').css('color','#c4291c')
+                                $('#post-like-thumb-6').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-5').css("color","#758591");
-                                $('#post-like-thumb-5').prop('islike', false)
+                                $('#post-like-thumb-6').css("color","#758591");
+                                $('#post-like-thumb-6').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-5').click(function() {
-                        num = $('#post-like-num-5').text()
-                        if ($('#post-like-thumb-5').prop('islike')) {
+                    $('#post-like-thumb-6').click(function() {
+                        num = $('#post-like-num-6').text()
+                        if ($('#post-like-thumb-6').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-5').css('color', '#758591');
-                            $('#post-like-thumb-5').prop('islike', false);
+                            $('#post-like-thumb-6').css('color', '#758591');
+                            $('#post-like-thumb-6').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-5').css('color','#c4291c');
-                            $('#post-like-thumb-5').prop('islike', true);
+                            $('#post-like-thumb-6').css('color','#c4291c');
+                            $('#post-like-thumb-6').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-5').text(num)
+                        $('#post-like-num-6').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1089,9 +1236,9 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
-            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-7">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-7">thumb_up</i>&nbsp;
+            <span id="post-like-num-7">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1103,7 +1250,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-6').text(res.count)
+                                $('#post-view-num-7').text(res.count)
                             }
                         },
                         async: true
@@ -1118,7 +1265,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-6').text(res.count)
+                                $('#post-like-num-7').text(res.count)
                             }
                         },
                         async: true
@@ -1133,30 +1280,30 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-6').css('color','#c4291c')
-                                $('#post-like-thumb-6').prop('islike', true)
+                                $('#post-like-thumb-7').css('color','#c4291c')
+                                $('#post-like-thumb-7').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-6').css("color","#758591");
-                                $('#post-like-thumb-6').prop('islike', false)
+                                $('#post-like-thumb-7').css("color","#758591");
+                                $('#post-like-thumb-7').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-6').click(function() {
-                        num = $('#post-like-num-6').text()
-                        if ($('#post-like-thumb-6').prop('islike')) {
+                    $('#post-like-thumb-7').click(function() {
+                        num = $('#post-like-num-7').text()
+                        if ($('#post-like-thumb-7').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-6').css('color', '#758591');
-                            $('#post-like-thumb-6').prop('islike', false);
+                            $('#post-like-thumb-7').css('color', '#758591');
+                            $('#post-like-thumb-7').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-6').css('color','#c4291c');
-                            $('#post-like-thumb-6').prop('islike', true);
+                            $('#post-like-thumb-7').css('color','#c4291c');
+                            $('#post-like-thumb-7').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-6').text(num)
+                        $('#post-like-num-7').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1236,9 +1383,9 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-7">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-7">thumb_up</i>&nbsp;
-            <span id="post-like-num-7">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-8">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-8">thumb_up</i>&nbsp;
+            <span id="post-like-num-8">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1250,7 +1397,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-7').text(res.count)
+                                $('#post-view-num-8').text(res.count)
                             }
                         },
                         async: true
@@ -1265,7 +1412,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-7').text(res.count)
+                                $('#post-like-num-8').text(res.count)
                             }
                         },
                         async: true
@@ -1280,30 +1427,30 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-7').css('color','#c4291c')
-                                $('#post-like-thumb-7').prop('islike', true)
+                                $('#post-like-thumb-8').css('color','#c4291c')
+                                $('#post-like-thumb-8').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-7').css("color","#758591");
-                                $('#post-like-thumb-7').prop('islike', false)
+                                $('#post-like-thumb-8').css("color","#758591");
+                                $('#post-like-thumb-8').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-7').click(function() {
-                        num = $('#post-like-num-7').text()
-                        if ($('#post-like-thumb-7').prop('islike')) {
+                    $('#post-like-thumb-8').click(function() {
+                        num = $('#post-like-num-8').text()
+                        if ($('#post-like-thumb-8').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-7').css('color', '#758591');
-                            $('#post-like-thumb-7').prop('islike', false);
+                            $('#post-like-thumb-8').css('color', '#758591');
+                            $('#post-like-thumb-8').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-7').css('color','#c4291c');
-                            $('#post-like-thumb-7').prop('islike', true);
+                            $('#post-like-thumb-8').css('color','#c4291c');
+                            $('#post-like-thumb-8').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-7').text(num)
+                        $('#post-like-num-8').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1383,9 +1530,9 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-8">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-8">thumb_up</i>&nbsp;
-            <span id="post-like-num-8">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-9">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-9">thumb_up</i>&nbsp;
+            <span id="post-like-num-9">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -1397,7 +1544,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-8').text(res.count)
+                                $('#post-view-num-9').text(res.count)
                             }
                         },
                         async: true
@@ -1412,7 +1559,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-8').text(res.count)
+                                $('#post-like-num-9').text(res.count)
                             }
                         },
                         async: true
@@ -1427,30 +1574,30 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-8').css('color','#c4291c')
-                                $('#post-like-thumb-8').prop('islike', true)
+                                $('#post-like-thumb-9').css('color','#c4291c')
+                                $('#post-like-thumb-9').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-8').css("color","#758591");
-                                $('#post-like-thumb-8').prop('islike', false)
+                                $('#post-like-thumb-9').css("color","#758591");
+                                $('#post-like-thumb-9').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-8').click(function() {
-                        num = $('#post-like-num-8').text()
-                        if ($('#post-like-thumb-8').prop('islike')) {
+                    $('#post-like-thumb-9').click(function() {
+                        num = $('#post-like-num-9').text()
+                        if ($('#post-like-thumb-9').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-8').css('color', '#758591');
-                            $('#post-like-thumb-8').prop('islike', false);
+                            $('#post-like-thumb-9').css('color', '#758591');
+                            $('#post-like-thumb-9').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-8').css('color','#c4291c');
-                            $('#post-like-thumb-8').prop('islike', true);
+                            $('#post-like-thumb-9').css('color','#c4291c');
+                            $('#post-like-thumb-9').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-8').text(num)
+                        $('#post-like-num-9').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -1531,153 +1678,6 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-9">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-9">thumb_up</i>&nbsp;
-            <span id="post-like-num-9">0</span>&nbsp;&nbsp;
-            <script>
-                $(document).ready(function() {
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countview",
-                        data: {
-                            title: "elasticsearch + kibana 集群环境搭建"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-view-num-9').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countlike",
-                        data: {
-                            title: "elasticsearch + kibana 集群环境搭建"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-like-num-9').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/showlike",
-                        data: {
-                            title: "elasticsearch + kibana 集群环境搭建"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.islike) {
-                                $('#post-like-thumb-9').css('color','#c4291c')
-                                $('#post-like-thumb-9').prop('islike', true)
-                            } else {
-                                $('#post-like-thumb-9').css("color","#758591");
-                                $('#post-like-thumb-9').prop('islike', false)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $('#post-like-thumb-9').click(function() {
-                        num = $('#post-like-num-9').text()
-                        if ($('#post-like-thumb-9').prop('islike')) {
-                            url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-9').css('color', '#758591');
-                            $('#post-like-thumb-9').prop('islike', false);
-                            num--
-                        } else {
-                            url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-9').css('color','#c4291c');
-                            $('#post-like-thumb-9').prop('islike', true);
-                            num++
-                        }
-                        $('#post-like-num-9').text(num)
-                        $.ajax({
-                            url: url,
-                            data: {
-                                title: "elasticsearch + kibana 集群环境搭建"
-                            },
-                            type: 'GET',
-                            dataType: 'JSON',
-                            success: function(res) {
-                            },
-                            async: true
-                        });
-
-                        return false;
-                    });
-                });
-            </script>
-
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/04/12/golang-性能优化之累加哈希/'">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/ready_player_one2.jpg">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/04/12/golang-性能优化之累加哈希/">golang 性能优化之累加哈希</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            很多时候性能问题总是发生在一些不起眼的地方。最近做一个性能问题分析的时候发现，一个函数里面使用由于字符串拼接产生的临时字符串导致内存上涨了40%（1...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/04/12/golang-性能优化之累加哈希/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                
-                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
-                
-            </div>
-            <div>
-                
-                    <strong>hatlonely</strong>
-                
-                <span>4月 12, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-
-            <!-- 浏览和点赞功能 by hatlonely -->
-            <i class="material-icons">remove_red_eye</i>&nbsp;
             <span id="post-view-num-10">0</span>&nbsp;&nbsp;&nbsp;
             <i class="material-icons like-hover" id="post-like-thumb-10">thumb_up</i>&nbsp;
             <span id="post-like-num-10">0</span>&nbsp;&nbsp;
@@ -1686,7 +1686,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countview",
                         data: {
-                            title: "golang 性能优化之累加哈希"
+                            title: "elasticsearch + kibana 集群环境搭建"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1701,7 +1701,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/countlike",
                         data: {
-                            title: "golang 性能优化之累加哈希"
+                            title: "elasticsearch + kibana 集群环境搭建"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1716,7 +1716,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                     $.ajax({
                         url: "http://123.207.136.97:3001/api/showlike",
                         data: {
-                            title: "golang 性能优化之累加哈希"
+                            title: "elasticsearch + kibana 集群环境搭建"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1749,7 +1749,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                         $.ajax({
                             url: url,
                             data: {
-                                title: "golang 性能优化之累加哈希"
+                                title: "elasticsearch + kibana 集群环境搭建"
                             },
                             type: 'GET',
                             dataType: 'JSON',
@@ -1890,7 +1890,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
             </ul>
         </li>
         
@@ -1923,7 +1923,7 @@ cmake 是一个跨平台的 c++ 构建工具，与 makefile 类似...
                     
                         <li>
                             <a class="sidebar_archives-link" href="/tags/性能"> 性能
-                                <span class="sidebar_archives-count"> 3 </span>
+                                <span class="sidebar_archives-count"> 4 </span>
                             </a>
                         </li>
                     
