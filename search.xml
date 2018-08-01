@@ -150,13 +150,13 @@ func (w *consulWatcher) Close() {
             
             <tag> golang </tag>
             
-            <tag> consul </tag>
-            
             <tag> grpc </tag>
             
             <tag> 负载均衡 </tag>
             
             <tag> load balancer </tag>
+            
+            <tag> consul </tag>
             
         </tags>
         
@@ -244,9 +244,9 @@ grpc_health_v1.RegisterHealthServer(server, &amp;HealthImpl{})
             
             <tag> golang </tag>
             
-            <tag> consul </tag>
-            
             <tag> grpc </tag>
+            
+            <tag> consul </tag>
             
             <tag> 服务注册与发现 </tag>
             
@@ -1145,9 +1145,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> hash </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -1215,13 +1215,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
+            <tag> 数据结构 </tag>
+            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
-            
-            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -1404,9 +1404,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> 构建工具 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 构建工具 </tag>
             
             <tag> Makefile </tag>
             
@@ -3339,9 +3339,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> 单元测试 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
             
         </tags>
         
@@ -3557,9 +3557,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> 依赖管理 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 依赖管理 </tag>
             
         </tags>
         
