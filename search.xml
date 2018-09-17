@@ -3,6 +3,163 @@
   
     
     <entry>
+      <title><![CDATA[谁养鱼]]></title>
+      <url>/2018/09/17/%E8%B0%81%E5%85%BB%E9%B1%BC/</url>
+      <content type="html"><![CDATA[<p>1、在一条街上,有5座房子,喷了5种颜色;<br>2、每个房子里住着不同国家的人;<br>3、每个人喝不同的饮料,抽不同牌子的香烟,养不同的宠物;</p>
+<p><strong>已知</strong></p>
+<p>1、英国人住红色房子;<br>2、瑞典人养狗;<br>3、丹麦人喝茶;<br>4、绿色房子在白色房子左面;<br>5、绿色房子主人喝咖啡;<br>6、抽Pall Mall 香烟的人养鸟;<br>7、黄色房子主人抽Dunhill 香烟;<br>8、住在中间房子的人喝牛奶;<br>9、挪威人住第一间房;<br>10、 抽Blends香烟的人住在养猫的人隔壁;<br>11、 养马的人住抽Dunhill 香烟的人隔壁;<br>12、 抽Blue Master的人喝啤酒;<br>13、 德国人抽Prince香烟;<br>14、 挪威人住蓝色房子隔壁;<br>15、 抽Blends香烟的人有一个喝水的邻居;</p>
+<p><strong>问</strong>：谁养鱼？</p>
+<pre><code class="python">#!/usr/bin/env python3
+
+from enum import Enum, unique
+import itertools
+
+@unique
+class 国籍(Enum):
+    英国 = 1
+    瑞典 = 2
+    丹麦 = 3
+    德国 = 4
+    挪威 = 5
+
+@unique
+class 房子(Enum):
+    红色 = 1
+    白色 = 2
+    绿色 = 3
+    黄色 = 4
+    蓝色 = 5
+
+@unique
+class 香烟(Enum):
+    PallMall   = 1
+    Dunhill    = 2
+    Blends     = 3
+    BlueMaster = 4
+    Prince     = 5
+
+@unique
+class 饮料(Enum):
+    茶 = 1
+    咖啡 = 2
+    牛奶 = 3
+    啤酒 = 4
+    水 = 5
+
+@unique
+class 宠物(Enum):
+    狗 = 1
+    鸟 = 2
+    猫 = 3
+    马 = 4
+    鱼 = 5
+
+def MakeIndex(items):
+    index = {}
+    for i in range(0, len(items)):
+        index[items[i]] = i
+    return index
+
+
+def main():
+    for 国籍排列 in itertools.permutations([国籍.英国, 国籍.瑞典, 国籍.丹麦, 国籍.德国, 国籍.挪威]):
+        # 9、 挪威人住第一间房
+        if 国籍排列[0] != 国籍.挪威:
+            continue
+
+        国籍索引 = MakeIndex(国籍排列)
+        for 房子排列 in itertools.permutations([房子.红色, 房子.白色, 房子.绿色, 房子.黄色, 房子.蓝色]):
+            # 1、英国人住红色房子
+            if 房子排列[国籍索引[国籍.英国]] != 房子.红色:
+                continue
+
+            # 4、绿色房子在白色房子左面
+            房子索引 = MakeIndex(房子排列)
+            if 房子索引[房子.白色] - 房子索引[房子.绿色] != 1:
+                continue
+            # 14、挪威人住蓝色房子隔壁
+            if abs(国籍索引[国籍.挪威] - 房子索引[房子.蓝色]) != 1:
+                continue
+
+            for 香烟排列 in itertools.permutations([香烟.PallMall, 香烟.Dunhill, 香烟.Blends, 香烟.BlueMaster, 香烟.Prince]):
+                # 7、黄色房子主人抽Dunhill 香烟
+                if 香烟排列[房子索引[房子.黄色]] != 香烟.Dunhill:
+                    continue
+                # 13、德国人抽Prince香烟。
+                if 香烟排列[国籍索引[国籍.德国]] != 香烟.Prince:
+                    continue
+
+                香烟索引 = MakeIndex(香烟排列)
+                for 饮料排列 in itertools.permutations([饮料.茶, 饮料.咖啡, 饮料.牛奶, 饮料.啤酒, 饮料.水]):
+                    # 8、住在中间房子的人喝牛奶
+                    if 饮料排列[2] != 饮料.牛奶:
+                        continue
+                    # 3、丹麦人喝茶
+                    if 饮料排列[国籍索引[国籍.丹麦]] != 饮料.茶:
+                        continue
+                    # 5、绿色房子主人喝咖啡
+                    if 饮料排列[房子索引[房子.绿色]] != 饮料.咖啡:
+                        continue
+                    # 12、抽Blue Master的人喝啤酒。
+                    if 饮料排列[香烟索引[香烟.BlueMaster]] != 饮料.啤酒:
+                        continue
+
+                    饮料索引 = MakeIndex(饮料排列)
+                    # 15、抽Blends香烟的人有一个喝水的邻居。
+                    if abs(香烟索引[香烟.Blends] - 饮料索引[饮料.水]) != 1:
+                        continue
+                    for 宠物排列 in itertools.permutations([宠物.狗, 宠物.鸟, 宠物.猫, 宠物.马, 宠物.鱼]):
+                        # 2、瑞典人养狗
+                        if 宠物排列[国籍索引[国籍.瑞典]] != 宠物.狗:
+                            continue
+                        # 6、抽Pall Mall 香烟的人养鸟。
+                        if 宠物排列[香烟索引[香烟.PallMall]] != 宠物.鸟:
+                            continue
+                        宠物索引 = MakeIndex(宠物排列)
+                        # 10、抽Blends香烟的人住在养猫的人隔壁
+                        if abs(香烟索引[香烟.Blends] - 宠物索引[宠物.猫]) != 1:
+                            continue
+                        # 11、养马的人住抽Dunhill 香烟的人隔壁。
+                        if abs(香烟索引[香烟.Dunhill] - 宠物索引[宠物.马]) != 1:
+                            continue
+
+                        items = []
+                        for i in range(0, len(国籍排列)):
+                            item = {}
+                            item[&#39;国籍&#39;] = 国籍排列[i].name
+                            item[&#39;房子&#39;] = 房子排列[i].name
+                            item[&#39;香烟&#39;] = 香烟排列[i].name
+                            item[&#39;饮料&#39;] = 饮料排列[i].name
+                            item[&#39;宠物&#39;] = 宠物排列[i].name
+                            items.append(item)
+                        for i in range(0, len(items)):
+                            item = items[i]
+                            print(&#39;第{0}间房是{1},住着{2}人,抽{3},喝{4},养{5}&#39;.format(
+                                i + 1, item[&#39;房子&#39;], item[&#39;国籍&#39;], item[&#39;香烟&#39;], item[&#39;饮料&#39;], item[&#39;宠物&#39;]))
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<p><strong>输出</strong></p>
+<pre><code>第1间房是黄色,住着挪威人,抽Dunhill,喝水,养猫
+第2间房是蓝色,住着丹麦人,抽Blends,喝茶,养马
+第3间房是红色,住着英国人,抽PallMall,喝牛奶,养鸟
+第4间房是绿色,住着德国人,抽Prince,喝咖啡,养鱼
+第5间房是白色,住着瑞典人,抽BlueMaster,喝啤酒,养狗
+</code></pre>]]></content>
+      
+        
+        <tags>
+            
+            <tag> 算法 </tag>
+            
+            <tag> funny </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[c++ map 查找性能测试]]></title>
       <url>/2018/08/01/c-map-%E6%9F%A5%E6%89%BE%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95/</url>
       <content type="html"><![CDATA[<p>最近在为推荐服务作性能调优，这个服务的主要逻辑是用离线计算的模型数据给请求中的每个广告打分，再返回这些广告的排序结果，这里面打分的过程其实就用请求中的数据拼成各种key，去查一个大的 map，这种计算非常多，成为了主要的性能瓶颈，代码比较老，使用的是 boost::unordered_map，为了解决这个问题，找了一些第三方库和标准库对比了一下</p>
@@ -150,13 +307,13 @@ func (w *consulWatcher) Close() {
             
             <tag> golang </tag>
             
+            <tag> consul </tag>
+            
             <tag> grpc </tag>
             
             <tag> 负载均衡 </tag>
             
             <tag> load balancer </tag>
-            
-            <tag> consul </tag>
             
         </tags>
         
@@ -244,9 +401,9 @@ grpc_health_v1.RegisterHealthServer(server, &amp;HealthImpl{})
             
             <tag> golang </tag>
             
-            <tag> grpc </tag>
-            
             <tag> consul </tag>
+            
+            <tag> grpc </tag>
             
             <tag> 服务注册与发现 </tag>
             
@@ -1145,9 +1302,9 @@ So(hasher.AddStr(&quot;hello world&quot;).Val(), ShouldEqual, hasher.AddStr(&quo
             
             <tag> 性能优化 </tag>
             
-            <tag> hash </tag>
-            
             <tag> 数据结构 </tag>
+            
+            <tag> hash </tag>
             
         </tags>
         
@@ -1215,13 +1372,13 @@ BenchmarkSetContains/hashset-8            20000000            89.4 ns/op        
             
             <tag> 性能优化 </tag>
             
-            <tag> 数据结构 </tag>
-            
             <tag> bitset </tag>
             
             <tag> hashset </tag>
             
             <tag> set </tag>
+            
+            <tag> 数据结构 </tag>
             
         </tags>
         
@@ -1404,9 +1561,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 构建工具 </tag>
+            
+            <tag> golang </tag>
             
             <tag> Makefile </tag>
             
@@ -3339,9 +3496,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 单元测试 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
@@ -3557,9 +3714,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 依赖管理 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
