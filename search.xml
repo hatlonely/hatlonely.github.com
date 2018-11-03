@@ -2789,15 +2789,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
+            <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
+            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
             
         </tags>
         
@@ -3299,9 +3299,9 @@ func main() {
         
         <tags>
             
-            <tag> 博客 </tag>
-            
             <tag> hexo </tag>
+            
+            <tag> 博客 </tag>
             
             <tag> 程序人生 </tag>
             
@@ -4332,7 +4332,7 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
     </entry>
     
     <entry>
-      <title><![CDATA[hexo + github 博客]]></title>
+      <title><![CDATA[c++11 新特性]]></title>
       <url>/2016/12/22/c-11-%E6%96%B0%E7%89%B9%E6%80%A7/</url>
       <content type="html"><![CDATA[<h2 id="auto，decltype，for，nullptr"><a href="#auto，decltype，for，nullptr" class="headerlink" title="auto，decltype，for，nullptr"></a>auto，decltype，for，nullptr</h2><p>如果编译器在定义一个变量的时候可以推断出变量的类型，不用写变量的类型，你只需写auto即可</p>
 <pre><code class="cpp">auto str = &quot;sissie&quot;;
@@ -5269,11 +5269,11 @@ hexo new page categories
         
         <tags>
             
-            <tag> 博客 </tag>
-            
             <tag> hexo </tag>
             
             <tag> github </tag>
+            
+            <tag> 博客 </tag>
             
             <tag> next </tag>
             
