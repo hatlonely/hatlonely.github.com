@@ -3,6 +3,147 @@
   
     
     <entry>
+      <title><![CDATA[admob 广告开发者报表 api]]></title>
+      <url>/2018/11/01/admob-%E5%B9%BF%E5%91%8A%E5%BC%80%E5%8F%91%E8%80%85%E6%8A%A5%E8%A1%A8-api/</url>
+      <content type="html"><![CDATA[<p>广告是移动应用非常好的变现模式，作为开发者经常会接很多家的广告平台，每个广告平台都有自己的报表系统，就会有一个各个平台数据汇总分析的需求，首先第一步就需要从各个广告平台获取数据，除了在web页面提供基本的数据导出功能，基本上各个平台都会提供 api 来方便数据拉取的自动化。</p>
+<p>admob 是 google 的移动开发者广告平台，同样也提供了完备的 api 来获取报表数据</p>
+<h3 id="创建-API-凭证"><a href="#创建-API-凭证" class="headerlink" title="创建 API 凭证"></a>创建 API 凭证</h3><p>报表 api 使用 oauth 2.0 授权，需要先开通云平台账号，需要填一下账单信息。开通账号后，在平台上创建一个 oauth 2.0 的凭证</p>
+<p><img src="/img/images/google_create_oauth.jpg" alt="google oauth 授权"></p>
+<p>创建完成后，<code>下载JSON</code> 秘钥文件，保存为 <code>client_secrets.json</code></p>
+<h3 id="使用-google-api-的-python-库"><a href="#使用-google-api-的-python-库" class="headerlink" title="使用 google api 的 python 库"></a>使用 google api 的 python 库</h3><pre><code>sudo pip3 install google-api-python-client
+sudo pip3 install oauth2client
+</code></pre><h3 id="初始化服务"><a href="#初始化服务" class="headerlink" title="初始化服务"></a>初始化服务</h3><pre><code class="python">from apiclient import sample_tools
+
+scope = [&#39;https://www.googleapis.com/auth/adsense.readonly&#39;]
+client_secrets_file = &#39;client_secrets.json&#39;
+
+service, _ = sample_tools.init(
+    &#39;&#39;, &#39;adsense&#39;, &#39;v1.4&#39;, __doc__,
+    client_secrets_file,
+    parents=[], scope=scope
+)
+</code></pre>
+<h3 id="调用服务-api"><a href="#调用服务-api" class="headerlink" title="调用服务 api"></a>调用服务 <a href="https://developers.google.com/adsense/management/v1.4/reference/accounts/reports/generate" target="_blank" rel="noopener">api</a></h3><pre><code class="python">results = service.accounts().reports().generate(
+    accountId=&#39;pub-131xxxxxxxxxxxxx&#39;,
+    startDate=start.strftime(&#39;%Y-%m-%d&#39;),
+    endDate=end.strftime(&#39;%Y-%m-%d&#39;),
+    metric=metric,
+    dimension=dimension,
+    useTimezoneReporting=True,
+).execute()
+</code></pre>
+<p><code>accountId</code>: 在 admob 平台的首页上 <a href="https://apps.admob.com/v2/home" target="_blank" rel="noopener">https://apps.admob.com/v2/home</a> 点击自己的头像， <code>发布商 ID</code> 就是 <code>accountId</code><br><code>metric</code>: 指标项，点击、展示、收入等<br><code>dimension</code>: 维度，日期、app、广告位、国家等<br><code>startDate</code>: 开始日期，yyyy-mm-dd 格式<br><code>endDate</code>: 结束时间，yyyy-mm-dd 格式<br><code>useTimezoneReporting</code>: 使用账户所在的时区</p>
+<h3 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h3><p>代码依赖了一个 <code>client_secrets.json</code> 的授权文件</p>
+<pre><code class="python">import json
+import datetime
+import argparse
+from apiclient import sample_tools
+
+
+def collect(start=None, end=None):
+    if not start:
+        start = datetime.datetime.now() - datetime.timedelta(days=1)
+    if not end:
+        end = start
+
+    scope = [&#39;https://www.googleapis.com/auth/adsense.readonly&#39;]
+    client_secrets_file = &#39;client_secrets.json&#39;
+
+    service, _ = sample_tools.init(
+        &#39;&#39;, &#39;adsense&#39;, &#39;v1.4&#39;, __doc__,
+        client_secrets_file,
+        parents=[], scope=scope
+    )
+
+    dimension = [
+        &quot;DATE&quot;, &quot;APP_NAME&quot;, &quot;APP_PLATFORM&quot;, &quot;AD_UNIT_NAME&quot;, &quot;AD_UNIT_ID&quot;, &quot;COUNTRY_CODE&quot;
+    ]
+    metric = [
+        &quot;AD_REQUESTS&quot;, &quot;CLICKS&quot;, &quot;INDIVIDUAL_AD_IMPRESSIONS&quot;, &quot;EARNINGS&quot;, &quot;REACHED_AD_REQUESTS_SHOW_RATE&quot;
+    ]
+
+    results = service.accounts().reports().generate(
+        accountId=&#39;pub-131xxxxxxxxxxxxx&#39;,
+        startDate=start.strftime(&#39;%Y-%m-%d&#39;),
+        endDate=end.strftime(&#39;%Y-%m-%d&#39;),
+        metric=metric,
+        dimension=dimension,
+        useTimezoneReporting=True,
+    ).execute()
+
+    headers = [i.lower() for i in dimension + metric]
+    datas = []
+    for row in results.get(&#39;rows&#39;):
+        data = {}
+        for i in range(len(row)):
+            data[headers[i]] = row[i]
+        datas.append(data)
+    return datas
+
+
+def transform(datas):
+    for data in datas:
+        # 数据转化
+        pass
+    return datas
+
+
+def serialize(datas):
+    for data in datas:
+        print(json.dumps(data))
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description=&quot;&quot;&quot;Example:
+            python3 admob.py -s 20181025 -e 20181028
+        &quot;&quot;&quot;
+    )
+    parser.add_argument(
+        &#39;-s&#39;, &#39;--start&#39;,
+        type=lambda d: datetime.datetime.strptime(d, &#39;%Y%m%d&#39;),
+        help=&#39;start time&#39;,
+        default=None
+    )
+    parser.add_argument(
+        &#39;-e&#39;, &#39;--end&#39;,
+        type=lambda d: datetime.datetime.strptime(d, &#39;%Y%m%d&#39;),
+        help=&#39;end time&#39;,
+        default=None
+    )
+    args = parser.parse_args()
+    serialize(transform(collect(args.start, args.end)))
+
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
+<li>google 广告平台报表 api:  <a href="https://developers.google.com/adsense/management/v1.4/reference/accounts/reports/generate" target="_blank" rel="noopener">https://developers.google.com/adsense/management/v1.4/reference/accounts/reports/generate</a></li>
+<li>google 广告平台指标和维度:<br><a href="https://developers.google.com/adsense/management/metrics-dimensions" target="_blank" rel="noopener">https://developers.google.com/adsense/management/metrics-dimensions</a></li>
+<li>google oauth 授权:  <a href="https://developers.google.com/adwords/api/docs/guides/authentication" target="_blank" rel="noopener">https://developers.google.com/adwords/api/docs/guides/authentication</a></li>
+<li>How to use Google Adsense API to download Adsense data: <a href="https://009co.com/?p=389" target="_blank" rel="noopener">https://009co.com/?p=389</a></li>
+<li>google admob 平台: <a href="https://apps.admob.com/v2/home" target="_blank" rel="noopener">https://apps.admob.com/v2/home</a></li>
+<li>google 云平台: <a href="https://console.cloud.google.com/home/dashboard" target="_blank" rel="noopener">https://console.cloud.google.com/home/dashboard</a></li>
+<li>adsense 平台凭据: <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">https://console.cloud.google.com/apis/credentials</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> admob </tag>
+            
+            <tag> 广告报表 </tag>
+            
+            <tag> api </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[谁养鱼]]></title>
       <url>/2018/09/17/%E8%B0%81%E5%85%BB%E9%B1%BC/</url>
       <content type="html"><![CDATA[<p>1、在一条街上,有5座房子,喷了5种颜色;<br>2、每个房子里住着不同国家的人;<br>3、每个人喝不同的饮料,抽不同牌子的香烟,养不同的宠物;</p>
@@ -1005,11 +1146,11 @@ install(DIRECTORY ${DMP_CLIENT_SOURCE_DIR}/include/dmpval DESTINATION include/dm
         
         <tags>
             
-            <tag> c++ </tag>
-            
             <tag> cmake </tag>
             
             <tag> cmakelists.txt </tag>
+            
+            <tag> c++ </tag>
             
             <tag> 构建工具 </tag>
             
@@ -1561,9 +1702,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> 构建工具 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 构建工具 </tag>
             
             <tag> Makefile </tag>
             
@@ -2648,15 +2789,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
-            
-            <tag> 博客 </tag>
-            
-            <tag> hexo </tag>
             
         </tags>
         
@@ -3158,11 +3299,11 @@ func main() {
         
         <tags>
             
+            <tag> 程序人生 </tag>
+            
             <tag> 博客 </tag>
             
             <tag> hexo </tag>
-            
-            <tag> 程序人生 </tag>
             
         </tags>
         
@@ -3496,9 +3637,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> 单元测试 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
             
         </tags>
         
@@ -3565,9 +3706,9 @@ export PATH=$PATH:/path/to/FlameGraph
         
         <tags>
             
-            <tag> 性能 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 性能 </tag>
             
             <tag> pprof </tag>
             
@@ -3654,9 +3795,9 @@ BenchmarkUnMarshalJsonparser-4               2000000           877 ns/op
         
         <tags>
             
-            <tag> 性能 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 性能 </tag>
             
             <tag> json </tag>
             
@@ -3714,9 +3855,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> 依赖管理 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 依赖管理 </tag>
             
         </tags>
         
@@ -4116,9 +4257,9 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
         
         <tags>
             
-            <tag> 性能 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 性能 </tag>
             
             <tag> slice </tag>
             
