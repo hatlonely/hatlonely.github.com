@@ -1702,9 +1702,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 构建工具 </tag>
+            
+            <tag> golang </tag>
             
             <tag> Makefile </tag>
             
@@ -3637,9 +3637,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 单元测试 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
@@ -3855,9 +3855,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> golang </tag>
-            
             <tag> 依赖管理 </tag>
+            
+            <tag> golang </tag>
             
         </tags>
         
