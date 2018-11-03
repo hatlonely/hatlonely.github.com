@@ -311,153 +311,6 @@
         
             
                 <!-- Paradox Thumbnail -->
-                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/01/21/与vim的一段往事/'">
-    <!-- Post Thumbnail -->
-    
-        <!-- Custom Thumbnail -->
-        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/vim_keyboard_shortcut_4.jpg">
-    
-
-        <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2018/01/21/与vim的一段往事/">与vim的一段往事</a></p>
-    </div>
-
-    <!-- Post Excerpt -->
-    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
-        
-            这就要从大学里面学c语言说起了，那个时候我们还在用古老的 visual c++ 6.0（满满的回忆有木有……），不过我唯一的印象只剩下了，嗯，这个东...
-        
-        &nbsp;&nbsp;&nbsp;
-        <span>
-            <a href="/2018/01/21/与vim的一段往事/" target="_self">阅读全文</a>
-        </span>
-    </div>
-    <!-- Post_entry Info-->
-    <div id="post_entry-info">
-        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
-            <!-- Author Avatar -->
-            <div id="author-avatar">
-                
-                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
-                
-            </div>
-            <div>
-                
-                    <strong>hatlonely</strong>
-                
-                <span>1月 21, 2018</span>
-            </div>
-        </div>
-        <div id="post_entry-right-info">
-
-            <!-- 浏览和点赞功能 by hatlonely -->
-            <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
-            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
-            <script>
-                $(document).ready(function() {
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countview",
-                        data: {
-                            title: "与vim的一段往事"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-view-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/countlike",
-                        data: {
-                            title: "与vim的一段往事"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.count) {
-                                $('#post-like-num-1').text(res.count)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $.ajax({
-                        url: "http://123.207.136.97:3001/api/showlike",
-                        data: {
-                            title: "与vim的一段往事"
-                        },
-                        type: 'GET',
-                        dataType: 'JSON',
-                        success: function(res) {
-                            if (res.islike) {
-                                $('#post-like-thumb-1').css('color','#c4291c')
-                                $('#post-like-thumb-1').prop('islike', true)
-                            } else {
-                                $('#post-like-thumb-1').css("color","#758591");
-                                $('#post-like-thumb-1').prop('islike', false)
-                            }
-                        },
-                        async: true
-                    });
-
-                    $('#post-like-thumb-1').click(function() {
-                        num = $('#post-like-num-1').text()
-                        if ($('#post-like-thumb-1').prop('islike')) {
-                            url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-1').css('color', '#758591');
-                            $('#post-like-thumb-1').prop('islike', false);
-                            num--
-                        } else {
-                            url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-1').css('color','#c4291c');
-                            $('#post-like-thumb-1').prop('islike', true);
-                            num++
-                        }
-                        $('#post-like-num-1').text(num)
-                        $.ajax({
-                            url: url,
-                            data: {
-                                title: "与vim的一段往事"
-                            },
-                            type: 'GET',
-                            dataType: 'JSON',
-                            success: function(res) {
-                            },
-                            async: true
-                        });
-
-                        return false;
-                    });
-                });
-            </script>
-
-            
-
-            
-
-            
-
-            <!-- Post Views -->
-            <span class="post_entry-views">
-            </span>
-        </div>
-    </div>
-</div>
-
-            
-            
-        
-        
-    
-        
-            
-                <!-- Paradox Thumbnail -->
                 <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2018/01/19/谈谈注释/'">
     <!-- Post Thumbnail -->
     
@@ -499,9 +352,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
-            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-1">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-1">thumb_up</i>&nbsp;
+            <span id="post-like-num-1">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -513,7 +366,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-2').text(res.count)
+                                $('#post-view-num-1').text(res.count)
                             }
                         },
                         async: true
@@ -528,7 +381,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-2').text(res.count)
+                                $('#post-like-num-1').text(res.count)
                             }
                         },
                         async: true
@@ -543,30 +396,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-2').css('color','#c4291c')
-                                $('#post-like-thumb-2').prop('islike', true)
+                                $('#post-like-thumb-1').css('color','#c4291c')
+                                $('#post-like-thumb-1').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-2').css("color","#758591");
-                                $('#post-like-thumb-2').prop('islike', false)
+                                $('#post-like-thumb-1').css("color","#758591");
+                                $('#post-like-thumb-1').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-2').click(function() {
-                        num = $('#post-like-num-2').text()
-                        if ($('#post-like-thumb-2').prop('islike')) {
+                    $('#post-like-thumb-1').click(function() {
+                        num = $('#post-like-num-1').text()
+                        if ($('#post-like-thumb-1').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-2').css('color', '#758591');
-                            $('#post-like-thumb-2').prop('islike', false);
+                            $('#post-like-thumb-1').css('color', '#758591');
+                            $('#post-like-thumb-1').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-2').css('color','#c4291c');
-                            $('#post-like-thumb-2').prop('islike', true);
+                            $('#post-like-thumb-1').css('color','#c4291c');
+                            $('#post-like-thumb-1').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-2').text(num)
+                        $('#post-like-num-1').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -646,9 +499,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
-            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-2">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-2">thumb_up</i>&nbsp;
+            <span id="post-like-num-2">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -660,7 +513,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-3').text(res.count)
+                                $('#post-view-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -675,7 +528,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-3').text(res.count)
+                                $('#post-like-num-2').text(res.count)
                             }
                         },
                         async: true
@@ -690,30 +543,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-3').css('color','#c4291c')
-                                $('#post-like-thumb-3').prop('islike', true)
+                                $('#post-like-thumb-2').css('color','#c4291c')
+                                $('#post-like-thumb-2').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-3').css("color","#758591");
-                                $('#post-like-thumb-3').prop('islike', false)
+                                $('#post-like-thumb-2').css("color","#758591");
+                                $('#post-like-thumb-2').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-3').click(function() {
-                        num = $('#post-like-num-3').text()
-                        if ($('#post-like-thumb-3').prop('islike')) {
+                    $('#post-like-thumb-2').click(function() {
+                        num = $('#post-like-num-2').text()
+                        if ($('#post-like-thumb-2').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-3').css('color', '#758591');
-                            $('#post-like-thumb-3').prop('islike', false);
+                            $('#post-like-thumb-2').css('color', '#758591');
+                            $('#post-like-thumb-2').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-3').css('color','#c4291c');
-                            $('#post-like-thumb-3').prop('islike', true);
+                            $('#post-like-thumb-2').css('color','#c4291c');
+                            $('#post-like-thumb-2').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-3').text(num)
+                        $('#post-like-num-2').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -793,9 +646,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
-            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-3">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-3">thumb_up</i>&nbsp;
+            <span id="post-like-num-3">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -807,7 +660,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-4').text(res.count)
+                                $('#post-view-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -822,7 +675,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-4').text(res.count)
+                                $('#post-like-num-3').text(res.count)
                             }
                         },
                         async: true
@@ -837,30 +690,30 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.islike) {
-                                $('#post-like-thumb-4').css('color','#c4291c')
-                                $('#post-like-thumb-4').prop('islike', true)
+                                $('#post-like-thumb-3').css('color','#c4291c')
+                                $('#post-like-thumb-3').prop('islike', true)
                             } else {
-                                $('#post-like-thumb-4').css("color","#758591");
-                                $('#post-like-thumb-4').prop('islike', false)
+                                $('#post-like-thumb-3').css("color","#758591");
+                                $('#post-like-thumb-3').prop('islike', false)
                             }
                         },
                         async: true
                     });
 
-                    $('#post-like-thumb-4').click(function() {
-                        num = $('#post-like-num-4').text()
-                        if ($('#post-like-thumb-4').prop('islike')) {
+                    $('#post-like-thumb-3').click(function() {
+                        num = $('#post-like-num-3').text()
+                        if ($('#post-like-thumb-3').prop('islike')) {
                             url = "http://123.207.136.97:3001/api/dounlike";
-                            $('#post-like-thumb-4').css('color', '#758591');
-                            $('#post-like-thumb-4').prop('islike', false);
+                            $('#post-like-thumb-3').css('color', '#758591');
+                            $('#post-like-thumb-3').prop('islike', false);
                             num--
                         } else {
                             url = "http://123.207.136.97:3001/api/dolike";
-                            $('#post-like-thumb-4').css('color','#c4291c');
-                            $('#post-like-thumb-4').prop('islike', true);
+                            $('#post-like-thumb-3').css('color','#c4291c');
+                            $('#post-like-thumb-3').prop('islike', true);
                             num++
                         }
-                        $('#post-like-num-4').text(num)
+                        $('#post-like-num-3').text(num)
                         $.ajax({
                             url: url,
                             data: {
@@ -940,9 +793,9 @@
 
             <!-- 浏览和点赞功能 by hatlonely -->
             <i class="material-icons">remove_red_eye</i>&nbsp;
-            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
-            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
-            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
+            <span id="post-view-num-4">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-4">thumb_up</i>&nbsp;
+            <span id="post-like-num-4">0</span>&nbsp;&nbsp;
             <script>
                 $(document).ready(function() {
                     $.ajax({
@@ -954,7 +807,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-view-num-5').text(res.count)
+                                $('#post-view-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -969,7 +822,7 @@
                         dataType: 'JSON',
                         success: function(res) {
                             if (res.count) {
-                                $('#post-like-num-5').text(res.count)
+                                $('#post-like-num-4').text(res.count)
                             }
                         },
                         async: true
@@ -979,6 +832,153 @@
                         url: "http://123.207.136.97:3001/api/showlike",
                         data: {
                             title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-4').css('color','#c4291c')
+                                $('#post-like-thumb-4').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-4').css("color","#758591");
+                                $('#post-like-thumb-4').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-4').click(function() {
+                        num = $('#post-like-num-4').text()
+                        if ($('#post-like-thumb-4').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-4').css('color', '#758591');
+                            $('#post-like-thumb-4').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-4').css('color','#c4291c');
+                            $('#post-like-thumb-4').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-4').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
+                    });
+                });
+            </script>
+
+            
+
+            
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+        
+    
+        
+            
+                <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2016/12/22/c-11-新特性/'">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/setting_sun2.jpg">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2016/12/22/c-11-新特性/">hexo + github 博客</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2016/12/22/c-11-新特性/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                
+                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
+                
+            </div>
+            <div>
+                
+                    <strong>hatlonely</strong>
+                
+                <span>12月 22, 2016</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-5">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-5">thumb_up</i>&nbsp;
+            <span id="post-like-num-5">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function() {
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-5').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-5').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "hexo + github 博客"
                         },
                         type: 'GET',
                         dataType: 'JSON',
@@ -1011,7 +1011,154 @@
                         $.ajax({
                             url: url,
                             data: {
-                                title: "《microservice &amp; serverless》by 蔡超的一点感想"
+                                title: "hexo + github 博客"
+                            },
+                            type: 'GET',
+                            dataType: 'JSON',
+                            success: function(res) {
+                            },
+                            async: true
+                        });
+
+                        return false;
+                    });
+                });
+            </script>
+
+            
+
+            
+
+            
+
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
+        </div>
+    </div>
+</div>
+
+            
+            
+        
+        
+    
+        
+            
+                <!-- Paradox Thumbnail -->
+                <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out" onclick="location='/2016/12/21/hexo-github-博客/'">
+    <!-- Post Thumbnail -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50 lazy" data-original="/img/thumbnail/elephant2.jpg">
+    
+
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2016/12/21/hexo-github-博客/">hexo + github 博客</a></p>
+    </div>
+
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2016/12/21/hexo-github-博客/" target="_self">阅读全文</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                
+                    <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="hatlonely's avatar">
+                
+            </div>
+            <div>
+                
+                    <strong>hatlonely</strong>
+                
+                <span>12月 21, 2016</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+
+            <!-- 浏览和点赞功能 by hatlonely -->
+            <i class="material-icons">remove_red_eye</i>&nbsp;
+            <span id="post-view-num-6">0</span>&nbsp;&nbsp;&nbsp;
+            <i class="material-icons like-hover" id="post-like-thumb-6">thumb_up</i>&nbsp;
+            <span id="post-like-num-6">0</span>&nbsp;&nbsp;
+            <script>
+                $(document).ready(function() {
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countview",
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-view-num-6').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/countlike",
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.count) {
+                                $('#post-like-num-6').text(res.count)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $.ajax({
+                        url: "http://123.207.136.97:3001/api/showlike",
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                            if (res.islike) {
+                                $('#post-like-thumb-6').css('color','#c4291c')
+                                $('#post-like-thumb-6').prop('islike', true)
+                            } else {
+                                $('#post-like-thumb-6').css("color","#758591");
+                                $('#post-like-thumb-6').prop('islike', false)
+                            }
+                        },
+                        async: true
+                    });
+
+                    $('#post-like-thumb-6').click(function() {
+                        num = $('#post-like-num-6').text()
+                        if ($('#post-like-thumb-6').prop('islike')) {
+                            url = "http://123.207.136.97:3001/api/dounlike";
+                            $('#post-like-thumb-6').css('color', '#758591');
+                            $('#post-like-thumb-6').prop('islike', false);
+                            num--
+                        } else {
+                            url = "http://123.207.136.97:3001/api/dolike";
+                            $('#post-like-thumb-6').css('color','#c4291c');
+                            $('#post-like-thumb-6').prop('islike', true);
+                            num++
+                        }
+                        $('#post-like-num-6').text(num)
+                        $.ajax({
+                            url: url,
+                            data: {
+                                title: "hexo + github 博客"
                             },
                             type: 'GET',
                             dataType: 'JSON',
@@ -1152,7 +1299,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a>
+                <a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

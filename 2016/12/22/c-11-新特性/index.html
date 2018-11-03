@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            hexo + github 博客 | 
+        
+        hatlonely的小站
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/avatar/hatlonely11.png">
+    <link rel="icon" href="/img/avatar/hatlonely11.png">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content="">
+    <meta name="keywords" content=",c++,c++11">
+    <meta name="theme-color" content="#0097A7">
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    <style id="github_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("github_css","/css/github.css?X77TkqaIl6vQk1NjGPgYxA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?viDXotD6w0lWI+/tiytINg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+            
+                <style id="prettify_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_css","/css/prettify.min.css?Za8gfWOCG/wBJQAgLgzW0Q==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+                <style id="prettify_theme"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("prettify_theme","/css/prettify/github-v2.min.css?AfzKxt++K+/lhZBlSjnxwg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+            
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+
+  code {
+    font-family: 'SF Mono', Menlo, Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="hatlonely的小站">
+    <meta name="msapplication-starturl" content="http://www.hatlonely.com/2016/12/22/c-11-新特性/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="hatlonely的小站">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/avatar/hatlonely11.png">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://www.hatlonely.com/2016/12/22/c-11-新特性/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="hexo + github 博客 | hatlonely的小站">
+    <meta property="og:image" content="/img/avatar/hatlonely11.png">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="c++"> <meta property="og:article:tag" content="c++11"> 
+
+    
+        <meta property="article:published_time" content="Thu Dec 22 2016 00:05:50 GMT+0800">
+        <meta property="article:modified_time" content="Sun Nov 04 2018 00:26:14 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html",
+    "headline": "hexo + github 博客",
+    "datePublished": "Thu Dec 22 2016 00:05:50 GMT+0800",
+    "dateModified": "Sun Nov 04 2018 00:26:14 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "hatlonely",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        },
+        "description": "Try new, go far, see more"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "hatlonely的小站",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/avatar/hatlonely11.png"
+        }
+    },
+    "keywords": ",c++,c++11",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+    
+        <script>
+    var _hmt = _hmt || [];
+    (function() {var hm = document.createElement('script');
+    hm.src = 'https://hm.baidu.com/hm.js?633cb5fd05b598aceeda727f031fa7e4';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+
+    <!-- Left aligned menu below button -->
+    
+    
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#auto，decltype，for，nullptr"><span class="post-toc-number">1.</span> <span class="post-toc-text">auto，decltype，for，nullptr</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#lambda-表达式"><span class="post-toc-number">2.</span> <span class="post-toc-text">lambda 表达式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初始化列表"><span class="post-toc-number">3.</span> <span class="post-toc-text">初始化列表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#类"><span class="post-toc-number">4.</span> <span class="post-toc-text">类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#move语义与右值引用"><span class="post-toc-number">5.</span> <span class="post-toc-text">move语义与右值引用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#容器"><span class="post-toc-number">6.</span> <span class="post-toc-text">容器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#std-vector"><span class="post-toc-number">6.1.</span> <span class="post-toc-text">std::vector</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#std-array"><span class="post-toc-number">6.2.</span> <span class="post-toc-text">std::array</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#std-forward-list"><span class="post-toc-number">6.3.</span> <span class="post-toc-text">std::forward_list</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#unordered"><span class="post-toc-number">6.4.</span> <span class="post-toc-text">unordered</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#智能指针"><span class="post-toc-number">7.</span> <span class="post-toc-text">智能指针</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#正则表达式"><span class="post-toc-number">8.</span> <span class="post-toc-text">正则表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#regex"><span class="post-toc-number">8.1.</span> <span class="post-toc-text">regex</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多线程"><span class="post-toc-number">9.</span> <span class="post-toc-text">多线程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#thread"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">thread</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#mutex"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">mutex</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#condition-variable"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">condition_variable</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#atomic"><span class="post-toc-number">9.4.</span> <span class="post-toc-text">atomic</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#随机数"><span class="post-toc-number">10.</span> <span class="post-toc-text">随机数</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#链接"><span class="post-toc-number">11.</span> <span class="post-toc-text">链接</span></a></li></ol>
+    </ul>
+    
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(/img/thumbnail/setting_sun2.jpg)">
+    
+            <p class="article-headline-p">
+                hexo + github 博客
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        
+            <img src="/img/avatar/hatlonely11.png" width="44px" height="44px" alt="Author Avatar"/>
+        
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        
+            <strong>hatlonely</strong>
+        
+        <span>12月 22, 2016</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+        <button id="article-functions-qrcode-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">devices other</i>
+    <span class="visuallyhidden">devices other</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-qrcode-button">
+    <li class="mdl-menu__item">在其它设备中阅读本文章</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACbElEQVR42u3aQVLDMBAEwPz/0+HKJWZmJQsXtE8p4thqHaRlVq/3n75eeHh4eHh4eHh4D+O94uvj4759++nO2VuGv8LDw8M7wvthqQ0Gff33fILWx4aHh4d3kvdpwb3+3G4b7fPz3+Lh4eE9mRe9pgTg4eHh/QdeXl5fhws5FQ8PD+9pvPWyOI9c83uOZi14eHh4Ma8d1snPR/t7eHh4eAGvPtK0ELlGy3qwGdx4pgwPDw8v4LVlbl3gLge+9SEwPDw8vCO8djnOw9n8XW1YXP/HgIeHh7eVNzsWMHt93jBLNo+lfQ8PDw9vxGsPDcx+2w49n7goxsXDw8Pbyssflw9oZZqui/hoIvDw8PCO8NqyNW90rR/AqqceDw8P72berAWVM5I4Y9Zy+zgSPDw8vCO8PBRov82X9fWiHA8PD+88bxabtgv9DJY3zPDw8PDu5g0X3/j41Ho0nE8NHh4e3hneLCzIn9AGCjceusLDw8PbysvDiGTQ+dZSLPd5QIyHh4d3M+9VXu/4mjXDZgcU8PDw8H6L9y6vfCNpY458cyo2Bjw8PLytvDw8TWLfZMrao11FbIGHh4d3kJcs6G37KimRZ+/Cw8PDewIvjyHyMrdtnrVjWCqp8fDw8Ea8WQCRHIeaHUSYTQEeHh7eSd7e1ldbdq+EHZv7e3h4eHglr2105Yt43riabQx4eHh4v8tbaXTlsWwSaqxsUXh4eHjP57VFdrtt1FOGh4eH90je9T3tpLQbzO0bAx4eHt7WMGJWIudPXi+s8fDw8M7wdsUK1/cnmDy0LWJcPDw8vK28v3fh4eHh4eHh4eE94PoCVIztOVK298sAAAAASUVORK5CYII=">
+    
+</ul>
+
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/c/">c++</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/c-11/">c++11</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=hexo + github 博客&url=http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html&pic=http://www.hatlonely.com/img/avatar/hatlonely11.png&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=hexo + github 博客&url=http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html&via=hatlonely" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=hatlonely的小站&title=hexo + github 博客&summary=&pics=http://www.hatlonely.com/img/avatar/hatlonely11.png&url=http://www.hatlonely.com/2016/12/22/c-11-新特性/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+    
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="auto，decltype，for，nullptr"><a href="#auto，decltype，for，nullptr" class="headerlink" title="auto，decltype，for，nullptr"></a>auto，decltype，for，nullptr</h2><p>如果编译器在定义一个变量的时候可以推断出变量的类型，不用写变量的类型，你只需写auto即可</p>
+<pre><code class="cpp">auto str = &quot;sissie&quot;;
+assert(typeid(str) == typeid(const char *));
+</code></pre>
+<p>auto处理引用时默认是值类型，可以指定&amp;作为修饰符强制它作为引用，auto自动获取指针类型，也可以显示地指定指针类型</p>
+<pre><code class="cpp">int&amp; foo();
+auto i = foo();     // int
+auto&amp; ri = foo();   // int&amp;
+
+int* bar();
+auto pi = bar();    // int*
+auto* pi = bar();   // int*
+</code></pre>
+<p>在迭代器中使用auto，简化代码</p>
+<pre><code class="cpp">std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+for (auto it = vs.begin(); it != vs.end(); ++it) {
+    std::cout &lt;&lt; *it &lt;&lt; &quot;, &quot;;
+}
+</code></pre>
+<p>在模板中使用auto</p>
+<pre><code class="cpp">template &lt;typename BuiltType, typename Builder&gt;
+void makeAndProcessObject(const Builder&amp; builder)
+{
+    BuiltType val = builder.makeObject();
+    // do stuff with val
+}
+MyObjBuilder builder;
+makeAndProcessObject&lt;MyObj&gt;(builder);
+
+// 使用auto只需要一个模板参数，让编译器自动推导
+template &lt;typename Builder&gt;
+void makeAndProcessObject(const Builder&amp; builder)
+{
+    auto val = builder.makeObject();
+    // do stuff with val
+}
+MyObjBuilder builder;
+makeAndProcessObject(builder);
+</code></pre>
+<p><code>decltype</code> 返回操作数的类型，可以对基本上任何类型使用<code>decltype</code>，包括函数的返回值</p>
+<pre><code class="cpp">int ia[10];
+decltype(ia) ib;    // int ib[10];
+</code></pre>
+<p>新的函数返回值声明语法，把返回类型放在函数声明的后面，用<code>auto</code>代替前面的返回类型</p>
+<pre><code class="cpp">// 这两种函数声明方式等效
+int multiply(int x, int y);
+auto multiply(int x, int y) -&gt; int;
+
+// 返回auto
+template &lt;typename Builder&gt;
+auto makeAndProcessObject(const Builder&amp; builder) -&gt; decltype(builder.makeObject())
+{
+    auto val = builder.makeObject();
+    // do stuff with val
+    return val;
+}
+</code></pre>
+<p>区间迭代，for循环遍历容器</p>
+<pre><code class="cpp">std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+for (const auto&amp; name: vs) {
+    std::cout &lt;&lt; name &lt;&lt; &quot;, &quot;;
+}
+</code></pre>
+<p><code>nullptr</code> 是C++11中新加的关键字，用来表示空指针，替代原来的<code>NULL</code>，<code>nullptr</code>不能转换成int</p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p>C++11中得lambda表达式用来定义和创建匿名函数，lambda表达式语法形式如下：</p>
+<pre><code class="cpp">[ capture ] ( params ) mutable exception attribute -&gt; ret { body }      // (1)
+[ capture ] ( params ) -&gt; ret { body }                                  // (2)
+[ capture ] ( params ) { body }                                         // (3)
+[ capture ] { body }                                                    // (4)
+</code></pre>
+<ul>
+<li>(1) 是完整的 lambda 表达式形式</li>
+<li>(2) const 类型的 lambda 表达式，该类型的表达式不能改捕获(“capture”)列表中的值</li>
+<li>(3) 省略了返回值类型的 lambda 表达式，但是该 lambda 表达式的返回类型可以按照下列规则推演出来：<ul>
+<li>如果 lambda 代码块中包含了 return 语句，则该 lambda 表达式的返回类型由 return 语句的返回类型确定。</li>
+<li>如果没有 return 语句，则类似 <code>void f(...)</code> 函数</li>
+</ul>
+</li>
+<li>(4) 省略了参数列表，类似于无参函数 f()</li>
+</ul>
+<ol>
+<li><strong>capture</strong>：capture 为捕获的lambda所在作用域范围内可见的局部变量列表<ul>
+<li><code>[a,&amp;b]</code> a变量以值的方式呗捕获，b以引用的方式被捕获</li>
+<li><code>[this]</code> 以值的方式捕获 this 指针</li>
+<li><code>[&amp;]</code> 以引用的方式捕获所有的外部自动变量</li>
+<li><code>[=]</code> 以值的方式捕获所有的外部自动变量</li>
+<li><code>[]</code> 不捕获外部的任何变量</li>
+</ul>
+</li>
+<li><strong>params</strong>：参数列表</li>
+<li><strong>mutable exception attribute</strong>：lambda是否可以更改捕获变量以及是否有异常抛出<ul>
+<li><strong>mutable</strong> 修饰符说明 lambda 表达式体内的代码可以修改被捕获的变量，并且可以访问被捕获对象的 non-const 方法</li>
+<li><strong>exception</strong> 说明 lambda 表达式是否抛出异常(noexcept)，以及抛出何种异常，类似于void f() throw(X, Y)</li>
+<li><strong>attribute</strong> 用来声明属性</li>
+</ul>
+</li>
+<li><strong>ret</strong>：返回类型</li>
+<li><strong>body</strong>：函数体</li>
+</ol>
+<pre><code class="cpp">// 数组累加
+std::vector&lt;int&gt; vi{{1, 2, 3, 4, 5, 6, 7, 8, 9}};
+int total = 0;
+std::for_each(vi.begin(), vi.end(), [&amp;total](int i) {
+  total += i;
+});
+
+// 数组绝对值
+// 单一的return语句，编译其可以推导出返回类型，多个return语句需要显示指定返回类型
+std::transform(vi.begin(), vi.end(), [](int i) -&gt; int {
+    if (i &lt; 0) {
+        return -i;
+    } else {
+        return i;
+    }
+});
+
+// mutable
+size_t i = 42;
+auto f = [i]() mutable {
+    return ++i;
+};
+i = 0;
+std::cout &lt;&lt; f() &lt;&lt; std::endl;   // 43
+std::cout &lt;&lt; f() &lt;&lt; std::endl;   // 44
+</code></pre>
+<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>C++11新添加初始化列表<code>std::initializer_list&lt;&gt;</code>类型，可以通过{}语法来构造初始化列表</p>
+<pre><code class="cpp">// 容器初始化
+// {1, 2, 3, 4, 5}实际上是一个std::initializer_list&lt;int&gt;类型
+std::vector&lt;int&gt; vi = {1, 2, 3, 4, 5};
+std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+std::map&lt;int, std::string&gt; mis = {
+    {1, &quot;c&quot;},
+    {2, &quot;java&quot;},
+    {3, &quot;c++&quot;}
+};
+
+// 初始化列表参数
+void print_initializer_list(std::initializer_list&lt;int&gt; il) {
+    for (auto i: il) {
+        std::cout &lt;&lt; i &lt;&lt; &quot;, &quot;;
+    }
+    std::cout &lt;&lt; endl;
+}
+print_initializer_list({1, 2, 3, 4, 5, 6});
+
+// 返回初始化列表
+std::vector&lt;std::string&gt; my_array() {
+    return {&quot;sissie&quot;, &quot;robin&quot;, &quot;playjokes&quot;, &quot;sky&quot;, &quot;hatlonely&quot;};
+}
+</code></pre>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>加入两个新的标识符：</p>
+<ul>
+<li><strong>override</strong>，表示函数应当重写基类中的虚函数；</li>
+<li><strong>final</strong>，表示派生类不应当重写这个虚函数</li>
+</ul>
+<pre><code class="cpp">class B
+{
+public:
+   virtual void f(int) {std::cout &lt;&lt; &quot;B::f&quot; &lt;&lt; std::endl;}
+};
+
+class D : public B
+{
+public:
+   virtual void f(int) override final {std::cout &lt;&lt; &quot;D::f&quot; &lt;&lt; std::endl;}
+};
+</code></pre>
+<p>默认或禁用函数，当我们定义了自己的带参数的构造函数时，编译器将不再生成默认的构造函数，如果此时想使用默认的构造函数，则必须显式地声明并定义不带参数的构造函数。在C++11中，我们可以使用<strong>default</strong>关键字来表明我们希望使用默认的构造函数。类似的，当我们不想外部使用编译器自动生成的构造函数或赋值函数时，我们一般需要将其声明成<code>protected</code>或<code>private</code>的。在C++ 11中，我们可以使用<strong>delete</strong>关键字来表明我们不希望编译器生成默认的构造函数或赋值函数。</p>
+<pre><code class="cpp">class Person {
+public:
+    Person() = default;
+    Person(const Person&amp; person) = delete;
+};
+</code></pre>
+<p>C++11允许成员变量就地初始化</p>
+<pre><code class="cpp">class Person {
+private:
+    std::string _name = &quot;sissie&quot;;
+}
+</code></pre>
+<p>委托构造函数，一个委托构造函数使用它所属类的其他构造函数执行它的初始化过程</p>
+<pre><code class="cpp">class SaleData {
+    SaleData(std::string booknum, uint32_t units_sold, double price) :
+        _booknum(booknum), _units_sold(unit_sold), _price(price) {}
+    SaleData() : SaleData(&quot;&quot;, 0, 0) {}
+    SaleData(std::string booknum) : SaleData(booknum, 0, 0) {}
+};
+</code></pre>
+<h2 id="move语义与右值引用"><a href="#move语义与右值引用" class="headerlink" title="move语义与右值引用"></a>move语义与右值引用</h2><p>左值和右值是针对表达式而言，表达式之后依然存在的对象是左值，表达式之后不再存在的临时对象为右值<br>左值可以对其取地址，右值不能</p>
+<pre><code class="cpp">int i = 0;
+std::string hello = &quot;hello&quot;;
+std::string world = &quot;world&quot;;
+const int&amp; ri = 1;
+
+// 左值：i, ++i, hello, world
+// 右值：i++, hello + world, ri
+</code></pre>
+<p>拷贝临时对象性能问题，考虑如下字符串初始化</p>
+<pre><code class="cpp">std::string str1 = &quot;a&quot;;
+// str1 + &quot;b&quot; 生成一个临时对象，再用这个临时对象去构造str2
+// 而这个临时对象在构造完str2后就被释放，这个对象并没有用到，却需要调用一次构造函数
+std::string str2 = str1 + &quot;b&quot;;
+</code></pre>
+<p>如果我们能确定某个值是一个非常量右值（或者是一个以后不会再使用的左值），则我们在进行临时对象的拷贝时，可以不用拷贝实际的数据，而只是窃取实际数据的指针，C++11中引入的右值引用正好可用于标识一个非常量右值。C++ 11中用&amp;表示左值引用，用&amp;&amp;表示右值引用</p>
+<p>移动构造函数</p>
+<pre><code class="cpp">// MemoryBlock.h
+#pragma once
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+class MemoryBlock {
+public:
+    // Simple constructor that initializes the resource.
+    explicit MemoryBlock(size_t length) : _length(length), _data(new int[length]) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(size_t). length = &quot; &lt;&lt; _length &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;
+    }
+
+    // Destructor.
+    ~MemoryBlock() {
+        std::cout &lt;&lt; &quot;In ~MemoryBlock(). length = &quot; &lt;&lt; _length &lt;&lt; &quot;.&quot;;
+
+        if (_data != NULL) {
+            std::cout &lt;&lt; &quot; Deleting resource.&quot;;
+            // Delete the resource.
+            delete[] _data;
+        }
+
+        std::cout &lt;&lt; std::endl;
+    }
+
+    // Copy constructor.
+    MemoryBlock(const MemoryBlock&amp; other) : _length(other._length), _data(new int[other._length]) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(const MemoryBlock&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Copying resource.&quot; &lt;&lt; std::endl;
+
+        std::copy(other._data, other._data + _length, _data);
+    }
+
+    // Copy assignment operator.
+    MemoryBlock&amp; operator=(const MemoryBlock&amp; other) {
+        std::cout &lt;&lt; &quot;In operator=(const MemoryBlock&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Copying resource.&quot; &lt;&lt; std::endl;
+
+        if (this != &amp;other)
+        {
+            // Free the existing resource.
+            delete[] _data;
+
+            _length = other._length;
+            _data = new int[_length];
+            std::copy(other._data, other._data + _length, _data);
+        }
+        return *this;
+    }
+
+    // Move constructor.
+    MemoryBlock(MemoryBlock&amp;&amp; other) : _length(0), _data(NULL) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(MemoryBlock&amp;&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Moving resource.&quot; &lt;&lt; std::endl;
+
+        // Copy the data pointer and its length from the
+        // source object.
+        _data = other._data;
+        _length = other._length;
+
+        // Release the data pointer from the source object so that
+        // the destructor does not free the memory multiple times.
+        other._data = NULL;
+        other._length = 0;
+    }
+
+    // Move assignment operator.
+    MemoryBlock&amp; operator=(MemoryBlock&amp;&amp; other) {
+        std::cout &lt;&lt; &quot;In operator=(MemoryBlock&amp;&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;
+
+        if (this != &amp;other)
+        {
+            // Free the existing resource.
+            delete[] _data;
+
+            // Copy the data pointer and its length from the
+            // source object.
+            _data = other._data;
+            _length = other._length;
+
+            // Release the data pointer from the source object so that
+            // the destructor does not free the memory multiple times.
+            other._data = NULL;
+            other._length = 0;
+        }
+        return *this;
+    }
+
+    // Retrieves the length of the data resource.
+    size_t Length() const {
+        return _length;
+    }
+
+private:
+    size_t _length; // The length of the resource.
+    int* _data;     // The resource.
+};
+
+// rvalue-references-move-semantics.cpp
+// compile with: /EHsc
+#include &quot;MemoryBlock.h&quot;
+#include &lt;vector&gt;
+
+int main() {
+    // Create a vector object and add a few elements to it.
+    std::vector&lt;MemoryBlock&gt; v;
+    v.push_back(MemoryBlock(25));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+    v.push_back(MemoryBlock(75));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+
+    // Insert a new element into the second position of the vector.
+    v.insert(v.begin() + 1, MemoryBlock(50));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+}
+
+// 可以看到下面的输出在push_back的时候，由于参数是一个非常量右值，自动调用了move构造函数
+// 下面还有拷贝构造函数是在vector长度增长时拷贝数组产生的，这次拷贝构造也可以优化成move
+// 具体实现与编译器有关
+// In MemoryBlock(size_t). length = 25.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 25. Moving resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In MemoryBlock(size_t). length = 75.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 75. Moving resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 25. Copying resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In MemoryBlock(size_t). length = 50.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 50. Moving resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 25. Copying resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 75. Copying resource.
+// In ~MemoryBlock(). length = 75. Deleting resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In ~MemoryBlock(). length = 75. Deleting resource.
+// In ~MemoryBlock(). length = 50. Deleting resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+</code></pre>
+<p><code>std::move</code>显示调用move构造函数，如果类没有move构造函数，会调用copy构造函数。对一个左值使用<code>std::move</code>之后，不应该再使用该对象，对该对象的任何操作都是未定义的。</p>
+<pre><code class="cpp">std::vector&lt;MemoryBlock&gt; v;
+MemoryBlock mb(66);
+v.push_back(std::move(mb));
+</code></pre>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="std-vector"><a href="#std-vector" class="headerlink" title="std::vector"></a>std::vector</h3><ul>
+<li><code>size()</code>：记录了当前元素的个数</li>
+<li><code>capacity()</code>：不重新分配内存的话，可以保存多少个元素</li>
+<li><code>reserve(n)</code>：分配至少能容纳n个元素的内存空间</li>
+<li><code>shrink_to_fit()</code>：将capacity减少为于<code>size()</code>相同的大小</li>
+</ul>
+<pre><code class="cpp">// vector的无参构造函数初始化vector时，size和capacity都是0
+// 之后当capacity不足时，capacity会成倍增加，可以用reverse指定capacity的值
+std::vector&lt;int&gt; vi;
+assert(vi.size() == 0);
+assert(vi.capacity() == 0);
+vi.reserve(1024);
+assert(vi.size() == 0);
+assert(vi.capacity() == 1024);
+
+// vector的构造函数可以传入一个参数指定当前vector的size
+// 此构造函数会调用元素的无参构造函数，初始化元素
+// 所以元素的类型必须实现无参构造函数，才能调用此构造函数
+std::vector&lt;std::string&gt; vs(5);
+assert(vs.size() == 5);
+assert(vs.capacity() == 5);
+vs.push_back(&quot;sissie&quot;);
+assert(vs[5] == &quot;sissie&quot;);
+assert(vs.size() == 6);
+assert(vs.capacity() == 10);
+vs.shrink_to_fit();
+assert(vs.capacity() == 6);
+</code></pre>
+<h3 id="std-array"><a href="#std-array" class="headerlink" title="std::array"></a>std::array</h3><p><code>array</code>是C++11新引入的数组类型，和<code>std::vector</code>不同的是<code>array</code>的长度是固定的，不能动态拓展</p>
+<pre><code class="cpp">template &lt;class T, std::size_t N&gt; struct array
+
+std::array&lt;int, 3&gt; a1{{1, 2, 3}};
+std::sort(a1.begin(), a1.end());
+</code></pre>
+<h3 id="std-forward-list"><a href="#std-forward-list" class="headerlink" title="std::forward_list"></a>std::forward_list</h3><p>C++11引入的新类型，<code>forward_list</code>是单链表（std::list是双链表），只需要顺序遍历的场合，<code>forward_list</code>能更加节省内存，插入和删除的性能高于list</p>
+<pre><code class="cpp">std::forward_list&lt;int&gt; fli{{1, 2, 3, 4}};
+</code></pre>
+<h3 id="unordered"><a href="#unordered" class="headerlink" title="unordered"></a>unordered</h3><p><code>std::set std::multiset std::map std::multimap</code><br>用平衡树实现的有序的容器，插入、删除和查找的时间复杂度都是O(nlogn)</p>
+<p><code>std::unordered_set std::unordered_multiset std::unordered_map std::unordered_multimap</code><br>C++11引入的新类型，用hash实现的无序的容器，插入、删除和查找的时间复杂度都是O(1)，在不关注容器内元素顺序的场合，使用unordered的容器能获得更高的性能</p>
+<pre><code class="cpp">std::unordered_set&lt;int&gt; usi = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+assert(usi.size() == 10);
+usi.insert(66);
+assert(usi.size() == 10);
+
+// unordered_set是无序的
+// 0,99,88,77,66,55,44,33,22,11,
+for (const auto&amp; i: usi) {
+    std::cout &lt;&lt; i &lt;&lt; &quot;,&quot;;
+}
+std::cout &lt;&lt; std::endl;
+// set是有序的
+// 0,11,22,33,44,55,66,77,88,99,
+std::set&lt;int&gt; si = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+for (const auto&amp; i: si) {
+    std::cout &lt;&lt; i &lt;&lt; &quot;,&quot;;
+}
+std::cout &lt;&lt; std::endl;
+
+// multiset中可以插入相同的值
+std::unordered_multiset&lt;int&gt; umsi = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+assert(umsi.size() == 10);
+assert(umsi.count(66) == 1);
+umsi.insert(66);
+assert(umsi.size() == 11);
+assert(umsi.count(66) == 2);
+
+std::unordered_map&lt;std::string, double&gt; book_price_map{{
+    {"C++ Primer", 128.00},
+    {"UNIX 环境高级编程", 99.00},
+    {"HBase 权威指南", 89.00},
+    {"MapReduce 设计模式", 49.00}
+}};
+for (const auto&amp; book_price_pair: book_price_map) {
+    std::cout &lt;&lt; book_price_pair.first &lt;&lt; &quot; =&gt; &quot; &lt;&lt; book_price_pair.second &lt;&lt; std::endl;
+}
+</code></pre>
+<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><ul>
+<li><code>unique_ptr</code>：作用域结束之后自动释放资源，不可复制，可以移动</li>
+<li><code>shared_ptr</code>：通过引用计数共享资源，当引用计数为0时，自动释放资源</li>
+<li><code>weak_ptr</code>：一个<code>shared_ptr</code>的弱引用，不修改引用计数，为了解决循环引用问题而引入</li>
+</ul>
+<pre><code class="cpp">#include &lt;cassert&gt;
+#include &lt;memory&gt;
+
+int main() {
+    {
+        std::unique_ptr&lt;int&gt; upi(new int(6));
+    }
+
+    {
+        // 用make_shared来初始化shared_ptr
+        std::shared_ptr&lt;int&gt; spi = std::make_shared&lt;int&gt;(6);
+        // use_count获取引用计数
+        assert(spi.use_count() == 1);
+        {
+            std::shared_ptr&lt;int&gt; spi_shared(spi);
+            assert(spi.use_count() == 2);
+        }
+        assert(spi.use_count() == 1);
+    }
+
+    {
+        std::shared_ptr&lt;int&gt; spi = std::make_shared&lt;int&gt;(6);
+        assert(spi.use_count() == 1);
+
+        // 通过shared_ptr来构造weak_ptr
+        std::weak_ptr&lt;int&gt; wpi(spi);
+        // weak_ptr不改变引用计数
+        assert(spi.use_count() == 1);
+        assert(wpi.use_count() == 1);
+
+        // lock() 获取weak_ptr引用的shared_ptr
+        assert(*wpi.lock() == 6);
+        // expired() 返回引用的对象是否已经释放
+        assert(!wpi.expired());
+    }
+
+    return 0;
+}
+</code></pre>
+<p><code>shared_ptr</code>提供<code>get</code>函数获取对象的指针</p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="regex"><a href="#regex" class="headerlink" title="regex"></a>regex</h3><pre><code class="cpp">typedef basic_regex&lt;char&gt; regex
+typedef basic_regex&lt;wchar_t&gt; wregex
+
+typedef sub_match&lt;const char*&gt; csub_match
+typedef sub_match&lt;const wchar_t*&gt; wcsub_match
+typedef sub_match&lt;std::string::const_iterator&gt; ssub_match
+typedef sub_match&lt;std::wstring::const_iterator&gt; wssub_match
+
+typedef match_results&lt;const char*&gt; cmatch
+typedef match_results&lt;const wchar_t*&gt; wcmatch
+typedef match_results&lt;std::string::const_iterator&gt; smatch
+typedef match_results&lt;std::wstring::const_iterator&gt; wsmatch
+</code></pre>
+<ul>
+<li><code>basic_regex</code>：正则表达式</li>
+<li><code>sub_match</code>：正则表达式子匹配</li>
+<li><code>match_result</code>：正则匹配结果，由多个<code>sub_match</code>组成</li>
+</ul>
+<p>match_result成员</p>
+<ul>
+<li><code>ready()</code>：如果已经通过<code>regex_serach</code>或者<code>regex_match</code>设置则返回<code>true</code>，否则返回<code>false</code>；如果<code>ready</code>返回<code>false</code>，那所有对<code>match_result</code>的操作都是未定义的</li>
+<li><code>size()</code>：匹配失败返回0，否则返回最近一次匹配正则表达式中子表达式的数目</li>
+<li><code>empty()</code>：返回<code>size() == 0</code></li>
+<li><code>prefix()</code>：返回一个<code>sub_match</code>对象，表示匹配之前的序列</li>
+<li><code>suffix()</code>：返回一个<code>sub_match</code>对象，表示匹配之后的序列</li>
+<li><code>format()</code>：将<code>match_result</code>格式化成一个字符串</li>
+<li><code>length(n)</code>：第n个子表达式的长度</li>
+<li><code>position(n)</code>：第n个子表达式距序列开始的距离</li>
+<li><code>str(n)</code>：第n个子表达式匹配的字符串</li>
+<li><code>[]</code>：第n个子表达式的<code>sub_match</code>对象</li>
+<li><code>begin(), end()</code>：<code>sub_match</code>的<code>iterator</code></li>
+<li><code>cbegin(), cend()</code>：<code>sub_match</code>的<code>const_iterator</code></li>
+</ul>
+<p>正则匹配</p>
+<ul>
+<li><code>regex_match()</code>：完全匹配</li>
+<li><code>regex_serach()</code>：部分匹配（匹配第一个）</li>
+<li><code>regex_replace()</code>：正则替换</li>
+<li><code>regex_iterator</code>：迭代器适配器（<code>value_type</code>为<code>match_result</code>），调用regex_search来遍历一个string中所有的匹配子串</li>
+<li><code>regex_token_iterator</code>：迭代器适配器（<code>value_type</code>为<code>sub_match</code>）</li>
+</ul>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;regex&gt;
+#include &lt;cassert&gt;
+
+int main()
+{
+    std::string context = &quot;&quot;
+        &quot;hatlonely (hatlonely@gmail.com) &quot;
+        &quot;playjokes (playjokes@gmail.com)&quot;;
+
+    std::regex mail_regex(&quot;(\\w+)@(\\w+)\\.com&quot;);
+    std::smatch mail_result;
+
+    // 不能全词匹配 regex_match返回false
+    assert(!std::regex_match(context, mail_result, mail_regex));
+    // 可以部分匹配 regex_search返回true
+    assert(std::regex_search(context, mail_result, mail_regex));
+    // mail_result被regex_search设置过 返回true
+    assert(mail_result.ready());
+    // mail_result中sub_match的个数，两个子表达式加上整个表达式
+    assert(mail_result.size() == 3);
+    // mail_result[0]为匹配到的整个字符串
+    assert(mail_result[0] == &quot;hatlonely@gmail.com&quot;);
+    // mail_result[n]为第n个子表达式匹配到得串（小括号内的串）
+    assert(mail_result[1] == &quot;hatlonely&quot;);
+    assert(mail_result[2] == &quot;gmail&quot;);
+    // prefix未匹配到的之前的串
+    assert(mail_result.prefix() == &quot;hatlonely (&quot;);
+    // suffix未匹配到的之后的串
+    assert(mail_result.suffix() == &quot;) playjokes (playjokes@gmail.com)&quot;);
+    // $`  相当于prefix
+    // $&#39;  相当于suffix
+    // $n  第n个子匹配
+    std::cout &lt;&lt; mail_result.format(&quot;$` $1 $2&quot;) &lt;&lt; std::endl;
+
+    {
+        // 相当于循环调用regex_search，迭代器的value_type为match_result
+        std::sregex_iterator it(context.begin(), context.end(), mail_regex);
+        std::sregex_iterator end;
+        for (; it != end; ++it) {
+            std::cout &lt;&lt; (*it)[0] &lt;&lt; std::endl;
+        }
+    }
+    {
+        // 相当于循环调用regex_search，迭代器的value_type为sub_match，相当于match_result[0]
+        std::sregex_token_iterator it(context.begin(), context.end(), mail_regex);
+        std::sregex_token_iterator end;
+        for (; it != end; ++it) {
+            std::cout &lt;&lt; *it &lt;&lt; std::endl;
+        }
+    }
+
+    {
+        // regex_replace 默认会替换所有匹配到的串，指定format_first_only可以只替换第一个匹配到得串
+        // hatlonely (hatlonely@gmail.com) playjokes (playjokes@gmail.com)
+        std::cout &lt;&lt; context &lt;&lt; std::endl;
+        // hatlonely (hatlonely) playjokes (playjokes)
+        std::cout &lt;&lt; regex_replace(context, mail_regex, &quot;$1&quot;) &lt;&lt; std::endl;
+        // hatlonely (hatlonely) playjokes (playjokes@gmail.com)
+        std::cout &lt;&lt; regex_replace(context, mail_regex, &quot;$1&quot;,
+            std::regex_constants::format_first_only) &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h3><p>构造函数</p>
+<pre><code class="cpp">thread();
+// f 是线程执行的函数，可以是函数指针或者是仿函数对象
+// args 是函数的参数，（C++11新特新可变模板参数）
+template &lt;class Function, class... Args&gt; explicit thread(Function&amp;&amp; f, Args&amp;&amp;... args);
+// 线程不可复制
+thread(const thread&amp;) = delete;
+// 线程可以移动
+thread(thread&amp;&amp; other);
+</code></pre>
+<p>thread成员函数</p>
+<ul>
+<li><code>get_id()</code>: 获取线程id</li>
+<li><code>joinable()</code>: 线程是否是可以合并的</li>
+<li><code>join()</code>: 合并线程</li>
+<li><code>detach()</code>: 分离线程</li>
+</ul>
+<p>join和detach是指主线程是否需要等待子线程执行完成，主线程调用join后将等待子线程执行完成，detach表示和主线程分离，子线程单独执行，一个线程在构造后必须调用join或者detach，编译器无法自动选择其中行为</p>
+<p>当前线程操作函数，这些函数都定义在std::this_thread命名空间内</p>
+<ul>
+<li><code>yield()</code>：当前线程将CPU让出，等待下次被调度</li>
+<li><code>get_id()</code>：获取当前线程的线程id</li>
+<li><code>sleep_for()</code>：当前线程休眠一段时间</li>
+<li><code>sleep_until()</code>：当前线程休眠到某个时间点</li>
+</ul>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+
+// 无参数线程函数
+void thread_func_with_no_param() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::cout &lt;&lt; &quot;thread_func_with_no_param&quot; &lt;&lt; std::endl;
+}
+
+// 带参数线程函数
+void thread_func_with_param(int a, int b, int&amp; result) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(40));
+    result = a + b;
+    std::cout &lt;&lt; &quot;thread_func_with_param: &quot; &lt;&lt; a &lt;&lt; &quot; + &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; result &lt;&lt; std::endl;
+}
+
+// 线程仿函数
+struct thread_func_struct {
+    void operator()(int a, int b, int&amp; result) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(60));
+        result = a * b;
+        std::cout &lt;&lt; &quot;thread_func_struct: &quot; &lt;&lt; a &lt;&lt; &quot; * &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; result &lt;&lt; std::endl;
+    }
+};
+
+void thread_usage() {
+    int a = 1, b = 2, result1, result2;
+
+    std::thread thread1(thread_func_with_no_param);
+    // 此处的必须使用std::ref传入result1的引用，下面一样
+    std::thread thread2(thread_func_with_param, a, b, std::ref(result1));
+    std::thread thread3(thread_func_struct(), a, b, std::ref(result2));
+
+    thread1.join();
+    thread2.join();
+    thread3.join();
+    // thread1.detach();
+    // thread2.detach();
+    // thread3.detach();
+
+    std::cout &lt;&lt; &quot;result1: &quot; &lt;&lt; result1 &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;result2: &quot; &lt;&lt; result2 &lt;&lt; std::endl;
+}
+</code></pre>
+<h3 id="mutex"><a href="#mutex" class="headerlink" title="mutex"></a>mutex</h3><p>多个线程同时访问共享资源的时候需要需要用到互斥量，当一个线程锁住了互斥量后，其他线程必须等待这个互斥量解锁后才能访问它。thread提供了四种不同的互斥量：</p>
+<ul>
+<li><code>mutex</code>：最基本的Mutex类。</li>
+<li><code>recursive_mutex</code>：递归Mutex类。</li>
+<li><code>timed_mutex</code>：定时Mutex类。</li>
+<li><code>recursive_timed_mutex</code>：定时递归Mutex类。</li>
+</ul>
+<p><code>std::mutex</code>加解锁是成对的，同一个线程内mutex在没有解锁的情况下，再次对它进行加锁这是不对的，会得到一个未定义行为；<code>std::recursive_mutex</code>与独mutex不同的是，同一个线程内在互斥量没有解锁的情况下可以再次进行加锁，不过他们的加解锁次数需要一致；</p>
+<p><strong>std::mutex</strong>有如下几个成员函数</p>
+<ul>
+<li>构造函数，<code>std::mutex</code>不允许拷贝构造，也不允许move拷贝，最初产生的mutex对象是处于unlocked状态的。</li>
+<li><code>lock()</code>，调用线程将锁住该互斥量。线程调用该函数会发生下面3种情况：<ol>
+<li>如果该互斥量当前没有被锁住，则调用线程将该互斥量锁住，直到调用unlock之前，该线程一直拥有该锁。</li>
+<li>如果当前互斥量被其他线程锁住，则当前的调用线程被阻塞住。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+</ol>
+</li>
+<li><code>unlock()</code>， 解锁，释放对互斥量的所有权。</li>
+<li><code>try_lock()</code>，尝试锁住互斥量，如果互斥量被其他线程占有，则当前线程也不会被阻塞。线程调用该函数也会出现下面3种情况：<ol>
+<li>如果当前互斥量没有被其他线程占有，则该线程锁住互斥量，直到该线程调用unlock释放互斥量。</li>
+<li>如果当前互斥量被其他线程锁住，则当前调用线程返回<code>false</code>，而并不会被阻塞掉。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+</ol>
+</li>
+</ul>
+<p><strong>std::timed_mutex</strong> 比 <code>std::mutex</code> 多了两个成员函数，<code>try_lock_for()</code>，<code>try_lock_until()</code>。</p>
+<ul>
+<li><code>try_lock_for()</code> 函数接受一个时间范围，表示在这一段时间范围之内线程如果没有获得锁则被阻塞住（与<code>std::mutex</code>的 <code>try_lock()</code>不同，<code>try_lock</code>如果被调用时没有获得锁则直接返回 <code>false</code>），如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 <code>false</code>。</li>
+<li><code>try_lock_until()</code> 函数则接受一个时间点作为参数，在指定时间点未到来之前线程如果没有获得锁则被阻塞住，如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 <code>false</code>。</li>
+</ul>
+<p><strong>std::lock_guard</strong>和<strong>std::unique_lock</strong>，与RAII相关，能自动上锁和解锁</p>
+<pre><code class="cpp">void thread_func1(std::mutex&amp; m) {
+    for (int i = 0; i &lt; 10; i++) {
+        m.lock();       // 加锁
+        std::cout &lt;&lt; &quot;thread1 &quot; &lt;&lt; i &lt;&lt; std::endl;
+        m.unlock();     // 解锁
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    }
+}
+
+void thread_func2(std::mutex&amp; m) {
+    for (int i = 0; i &lt; 10; i++) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        // lock_guard在构造后加锁，在作用域解释后自动释放锁
+        std::lock_guard&lt;std::mutex&gt; lg(m);
+        std::cout &lt;&lt; &quot;thread2 &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+}
+
+void mutex_usage() {
+    std::mutex m;
+
+    std::thread thread1(thread_func1, std::ref(m));
+    std::thread thread2(thread_func2, std::ref(m));
+
+    thread1.join();
+    thread2.join();
+}
+</code></pre>
+<h3 id="condition-variable"><a href="#condition-variable" class="headerlink" title="condition_variable"></a>condition_variable</h3><p>当<code>std::condition_variable</code>对象的某个wait函数被调用的时候，它使用<code>std::unique_lock</code>(通过<code>std::mutex</code>) 来锁住当前线程。当前线程会一直被阻塞，直到另外一个线程在相同的<code>std::condition_variable</code>对象上调用了notification函数来唤醒当前线程。</p>
+<p><code>std::condition_variable</code>对象通常使用<code>std::unique_lock&lt;std::mutex&gt;</code>来等待，如果需要使用另外的lockable类型，可以使用<code>std::condition_variable_any</code>类</p>
+<p><strong>condition_variable</strong>成员函数</p>
+<ul>
+<li><code>condition_variable</code> 不可拷贝不可赋值</li>
+<li><code>notify_one()</code>：唤醒一个等待的线程</li>
+<li><code>notify_all()</code>：唤醒所有等待的线程</li>
+<li><code>wait()</code>：阻塞等待直到被唤醒</li>
+<li><code>wait_for()</code>：阻塞等待被唤醒，或者超时</li>
+<li><code>wait_until()</code>：阻塞等待被唤醒，或者到某个时间点</li>
+</ul>
+<pre><code class="cpp">// wait
+void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock);
+template &lt;class Predicate&gt;
+void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock, Predicate pred);
+
+// wait_for
+template &lt;class Rep, class Period&gt;
+std::cv_status wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::duration&lt;Rep, Period&gt;&amp; rel_time);
+template &lt;class Rep, class Period, class Predicate&gt;
+bool wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::duration&lt;Rep, Period&gt;&amp; rel_time,
+    Predicate pred);
+
+// wait_until
+template&lt;class Clock, class Duration&gt;
+std::cv_status wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::time_point&lt;Clock, Duration&gt;&amp; timeout_time);
+template&lt;class Clock, class Duration, class Predicate&gt;
+bool wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::time_point&lt;Clock, Duration&gt;&amp; timeout_time,
+    Predicate pred);
+</code></pre>
+<pre><code class="cpp">#include &lt;iostream&gt;           // std::cout
+#include &lt;thread&gt;             // std::thread
+#include &lt;mutex&gt;              // std::mutex, std::unique_lock
+#include &lt;condition_variable&gt; // std::condition_variable
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+void print_id (int id) {
+    std::unique_lock&lt;std::mutex&gt; lck(mtx);
+    // 下面两句话是一样的
+    // while (!ready) cv.wait(lck);
+    cv.wait(lck, []{return ready;});
+    std::cout &lt;&lt; &quot;thread &quot; &lt;&lt; id &lt;&lt; &#39;\n&#39;;
+}
+
+void go() {
+    std::unique_lock&lt;std::mutex&gt; lck(mtx);
+    ready = true;
+    cv.notify_all();
+}
+
+void condition_variable_usage() {
+    std::thread threads[10];
+    // spawn 10 threads:
+    for (int i=0; i&lt;10; ++i) {
+        threads[i] = std::thread(print_id, i);
+    }
+
+    std::cout &lt;&lt; &quot;10 threads ready to race...\n&quot;;
+    go();
+
+    for (auto&amp; th : threads) {
+        th.join();
+    }
+}
+</code></pre>
+<h3 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h3><p>原子类型对象的主要特点就是从不同线程访问不会导致数据竞争(data race)。因此从不同线程访问某个原子对象是良性 (well-defined) 行为，而通常对于非原子类型而言，并发访问某个对象（如果不做任何同步操作）会导致未定义 (undifined) 行为发生。</p>
+<pre><code class="cpp">#include &lt;atomic&gt;
+int main() {
+    std::atomic&lt;int&gt; ai(5);
+    ai++;
+    ai += 100;
+
+    return 0;
+}
+</code></pre>
+<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p>标准把随机数抽象成随机数引擎和分布两部分.引擎用来产生随机数,分布产生特定分布的随机数(比如平均分布,正太分布等)</p>
+<p>标准提供三种常用的引擎:<code>linear_congruential_engine</code>，<code>mersenne_twister_engine</code>和<code>subtract_with_carry_engine</code>。第一种是线性同余算法，第二种是梅森旋转算法，第三种带进位的线性同余算法。第一种是最常用的，而且速度也是非常快的</p>
+<p>随机数引擎接受一个整形参数当作种子，不提供的话，会使用默认值，推荐使用<code>random_device</code>来产生一个随机数当作种子</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    {
+        // random_device是一个随机数设备，不同的操作系统有不同的实现，linux下是读取/dev/urandom设备
+        std::random_device rd;
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; rd() &lt;&lt; std::endl;
+        }
+    }
+
+    {
+        std::random_device rd;
+        // 用random_device来为随机数生成器设置种子
+        std::mt19937_64 mt(rd());
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; mt() &lt;&lt; std::endl;
+        }
+
+        // 整数均匀分布
+        std::uniform_int_distribution&lt;unsigned&gt; dis(1, 100);
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; dis(mt) &lt;&lt; std::endl;
+        }
+
+        // 浮点数均匀分布
+        std::uniform_real_distribution&lt;double&gt; drs(0.0, 1.0);
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; drs(mt) &lt;&lt; std::endl;
+        }
+    }
+}
+</code></pre>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="http://en.cppreference.com/w/cpp" target="_blank" rel="noopener">cpp reference</a></li>
+<li><a href="https://msdn.microsoft.com/zh-cn/library/dd293665.aspx" target="_blank" rel="noopener">如何编写移动构造函数</a></li>
+<li><a href="http://www.cnblogs.com/hujian/archive/2012/12/10/2810813.html" target="_blank" rel="noopener">C++11系列博文</a></li>
+<li><a href="http://towriting.com/blog/2013/08/01/what-is-cpp11/" target="_blank" rel="noopener">C++11系列-什么是C++11</a></li>
+<li><a href="http://blog.csdn.net/tujiaw/article/details/8245130" target="_blank" rel="noopener">C++11 thread</a></li>
+<li><a href="http://www.cnblogs.com/haippy/p/3284540.html" target="_blank" rel="noopener">C++11 并发指南系列</a></li>
+<li><a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf" target="_blank" rel="noopener">ECMAScript</a></li>
+<li><a href="http://www.tuicool.com/articles/F3u6jy" target="_blank" rel="noopener">make_shared和shared_ptr的区别</a></li>
+<li><a href="http://blog.csdn.net/akonlookie/article/details/8223525" target="_blank" rel="noopener">C++11 随机数函数库random</a></li>
+</ul>
+
+        <!-- 增加点赞功能 by hatlonely -->
+        <div id="post-dolike" islike="false"><i id="post-dolike-thumb" class="material-icons like-hover">thumb_up</i></div>
+        <script>
+            $(document).ready(function() {
+                $.ajax({
+                    url: "http://123.207.136.97:3001/api/showlike",
+                    data: {
+                        title: "hexo + github 博客"
+                    },
+                    type: 'GET',
+                    dataType: 'JSON',
+                    success: function(res) {
+                        if (res.islike) {
+                            $('#post-dolike-thumb').css('color','#c4291c')
+                            $('#post-dolike-thumb').prop('islike', true)
+                        } else {
+                            $('#post-dolike-thumb').css("color","#758591");
+                            $('#post-dolike-thumb').prop('islike', false)
+                        }
+                    },
+                    async: true
+                });
+
+                $('#post-dolike-thumb').click(function() {
+                    if ($('#post-dolike-thumb').prop('islike')) {
+                        url = "http://123.207.136.97:3001/api/dounlike"
+                        $('#post-dolike-thumb').css('color', '#758591')
+                        $('#post-dolike-thumb').prop('islike', false)
+                    } else {
+                        url = "http://123.207.136.97:3001/api/dolike"
+                        $('#post-dolike-thumb').css('color','#c4291c')
+                        $('#post-dolike-thumb').prop('islike', true)
+                    }
+                    $.ajax({
+                        url: url,
+                        data: {
+                            title: "hexo + github 博客"
+                        },
+                        type: 'GET',
+                        dataType: 'JSON',
+                        success: function(res) {
+                        },
+                        async: true
+                    });
+
+                    return false;
+                });
+            });
+        </script>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                        
+                            转载请注明出处
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://www.hatlonely.com/2016/12/22/c-11-新特性/">http://www.hatlonely.com/2016/12/22/c-11-新特性/</a>
+                    </p>
+                </blockquote>
+        
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2018/01/12/《microservice-&-serverless》by-蔡超的一点感想/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2016/12/21/hexo-github-博客/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+<!-- 增加浏览功能 by hatlonely -->
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: "http://123.207.136.97:3001/api/doview",
+            data: {
+                title: "hexo + github 博客"
+            },
+            type: 'GET',
+            dataType: 'JSON',
+            success: function(res) {
+            },
+            async: true
+        });
+    });
+</script>
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/thumbnail/coco1.jpg);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <!--
+    <div class="sidebar-image">
+        <img src="/img/avatar/hatlonely11.png" alt="hatlonely's avatar">
+    </div>
+    -->
+
+    <!-- Sidebar Email -->
+    <!--
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        hatlonely@foxmail.com
+        <b class="caret"></b>
+    </a>
+    -->
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="mailto:hatlonely@foxmail.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/05/">五月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">12</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">folder</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/golang"> golang
+                                <span class="sidebar_archives-count"> 23 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/java"> java
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/性能"> 性能
+                                <span class="sidebar_archives-count"> 4 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/微服务"> 微服务
+                                <span class="sidebar_archives-count"> 6 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/网络框架"> 网络框架
+                                <span class="sidebar_archives-count"> 3 </span>
+                            </a>
+                        </li>
+                    
+                        <li>
+                            <a class="sidebar_archives-link" href="/tags/程序人生"> 程序人生
+                                <span class="sidebar_archives-count"> 2 </span>
+                            </a>
+                        </li>
+                    
+                
+                <!--
+                <li>
+                
+                -->
+            </ul>
+        </li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/timeline" title="时间轴">
+                
+                    <i class="material-icons sidebar-material-icons">timeline</i>
+                
+                时间轴
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签云">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签云
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/links" title="友情链接">
+                
+                    <i class="material-icons sidebar-material-icons">link</i>
+                
+                友情链接
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-twitter">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/profile.php?id=100002314767374" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-facebook">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="http://weibo.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/hatlonely" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>hatlonely的小站
+            
+                <br>
+                
+                    <a href="http://www.miitbeian.gov.cn" rel="nofollow">京ICP备18012308号</a>
+                
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?yvbglk2xb/g60XhlYY9COA==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+    
+        
+            <script>lsloader.load("prettify_js","/js/prettify.min.js?WN07fivHQSMKWy7BmHBB6w==", true)</script>
+        
+    
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+        
+            $(function() {
+                $('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+                prettyPrint();
+                })
+        
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

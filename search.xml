@@ -3,98 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[hexo + github 博客]]></title>
-      <url>/2018/11/04/hexo-github-%E5%8D%9A%E5%AE%A2/</url>
-      <content type="html"><![CDATA[<h2 id="创建-github-仓库"><a href="#创建-github-仓库" class="headerlink" title="创建 github 仓库"></a>创建 github 仓库</h2><p>在 github 上创建一个名为 <code>hatlonely.github.com</code> 的仓库</p>
-<h2 id="安装下载-hexo"><a href="#安装下载-hexo" class="headerlink" title="安装下载 hexo"></a>安装下载 hexo</h2><pre><code>sudo npm install -g hexo
-</code></pre><h2 id="初始化-hexo"><a href="#初始化-hexo" class="headerlink" title="初始化 hexo"></a>初始化 hexo</h2><pre><code>hexo init
-</code></pre><p>修改 <code>_config.yml</code>，增加作者信息</p>
-<pre><code>title: hatlonely的博客
-subtitle:
-description: 做一个有意思的程序员
-author: hatlonely
-language: zh-Hans
-</code></pre><h2 id="预览-hexo"><a href="#预览-hexo" class="headerlink" title="预览 hexo"></a>预览 hexo</h2><pre><code>hexo server
-</code></pre><p>现在可以 <a href="http://127.0.0.1:4000/" target="_blank" rel="noopener">http://127.0.0.1:4000/</a> 预览效果</p>
-<h2 id="提交到-github"><a href="#提交到-github" class="headerlink" title="提交到 github"></a>提交到 github</h2><p>修改配置文件<code>_config.yml</code>，部署到github，需要将本地 ssh key 添加到 github 账号中</p>
-<pre><code>deploy:
-  type: git
-  repository: git@github.com:hatlonely/hatlonely.github.com.git
-  branch: master
-</code></pre><p>下载 git 插件</p>
-<pre><code>npm install hexo-deployer-git --save
-</code></pre><p>提交</p>
-<pre><code>hexo clean
-hexo generate
-hexo deploy
-</code></pre><p>现在可以访问 <a href="http://hatlonely.github.io/" target="_blank" rel="noopener">http://hatlonely.github.io/</a></p>
-<h2 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h2><p>下载 next 主题</p>
-<pre><code>git clone https://github.com/iissnan/hexo-theme-next themes/next
-</code></pre><p>修改 <code>themes/next/_config.yml</code>，使用 Pisces 模式</p>
-<pre><code>scheme: Pisces
-</code></pre><p>修改头像，将图片上传到 <code>public/images</code> 里面</p>
-<pre><code>avatar: /images/avatar.png
-</code></pre><p>修改 <code>_config.yml</code>，使用 next 主题</p>
-<pre><code>theme: next
-</code></pre><h2 id="图片支持"><a href="#图片支持" class="headerlink" title="图片支持"></a>图片支持</h2><p>修改配置 <code>_config.yml</code> 中有</p>
-<pre><code>post_asset_folder:true
-</code></pre><p>安装 <code>hexo-assert-image</code></p>
-<pre><code>npm install https://github.com/CodeFalling/hexo-asset-image --save
-</code></pre><p>在 <code>sources/_posts/</code> 路径下面创建与文章名一致的目录，存放图片，图片的访问方式</p>
-<pre><code>![image](article/image.jpg)
-</code></pre><h2 id="添加标签页和分类页"><a href="#添加标签页和分类页" class="headerlink" title="添加标签页和分类页"></a>添加标签页和分类页</h2><pre><code>hexo new page tags
-hexo new page categories
-</code></pre><p>修改主题配置文件 <code>themes/next/_config.yml</code></p>
-<pre><code>menu:
-  home: /
-  categories: /categories
-  archives: /archives
-  tags: /tags
-</code></pre><h2 id="多说评论支持"><a href="#多说评论支持" class="headerlink" title="多说评论支持"></a>多说评论支持</h2><ol>
-<li>登陆多说 <a href="http://duoshuo.com/" target="_blank" rel="noopener">http://duoshuo.com/</a>，点击个人主页获取user_id</li>
-<li>创建多说站点 <a href="http://duoshuo.com/create-site/" target="_blank" rel="noopener">http://duoshuo.com/create-site/</a></li>
-<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
-<pre><code> duoshuo_shortname: &lt;2中的多说域名&gt;
-</code></pre></li>
-<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
-<pre><code> duoshuo_info:
- ua_enable: true
- admin_enable: true
- user_id: &lt;1中获取的user_id&gt;
- admin_nickname: hatlonely
-</code></pre></li>
-</ol>
-<h2 id="腾讯统计支持"><a href="#腾讯统计支持" class="headerlink" title="腾讯统计支持"></a>腾讯统计支持</h2><ol>
-<li>登陆腾讯分析 <a href="http://v2.ta.qq.com/analysis/index" target="_blank" rel="noopener">http://v2.ta.qq.com/analysis/index</a>，添加统计页面，获取统计id</li>
-<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
-<pre><code> tencent_analytics: 56xxxx55
-</code></pre></li>
-</ol>
-<p>可能不是实时的，会有延时，延时几个小时吧，查看一下自己页面的源码，搜索一下统计id，如果有应该就没问题</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://hexo.io/" target="_blank" rel="noopener">hexo 官网</a></li>
-<li><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next 主题使用文档</a></li>
-<li><a href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="noopener">matrial 主题</a></li>
-<li><a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">icarus 主题</a></li>
-</ul>
-]]></content>
-      
-        
-        <tags>
-            
-            <tag> hexo </tag>
-            
-            <tag> github </tag>
-            
-            <tag> 博客 </tag>
-            
-            <tag> next </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[admob 广告开发者报表 api]]></title>
       <url>/2018/11/01/admob-%E5%B9%BF%E5%91%8A%E5%BC%80%E5%8F%91%E8%80%85%E6%8A%A5%E8%A1%A8-api/</url>
       <content type="html"><![CDATA[<p>广告是移动应用非常好的变现模式，作为开发者经常会接很多家的广告平台，每个广告平台都有自己的报表系统，就会有一个各个平台数据汇总分析的需求，首先第一步就需要从各个广告平台获取数据，除了在web页面提供基本的数据导出功能，基本上各个平台都会提供 api 来方便数据拉取的自动化。</p>
@@ -540,13 +448,13 @@ func (w *consulWatcher) Close() {
             
             <tag> golang </tag>
             
+            <tag> consul </tag>
+            
             <tag> grpc </tag>
             
             <tag> 负载均衡 </tag>
             
             <tag> load balancer </tag>
-            
-            <tag> consul </tag>
             
         </tags>
         
@@ -634,9 +542,9 @@ grpc_health_v1.RegisterHealthServer(server, &amp;HealthImpl{})
             
             <tag> golang </tag>
             
-            <tag> grpc </tag>
-            
             <tag> consul </tag>
+            
+            <tag> grpc </tag>
             
             <tag> 服务注册与发现 </tag>
             
@@ -1794,9 +1702,9 @@ easyjson: golang
         
         <tags>
             
-            <tag> 构建工具 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 构建工具 </tag>
             
             <tag> Makefile </tag>
             
@@ -2881,15 +2789,15 @@ brew services list                  # 列出当前的状态
         
         <tags>
             
-            <tag> hexo </tag>
-            
-            <tag> 博客 </tag>
-            
             <tag> markdown </tag>
             
             <tag> 写作 </tag>
             
             <tag> 工具 </tag>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
         </tags>
         
@@ -3391,9 +3299,9 @@ func main() {
         
         <tags>
             
-            <tag> hexo </tag>
-            
             <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
             
             <tag> 程序人生 </tag>
             
@@ -3729,9 +3637,9 @@ func TestIntegerStuff(t *testing.T) {
         
         <tags>
             
-            <tag> 单元测试 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 单元测试 </tag>
             
         </tags>
         
@@ -3947,9 +3855,9 @@ glide mirror set https://golang.org/x/sys https://github.com/golang/sys --vcs gi
         
         <tags>
             
-            <tag> 依赖管理 </tag>
-            
             <tag> golang </tag>
+            
+            <tag> 依赖管理 </tag>
             
         </tags>
         
@@ -4418,6 +4326,956 @@ func BenchmarkAppendWithCapGreaterLen10thReuse(b *testing.B) {
             <tag> serverless </tag>
             
             <tag> microservice </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hexo + github 博客]]></title>
+      <url>/2016/12/22/c-11-%E6%96%B0%E7%89%B9%E6%80%A7/</url>
+      <content type="html"><![CDATA[<h2 id="auto，decltype，for，nullptr"><a href="#auto，decltype，for，nullptr" class="headerlink" title="auto，decltype，for，nullptr"></a>auto，decltype，for，nullptr</h2><p>如果编译器在定义一个变量的时候可以推断出变量的类型，不用写变量的类型，你只需写auto即可</p>
+<pre><code class="cpp">auto str = &quot;sissie&quot;;
+assert(typeid(str) == typeid(const char *));
+</code></pre>
+<p>auto处理引用时默认是值类型，可以指定&amp;作为修饰符强制它作为引用，auto自动获取指针类型，也可以显示地指定指针类型</p>
+<pre><code class="cpp">int&amp; foo();
+auto i = foo();     // int
+auto&amp; ri = foo();   // int&amp;
+
+int* bar();
+auto pi = bar();    // int*
+auto* pi = bar();   // int*
+</code></pre>
+<p>在迭代器中使用auto，简化代码</p>
+<pre><code class="cpp">std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+for (auto it = vs.begin(); it != vs.end(); ++it) {
+    std::cout &lt;&lt; *it &lt;&lt; &quot;, &quot;;
+}
+</code></pre>
+<p>在模板中使用auto</p>
+<pre><code class="cpp">template &lt;typename BuiltType, typename Builder&gt;
+void makeAndProcessObject(const Builder&amp; builder)
+{
+    BuiltType val = builder.makeObject();
+    // do stuff with val
+}
+MyObjBuilder builder;
+makeAndProcessObject&lt;MyObj&gt;(builder);
+
+// 使用auto只需要一个模板参数，让编译器自动推导
+template &lt;typename Builder&gt;
+void makeAndProcessObject(const Builder&amp; builder)
+{
+    auto val = builder.makeObject();
+    // do stuff with val
+}
+MyObjBuilder builder;
+makeAndProcessObject(builder);
+</code></pre>
+<p><code>decltype</code> 返回操作数的类型，可以对基本上任何类型使用<code>decltype</code>，包括函数的返回值</p>
+<pre><code class="cpp">int ia[10];
+decltype(ia) ib;    // int ib[10];
+</code></pre>
+<p>新的函数返回值声明语法，把返回类型放在函数声明的后面，用<code>auto</code>代替前面的返回类型</p>
+<pre><code class="cpp">// 这两种函数声明方式等效
+int multiply(int x, int y);
+auto multiply(int x, int y) -&gt; int;
+
+// 返回auto
+template &lt;typename Builder&gt;
+auto makeAndProcessObject(const Builder&amp; builder) -&gt; decltype(builder.makeObject())
+{
+    auto val = builder.makeObject();
+    // do stuff with val
+    return val;
+}
+</code></pre>
+<p>区间迭代，for循环遍历容器</p>
+<pre><code class="cpp">std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+for (const auto&amp; name: vs) {
+    std::cout &lt;&lt; name &lt;&lt; &quot;, &quot;;
+}
+</code></pre>
+<p><code>nullptr</code> 是C++11中新加的关键字，用来表示空指针，替代原来的<code>NULL</code>，<code>nullptr</code>不能转换成int</p>
+<h2 id="lambda-表达式"><a href="#lambda-表达式" class="headerlink" title="lambda 表达式"></a>lambda 表达式</h2><p>C++11中得lambda表达式用来定义和创建匿名函数，lambda表达式语法形式如下：</p>
+<pre><code class="cpp">[ capture ] ( params ) mutable exception attribute -&gt; ret { body }      // (1)
+[ capture ] ( params ) -&gt; ret { body }                                  // (2)
+[ capture ] ( params ) { body }                                         // (3)
+[ capture ] { body }                                                    // (4)
+</code></pre>
+<ul>
+<li>(1) 是完整的 lambda 表达式形式</li>
+<li>(2) const 类型的 lambda 表达式，该类型的表达式不能改捕获(“capture”)列表中的值</li>
+<li>(3) 省略了返回值类型的 lambda 表达式，但是该 lambda 表达式的返回类型可以按照下列规则推演出来：<ul>
+<li>如果 lambda 代码块中包含了 return 语句，则该 lambda 表达式的返回类型由 return 语句的返回类型确定。</li>
+<li>如果没有 return 语句，则类似 <code>void f(...)</code> 函数</li>
+</ul>
+</li>
+<li>(4) 省略了参数列表，类似于无参函数 f()</li>
+</ul>
+<ol>
+<li><strong>capture</strong>：capture 为捕获的lambda所在作用域范围内可见的局部变量列表<ul>
+<li><code>[a,&amp;b]</code> a变量以值的方式呗捕获，b以引用的方式被捕获</li>
+<li><code>[this]</code> 以值的方式捕获 this 指针</li>
+<li><code>[&amp;]</code> 以引用的方式捕获所有的外部自动变量</li>
+<li><code>[=]</code> 以值的方式捕获所有的外部自动变量</li>
+<li><code>[]</code> 不捕获外部的任何变量</li>
+</ul>
+</li>
+<li><strong>params</strong>：参数列表</li>
+<li><strong>mutable exception attribute</strong>：lambda是否可以更改捕获变量以及是否有异常抛出<ul>
+<li><strong>mutable</strong> 修饰符说明 lambda 表达式体内的代码可以修改被捕获的变量，并且可以访问被捕获对象的 non-const 方法</li>
+<li><strong>exception</strong> 说明 lambda 表达式是否抛出异常(noexcept)，以及抛出何种异常，类似于void f() throw(X, Y)</li>
+<li><strong>attribute</strong> 用来声明属性</li>
+</ul>
+</li>
+<li><strong>ret</strong>：返回类型</li>
+<li><strong>body</strong>：函数体</li>
+</ol>
+<pre><code class="cpp">// 数组累加
+std::vector&lt;int&gt; vi{{1, 2, 3, 4, 5, 6, 7, 8, 9}};
+int total = 0;
+std::for_each(vi.begin(), vi.end(), [&amp;total](int i) {
+  total += i;
+});
+
+// 数组绝对值
+// 单一的return语句，编译其可以推导出返回类型，多个return语句需要显示指定返回类型
+std::transform(vi.begin(), vi.end(), [](int i) -&gt; int {
+    if (i &lt; 0) {
+        return -i;
+    } else {
+        return i;
+    }
+});
+
+// mutable
+size_t i = 42;
+auto f = [i]() mutable {
+    return ++i;
+};
+i = 0;
+std::cout &lt;&lt; f() &lt;&lt; std::endl;   // 43
+std::cout &lt;&lt; f() &lt;&lt; std::endl;   // 44
+</code></pre>
+<h2 id="初始化列表"><a href="#初始化列表" class="headerlink" title="初始化列表"></a>初始化列表</h2><p>C++11新添加初始化列表<code>std::initializer_list&lt;&gt;</code>类型，可以通过{}语法来构造初始化列表</p>
+<pre><code class="cpp">// 容器初始化
+// {1, 2, 3, 4, 5}实际上是一个std::initializer_list&lt;int&gt;类型
+std::vector&lt;int&gt; vi = {1, 2, 3, 4, 5};
+std::vector&lt;std::string&gt; vs{{"sissie", "robin", "playjokes", "sky", "hatlonely"}};
+std::map&lt;int, std::string&gt; mis = {
+    {1, &quot;c&quot;},
+    {2, &quot;java&quot;},
+    {3, &quot;c++&quot;}
+};
+
+// 初始化列表参数
+void print_initializer_list(std::initializer_list&lt;int&gt; il) {
+    for (auto i: il) {
+        std::cout &lt;&lt; i &lt;&lt; &quot;, &quot;;
+    }
+    std::cout &lt;&lt; endl;
+}
+print_initializer_list({1, 2, 3, 4, 5, 6});
+
+// 返回初始化列表
+std::vector&lt;std::string&gt; my_array() {
+    return {&quot;sissie&quot;, &quot;robin&quot;, &quot;playjokes&quot;, &quot;sky&quot;, &quot;hatlonely&quot;};
+}
+</code></pre>
+<h2 id="类"><a href="#类" class="headerlink" title="类"></a>类</h2><p>加入两个新的标识符：</p>
+<ul>
+<li><strong>override</strong>，表示函数应当重写基类中的虚函数；</li>
+<li><strong>final</strong>，表示派生类不应当重写这个虚函数</li>
+</ul>
+<pre><code class="cpp">class B
+{
+public:
+   virtual void f(int) {std::cout &lt;&lt; &quot;B::f&quot; &lt;&lt; std::endl;}
+};
+
+class D : public B
+{
+public:
+   virtual void f(int) override final {std::cout &lt;&lt; &quot;D::f&quot; &lt;&lt; std::endl;}
+};
+</code></pre>
+<p>默认或禁用函数，当我们定义了自己的带参数的构造函数时，编译器将不再生成默认的构造函数，如果此时想使用默认的构造函数，则必须显式地声明并定义不带参数的构造函数。在C++11中，我们可以使用<strong>default</strong>关键字来表明我们希望使用默认的构造函数。类似的，当我们不想外部使用编译器自动生成的构造函数或赋值函数时，我们一般需要将其声明成<code>protected</code>或<code>private</code>的。在C++ 11中，我们可以使用<strong>delete</strong>关键字来表明我们不希望编译器生成默认的构造函数或赋值函数。</p>
+<pre><code class="cpp">class Person {
+public:
+    Person() = default;
+    Person(const Person&amp; person) = delete;
+};
+</code></pre>
+<p>C++11允许成员变量就地初始化</p>
+<pre><code class="cpp">class Person {
+private:
+    std::string _name = &quot;sissie&quot;;
+}
+</code></pre>
+<p>委托构造函数，一个委托构造函数使用它所属类的其他构造函数执行它的初始化过程</p>
+<pre><code class="cpp">class SaleData {
+    SaleData(std::string booknum, uint32_t units_sold, double price) :
+        _booknum(booknum), _units_sold(unit_sold), _price(price) {}
+    SaleData() : SaleData(&quot;&quot;, 0, 0) {}
+    SaleData(std::string booknum) : SaleData(booknum, 0, 0) {}
+};
+</code></pre>
+<h2 id="move语义与右值引用"><a href="#move语义与右值引用" class="headerlink" title="move语义与右值引用"></a>move语义与右值引用</h2><p>左值和右值是针对表达式而言，表达式之后依然存在的对象是左值，表达式之后不再存在的临时对象为右值<br>左值可以对其取地址，右值不能</p>
+<pre><code class="cpp">int i = 0;
+std::string hello = &quot;hello&quot;;
+std::string world = &quot;world&quot;;
+const int&amp; ri = 1;
+
+// 左值：i, ++i, hello, world
+// 右值：i++, hello + world, ri
+</code></pre>
+<p>拷贝临时对象性能问题，考虑如下字符串初始化</p>
+<pre><code class="cpp">std::string str1 = &quot;a&quot;;
+// str1 + &quot;b&quot; 生成一个临时对象，再用这个临时对象去构造str2
+// 而这个临时对象在构造完str2后就被释放，这个对象并没有用到，却需要调用一次构造函数
+std::string str2 = str1 + &quot;b&quot;;
+</code></pre>
+<p>如果我们能确定某个值是一个非常量右值（或者是一个以后不会再使用的左值），则我们在进行临时对象的拷贝时，可以不用拷贝实际的数据，而只是窃取实际数据的指针，C++11中引入的右值引用正好可用于标识一个非常量右值。C++ 11中用&amp;表示左值引用，用&amp;&amp;表示右值引用</p>
+<p>移动构造函数</p>
+<pre><code class="cpp">// MemoryBlock.h
+#pragma once
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+class MemoryBlock {
+public:
+    // Simple constructor that initializes the resource.
+    explicit MemoryBlock(size_t length) : _length(length), _data(new int[length]) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(size_t). length = &quot; &lt;&lt; _length &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;
+    }
+
+    // Destructor.
+    ~MemoryBlock() {
+        std::cout &lt;&lt; &quot;In ~MemoryBlock(). length = &quot; &lt;&lt; _length &lt;&lt; &quot;.&quot;;
+
+        if (_data != NULL) {
+            std::cout &lt;&lt; &quot; Deleting resource.&quot;;
+            // Delete the resource.
+            delete[] _data;
+        }
+
+        std::cout &lt;&lt; std::endl;
+    }
+
+    // Copy constructor.
+    MemoryBlock(const MemoryBlock&amp; other) : _length(other._length), _data(new int[other._length]) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(const MemoryBlock&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Copying resource.&quot; &lt;&lt; std::endl;
+
+        std::copy(other._data, other._data + _length, _data);
+    }
+
+    // Copy assignment operator.
+    MemoryBlock&amp; operator=(const MemoryBlock&amp; other) {
+        std::cout &lt;&lt; &quot;In operator=(const MemoryBlock&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Copying resource.&quot; &lt;&lt; std::endl;
+
+        if (this != &amp;other)
+        {
+            // Free the existing resource.
+            delete[] _data;
+
+            _length = other._length;
+            _data = new int[_length];
+            std::copy(other._data, other._data + _length, _data);
+        }
+        return *this;
+    }
+
+    // Move constructor.
+    MemoryBlock(MemoryBlock&amp;&amp; other) : _length(0), _data(NULL) {
+        std::cout &lt;&lt; &quot;In MemoryBlock(MemoryBlock&amp;&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;. Moving resource.&quot; &lt;&lt; std::endl;
+
+        // Copy the data pointer and its length from the
+        // source object.
+        _data = other._data;
+        _length = other._length;
+
+        // Release the data pointer from the source object so that
+        // the destructor does not free the memory multiple times.
+        other._data = NULL;
+        other._length = 0;
+    }
+
+    // Move assignment operator.
+    MemoryBlock&amp; operator=(MemoryBlock&amp;&amp; other) {
+        std::cout &lt;&lt; &quot;In operator=(MemoryBlock&amp;&amp;). length = &quot;
+            &lt;&lt; other._length &lt;&lt; &quot;.&quot; &lt;&lt; std::endl;
+
+        if (this != &amp;other)
+        {
+            // Free the existing resource.
+            delete[] _data;
+
+            // Copy the data pointer and its length from the
+            // source object.
+            _data = other._data;
+            _length = other._length;
+
+            // Release the data pointer from the source object so that
+            // the destructor does not free the memory multiple times.
+            other._data = NULL;
+            other._length = 0;
+        }
+        return *this;
+    }
+
+    // Retrieves the length of the data resource.
+    size_t Length() const {
+        return _length;
+    }
+
+private:
+    size_t _length; // The length of the resource.
+    int* _data;     // The resource.
+};
+
+// rvalue-references-move-semantics.cpp
+// compile with: /EHsc
+#include &quot;MemoryBlock.h&quot;
+#include &lt;vector&gt;
+
+int main() {
+    // Create a vector object and add a few elements to it.
+    std::vector&lt;MemoryBlock&gt; v;
+    v.push_back(MemoryBlock(25));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+    v.push_back(MemoryBlock(75));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+
+    // Insert a new element into the second position of the vector.
+    v.insert(v.begin() + 1, MemoryBlock(50));
+    std::cout &lt;&lt; &quot;======================&quot; &lt;&lt; std::endl;
+}
+
+// 可以看到下面的输出在push_back的时候，由于参数是一个非常量右值，自动调用了move构造函数
+// 下面还有拷贝构造函数是在vector长度增长时拷贝数组产生的，这次拷贝构造也可以优化成move
+// 具体实现与编译器有关
+// In MemoryBlock(size_t). length = 25.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 25. Moving resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In MemoryBlock(size_t). length = 75.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 75. Moving resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 25. Copying resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In MemoryBlock(size_t). length = 50.
+// In MemoryBlock(MemoryBlock&amp;&amp;). length = 50. Moving resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 25. Copying resource.
+// In MemoryBlock(const MemoryBlock&amp;). length = 75. Copying resource.
+// In ~MemoryBlock(). length = 75. Deleting resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+// In ~MemoryBlock(). length = 0.
+// ======================
+// In ~MemoryBlock(). length = 75. Deleting resource.
+// In ~MemoryBlock(). length = 50. Deleting resource.
+// In ~MemoryBlock(). length = 25. Deleting resource.
+</code></pre>
+<p><code>std::move</code>显示调用move构造函数，如果类没有move构造函数，会调用copy构造函数。对一个左值使用<code>std::move</code>之后，不应该再使用该对象，对该对象的任何操作都是未定义的。</p>
+<pre><code class="cpp">std::vector&lt;MemoryBlock&gt; v;
+MemoryBlock mb(66);
+v.push_back(std::move(mb));
+</code></pre>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="std-vector"><a href="#std-vector" class="headerlink" title="std::vector"></a>std::vector</h3><ul>
+<li><code>size()</code>：记录了当前元素的个数</li>
+<li><code>capacity()</code>：不重新分配内存的话，可以保存多少个元素</li>
+<li><code>reserve(n)</code>：分配至少能容纳n个元素的内存空间</li>
+<li><code>shrink_to_fit()</code>：将capacity减少为于<code>size()</code>相同的大小</li>
+</ul>
+<pre><code class="cpp">// vector的无参构造函数初始化vector时，size和capacity都是0
+// 之后当capacity不足时，capacity会成倍增加，可以用reverse指定capacity的值
+std::vector&lt;int&gt; vi;
+assert(vi.size() == 0);
+assert(vi.capacity() == 0);
+vi.reserve(1024);
+assert(vi.size() == 0);
+assert(vi.capacity() == 1024);
+
+// vector的构造函数可以传入一个参数指定当前vector的size
+// 此构造函数会调用元素的无参构造函数，初始化元素
+// 所以元素的类型必须实现无参构造函数，才能调用此构造函数
+std::vector&lt;std::string&gt; vs(5);
+assert(vs.size() == 5);
+assert(vs.capacity() == 5);
+vs.push_back(&quot;sissie&quot;);
+assert(vs[5] == &quot;sissie&quot;);
+assert(vs.size() == 6);
+assert(vs.capacity() == 10);
+vs.shrink_to_fit();
+assert(vs.capacity() == 6);
+</code></pre>
+<h3 id="std-array"><a href="#std-array" class="headerlink" title="std::array"></a>std::array</h3><p><code>array</code>是C++11新引入的数组类型，和<code>std::vector</code>不同的是<code>array</code>的长度是固定的，不能动态拓展</p>
+<pre><code class="cpp">template &lt;class T, std::size_t N&gt; struct array
+
+std::array&lt;int, 3&gt; a1{{1, 2, 3}};
+std::sort(a1.begin(), a1.end());
+</code></pre>
+<h3 id="std-forward-list"><a href="#std-forward-list" class="headerlink" title="std::forward_list"></a>std::forward_list</h3><p>C++11引入的新类型，<code>forward_list</code>是单链表（std::list是双链表），只需要顺序遍历的场合，<code>forward_list</code>能更加节省内存，插入和删除的性能高于list</p>
+<pre><code class="cpp">std::forward_list&lt;int&gt; fli{{1, 2, 3, 4}};
+</code></pre>
+<h3 id="unordered"><a href="#unordered" class="headerlink" title="unordered"></a>unordered</h3><p><code>std::set std::multiset std::map std::multimap</code><br>用平衡树实现的有序的容器，插入、删除和查找的时间复杂度都是O(nlogn)</p>
+<p><code>std::unordered_set std::unordered_multiset std::unordered_map std::unordered_multimap</code><br>C++11引入的新类型，用hash实现的无序的容器，插入、删除和查找的时间复杂度都是O(1)，在不关注容器内元素顺序的场合，使用unordered的容器能获得更高的性能</p>
+<pre><code class="cpp">std::unordered_set&lt;int&gt; usi = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+assert(usi.size() == 10);
+usi.insert(66);
+assert(usi.size() == 10);
+
+// unordered_set是无序的
+// 0,99,88,77,66,55,44,33,22,11,
+for (const auto&amp; i: usi) {
+    std::cout &lt;&lt; i &lt;&lt; &quot;,&quot;;
+}
+std::cout &lt;&lt; std::endl;
+// set是有序的
+// 0,11,22,33,44,55,66,77,88,99,
+std::set&lt;int&gt; si = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+for (const auto&amp; i: si) {
+    std::cout &lt;&lt; i &lt;&lt; &quot;,&quot;;
+}
+std::cout &lt;&lt; std::endl;
+
+// multiset中可以插入相同的值
+std::unordered_multiset&lt;int&gt; umsi = {{11, 22, 33, 44, 55, 66, 77, 88, 99, 0}};
+assert(umsi.size() == 10);
+assert(umsi.count(66) == 1);
+umsi.insert(66);
+assert(umsi.size() == 11);
+assert(umsi.count(66) == 2);
+
+std::unordered_map&lt;std::string, double&gt; book_price_map{{
+    {"C++ Primer", 128.00},
+    {"UNIX 环境高级编程", 99.00},
+    {"HBase 权威指南", 89.00},
+    {"MapReduce 设计模式", 49.00}
+}};
+for (const auto&amp; book_price_pair: book_price_map) {
+    std::cout &lt;&lt; book_price_pair.first &lt;&lt; &quot; =&gt; &quot; &lt;&lt; book_price_pair.second &lt;&lt; std::endl;
+}
+</code></pre>
+<h2 id="智能指针"><a href="#智能指针" class="headerlink" title="智能指针"></a>智能指针</h2><ul>
+<li><code>unique_ptr</code>：作用域结束之后自动释放资源，不可复制，可以移动</li>
+<li><code>shared_ptr</code>：通过引用计数共享资源，当引用计数为0时，自动释放资源</li>
+<li><code>weak_ptr</code>：一个<code>shared_ptr</code>的弱引用，不修改引用计数，为了解决循环引用问题而引入</li>
+</ul>
+<pre><code class="cpp">#include &lt;cassert&gt;
+#include &lt;memory&gt;
+
+int main() {
+    {
+        std::unique_ptr&lt;int&gt; upi(new int(6));
+    }
+
+    {
+        // 用make_shared来初始化shared_ptr
+        std::shared_ptr&lt;int&gt; spi = std::make_shared&lt;int&gt;(6);
+        // use_count获取引用计数
+        assert(spi.use_count() == 1);
+        {
+            std::shared_ptr&lt;int&gt; spi_shared(spi);
+            assert(spi.use_count() == 2);
+        }
+        assert(spi.use_count() == 1);
+    }
+
+    {
+        std::shared_ptr&lt;int&gt; spi = std::make_shared&lt;int&gt;(6);
+        assert(spi.use_count() == 1);
+
+        // 通过shared_ptr来构造weak_ptr
+        std::weak_ptr&lt;int&gt; wpi(spi);
+        // weak_ptr不改变引用计数
+        assert(spi.use_count() == 1);
+        assert(wpi.use_count() == 1);
+
+        // lock() 获取weak_ptr引用的shared_ptr
+        assert(*wpi.lock() == 6);
+        // expired() 返回引用的对象是否已经释放
+        assert(!wpi.expired());
+    }
+
+    return 0;
+}
+</code></pre>
+<p><code>shared_ptr</code>提供<code>get</code>函数获取对象的指针</p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><h3 id="regex"><a href="#regex" class="headerlink" title="regex"></a>regex</h3><pre><code class="cpp">typedef basic_regex&lt;char&gt; regex
+typedef basic_regex&lt;wchar_t&gt; wregex
+
+typedef sub_match&lt;const char*&gt; csub_match
+typedef sub_match&lt;const wchar_t*&gt; wcsub_match
+typedef sub_match&lt;std::string::const_iterator&gt; ssub_match
+typedef sub_match&lt;std::wstring::const_iterator&gt; wssub_match
+
+typedef match_results&lt;const char*&gt; cmatch
+typedef match_results&lt;const wchar_t*&gt; wcmatch
+typedef match_results&lt;std::string::const_iterator&gt; smatch
+typedef match_results&lt;std::wstring::const_iterator&gt; wsmatch
+</code></pre>
+<ul>
+<li><code>basic_regex</code>：正则表达式</li>
+<li><code>sub_match</code>：正则表达式子匹配</li>
+<li><code>match_result</code>：正则匹配结果，由多个<code>sub_match</code>组成</li>
+</ul>
+<p>match_result成员</p>
+<ul>
+<li><code>ready()</code>：如果已经通过<code>regex_serach</code>或者<code>regex_match</code>设置则返回<code>true</code>，否则返回<code>false</code>；如果<code>ready</code>返回<code>false</code>，那所有对<code>match_result</code>的操作都是未定义的</li>
+<li><code>size()</code>：匹配失败返回0，否则返回最近一次匹配正则表达式中子表达式的数目</li>
+<li><code>empty()</code>：返回<code>size() == 0</code></li>
+<li><code>prefix()</code>：返回一个<code>sub_match</code>对象，表示匹配之前的序列</li>
+<li><code>suffix()</code>：返回一个<code>sub_match</code>对象，表示匹配之后的序列</li>
+<li><code>format()</code>：将<code>match_result</code>格式化成一个字符串</li>
+<li><code>length(n)</code>：第n个子表达式的长度</li>
+<li><code>position(n)</code>：第n个子表达式距序列开始的距离</li>
+<li><code>str(n)</code>：第n个子表达式匹配的字符串</li>
+<li><code>[]</code>：第n个子表达式的<code>sub_match</code>对象</li>
+<li><code>begin(), end()</code>：<code>sub_match</code>的<code>iterator</code></li>
+<li><code>cbegin(), cend()</code>：<code>sub_match</code>的<code>const_iterator</code></li>
+</ul>
+<p>正则匹配</p>
+<ul>
+<li><code>regex_match()</code>：完全匹配</li>
+<li><code>regex_serach()</code>：部分匹配（匹配第一个）</li>
+<li><code>regex_replace()</code>：正则替换</li>
+<li><code>regex_iterator</code>：迭代器适配器（<code>value_type</code>为<code>match_result</code>），调用regex_search来遍历一个string中所有的匹配子串</li>
+<li><code>regex_token_iterator</code>：迭代器适配器（<code>value_type</code>为<code>sub_match</code>）</li>
+</ul>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;regex&gt;
+#include &lt;cassert&gt;
+
+int main()
+{
+    std::string context = &quot;&quot;
+        &quot;hatlonely (hatlonely@gmail.com) &quot;
+        &quot;playjokes (playjokes@gmail.com)&quot;;
+
+    std::regex mail_regex(&quot;(\\w+)@(\\w+)\\.com&quot;);
+    std::smatch mail_result;
+
+    // 不能全词匹配 regex_match返回false
+    assert(!std::regex_match(context, mail_result, mail_regex));
+    // 可以部分匹配 regex_search返回true
+    assert(std::regex_search(context, mail_result, mail_regex));
+    // mail_result被regex_search设置过 返回true
+    assert(mail_result.ready());
+    // mail_result中sub_match的个数，两个子表达式加上整个表达式
+    assert(mail_result.size() == 3);
+    // mail_result[0]为匹配到的整个字符串
+    assert(mail_result[0] == &quot;hatlonely@gmail.com&quot;);
+    // mail_result[n]为第n个子表达式匹配到得串（小括号内的串）
+    assert(mail_result[1] == &quot;hatlonely&quot;);
+    assert(mail_result[2] == &quot;gmail&quot;);
+    // prefix未匹配到的之前的串
+    assert(mail_result.prefix() == &quot;hatlonely (&quot;);
+    // suffix未匹配到的之后的串
+    assert(mail_result.suffix() == &quot;) playjokes (playjokes@gmail.com)&quot;);
+    // $`  相当于prefix
+    // $&#39;  相当于suffix
+    // $n  第n个子匹配
+    std::cout &lt;&lt; mail_result.format(&quot;$` $1 $2&quot;) &lt;&lt; std::endl;
+
+    {
+        // 相当于循环调用regex_search，迭代器的value_type为match_result
+        std::sregex_iterator it(context.begin(), context.end(), mail_regex);
+        std::sregex_iterator end;
+        for (; it != end; ++it) {
+            std::cout &lt;&lt; (*it)[0] &lt;&lt; std::endl;
+        }
+    }
+    {
+        // 相当于循环调用regex_search，迭代器的value_type为sub_match，相当于match_result[0]
+        std::sregex_token_iterator it(context.begin(), context.end(), mail_regex);
+        std::sregex_token_iterator end;
+        for (; it != end; ++it) {
+            std::cout &lt;&lt; *it &lt;&lt; std::endl;
+        }
+    }
+
+    {
+        // regex_replace 默认会替换所有匹配到的串，指定format_first_only可以只替换第一个匹配到得串
+        // hatlonely (hatlonely@gmail.com) playjokes (playjokes@gmail.com)
+        std::cout &lt;&lt; context &lt;&lt; std::endl;
+        // hatlonely (hatlonely) playjokes (playjokes)
+        std::cout &lt;&lt; regex_replace(context, mail_regex, &quot;$1&quot;) &lt;&lt; std::endl;
+        // hatlonely (hatlonely) playjokes (playjokes@gmail.com)
+        std::cout &lt;&lt; regex_replace(context, mail_regex, &quot;$1&quot;,
+            std::regex_constants::format_first_only) &lt;&lt; std::endl;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="thread"><a href="#thread" class="headerlink" title="thread"></a>thread</h3><p>构造函数</p>
+<pre><code class="cpp">thread();
+// f 是线程执行的函数，可以是函数指针或者是仿函数对象
+// args 是函数的参数，（C++11新特新可变模板参数）
+template &lt;class Function, class... Args&gt; explicit thread(Function&amp;&amp; f, Args&amp;&amp;... args);
+// 线程不可复制
+thread(const thread&amp;) = delete;
+// 线程可以移动
+thread(thread&amp;&amp; other);
+</code></pre>
+<p>thread成员函数</p>
+<ul>
+<li><code>get_id()</code>: 获取线程id</li>
+<li><code>joinable()</code>: 线程是否是可以合并的</li>
+<li><code>join()</code>: 合并线程</li>
+<li><code>detach()</code>: 分离线程</li>
+</ul>
+<p>join和detach是指主线程是否需要等待子线程执行完成，主线程调用join后将等待子线程执行完成，detach表示和主线程分离，子线程单独执行，一个线程在构造后必须调用join或者detach，编译器无法自动选择其中行为</p>
+<p>当前线程操作函数，这些函数都定义在std::this_thread命名空间内</p>
+<ul>
+<li><code>yield()</code>：当前线程将CPU让出，等待下次被调度</li>
+<li><code>get_id()</code>：获取当前线程的线程id</li>
+<li><code>sleep_for()</code>：当前线程休眠一段时间</li>
+<li><code>sleep_until()</code>：当前线程休眠到某个时间点</li>
+</ul>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;thread&gt;
+
+// 无参数线程函数
+void thread_func_with_no_param() {
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    std::cout &lt;&lt; &quot;thread_func_with_no_param&quot; &lt;&lt; std::endl;
+}
+
+// 带参数线程函数
+void thread_func_with_param(int a, int b, int&amp; result) {
+    std::this_thread::sleep_for(std::chrono::milliseconds(40));
+    result = a + b;
+    std::cout &lt;&lt; &quot;thread_func_with_param: &quot; &lt;&lt; a &lt;&lt; &quot; + &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; result &lt;&lt; std::endl;
+}
+
+// 线程仿函数
+struct thread_func_struct {
+    void operator()(int a, int b, int&amp; result) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(60));
+        result = a * b;
+        std::cout &lt;&lt; &quot;thread_func_struct: &quot; &lt;&lt; a &lt;&lt; &quot; * &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; result &lt;&lt; std::endl;
+    }
+};
+
+void thread_usage() {
+    int a = 1, b = 2, result1, result2;
+
+    std::thread thread1(thread_func_with_no_param);
+    // 此处的必须使用std::ref传入result1的引用，下面一样
+    std::thread thread2(thread_func_with_param, a, b, std::ref(result1));
+    std::thread thread3(thread_func_struct(), a, b, std::ref(result2));
+
+    thread1.join();
+    thread2.join();
+    thread3.join();
+    // thread1.detach();
+    // thread2.detach();
+    // thread3.detach();
+
+    std::cout &lt;&lt; &quot;result1: &quot; &lt;&lt; result1 &lt;&lt; std::endl;
+    std::cout &lt;&lt; &quot;result2: &quot; &lt;&lt; result2 &lt;&lt; std::endl;
+}
+</code></pre>
+<h3 id="mutex"><a href="#mutex" class="headerlink" title="mutex"></a>mutex</h3><p>多个线程同时访问共享资源的时候需要需要用到互斥量，当一个线程锁住了互斥量后，其他线程必须等待这个互斥量解锁后才能访问它。thread提供了四种不同的互斥量：</p>
+<ul>
+<li><code>mutex</code>：最基本的Mutex类。</li>
+<li><code>recursive_mutex</code>：递归Mutex类。</li>
+<li><code>timed_mutex</code>：定时Mutex类。</li>
+<li><code>recursive_timed_mutex</code>：定时递归Mutex类。</li>
+</ul>
+<p><code>std::mutex</code>加解锁是成对的，同一个线程内mutex在没有解锁的情况下，再次对它进行加锁这是不对的，会得到一个未定义行为；<code>std::recursive_mutex</code>与独mutex不同的是，同一个线程内在互斥量没有解锁的情况下可以再次进行加锁，不过他们的加解锁次数需要一致；</p>
+<p><strong>std::mutex</strong>有如下几个成员函数</p>
+<ul>
+<li>构造函数，<code>std::mutex</code>不允许拷贝构造，也不允许move拷贝，最初产生的mutex对象是处于unlocked状态的。</li>
+<li><code>lock()</code>，调用线程将锁住该互斥量。线程调用该函数会发生下面3种情况：<ol>
+<li>如果该互斥量当前没有被锁住，则调用线程将该互斥量锁住，直到调用unlock之前，该线程一直拥有该锁。</li>
+<li>如果当前互斥量被其他线程锁住，则当前的调用线程被阻塞住。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+</ol>
+</li>
+<li><code>unlock()</code>， 解锁，释放对互斥量的所有权。</li>
+<li><code>try_lock()</code>，尝试锁住互斥量，如果互斥量被其他线程占有，则当前线程也不会被阻塞。线程调用该函数也会出现下面3种情况：<ol>
+<li>如果当前互斥量没有被其他线程占有，则该线程锁住互斥量，直到该线程调用unlock释放互斥量。</li>
+<li>如果当前互斥量被其他线程锁住，则当前调用线程返回<code>false</code>，而并不会被阻塞掉。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+</ol>
+</li>
+</ul>
+<p><strong>std::timed_mutex</strong> 比 <code>std::mutex</code> 多了两个成员函数，<code>try_lock_for()</code>，<code>try_lock_until()</code>。</p>
+<ul>
+<li><code>try_lock_for()</code> 函数接受一个时间范围，表示在这一段时间范围之内线程如果没有获得锁则被阻塞住（与<code>std::mutex</code>的 <code>try_lock()</code>不同，<code>try_lock</code>如果被调用时没有获得锁则直接返回 <code>false</code>），如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 <code>false</code>。</li>
+<li><code>try_lock_until()</code> 函数则接受一个时间点作为参数，在指定时间点未到来之前线程如果没有获得锁则被阻塞住，如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 <code>false</code>。</li>
+</ul>
+<p><strong>std::lock_guard</strong>和<strong>std::unique_lock</strong>，与RAII相关，能自动上锁和解锁</p>
+<pre><code class="cpp">void thread_func1(std::mutex&amp; m) {
+    for (int i = 0; i &lt; 10; i++) {
+        m.lock();       // 加锁
+        std::cout &lt;&lt; &quot;thread1 &quot; &lt;&lt; i &lt;&lt; std::endl;
+        m.unlock();     // 解锁
+        std::this_thread::sleep_for(std::chrono::milliseconds(20));
+    }
+}
+
+void thread_func2(std::mutex&amp; m) {
+    for (int i = 0; i &lt; 10; i++) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        // lock_guard在构造后加锁，在作用域解释后自动释放锁
+        std::lock_guard&lt;std::mutex&gt; lg(m);
+        std::cout &lt;&lt; &quot;thread2 &quot; &lt;&lt; i &lt;&lt; std::endl;
+    }
+}
+
+void mutex_usage() {
+    std::mutex m;
+
+    std::thread thread1(thread_func1, std::ref(m));
+    std::thread thread2(thread_func2, std::ref(m));
+
+    thread1.join();
+    thread2.join();
+}
+</code></pre>
+<h3 id="condition-variable"><a href="#condition-variable" class="headerlink" title="condition_variable"></a>condition_variable</h3><p>当<code>std::condition_variable</code>对象的某个wait函数被调用的时候，它使用<code>std::unique_lock</code>(通过<code>std::mutex</code>) 来锁住当前线程。当前线程会一直被阻塞，直到另外一个线程在相同的<code>std::condition_variable</code>对象上调用了notification函数来唤醒当前线程。</p>
+<p><code>std::condition_variable</code>对象通常使用<code>std::unique_lock&lt;std::mutex&gt;</code>来等待，如果需要使用另外的lockable类型，可以使用<code>std::condition_variable_any</code>类</p>
+<p><strong>condition_variable</strong>成员函数</p>
+<ul>
+<li><code>condition_variable</code> 不可拷贝不可赋值</li>
+<li><code>notify_one()</code>：唤醒一个等待的线程</li>
+<li><code>notify_all()</code>：唤醒所有等待的线程</li>
+<li><code>wait()</code>：阻塞等待直到被唤醒</li>
+<li><code>wait_for()</code>：阻塞等待被唤醒，或者超时</li>
+<li><code>wait_until()</code>：阻塞等待被唤醒，或者到某个时间点</li>
+</ul>
+<pre><code class="cpp">// wait
+void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock);
+template &lt;class Predicate&gt;
+void wait(std::unique_lock&lt;std::mutex&gt;&amp; lock, Predicate pred);
+
+// wait_for
+template &lt;class Rep, class Period&gt;
+std::cv_status wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::duration&lt;Rep, Period&gt;&amp; rel_time);
+template &lt;class Rep, class Period, class Predicate&gt;
+bool wait_for(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::duration&lt;Rep, Period&gt;&amp; rel_time,
+    Predicate pred);
+
+// wait_until
+template&lt;class Clock, class Duration&gt;
+std::cv_status wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::time_point&lt;Clock, Duration&gt;&amp; timeout_time);
+template&lt;class Clock, class Duration, class Predicate&gt;
+bool wait_until(
+    std::unique_lock&lt;std::mutex&gt;&amp; lock,
+    const std::chrono::time_point&lt;Clock, Duration&gt;&amp; timeout_time,
+    Predicate pred);
+</code></pre>
+<pre><code class="cpp">#include &lt;iostream&gt;           // std::cout
+#include &lt;thread&gt;             // std::thread
+#include &lt;mutex&gt;              // std::mutex, std::unique_lock
+#include &lt;condition_variable&gt; // std::condition_variable
+
+std::mutex mtx;
+std::condition_variable cv;
+bool ready = false;
+
+void print_id (int id) {
+    std::unique_lock&lt;std::mutex&gt; lck(mtx);
+    // 下面两句话是一样的
+    // while (!ready) cv.wait(lck);
+    cv.wait(lck, []{return ready;});
+    std::cout &lt;&lt; &quot;thread &quot; &lt;&lt; id &lt;&lt; &#39;\n&#39;;
+}
+
+void go() {
+    std::unique_lock&lt;std::mutex&gt; lck(mtx);
+    ready = true;
+    cv.notify_all();
+}
+
+void condition_variable_usage() {
+    std::thread threads[10];
+    // spawn 10 threads:
+    for (int i=0; i&lt;10; ++i) {
+        threads[i] = std::thread(print_id, i);
+    }
+
+    std::cout &lt;&lt; &quot;10 threads ready to race...\n&quot;;
+    go();
+
+    for (auto&amp; th : threads) {
+        th.join();
+    }
+}
+</code></pre>
+<h3 id="atomic"><a href="#atomic" class="headerlink" title="atomic"></a>atomic</h3><p>原子类型对象的主要特点就是从不同线程访问不会导致数据竞争(data race)。因此从不同线程访问某个原子对象是良性 (well-defined) 行为，而通常对于非原子类型而言，并发访问某个对象（如果不做任何同步操作）会导致未定义 (undifined) 行为发生。</p>
+<pre><code class="cpp">#include &lt;atomic&gt;
+int main() {
+    std::atomic&lt;int&gt; ai(5);
+    ai++;
+    ai += 100;
+
+    return 0;
+}
+</code></pre>
+<h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p>标准把随机数抽象成随机数引擎和分布两部分.引擎用来产生随机数,分布产生特定分布的随机数(比如平均分布,正太分布等)</p>
+<p>标准提供三种常用的引擎:<code>linear_congruential_engine</code>，<code>mersenne_twister_engine</code>和<code>subtract_with_carry_engine</code>。第一种是线性同余算法，第二种是梅森旋转算法，第三种带进位的线性同余算法。第一种是最常用的，而且速度也是非常快的</p>
+<p>随机数引擎接受一个整形参数当作种子，不提供的话，会使用默认值，推荐使用<code>random_device</code>来产生一个随机数当作种子</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
+#include &lt;random&gt;
+
+int main() {
+    {
+        // random_device是一个随机数设备，不同的操作系统有不同的实现，linux下是读取/dev/urandom设备
+        std::random_device rd;
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; rd() &lt;&lt; std::endl;
+        }
+    }
+
+    {
+        std::random_device rd;
+        // 用random_device来为随机数生成器设置种子
+        std::mt19937_64 mt(rd());
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; mt() &lt;&lt; std::endl;
+        }
+
+        // 整数均匀分布
+        std::uniform_int_distribution&lt;unsigned&gt; dis(1, 100);
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; dis(mt) &lt;&lt; std::endl;
+        }
+
+        // 浮点数均匀分布
+        std::uniform_real_distribution&lt;double&gt; drs(0.0, 1.0);
+        for (int i = 0; i &lt; 10; i++) {
+            std::cout &lt;&lt; drs(mt) &lt;&lt; std::endl;
+        }
+    }
+}
+</code></pre>
+<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<li><a href="http://en.cppreference.com/w/cpp" target="_blank" rel="noopener">cpp reference</a></li>
+<li><a href="https://msdn.microsoft.com/zh-cn/library/dd293665.aspx" target="_blank" rel="noopener">如何编写移动构造函数</a></li>
+<li><a href="http://www.cnblogs.com/hujian/archive/2012/12/10/2810813.html" target="_blank" rel="noopener">C++11系列博文</a></li>
+<li><a href="http://towriting.com/blog/2013/08/01/what-is-cpp11/" target="_blank" rel="noopener">C++11系列-什么是C++11</a></li>
+<li><a href="http://blog.csdn.net/tujiaw/article/details/8245130" target="_blank" rel="noopener">C++11 thread</a></li>
+<li><a href="http://www.cnblogs.com/haippy/p/3284540.html" target="_blank" rel="noopener">C++11 并发指南系列</a></li>
+<li><a href="http://www.ecma-international.org/publications/files/ECMA-ST-ARCH/ECMA-262,%203rd%20edition,%20December%201999.pdf" target="_blank" rel="noopener">ECMAScript</a></li>
+<li><a href="http://www.tuicool.com/articles/F3u6jy" target="_blank" rel="noopener">make_shared和shared_ptr的区别</a></li>
+<li><a href="http://blog.csdn.net/akonlookie/article/details/8223525" target="_blank" rel="noopener">C++11 随机数函数库random</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> c++ </tag>
+            
+            <tag> c++11 </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
+      <title><![CDATA[hexo + github 博客]]></title>
+      <url>/2016/12/21/hexo-github-%E5%8D%9A%E5%AE%A2/</url>
+      <content type="html"><![CDATA[<h2 id="创建-github-仓库"><a href="#创建-github-仓库" class="headerlink" title="创建 github 仓库"></a>创建 github 仓库</h2><p>在 github 上创建一个名为 <code>hatlonely.github.com</code> 的仓库</p>
+<h2 id="安装下载-hexo"><a href="#安装下载-hexo" class="headerlink" title="安装下载 hexo"></a>安装下载 hexo</h2><pre><code>sudo npm install -g hexo
+</code></pre><h2 id="初始化-hexo"><a href="#初始化-hexo" class="headerlink" title="初始化 hexo"></a>初始化 hexo</h2><pre><code>hexo init
+</code></pre><p>修改 <code>_config.yml</code>，增加作者信息</p>
+<pre><code>title: hatlonely的博客
+subtitle:
+description: 做一个有意思的程序员
+author: hatlonely
+language: zh-Hans
+</code></pre><h2 id="预览-hexo"><a href="#预览-hexo" class="headerlink" title="预览 hexo"></a>预览 hexo</h2><pre><code>hexo server
+</code></pre><p>现在可以 <a href="http://127.0.0.1:4000/" target="_blank" rel="noopener">http://127.0.0.1:4000/</a> 预览效果</p>
+<h2 id="提交到-github"><a href="#提交到-github" class="headerlink" title="提交到 github"></a>提交到 github</h2><p>修改配置文件<code>_config.yml</code>，部署到github，需要将本地 ssh key 添加到 github 账号中</p>
+<pre><code>deploy:
+  type: git
+  repository: git@github.com:hatlonely/hatlonely.github.com.git
+  branch: master
+</code></pre><p>下载 git 插件</p>
+<pre><code>npm install hexo-deployer-git --save
+</code></pre><p>提交</p>
+<pre><code>hexo clean
+hexo generate
+hexo deploy
+</code></pre><p>现在可以访问 <a href="http://hatlonely.github.io/" target="_blank" rel="noopener">http://hatlonely.github.io/</a></p>
+<h2 id="美化"><a href="#美化" class="headerlink" title="美化"></a>美化</h2><p>下载 next 主题</p>
+<pre><code>git clone https://github.com/iissnan/hexo-theme-next themes/next
+</code></pre><p>修改 <code>themes/next/_config.yml</code>，使用 Pisces 模式</p>
+<pre><code>scheme: Pisces
+</code></pre><p>修改头像，将图片上传到 <code>public/images</code> 里面</p>
+<pre><code>avatar: /images/avatar.png
+</code></pre><p>修改 <code>_config.yml</code>，使用 next 主题</p>
+<pre><code>theme: next
+</code></pre><h2 id="图片支持"><a href="#图片支持" class="headerlink" title="图片支持"></a>图片支持</h2><p>修改配置 <code>_config.yml</code> 中有</p>
+<pre><code>post_asset_folder:true
+</code></pre><p>安装 <code>hexo-assert-image</code></p>
+<pre><code>npm install https://github.com/CodeFalling/hexo-asset-image --save
+</code></pre><p>在 <code>sources/_posts/</code> 路径下面创建与文章名一致的目录，存放图片，图片的访问方式</p>
+<pre><code>![image](article/image.jpg)
+</code></pre><h2 id="添加标签页和分类页"><a href="#添加标签页和分类页" class="headerlink" title="添加标签页和分类页"></a>添加标签页和分类页</h2><pre><code>hexo new page tags
+hexo new page categories
+</code></pre><p>修改主题配置文件 <code>themes/next/_config.yml</code></p>
+<pre><code>menu:
+  home: /
+  categories: /categories
+  archives: /archives
+  tags: /tags
+</code></pre><h2 id="多说评论支持"><a href="#多说评论支持" class="headerlink" title="多说评论支持"></a>多说评论支持</h2><ol>
+<li>登陆多说 <a href="http://duoshuo.com/" target="_blank" rel="noopener">http://duoshuo.com/</a>，点击个人主页获取user_id</li>
+<li>创建多说站点 <a href="http://duoshuo.com/create-site/" target="_blank" rel="noopener">http://duoshuo.com/create-site/</a></li>
+<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
+<pre><code> duoshuo_shortname: &lt;2中的多说域名&gt;
+</code></pre></li>
+<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
+<pre><code> duoshuo_info:
+ ua_enable: true
+ admin_enable: true
+ user_id: &lt;1中获取的user_id&gt;
+ admin_nickname: hatlonely
+</code></pre></li>
+</ol>
+<h2 id="腾讯统计支持"><a href="#腾讯统计支持" class="headerlink" title="腾讯统计支持"></a>腾讯统计支持</h2><ol>
+<li>登陆腾讯分析 <a href="http://v2.ta.qq.com/analysis/index" target="_blank" rel="noopener">http://v2.ta.qq.com/analysis/index</a>，添加统计页面，获取统计id</li>
+<li><p>修改next主题配置文件 <code>themes/next/_config.yml</code></p>
+<pre><code> tencent_analytics: 56xxxx55
+</code></pre></li>
+</ol>
+<p>可能不是实时的，会有延时，延时几个小时吧，查看一下自己页面的源码，搜索一下统计id，如果有应该就没问题</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://hexo.io/" target="_blank" rel="noopener">hexo 官网</a></li>
+<li><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next 主题使用文档</a></li>
+<li><a href="https://github.com/viosey/hexo-theme-material" target="_blank" rel="noopener">matrial 主题</a></li>
+<li><a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">icarus 主题</a></li>
+</ul>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> 博客 </tag>
+            
+            <tag> hexo </tag>
+            
+            <tag> github </tag>
+            
+            <tag> next </tag>
             
         </tags>
         
